@@ -1,3 +1,8 @@
+set encoding=utf8       " {
+"   At the very start, so that the various mappings involving
+"   the Meta key (Alt) work, at least on windows, that is.
+"   }
+
 set rtp+=$git_work_dir\vim\vimfiles
 set rtp+=$git_work_dir\vim\vimfiles\after
 
@@ -6,5 +11,85 @@ set rtp+=$git_work_dir\vim\vimfiles\after
 call TQ84_log_init()
 " }
 
+set nocompatible        " {
+"   This options sets/modifies other options!
+"   Note, the option is set anyway when a (g)vimrc file is found
+"   }
+
+" { Bare minimum settings
+
+set hidden
+set lazyredraw      "   Don't update display while executing macros.
+set nowrap
+set linebreak       "   Only used when a text is «wrapped» (set wrap): prevents words from being broken in the middle.
+set bs=2            "   allow backspacing over everything in insert mode
+
+" }
+
+" { Files to ignore (when using :e or insert mode )
+set wildignore+=*.o
+set wildignore+=*.obj
+set wildignore+=*.exe
+set wildignore+=*.dll
+" }
+
+" { OS Dependent
+if     has('unix') " {
+
+  set guifont=Monospace\ 9
+
+" Full screen
+  set columns=999 lines=999
+
+" }
+elseif has('win32') || has('win64') " {
+  autocmd GUIEnter * simalt ~x
+
+" Only working on windows: opens gvim using the entire screen.
+  set guifont=Lucida_Console:h8
+
+
+  " Search recursively and case insensitive for regular expressions (Windows)
+  " For example, search in all *.txt files for foo.*bar:
+  " :grep "foo.*bar" *.txt
+  set grepprg=findstr\ /n\ /s\ /i\ /r\ /c:$*
+
+" }
+else " {
+
+" Others systems...
+  no no
+
+endif " }
+" }
+
+" { Mappings
+  " { Mapleader
+ 
+  " It's been said that mapleader should be set before vundle starts
+  " loading the plugins.
+
+    let g:mapleader=","
+
+  " }
+  " { let n always search forward, N search backwards
+  "   http://vi.stackexchange.com/a/2366/985
+    nnoremap <expr> n 'Nn'[v:searchforward]
+    nnoremap <expr> N 'nN'[v:searchforward]
+  " }
+  " { Umlaute
+    imap <M-'> ä
+    imap <M-;> ö
+    imap <M-[> ü
+    imap <M-"> Ä
+    imap <M-:> Ö
+    imap <M-{> Ü
+    " }
+  " }
+" }
+
+" { Additional digraphs
+:digraph .. 8226
+" }
 
 so       $git_work_dir\vim\vimfiles\vimrc
