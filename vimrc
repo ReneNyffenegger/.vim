@@ -11,6 +11,8 @@ set rtp+=$git_work_dir\vim\vimfiles\after
 call TQ84_log_init()
 " }
 
+call TQ84_log_indent(expand("<sfile>"))
+
 set nocompatible        " {
 "   This options sets/modifies other options!
 "   Note, the option is set anyway when a (g)vimrc file is found
@@ -63,6 +65,7 @@ set wildignore+=*.dll
 " { OS Dependent
 if     has('unix') " {
 
+  call TQ84_log('has unix')
   set guifont=Monospace\ 9
 
 " Full screen
@@ -70,6 +73,7 @@ if     has('unix') " {
 
 " }
 elseif has('win32') || has('win64') " {
+  call TQ84_log('has win32 || win64')
   autocmd GUIEnter * simalt ~x
 
 " Only working on windows: opens gvim using the entire screen.
@@ -113,6 +117,7 @@ endif " }
     imap <M-{> Ü
     " }
   " }
+   nmap ,opbl :call OpenUrl#BlueLetterWithInput()
 " }
 
 " { Additional digraphs
@@ -120,3 +125,4 @@ endif " }
 " }
 
 so       $git_work_dir\vim\vimfiles\vimrc
+call TQ84_log_dedent()
