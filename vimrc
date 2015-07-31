@@ -24,6 +24,33 @@ set nowrap
 set linebreak       "   Only used when a text is «wrapped» (set wrap): prevents words from being broken in the middle.
 set bs=2            "   allow backspacing over everything in insert mode
 
+" Filetype related {
+call TQ84_log_indent('filetype on') " {
+filetype on 
+" -----------
+" This command loads (on Windows)
+"   $VIMRUNTIME/filetype.vim
+" that defines autocommands for the BufNewFile and BufRead
+" event. For example, the file contains
+"
+"   au BufNewFile,BufRead *.java,*.jav		setf java
+"
+call TQ84_log_dedent() " }
+call TQ84_log_indent('plugin on') " {
+filetype plugin on
+" ------------------
+" This command also tries to load $VIMRUNTIME/filetype.vim
+"
+call TQ84_log_dedent() " }
+call TQ84_log_indent('indent on') " {
+"    TODO 2015-07-31. Comment next line if alle_kapitel.html takes too long to edit
+filetype indent on
+"
+"    This command also tries to load $VIMRUNTIME/filetype.vim
+"
+call TQ84_log_dedent() " }
+"  }
+
 " }
 
 " { Files to ignore (when using :e or insert mode )
