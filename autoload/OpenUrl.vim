@@ -83,8 +83,6 @@ fu OpenUrl#KommentarMitEingabe() " {
   let l:kapitel = buch_kapitel_vers_[2]
   let l:vers    = buch_kapitel_vers_[3]
 
-  
-
   if l:buch == 'ri' || l:buch == 'rt'
     let l:buch_ = 'ri_rt.html'
   elseif l:buch == 'esr' || l:buch == 'neh' || l:buch == 'est'
@@ -95,8 +93,8 @@ fu OpenUrl#KommentarMitEingabe() " {
     let l:buch_ ='hos_joe_am_ob_jon_mi.html'
   elseif l:buch == 'nah' || l:buch == 'hab' || l:buch == 'zeph' || l:buch == 'hag' || l:buch == 'sach' || l:buch == 'mal'
     let l:buch_ ='nah_hab_zeph_hag_sach_mal.html'
-  elseif l:buch == '1koe' || l:buch == '2koe'
-    let l:buch_ ='koe.html'
+  elseif l:buch == '1kor' || l:buch == '2kor'
+    let l:buch_ ='kor.html'
   elseif l:buch == 'gal' || l:buch == 'eph' || l:buch == 'phil' || l:buch == 'kol' || l:buch == '1thes' || l:buch == '2thes'
     let l:buch_ ='gal_eph_phil_kol_thes.html'
   elseif l:buch == '1tim' || l:buch == '2tim' || l:buch == 'tit' || l:buch == 'phim' || l:buch == 'hebr'
