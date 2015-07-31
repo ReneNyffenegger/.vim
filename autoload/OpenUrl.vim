@@ -27,7 +27,7 @@ fu OpenUrl#Go(url) " {
 
 endfu " }
 
-fu OpenUrl#BlueLetterWithInput() " {
+fu OpenUrl#BlueLetterMitEingabe() " {
   call TQ84_log_indent(expand("<sfile>") . "-BlueLetterWithInput")
   let l:buch_kapitel_vers = input("Buch Kapitel Vers: ")
   
@@ -69,6 +69,48 @@ fu OpenUrl#BlueLetterWithInput() " {
   
 " let l:dummy = RN_OpenBlueLetter(l:book, l:bk_ch_v_[2], l:bk_ch_v_[3])
   call OpenUrl#Go("http://www.blueletterbible.org/Bible.cfm?b=" . l:buch . "&c=" . l:kapitel . "&v=" . l:vers . "&t=KJV#" . l:vers)
+  call TQ84_log_dedent()
+endfu " }
+
+fu OpenUrl#KommentarMitEingabe() " {
+  call TQ84_log_indent(expand("<sfile>") . "-BlueLetterWithInput")
+
+  let l:buch_kapitel_vers = input("Buch Kapitel Vers: ")
+  
+  let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\(\w\+\) \(\w\+\) \(\w\+\)')
+  
+  let l:buch    = buch_kapitel_vers_[1]
+  let l:kapitel = buch_kapitel_vers_[2]
+  let l:vers    = buch_kapitel_vers_[3]
+
+  
+
+  if l:buch == 'ri' || l:buch == 'rt'
+    let l:buch_ = 'ri_rt.html'
+  elseif l:buch == 'esr' || l:buch == 'neh' || l:buch == 'est'
+    let l:buch_ = 'esr_neh_est.html'
+  elseif l:buch == 'pred' || l:buch == 'hl'
+    let l:buch_ = 'pred_hl.html'
+  elseif l:buch == 'hos' || l:buch == 'joe' || l:buch == 'am' || l:buch == 'ob' || l:buch == 'jon' || l:buch == 'mi'
+    let l:buch_ ='hos_joe_am_ob_jon_mi.html'
+  elseif l:buch == 'nah' || l:buch == 'hab' || l:buch == 'zeph' || l:buch == 'hag' || l:buch == 'sach' || l:buch == 'mal'
+    let l:buch_ ='nah_hab_zeph_hag_sach_mal.html'
+  elseif l:buch == '1koe' || l:buch == '2koe'
+    let l:buch_ ='koe.html'
+  elseif l:buch == 'gal' || l:buch == 'eph' || l:buch == 'phil' || l:buch == 'kol' || l:buch == '1thes' || l:buch == '2thes'
+    let l:buch_ ='gal_eph_phil_kol_thes.html'
+  elseif l:buch == '1tim' || l:buch == '2tim' || l:buch == 'tit' || l:buch == 'phim' || l:buch == 'hebr'
+    let l:buch_ ='tim_tit_phim_hebr.html'
+  elseif l:buch == 'jak' || l:buch == '1petr' || l:buch == '2petr' || l:buch == '1joh' || l:buch == '2joh' || l:buch == '3joh' || l:buch == 'jud'
+    let l:buch_ ='jak_petr_joh_jud.html'
+  else
+    let l:buch_ = l:buch . '.html'
+  endif
+
+" let l:dummy = RN_OpenBlueLetter(l:book, l:bk_ch_v_[2], l:bk_ch_v_[3])
+  call TQ84_log("l:buch = " . l:buch . " / l:buch_ = " . l:buch_)
+  call OpenUrl#Go("file://c:\\schlachter2000\\" . l:buch_ . '#I' . l:buch . '-' . l:kapitel . '-' . l:vers)
+
   call TQ84_log_dedent()
 endfu " }
 

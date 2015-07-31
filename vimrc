@@ -117,7 +117,8 @@ endif " }
     imap <M-{> Ü
     " }
   " }
-   nmap ,opbl :call OpenUrl#BlueLetterWithInput()
+   nmap ,opbl   :call OpenUrl#BlueLetterMitEingabe()
+   nmap ,opkom  :call OpenUrl#KommentarMitEingabe()
 " }
 
 " { Additional digraphs
