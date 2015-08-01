@@ -120,6 +120,7 @@ endif " }
   " { Font
    nmap ,ft+    :call Font#ResizeRelative( 1)
    nmap ,ft-    :call Font#ResizeRelative(-1)
+   nmap ,ft=    :call Font#ResizeWithInput()
   " }
    nmap ,opbl   :call OpenUrl#BlueLetterMitEingabe()
    nmap ,opkom  :call OpenUrl#KommentarMitEingabe()

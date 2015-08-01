@@ -7,7 +7,7 @@ fu! Font#Characteristics() " {
 
   call TQ84_log('font: ' . l:font)
 
-  let l:font_parts = matchlist(l:font, '\v(\w+):(\w+):(\w+)')
+  let l:font_parts = matchlist(l:font, '\v(\w+):(\w+):?(\w+)?')
 
   let l:font_size_parts = matchlist(l:font_parts[2], '\v(\w)(\d+)')
 
@@ -43,6 +43,21 @@ fu! Font#Resize(new_size) " {
   let l:fontCharacteristics = Font#Characteristics()
   
   let l:fontCharacteristics['size'] = a:new_size
+
+  call Font#Set(l:fontCharacteristics)
+
+  call TQ84_log_dedent()
+
+endfu " }
+
+fu! Font#ResizeWithInput() " {
+  call TQ84_log_indent(expand("<sfile>") . "-ResizeWithInput")
+
+  let l:new_size = input('New Size: ')
+
+  let l:fontCharacteristics = Font#Characteristics()
+  
+  let l:fontCharacteristics['size'] = l:new_size
 
   call Font#Set(l:fontCharacteristics)
 
