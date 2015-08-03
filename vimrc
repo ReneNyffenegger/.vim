@@ -140,14 +140,14 @@ endif " }
     " }
   " }
   " { <leader>ft Font
-   nmap <leader>ft+    :call Font#ResizeRelative( 1)<CR>
-   nmap <leader>ft-    :call Font#ResizeRelative(-1)<CR>
-   nmap <leader>ft=    :call Font#ResizeWithInput()<CR>
+   nnoremap <leader>ft+    :call Font#ResizeRelative( 1)<CR>
+   nnoremap <leader>ft-    :call Font#ResizeRelative(-1)<CR>
+   nnoremap <leader>ft=    :call Font#ResizeWithInput()<CR>
   " }
   " { <leader>op Open
-   nmap <leader>opbl   :call OpenUrl#BlueLetterMitEingabe()<CR>
-   nmap <leader>opkom  :call OpenUrl#KommentarMitEingabe()<CR>
-   nmap <leader>oprc   :e $MYVIMRC<CR>
+   nnoremap <leader>opbl   :call OpenUrl#BlueLetterMitEingabe()<CR>
+   nnoremap <leader>opkom  :call OpenUrl#KommentarMitEingabe()<CR>
+   nnoremap <leader>oprc   :e $MYVIMRC<CR>
   " }
 " }
 
