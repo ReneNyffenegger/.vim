@@ -78,4 +78,54 @@ fu! Font#ResizeRelative(by) " {
 
 endfu " }
 
+fu! Font#FontsFromRegistry() " {
+  call TQ84_log_indent(expand("<sfile>") . '-FontsFromRegistry')
+
+" Ideas found at
+"   https://github.com/drmikehenry/vim-fontdetect/blob/master/autoload/fontdetect.vim
+"
+  if !executable("reg")
+      TQ84_log('reg is not executable')
+      throw "reg is not executable"
+  endif
+
+  let l:reg = system('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"')
+
+  call TQ84_log('l:reg (1): ' . l:reg)
+
+
+  " l:reg starts with 
+  "   \nHKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts\n
+  " Remove this line
+  let l:reg = substitute(l:reg, '^\n.\{-}\n', '', '')
+
+  call TQ84_log('l:reg after removing first line: ' . l:reg)
+
+  " Remove blank lines. Are there any?
+  " let l:reg = substitute(l:reg, '\n\n\+', '\n', 'g')
+
+
+  " Extract font family from each line. Lines have one of the following
+  " formats; all begin with leading spaces and can have spaces in the
+  " font family portion:
+  "   Font family REG_SZ FontFilename
+  "   Font family (TrueType) REG_SZ FontFilename
+  "   Font family 1,2,3 (TrueType) REG_SZ FontFilename
+  " Throw away everything before and after the font family.
+  " Assume that any '(' is not part of the family name.
+  " Assume digits followed by comma indicates point size.
+  let l:reg = substitute(l:reg, 
+          \ ' *\(.\{-}\)\ *'       .
+          \ '\((\|\d\+,\|REG_SZ\)' .
+          \ '.\{-}\n', 
+          \ '\1\n', 'g')
+
+    
+  call TQ84_log('l:reg after big substitute: ' . l:reg)
+
+  return split(l:reg, '\n')
+
+  call TQ84_log_dedent()
+endfu " }
+
 call TQ84_log_dedent()
