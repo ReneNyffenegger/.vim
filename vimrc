@@ -148,6 +148,9 @@ endif " }
    nnoremap <leader>opbl   :call OpenUrl#BlueLetterMitEingabe()<CR>
    nnoremap <leader>opkom  :call OpenUrl#KommentarMitEingabe()<CR>
    nnoremap <leader>oprc   :e $MYVIMRC<CR>
+
+   " Open a file of which only a part of the file name is known:
+   nnoremap <leader>ope8   :e *
   " }
 " }
 
