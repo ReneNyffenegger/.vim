@@ -92,40 +92,52 @@ fu! Font#FontsFromRegistry() " {
   let l:reg = system('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"')
 
   call TQ84_log('l:reg (1): ' . l:reg)
-
+  
+  let l:font_lines = split (l:reg, '\n')
 
   " l:reg starts with 
   "   \nHKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts\n
-  " Remove this line
-  let l:reg = substitute(l:reg, '^\n.\{-}\n', '', '')
+  " Remove these two (first) lines:
+  let l:font_lines = l:font_lines[1:]
 
-  call TQ84_log('l:reg after removing first line: ' . l:reg)
-
-  " Remove blank lines. Are there any?
-  " let l:reg = substitute(l:reg, '\n\n\+', '\n', 'g')
+  " l:reg also has an emtpy last line to remove:
+  let l:font_lines = l:font_lines[:-2]
 
 
-  " Extract font family from each line. Lines have one of the following
-  " formats; all begin with leading spaces and can have spaces in the
-  " font family portion:
-  "   Font family REG_SZ FontFilename
-  "   Font family (TrueType) REG_SZ FontFilename
-  "   Font family 1,2,3 (TrueType) REG_SZ FontFilename
-  " Throw away everything before and after the font family.
-  " Assume that any '(' is not part of the family name.
-  " Assume digits followed by comma indicates point size.
-  let l:reg = substitute(l:reg, 
-          \ ' *\(.\{-}\)\ *'       .
-          \ '\((\|\d\+,\|REG_SZ\)' .
-          \ '.\{-}\n', 
-          \ '\1\n', 'g')
+  let l:ret = []
+  for f in l:font_lines
 
-    
-  call TQ84_log('l:reg after big substitute: ' . l:reg)
+    " A font-line looks like:
+    "   Arial (TrueType)    REG_SZ    arial.ttf
+    "   Batang & BatangChe & Gungsuh & GungsuhChe (TrueType)    REG_SZ    batang.ttc
+    "   Courier 10,12,15    REG_SZ    COURE.FON
+    "   MS Serif 8,10,12,14,18,24    REG_SZ    SERIFE.FON
+    "   Small Fonts    REG_SZ    SMALLE.FON
+    "   Small Fonts (120)    REG_SZ    SMALLF.FON
 
-  return split(l:reg, '\n')
+    call TQ84_log_indent('f = ' . f)
+
+    let l:ff = f
+
+    let l:ff = substitute (l:ff, ' *REG_SZ.*', '', '')
+    call TQ84_log('l:ff = ' . l:ff)
+
+    let l:ff = substitute(l:ff, '\v \d+(,\d+)+$', '', '')
+    call TQ84_log('l:ff = ' . l:ff)
+
+    let l:ff = substitute(l:ff, '\v *\([^)]*\)$', '', '')
+    call TQ84_log('l:ff = ' . l:ff)
+
+
+    let l:ret = add(l:ret, l:ff)
+
+    call TQ84_log_dedent()
+
+  endfor
 
   call TQ84_log_dedent()
+  return l:ret
+
 endfu " }
 
 call TQ84_log_dedent()
