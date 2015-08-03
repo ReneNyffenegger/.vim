@@ -139,15 +139,15 @@ endif " }
     imap <M-{> Ü
     " }
   " }
-  " { ,ft Font
-   nmap ,ft+    :call Font#ResizeRelative( 1)<CR>
-   nmap ,ft-    :call Font#ResizeRelative(-1)<CR>
-   nmap ,ft=    :call Font#ResizeWithInput()<CR>
+  " { <leader>ft Font
+   nmap <leader>ft+    :call Font#ResizeRelative( 1)<CR>
+   nmap <leader>ft-    :call Font#ResizeRelative(-1)<CR>
+   nmap <leader>ft=    :call Font#ResizeWithInput()<CR>
   " }
-  " { ,op Open
-   nmap ,opbl   :call OpenUrl#BlueLetterMitEingabe()<CR>
-   nmap ,opkom  :call OpenUrl#KommentarMitEingabe()<CR>
-   nmap ,oprc   :e $MYVIMRC<CR>
+  " { <leader>op Open
+   nmap <leader>opbl   :call OpenUrl#BlueLetterMitEingabe()<CR>
+   nmap <leader>opkom  :call OpenUrl#KommentarMitEingabe()<CR>
+   nmap <leader>oprc   :e $MYVIMRC<CR>
   " }
 " }
 
