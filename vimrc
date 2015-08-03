@@ -117,13 +117,16 @@ endif " }
     imap <M-{> Ü
     " }
   " }
-  " { Font
-   nmap ,ft+    :call Font#ResizeRelative( 1)
-   nmap ,ft-    :call Font#ResizeRelative(-1)
-   nmap ,ft=    :call Font#ResizeWithInput()
+  " { ,ft Font
+   nmap ,ft+    :call Font#ResizeRelative( 1)<CR>
+   nmap ,ft-    :call Font#ResizeRelative(-1)<CR>
+   nmap ,ft=    :call Font#ResizeWithInput()<CR>
   " }
-   nmap ,opbl   :call OpenUrl#BlueLetterMitEingabe()
-   nmap ,opkom  :call OpenUrl#KommentarMitEingabe()
+  " { ,op Open
+   nmap ,opbl   :call OpenUrl#BlueLetterMitEingabe()<CR>
+   nmap ,opkom  :call OpenUrl#KommentarMitEingabe()<CR>
+   nmap ,oprc   :e $MYVIMRC<CR>
+  " }
 " }
 
 " { Additional digraphs
