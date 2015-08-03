@@ -84,6 +84,31 @@ set wildignore+=*.exe
 set wildignore+=*.dll
 " }
 
+" { Backup files
+
+" Make no backup files:
+set nobackup
+set nowritebackup
+
+"  set backupdir=c:\temp\vim
+
+"  }
+"
+" { Other settings
+
+" keep 999 lines of command line history
+set history=999
+
+set wildchar=9
+"set wildmode=list,longest
+
+" No fancy visual bell
+set visualbell t_vb=""
+
+set relativenumber
+
+" }
+
 " { OS Dependent
 if     has('unix') " {
 
@@ -117,6 +142,7 @@ endif " }
 " }
 
 " { Mappings
+
   " { Mapleader
  
   " It's been said that mapleader should be set before vundle starts
@@ -152,6 +178,40 @@ endif " }
    " Open a file of which only a part of the file name is known:
    nnoremap <leader>ope8   :e *
   " }
+  " { Function keys
+
+" Toggle Case Insesitiveness
+
+nnoremap   <F2> :set ic!<CR>
+nnoremap <S-F2> :set hlsearch!<CR>
+
+" F3: Complete Filename / path / filename only to clipboard {
+nnoremap   <F3> :let @+=expand("%:p")<CR>
+nnoremap <S-F3> :let @+=expand("%:p:h")<CR>
+nnoremap <M-F3> :let @+=expand("%:t")<CR>
+" }
+" F4: Yanking {
+" copy WORD under cursor to clipboard
+nnoremap   <F4> "+yiW
+
+" copy visual selection to clipboard
+vnoremap   <F4> "+y
+
+" copy current line to Clipboard
+nnoremap <S-F4> "+yy
+" }
+" F5: {
+nnoremap   <F5> :set list!<CR>
+nnoremap <S-F5> :set foldmethod=marker foldmarker={,}<CR>
+
+"  Toggle cursor position cross hair:
+nnoremap <M-F5> :set cursorline! cursorcolumn!<CR>
+" }
+
+nnoremap   <F6> :only<CR>
+
+  " }
+
 " }
 
 " { Additional digraphs
