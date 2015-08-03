@@ -55,6 +55,28 @@ call TQ84_log_dedent() " }
 
 " }
 
+" { Gui Options
+
+"   Don't source $VIMRUNTIME/menu.vim (I don't want menus)
+"   (must be stated before sourcing :syntax on (sy on))
+"   TODO: Is this necessary given that «set guioptions-=m»
+"   doesn't display a menu at all?
+set guioptions-=M
+
+"   No Menubar anyway
+set guioptions-=m
+
+"   No toolbar either
+set guioptions-=T
+
+"   Console dialogs instead of gui dialogs for simple options
+set guioptions+=c
+
+"   No right scrollbar
+set guioptions-=r
+
+" }
+
 " { Files to ignore (when using :e or insert mode )
 set wildignore+=*.o
 set wildignore+=*.obj
