@@ -121,10 +121,11 @@ if     has('unix') " {
 " }
 elseif has('win32') || has('win64') " {
   call TQ84_log('has win32 || win64')
-  autocmd GUIEnter * simalt ~x
 
 " Only working on windows: opens gvim using the entire screen.
-  set guifont=Lucida_Console:h8
+  autocmd GUIEnter * simalt ~x
+
+  set guifont=Lucida\ Console:h8:cDEFAULT
 
 
   " Search recursively and case insensitive for regular expressions (Windows)
