@@ -1,7 +1,7 @@
 call TQ84_log_indent(expand("<sfile>"))
 
 fu! Font#Characteristics() " {
-  call TQ84_log_indent(expand("<sfile>") . "-Characteristics")
+  call TQ84_log_indent(expand("<sfile>"))
   
   let l:font = &guifont
 
@@ -25,9 +25,14 @@ fu! Font#Characteristics() " {
 endfu " }
 
 fu! Font#Set(fontCharacteristics) " {
-  call TQ84_log_indent(expand("<sfile>") . "-Set")
+  call TQ84_log_indent(expand("<sfile>"))
   
-  let l:font_new = a:fontCharacteristics['name'] . ':' . a:fontCharacteristics['h_or_w'] . a:fontCharacteristics['size'] . ':' . a:fontCharacteristics['3rd?']
+  let l:font_new = a:fontCharacteristics['name'] . ':' . a:fontCharacteristics['h_or_w'] . a:fontCharacteristics['size'] 
+  
+  if a:fontCharacteristics['3rd?'] =~ '\S'
+     call TQ84_log_indent('3rd: ' . a:fontCharacteristics['3rd?'])
+     let a:fontCharacteristics .= ':' . a:fontCharacteristics['3rd?']
+  endif
 
   call TQ84_log('new Font: ' . l:font_new)
 
@@ -38,7 +43,7 @@ fu! Font#Set(fontCharacteristics) " {
 endfu " }
 
 fu! Font#Resize(new_size) " {
-  call TQ84_log_indent(expand("<sfile>") . "-Resize (new_size = " . a:new_size . ')')
+  call TQ84_log_indent(expand("<sfile>") . " (new_size = " . a:new_size . ')')
 
   let l:fontCharacteristics = Font#Characteristics()
   
@@ -51,7 +56,7 @@ fu! Font#Resize(new_size) " {
 endfu " }
 
 fu! Font#ResizeWithInput() " {
-  call TQ84_log_indent(expand("<sfile>") . "-ResizeWithInput")
+  call TQ84_log_indent(expand("<sfile>"))
 
   let l:new_size = input('New Size: ')
 
@@ -66,7 +71,7 @@ fu! Font#ResizeWithInput() " {
 endfu " }
 
 fu! Font#ResizeRelative(by) " {
-  call TQ84_log_indent(expand("<sfile>") . "-ResizeRelative (by = " . a:by . ')')
+  call TQ84_log_indent(expand("<sfile>") . " (by = " . a:by . ')')
   
   let l:fontCharacteristics = Font#Characteristics()
   
@@ -79,7 +84,7 @@ fu! Font#ResizeRelative(by) " {
 endfu " }
 
 fu! Font#FontsFromRegistry() " {
-  call TQ84_log_indent(expand("<sfile>") . '-FontsFromRegistry')
+  call TQ84_log_indent(expand("<sfile>"))
 
 " Ideas found at
 "   https://github.com/drmikehenry/vim-fontdetect/blob/master/autoload/fontdetect.vim
