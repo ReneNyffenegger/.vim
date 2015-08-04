@@ -7,7 +7,7 @@ fu! Font#Characteristics() " {
 
   call TQ84_log('font: ' . l:font)
 
-  let l:font_parts = matchlist(l:font, '\v(\w+):(\w+):?(\w+)?')
+  let l:font_parts = matchlist(l:font, '\v([^:]+):(\w+):?(\w+)?')
 
   let l:font_size_parts = matchlist(l:font_parts[2], '\v(\w)(\d+)')
 
@@ -28,10 +28,11 @@ fu! Font#Set(fontCharacteristics) " {
   call TQ84_log_indent(expand("<sfile>"))
   
   let l:font_new = a:fontCharacteristics['name'] . ':' . a:fontCharacteristics['h_or_w'] . a:fontCharacteristics['size'] 
+  call TQ84_log('l:font_new: ' . l:font_new)
   
   if a:fontCharacteristics['3rd?'] =~ '\S'
-     call TQ84_log_indent('3rd: ' . a:fontCharacteristics['3rd?'])
-     let a:fontCharacteristics .= ':' . a:fontCharacteristics['3rd?']
+     call TQ84_log('3rd: ' . a:fontCharacteristics['3rd?'])
+     let l:font_new .= ':' . a:fontCharacteristics['3rd?']
   endif
 
   call TQ84_log('new Font: ' . l:font_new)
