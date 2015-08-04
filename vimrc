@@ -169,6 +169,7 @@ endif " }
   " { <leader>ft Font
    nnoremap <leader>ft+    :call Font#ResizeRelative( 1)<CR>
    nnoremap <leader>ft-    :call Font#ResizeRelative(-1)<CR>
+   nnoremap <leader>ft=    :call Font#ResizeWithInput()<CR>
    nnoremap <leader>fth    :call Font#Hebrew()<CR>
    nnoremap <leader>ftr    :call Font#Reset()<CR>
   " }
