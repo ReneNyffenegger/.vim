@@ -128,8 +128,7 @@ fu! Font#FontsFromRegistry() " {
     let l:ff = substitute(l:ff, '\v *\([^)]*\)$', '', '')
     call TQ84_log('l:ff = ' . l:ff)
 
-
-    let l:ret = add(l:ret, l:ff)
+    call add(l:ret, l:ff)
 
     call TQ84_log_dedent()
 
