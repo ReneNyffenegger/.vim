@@ -144,4 +144,24 @@ fu! Font#FontsFromRegistry() " {
 
 endfu " }
 
+fu! Font#Reset() " {
+
+  call TQ84_log_indent(expand("<sfile>"))
+
+  set guifont=Lucida\ Console:h8:cDEFAULT
+
+  call TQ84_log_dedent()
+
+endfu " }
+
+fu! Font#Hebrew() " {
+
+  call TQ84_log_indent(expand("<sfile>"))
+
+  set guifont=Courier\ New:h11\:cEASTEUROPE
+
+  call TQ84_log_dedent()
+
+endfu " }
+
 call TQ84_log_dedent()
