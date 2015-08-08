@@ -160,6 +160,7 @@ fu! Font#Hebrew() " {
   call TQ84_log_indent(expand("<sfile>"))
 
   set guifont=Courier\ New:h11\:cEASTEUROPE
+" set guifont=Miriam_Fixed:h11:cHEBREW
 
   call TQ84_log_dedent()
 
