@@ -36,13 +36,27 @@ fu! tq84#EmbedVisualSelection(txt_before, txt_after) range " {
 
   call TQ84_log('Lines: ' . l:line_b . "-" . l:line_e . ", columns " . l:col_b . ":" . l:col_e)
 
-" Append after end of visual selection
-  call setpos(".", [0, l:line_e, l:col_e, 0])
-  execute "normal a" . a:txt_after . nr2char(27)
+  let l:line = getline(l:line_e)
+  let l:line = strpart(l:line, 0, l:col_e) . a:txt_after . strpart(l:line, l:col_e)
 
-" Insert befor beginning of visual selection
-  call setpos(".", [0, l:line_b, l:col_b, 0])
-  execute "normal i" . a:txt_before . nr2char(27)
+  call TQ84_log('l:line: ' . l:line)
+
+  call setline(l:line_e, l:line)
+
+  let l:line = getline(l:line_b)
+  let l:line = strpart(l:line, 0, l:col_b-1) . a:txt_before . strpart(l:line, l:col_b-1)
+
+  call TQ84_log('l:line: ' . l:line)
+
+  call setline(l:line_b, l:line)
+
+" " Append after end of visual selection
+"   call setpos(".", [0, l:line_e, l:col_e, 0])
+"   execute "normal a" . a:txt_after . nr2char(27)
+" 
+" " Insert befor beginning of visual selection
+"   call setpos(".", [0, l:line_b, l:col_b, 0])
+"   execute "normal i" . a:txt_before . nr2char(27)
 
   call TQ84_log_dedent()
 
