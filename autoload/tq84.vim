@@ -50,6 +50,8 @@ fu! tq84#EmbedVisualSelection(txt_before, txt_after) range " {
 
   call setline(l:line_b, l:line)
 
+  call setpos('.', [0, l:line_e, l:col_e + len(a:txt_before) + len(a:txt_after), 0])
+
 " " Append after end of visual selection
 "   call setpos(".", [0, l:line_e, l:col_e, 0])
 "   execute "normal a" . a:txt_after . nr2char(27)
