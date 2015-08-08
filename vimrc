@@ -158,12 +158,12 @@ endif " }
     nnoremap <expr> N 'nN'[v:searchforward]
   " }
   " { Umlaute
-    imap <M-'> ä
-    imap <M-;> ö
-    imap <M-[> ü
-    imap <M-"> Ä
-    imap <M-:> Ö
-    imap <M-{> Ü
+    inoremap <M-'> ä
+    inoremap <M-;> ö
+    inoremap <M-[> ü
+    inoremap <M-"> Ä
+    inoremap <M-:> Ö
+    inoremap <M-{> Ü
     " }
   " }
   " { <leader>ft Font
