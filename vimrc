@@ -181,7 +181,7 @@ endif " }
    nnoremap <leader>ftr    :call Font#Reset()<CR>
   " }
   " { <leader>op Open
-   nnoremap <leader>opbl   :call OpenUrl#BlueLetterMitEingabe()<CR>
+   nnoremap <leader>opbl   :call OpenUrl#BlueLetterWithInput()<CR>
    nnoremap <leader>opkom  :call OpenUrl#KommentarMitEingabe()<CR>
    nnoremap <leader>opstr  :call OpenUrl#StrongsWithInput()<CR>
    nnoremap <leader>oprc   :e $MYVIMRC<CR>
