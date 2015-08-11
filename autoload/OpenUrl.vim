@@ -4,7 +4,7 @@
 
 call TQ84_log_indent(expand("<sfile>"))
 
-fu OpenUrl#Go(url) " {
+fu! OpenUrl#Go(url) " {
 
   call TQ84_log_indent(expand("<sfile>") . "-OpenUrl#Go: " . a:url)
   let use_mozilla = 1
@@ -27,8 +27,8 @@ fu OpenUrl#Go(url) " {
 
 endfu " }
 
-fu OpenUrl#BlueLetterMitEingabe() " {
-  call TQ84_log_indent(expand("<sfile>") . "-BlueLetterWithInput")
+fu! OpenUrl#BlueLetterWithInput() " {
+  call TQ84_log_indent(expand("<sfile>"))
   let l:buch_kapitel_vers = input("Buch Kapitel Vers: ")
   
   let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\(\w\+\) \(\w\+\) \(\w\+\)')
@@ -67,12 +67,11 @@ fu OpenUrl#BlueLetterMitEingabe() " {
   elseif l:buch == 'hl'    | let l:buch = 'song'
   endif
   
-" let l:dummy = RN_OpenBlueLetter(l:book, l:bk_ch_v_[2], l:bk_ch_v_[3])
   call OpenUrl#Go("http://www.blueletterbible.org/Bible.cfm?b=" . l:buch . "&c=" . l:kapitel . "&v=" . l:vers . "&t=KJV#" . l:vers)
   call TQ84_log_dedent()
 endfu " }
 
-fu OpenUrl#KommentarMitEingabe() " {
+fu! OpenUrl#KommentarMitEingabe() " {
   call TQ84_log_indent(expand("<sfile>") . "-BlueLetterWithInput")
 
   let l:buch_kapitel_vers = input("Buch Kapitel Vers: ")
@@ -109,6 +108,14 @@ fu OpenUrl#KommentarMitEingabe() " {
   call TQ84_log("l:buch = " . l:buch . " / l:buch_ = " . l:buch_)
   call OpenUrl#Go("file://c:\\schlachter2000\\" . l:buch_ . '#I' . l:buch . '-' . l:kapitel . '-' . l:vers)
 
+  call TQ84_log_dedent()
+endfu " }
+
+fu! OpenUrl#StrongsWithInput() " {
+  call TQ84_log_indent(expand("<sfile>"))
+  let l:strongs_nr = input("Strongs Number, prefix with G or H: ")
+  
+  call OpenUrl#Go("http://www.blueletterbible.org/lang/lexicon/lexicon.cfm?Strongs=" . l:strongs_nr . "&t=KJV")
   call TQ84_log_dedent()
 endfu " }
 

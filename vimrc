@@ -176,6 +176,7 @@ endif " }
   " { <leader>op Open
    nnoremap <leader>opbl   :call OpenUrl#BlueLetterMitEingabe()<CR>
    nnoremap <leader>opkom  :call OpenUrl#KommentarMitEingabe()<CR>
+   nnoremap <leader>opstr  :call OpenUrl#StrongsWithInput()<CR>
    nnoremap <leader>oprc   :e $MYVIMRC<CR>
 
    " Open a file of which only a part of the file name is known:
