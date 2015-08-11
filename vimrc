@@ -165,6 +165,13 @@ endif " }
     inoremap <M-:> Ö
     inoremap <M-{> Ü
     " }
+    cnoremap <M-'> ä
+    cnoremap <M-;> ö
+    cnoremap <M-[> ü
+    cnoremap <M-"> Ä
+    cnoremap <M-:> Ö
+    cnoremap <M-{> Ü
+    " }
   " }
   " { <leader>ft Font
    nnoremap <leader>ft+    :call Font#ResizeRelative( 1)<CR>
