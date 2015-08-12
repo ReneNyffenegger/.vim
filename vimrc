@@ -222,7 +222,9 @@ nnoremap <M-F5> :set cursorline! cursorcolumn!<CR>
 nnoremap   <F6> :only<CR>
 
   " }
-
+  " { Command line mode
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
 " }
 
 " { Additional digraphs
