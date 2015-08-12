@@ -127,6 +127,46 @@ fu! OpenUrl#BibelOnlineLuther1545MitEingabe() " {
   call TQ84_log_dedent()
 
 endfu " }
+fu! OpenUrl#BibelOnlineLuther1912MitEingabe() " {
+  call TQ84_log_indent(expand("<sfile>"))
+  
+  call OpenUrl#BibelOnline('luther_1912', Input#BuchKapitelVers())
+  
+  call TQ84_log_dedent()
+
+endfu " }
+fu! OpenUrl#BibelOnlineInterlinearMitEingabe() " {
+  call TQ84_log_indent(expand("<sfile>"))
+  
+  call OpenUrl#BibelOnline('interlinear', Input#BuchKapitelVers())
+  
+  call TQ84_log_dedent()
+
+endfu " }
+fu! OpenUrl#BibelOnlineNeueEvangelistischeMitEingabe() " {
+  call TQ84_log_indent(expand("<sfile>"))
+  
+  call OpenUrl#BibelOnline('neue_evangelistische', Input#BuchKapitelVers())
+  
+  call TQ84_log_dedent()
+
+endfu " }
+fu! OpenUrl#BibelOnlineSchlachter51MitEingabe() " {
+  call TQ84_log_indent(expand("<sfile>"))
+  
+  call OpenUrl#BibelOnline('schlachter_1951', Input#BuchKapitelVers())
+  
+  call TQ84_log_dedent()
+
+endfu " }
+fu! OpenUrl#BibelOnlineElberfelder1905MitEingabe() " {
+  call TQ84_log_indent(expand("<sfile>"))
+  
+  call OpenUrl#BibelOnline('elberfelder_1905', Input#BuchKapitelVers())
+  
+  call TQ84_log_dedent()
+
+endfu " }
 
 fu! OpenUrl#BibelOnline(uebersetzung, vers) " {
   call TQ84_log_indent(expand("<sfile>"))

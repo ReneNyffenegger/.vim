@@ -181,11 +181,16 @@ endif " }
    nnoremap <leader>ftr    :call Font#Reset()<CR>
   " }
   " { <leader>op Open
-   nnoremap <leader>opbl   :call OpenUrl#BlueLetterWithInput()<CR>
-   nnoremap <leader>oplu15 :call OpenUrl#BibelOnlineLuther1545MitEingabe()<CR>
-   nnoremap <leader>opkom  :call OpenUrl#KommentarMitEingabe()<CR>
-   nnoremap <leader>opstr  :call OpenUrl#StrongsWithInput()<CR>
-   nnoremap <leader>oprc   :e $MYVIMRC<CR>
+   nnoremap <leader>opbl    :call OpenUrl#BlueLetterWithInput()<CR>
+   nnoremap <leader>oplu15  :call OpenUrl#BibelOnlineLuther1545MitEingabe()<CR>
+   nnoremap <leader>oplu12  :call OpenUrl#BibelOnlineLuther1912MitEingabe()<CR>
+   nnoremap <leader>opintl  :call OpenUrl#BibelOnlineInterlinearMitEingabe()<CR>
+   nnoremap <leader>opneu   :call OpenUrl#BibelOnlineNeueEvangelistischeMitEingabe()<CR>
+   nnoremap <leader>opsch51 :call OpenUrl#BibelOnlineSchlachter51MitEingabe()<CR>
+   nnoremap <leader>opelb05 :call OpenUrl#BibelOnlineElberfelder1905MitEingabe()<CR>
+   nnoremap <leader>opkom   :call OpenUrl#KommentarMitEingabe()<CR>
+   nnoremap <leader>opstr   :call OpenUrl#StrongsWithInput()<CR>
+   nnoremap <leader>oprc    :e $MYVIMRC<CR>
 
    " Open a file of which only a part of the file name is known:
    nnoremap <leader>ope8   :e *
