@@ -85,7 +85,7 @@ fu! TQ84_log (S) " {
 endfu " }
 fu! TQ84_log_indent(S) " {
 
-  let l:line = TQ84_log('time: ? ' . a:S .  nr2char(123))
+  let l:line = TQ84_log('time: ? ' . a:S . ' ' . nr2char(123))
   call add(s:tq84_log_array, {'reltime': reltime(), 'line': l:line})
 
 endfu! " }
