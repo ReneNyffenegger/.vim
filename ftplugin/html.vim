@@ -18,8 +18,10 @@ fu! Switch_Tag(tag) " {
   endif
 
   if col('.') + 1 == col('$')
+     call TQ84_log(' . : ' . col('.') . ', $ : ' . col('$') . ' -> startinsert !')
      startinsert!
   else
+    call TQ84_log(' . : ' . col('.') . ', $ : ' . col('$') . ' -> normal l , startinsert')
     execute 'normal l'
     startinsert
   end
