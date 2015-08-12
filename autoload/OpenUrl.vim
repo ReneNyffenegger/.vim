@@ -180,4 +180,19 @@ fu! OpenUrl#BibelOnline(uebersetzung, vers) " {
 
 endfu " }
 
+fu! OpenUrl#MengeUebersetzungMitEingabe() " {
+  call TQ84_log_indent(expand("<sfile>"))
+  
+  let l:vers = Input#BuchKapitelVers()
+
+  if l:vers['buch'] == 'hebr'
+     let l:buch_nr = 68
+  endif
+
+  call OpenUrl#Go("https://www.die-bibel.de/online-bibeln/menge-bibel/bibeltext/bibel/text/lesen/stelle/" . l:buch_nr . '/' . l:vers['kapitel'] . '0001/' . l:vers['kapitel'] . '9999/')
+  
+  call TQ84_log_dedent()
+
+endfu " }
+
 call TQ84_log_dedent()
