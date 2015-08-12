@@ -182,6 +182,7 @@ endif " }
   " }
   " { <leader>op Open
    nnoremap <leader>opbl   :call OpenUrl#BlueLetterWithInput()<CR>
+   nnoremap <leader>oplu15 :call OpenUrl#BibelOnlineLuther1545MitEingabe()<CR>
    nnoremap <leader>opkom  :call OpenUrl#KommentarMitEingabe()<CR>
    nnoremap <leader>opstr  :call OpenUrl#StrongsWithInput()<CR>
    nnoremap <leader>oprc   :e $MYVIMRC<CR>
