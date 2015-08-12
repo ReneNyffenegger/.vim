@@ -119,4 +119,33 @@ fu! OpenUrl#StrongsWithInput() " {
   call TQ84_log_dedent()
 endfu " }
 
+fu! OpenUrl#BibelOnlineLuther1545MitEingabe() " {
+  call TQ84_log_indent(expand("<sfile>"))
+  
+  let l:buch_kapitel_vers = input("Buch Kapitel Vers: ")
+  
+  let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\(\w\+\) \(\w\+\) \(\w\+\)')
+  
+  let l:buch    = buch_kapitel_vers_[1]
+  let l:kapitel = buch_kapitel_vers_[2]
+  let l:vers    = buch_kapitel_vers_[3]
+
+  call OpenUrl#BibelOnline('luther_1545_letzte_hand', l:buch, l:kapitel, l:vers)
+  
+  call TQ84_log_dedent()
+
+endfu " }
+
+fu! OpenUrl#BibelOnline(uebersetzung, buch, kapitel, vers) " {
+  call TQ84_log_indent(expand("<sfile>"))
+
+  if a:buch == 'hebr'
+     let l:buch = 'hebraeer'
+  endif
+
+  call OpenUrl#Go("http://www.bibel-online.net/buch/" . a:uebersetzung . '/' . l:buch . '/' . a:kapitel . '/#' . a:vers)
+  call TQ84_log_dedent()
+
+endfu " }
+
 call TQ84_log_dedent()
