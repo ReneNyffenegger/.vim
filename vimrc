@@ -173,6 +173,14 @@ endif " }
     cnoremap <M-{> Ü
     " }
   " }
+  " { Special characters
+
+  " http://vi.stackexchange.com/questions/4284/how-can-i-map-alt-or-alt
+    inoremap ¬ «
+    inoremap ® »
+"   inoremap <M-<> «
+"   inoremap <M->> »
+  " }
   " { <leader>ft Font
    nnoremap <leader>ft+    :call Font#ResizeRelative( 1)<CR>
    nnoremap <leader>ft-    :call Font#ResizeRelative(-1)<CR>
