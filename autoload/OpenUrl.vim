@@ -1,5 +1,6 @@
 " 
-"  TODO:  https://github.com/ReneNyffenegger/open-browser.vim/blob/master/plugin/openbrowser.vim
+"  TODO:
+"  https://github.com/tyru/open-browser.vim/blob/master/plugin/openbrowser.vim
 "
 
 call TQ84_log_indent(expand("<sfile>"))
@@ -171,9 +172,12 @@ endfu " }
 fu! OpenUrl#BibelOnline(uebersetzung, vers) " {
   call TQ84_log_indent(expand("<sfile>"))
 
-  if a:vers['buch'] == 'hebr'
-     let l:buch = 'hebraeer'
-  endif
+  let l:buch = tolower(Bibel#BuchnameAusAbkuerzung(a:vers['buch']))
+
+  let l:buch = substitute(l:buch, '(\d)\. ', '\1_', '')
+  let l:buch = substitute(l:buch, 'ä'      , 'ae' , '')
+  let l:buch = substitute(l:buch, 'ö'      , 'oe' , '')
+
 
   call OpenUrl#Go("http://www.bibel-online.net/buch/" . a:uebersetzung . '/' . l:buch . '/' . a:vers['kapitel'] . '/#' . a:vers['vers'])
   call TQ84_log_dedent()
@@ -185,8 +189,9 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   
   let l:vers = Input#BuchKapitelVers()
 
-  if l:vers['buch'] == 'hebr'
-     let l:buch_nr = 68
+  
+  if     l:vers['buch'] == '1kor'   | let l:buch_nr = 56
+  elseif l:vers['buch'] == 'hebr'   | let l:buch_nr = 68
   endif
 
   call OpenUrl#Go("https://www.die-bibel.de/online-bibeln/menge-bibel/bibeltext/bibel/text/lesen/stelle/" . l:buch_nr . '/' . l:vers['kapitel'] . '0001/' . l:vers['kapitel'] . '9999/')
