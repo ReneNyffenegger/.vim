@@ -86,9 +86,8 @@ set wildignore+=*.dll
 
 " { Backup files
 
-" Make no backup files:
 set nobackup
-set nowritebackup
+set writebackup
 
 "  set backupdir=c:\temp\vim
 
