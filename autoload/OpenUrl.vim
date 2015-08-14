@@ -170,14 +170,16 @@ fu! OpenUrl#BibelOnlineElberfelder1905MitEingabe() " {
 endfu " }
 
 fu! OpenUrl#BibelOnline(uebersetzung, vers) " {
-  call TQ84_log_indent(expand("<sfile>") . ' Buch: ' . a['buch'] . ', Kapitel: ' . a['kapitel'])
+
+  call TQ84_log_indent(expand("<sfile>") . ' Buch: ' . a:vers['buch'] . ', Kapitel: ' . a:vers['kapitel'])
 
   let l:buch = tolower(Bibel#BuchnameAusAbkuerzung(a:vers['buch']))
 
-  let l:buch = substitute(l:buch, '(\d)\. ', '\1_', '')
-  let l:buch = substitute(l:buch, 'ä'      , 'ae' , '')
-  let l:buch = substitute(l:buch, 'ö'      , 'oe' , '')
+  let l:buch = substitute(l:buch, '\v(\d)\. ', '\1_', '')
+  let l:buch = substitute(l:buch, 'ä'        , 'ae' , '')
+  let l:buch = substitute(l:buch, 'ö'        , 'oe' , '')
 
+  call TQ84_log('l:buch = ' . l:buch)
 
   call OpenUrl#Go("http://www.bibel-online.net/buch/" . a:uebersetzung . '/' . l:buch . '/' . a:vers['kapitel'] . '/#' . a:vers['vers'])
   call TQ84_log_dedent()
