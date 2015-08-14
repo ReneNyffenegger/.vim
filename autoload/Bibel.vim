@@ -71,7 +71,7 @@ fu! Bibel#BuchnameAusAbkuerzung(abkuerzung) " {
   elseif a:abkuerzung == 'offb'  | let l:ret = 'Offenbarung'
   endif
 
-  call TQ84_log('Buchname: ' . l:ret)
+  call TQ84_log('Buchname für Abkürzung: ' . l:ret)
   call TQ84_log_dedent()
 
   return l:ret
