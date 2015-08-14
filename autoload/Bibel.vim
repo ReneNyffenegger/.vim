@@ -21,7 +21,7 @@ fu! Bibel#BuchnameAusAbkuerzung(abkuerzung) " {
   elseif a:abkuerzung == 'neh'   | let l:ret = 'Nehemia'
   elseif a:abkuerzung == 'est'   | let l:ret = 'Esther'
   elseif a:abkuerzung == 'hi'    | let l:ret = 'Hiob'
-  elseif a:abkuerzung == 'ps'    | let l:ret = 'Psalmen'
+  elseif a:abkuerzung == 'ps'    | let l:ret = 'Psalm'
   elseif a:abkuerzung == 'spr'   | let l:ret = 'Sprüche'
   elseif a:abkuerzung == 'pred'  | let l:ret = 'Prediger'
   elseif a:abkuerzung == 'hl'    | let l:ret = 'Hohelied'
@@ -71,7 +71,7 @@ fu! Bibel#BuchnameAusAbkuerzung(abkuerzung) " {
   elseif a:abkuerzung == 'offb'  | let l:ret = 'Offenbarung'
   endif
 
-  call TQ84_log('Buchname: ' . l:ret)
+  call TQ84_log('Buchname für Abkürzung: ' . l:ret)
   call TQ84_log_dedent()
 
   return l:ret

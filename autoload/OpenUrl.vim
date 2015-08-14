@@ -170,14 +170,16 @@ fu! OpenUrl#BibelOnlineElberfelder1905MitEingabe() " {
 endfu " }
 
 fu! OpenUrl#BibelOnline(uebersetzung, vers) " {
-  call TQ84_log_indent(expand("<sfile>"))
+
+  call TQ84_log_indent(expand("<sfile>") . ' Buch: ' . a:vers['buch'] . ', Kapitel: ' . a:vers['kapitel'])
 
   let l:buch = tolower(Bibel#BuchnameAusAbkuerzung(a:vers['buch']))
 
-  let l:buch = substitute(l:buch, '(\d)\. ', '\1_', '')
-  let l:buch = substitute(l:buch, 'ä'      , 'ae' , '')
-  let l:buch = substitute(l:buch, 'ö'      , 'oe' , '')
+  let l:buch = substitute(l:buch, '\v(\d)\. ', '\1_', '')
+  let l:buch = substitute(l:buch, 'ä'        , 'ae' , '')
+  let l:buch = substitute(l:buch, 'ö'        , 'oe' , '')
 
+  call TQ84_log('l:buch = ' . l:buch)
 
   call OpenUrl#Go("http://www.bibel-online.net/buch/" . a:uebersetzung . '/' . l:buch . '/' . a:vers['kapitel'] . '/#' . a:vers['vers'])
   call TQ84_log_dedent()
@@ -189,12 +191,27 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   
   let l:vers = Input#BuchKapitelVers()
 
+  call TQ84_log('buch ' . l:vers['buch'] . ', kapitel: ' . l:vers['kapitel'])
   
   if     l:vers['buch'] == 'hi'     | let l:buch_nr = 18
   elseif l:vers['buch'] == 'ps'     | let l:buch_nr = 19
   elseif l:vers['buch'] == '1kor'   | let l:buch_nr = 56
+  elseif l:vers['buch'] == '1kor'   | let l:buch_nr = 56
+  elseif l:vers['buch'] == '2kor'   | let l:buch_nr = 57
+  elseif l:vers['buch'] == 'gal'    | let l:buch_nr = 58
+  elseif l:vers['buch'] == 'eph'    | let l:buch_nr = 59
+  elseif l:vers['buch'] == 'phil'   | let l:buch_nr = 60
+  elseif l:vers['buch'] == 'kol'    | let l:buch_nr = 61
+  elseif l:vers['buch'] == '1thes'  | let l:buch_nr = 62
+  elseif l:vers['buch'] == '2thes'  | let l:buch_nr = 63
+  elseif l:vers['buch'] == '1tim'   | let l:buch_nr = 64
+  elseif l:vers['buch'] == '2tim'   | let l:buch_nr = 65
+  elseif l:vers['buch'] == 'tit''   | let l:buch_nr = 66
+  elseif l:vers['buch'] == 'phim'   | let l:buch_nr = 67
   elseif l:vers['buch'] == 'hebr'   | let l:buch_nr = 68
   endif
+
+  call TQ84_log('buch_nr ' . l:buch_nr)
 
   call OpenUrl#Go("https://www.die-bibel.de/online-bibeln/menge-bibel/bibeltext/bibel/text/lesen/stelle/" . l:buch_nr . '/' . l:vers['kapitel'] . '0001/' . l:vers['kapitel'] . '9999/')
   
