@@ -190,7 +190,9 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   let l:vers = Input#BuchKapitelVers()
 
   
-  if     l:vers['buch'] == '1kor'   | let l:buch_nr = 56
+  if     l:vers['buch'] == 'hi'     | let l:buch_nr = 18
+  elseif l:vers['buch'] == 'ps'     | let l:buch_nr = 19
+  elseif l:vers['buch'] == '1kor'   | let l:buch_nr = 56
   elseif l:vers['buch'] == 'hebr'   | let l:buch_nr = 68
   endif
 
