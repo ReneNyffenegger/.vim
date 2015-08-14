@@ -193,22 +193,28 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
 
   call TQ84_log('buch ' . l:vers['buch'] . ', kapitel: ' . l:vers['kapitel'])
   
-  if     l:vers['buch'] == 'hi'     | let l:buch_nr = 18
-  elseif l:vers['buch'] == 'ps'     | let l:buch_nr = 19
-  elseif l:vers['buch'] == '1kor'   | let l:buch_nr = 56
-  elseif l:vers['buch'] == '1kor'   | let l:buch_nr = 56
-  elseif l:vers['buch'] == '2kor'   | let l:buch_nr = 57
-  elseif l:vers['buch'] == 'gal'    | let l:buch_nr = 58
-  elseif l:vers['buch'] == 'eph'    | let l:buch_nr = 59
-  elseif l:vers['buch'] == 'phil'   | let l:buch_nr = 60
-  elseif l:vers['buch'] == 'kol'    | let l:buch_nr = 61
-  elseif l:vers['buch'] == '1thes'  | let l:buch_nr = 62
-  elseif l:vers['buch'] == '2thes'  | let l:buch_nr = 63
-  elseif l:vers['buch'] == '1tim'   | let l:buch_nr = 64
-  elseif l:vers['buch'] == '2tim'   | let l:buch_nr = 65
-  elseif l:vers['buch'] == 'tit''   | let l:buch_nr = 66
-  elseif l:vers['buch'] == 'phim'   | let l:buch_nr = 67
-  elseif l:vers['buch'] == 'hebr'   | let l:buch_nr = 68
+  if     l:vers['buch'] == '1mo'    | let l:buch_nr = '01'
+  elseif l:vers['buch'] == '2mo'    | let l:buch_nr = '02'
+  elseif l:vers['buch'] == '3mo'    | let l:buch_nr = '03'
+  elseif l:vers['buch'] == '4mo'    | let l:buch_nr = '04'
+  elseif l:vers['buch'] == '5mo'    | let l:buch_nr = '05'
+  elseif l:vers['buch'] == 'jos'    | let l:buch_nr = '06'
+  elseif l:vers['buch'] == 'hi'     | let l:buch_nr = '18'
+  elseif l:vers['buch'] == 'ps'     | let l:buch_nr = '19'
+  elseif l:vers['buch'] == '1kor'   | let l:buch_nr = '56'
+  elseif l:vers['buch'] == '1kor'   | let l:buch_nr = '56'
+  elseif l:vers['buch'] == '2kor'   | let l:buch_nr = '57'
+  elseif l:vers['buch'] == 'gal'    | let l:buch_nr = '58'
+  elseif l:vers['buch'] == 'eph'    | let l:buch_nr = '59'
+  elseif l:vers['buch'] == 'phil'   | let l:buch_nr = '60'
+  elseif l:vers['buch'] == 'kol'    | let l:buch_nr = '61'
+  elseif l:vers['buch'] == '1thes'  | let l:buch_nr = '62'
+  elseif l:vers['buch'] == '2thes'  | let l:buch_nr = '63'
+  elseif l:vers['buch'] == '1tim'   | let l:buch_nr = '64'
+  elseif l:vers['buch'] == '2tim'   | let l:buch_nr = '65'
+  elseif l:vers['buch'] == 'tit''   | let l:buch_nr = '66'
+  elseif l:vers['buch'] == 'phim'   | let l:buch_nr = '67'
+  elseif l:vers['buch'] == 'hebr'   | let l:buch_nr = '68'
   endif
 
   call TQ84_log('buch_nr ' . l:buch_nr)
