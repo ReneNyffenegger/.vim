@@ -9,7 +9,7 @@ fu! <SID>InsertFooBarBaz() " {
 
 "    \ ['ins-const', 'Foo. press tab again '],
    call Tabber#Add([
-     \ ['ins-const', 'Bar. type xyz '       ],
+     \ ['ins-const', 'Bar. type 123 '       ],
      \ ['ins-const', 'Baz. press tab again ']
      \ ])
 
@@ -34,8 +34,8 @@ endfu " }
 new
 
 
-if mapcheck('xyz') == ""
-  inoremap <expr> xyz <SID>InsertOneTwoThree()
+if mapcheck('123') == ""
+  inoremap <expr> 123 <SID>InsertOneTwoThree()
 endif
 
 if mapcheck('fbb') == ""
@@ -45,7 +45,7 @@ endif
 if s:manually == 1
    echo "Go to insertmode and enter fbb"
 else
-   execute "normal ifbb a \t b xyz \t c \t d \t e \t f \t g<"
+   execute "normal ifbb a \t b 123 \t c \t d \t e \t f \t g<"
 
   write! Tabber.out
 
