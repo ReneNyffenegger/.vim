@@ -10,21 +10,12 @@ fu! Switch_Tag(tag) " {
   endif
 
   if b:in_tag[a:tag]
-     execute 'normal a</' . a:tag . '>'
+     call GUI#InsertModeInsertText('</' . a:tag . '>')
      let b:in_tag[a:tag] = 0
   else
-     execute 'normal a<'  . a:tag . '>'
+     call GUI#InsertModeInsertText('<'  . a:tag . '>')
      let b:in_tag[a:tag] = 1
   endif
-
-  if col('.') + 1 == col('$')
-     call TQ84_log(' . : ' . col('.') . ', $ : ' . col('$') . ' -> startinsert !')
-     startinsert!
-  else
-    call TQ84_log(' . : ' . col('.') . ', $ : ' . col('$') . ' -> normal l , startinsert')
-    execute 'normal l'
-    startinsert
-  end
 
   call TQ84_log_dedent()
 
