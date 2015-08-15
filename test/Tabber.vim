@@ -5,7 +5,7 @@
 "   Change to = 1 to test manually, without Tabber.bat
 let s:manually = 0
 
-fu! TabberTestStepOne()
+fu! <SID>InsertFooBarBaz() " {
 
    call Tabber#Add([
      \ ['ins-const', 'Foo. press tab again '],
@@ -13,9 +13,9 @@ fu! TabberTestStepOne()
      \ ['ins-const', 'Baz. press tab again ']
      \ ])
 
-endfu
+endfu " }
 
-fu! TabberTestStepTwo()
+fu! <SID>InsertOneTwoThree() " {
 
    call Tabber#Add([
      \ ['ins-const', 'One. press tab again '  ],
@@ -27,16 +27,16 @@ fu! TabberTestStepTwo()
 
    return 'EggsWhyZee '
 
-endfu
+endfu " }
 
 new
 
 
 if mapcheck('xyz') == ""
-  inoremap <expr> xyz TabberTestStepTwo()
+  inoremap <expr> xyz <SID>InsertOneTwoThree()
 endif
 
-call TabberTestStepOne()
+call <SID>InsertFooBarBaz()
 
 if s:manually == 1
    echo "Go to insertmode and press tab"
