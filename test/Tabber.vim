@@ -7,11 +7,13 @@ let s:manually = 0
 
 fu! <SID>InsertFooBarBaz() " {
 
+"    \ ['ins-const', 'Foo. press tab again '],
    call Tabber#Add([
-     \ ['ins-const', 'Foo. press tab again '],
      \ ['ins-const', 'Bar. type xyz '       ],
      \ ['ins-const', 'Baz. press tab again ']
      \ ])
+
+   return 'Foo. press tab again '
 
 endfu " }
 
@@ -23,7 +25,7 @@ fu! <SID>InsertOneTwoThree() " {
      \ ['ins-const', 'Three. press tab again '],
      \ ])
 
-   echo "go to insertmode and press tab"
+"  echo "go to insertmode and press tab"
 
    return 'EggsWhyZee '
 
@@ -36,12 +38,14 @@ if mapcheck('xyz') == ""
   inoremap <expr> xyz <SID>InsertOneTwoThree()
 endif
 
-call <SID>InsertFooBarBaz()
+if mapcheck('fbb') == ""
+  inoremap <expr> fbb <SID>InsertFooBarBaz()
+endif
 
 if s:manually == 1
-   echo "Go to insertmode and press tab"
+   echo "Go to insertmode and enter fbb"
 else
-   execute "normal i\t a \t b xyz \t c \t d \t e \t f \t g<"
+   execute "normal ifbb a \t b xyz \t c \t d \t e \t f \t g<"
 
   write! Tabber.out
 
