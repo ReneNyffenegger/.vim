@@ -22,7 +22,7 @@ fu! <SID>Switch_Tag(tag) " {
 endfu " }
 fu! <SID>RemoveComment() " {
 
-  call GUI#InsertModeInsertText(nr2char(10000))
+  execute "normal i" . nr2char(10000)
 
   call search('<!--', 'b')
   normal 4x
@@ -37,6 +37,7 @@ inoremap <buffer> <M-i> <ESC>:call <SID>Switch_Tag('i')<CR>
 inoremap <buffer> <M-b> <ESC>:call <SID>Switch_Tag('b')<CR>
 
 nnoremap <buffer> ,rmcom <ESC>:call <SID>RemoveComment()<CR>
+vnoremap <buffer> ,com  :call tq84#EmbedVisualSelection('<!-- ', ' -->')<CR>
 
 vnoremap <buffer> <M-b> :call tq84#EmbedVisualSelection('<b>', '</b>')<CR>
 vnoremap <buffer> <M-i> :call tq84#EmbedVisualSelection('<i>', '</i>')<CR>
