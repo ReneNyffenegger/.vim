@@ -52,6 +52,25 @@ fu! <SID>InsertH1Section() " {
 
 endfu " }
 
+fu! <SID>InsertUnindentedSkeleton_2() " {
+
+  let l:jumpTo_1 = Tabber#MakeJumpToMark()
+  let l:jumpTo_2 = Tabber#MakeJumpToMark()
+
+  call Tabber#InsertUnindentedSkeleton(
+  \ ['  IUS '    . l:jumpTo_1      ,
+  \  '  ius '    . l:jumpTo_2 . '<',
+  \ ])
+
+  call Tabber#Add([
+     \ ['jump-to', l:jumpTo_1 ],
+     \ ['jump-to', l:jumpTo_2 ],
+     \ ])
+
+  call Tabber#TabPressed()
+
+endfu " }
+
 new
   
 
@@ -65,6 +84,10 @@ endif
 
 if mapcheck('h1') == ""
   inoremap  h1  <ESC>:call <SID>InsertH1Section()<CR>
+endif
+
+if mapcheck('ius2') == ""
+  inoremap  ius2 <ESC>:call <SID>InsertUnindentedSkeleton_2()<CR>
 endif
 
 if s:manually == 1
@@ -116,6 +139,13 @@ else
 
 "  add another h1
    let s:typed = s:typed . "ih1XXX\tYYYY\tZZZZ"
+
+"  Go to «line 2»
+   let s:typed = s:typed . "/line 2\n"
+
+"  Add an unindented skeleton, test whether a jump
+"  mark at the end is treated correctly:
+   let s:typed = s:typed . "iius2ENTER-1\tENTER-2"
 
    execute "normal " . s:typed
 

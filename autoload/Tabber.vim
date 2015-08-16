@@ -54,11 +54,14 @@ fu! Tabber#TabPressed() " {
 "       let l:lineText = getline(l:found_line_nr)
 "       call setline(l:found_line_nr, l:lineText[0 : l:cursor_pos-1] . l:lineText[l:cursor_pos :])
 
-        normal x
 
-        if col('.') + 1 == col('$')
+        if virtcol('.') + 1 == virtcol('$')
+           call TQ84_log('last character, startinsert!')
+           normal x
            startinsert!
         else
+           call TQ84_log(virtcol('.') . ' not last character [' . virtcol('$') . '], startinsert')
+           normal x
            startinsert
         endif
 
