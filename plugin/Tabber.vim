@@ -8,6 +8,6 @@ endif
 
 call TQ84_log('g:use_tabber = ' . g:use_tabber)
 
-inoremap <expr> <TAB> Tabber#TabPressed()
+inoremap  <TAB> <ESC>:call Tabber#TabPressed()<CR>
 
 call TQ84_log_dedent()

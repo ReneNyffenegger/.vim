@@ -1,1 +1,7 @@
-Foo. press tab again  a Bar. type 123  b EggsWhyZee  One. press tab again  c Two. press tab again  d Three. press tab again  e Baz. press tab again  f   g<
+line 1
+line 2
+  <h1>Foo. press tab again  a Bar. type 12 then 3 b EggsWhyZee One. press tab again  c Two. press tab again  d Three. press tab again  e Baz. press tab again  f </h1>  <!--{-->
+    <div> g<</div>
+  <!--}-->
+line 3
+
