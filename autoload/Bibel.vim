@@ -25,7 +25,7 @@ fu! Bibel#BuchnameAusAbkuerzung(abkuerzung) " {
   elseif a:abkuerzung == 'spr'   | let l:ret = 'Sprüche'
   elseif a:abkuerzung == 'pred'  | let l:ret = 'Prediger'
   elseif a:abkuerzung == 'hl'    | let l:ret = 'Hohelied'
-  elseif a:abkuerzung == 'jes'   | let l:ret = 'Jesaia'
+  elseif a:abkuerzung == 'jes'   | let l:ret = 'Jesaja'
   elseif a:abkuerzung == 'jer'   | let l:ret = 'Jeremia'
   elseif a:abkuerzung == 'kla'   | let l:ret = 'Klagelieder'
   elseif a:abkuerzung == 'hes'   | let l:ret = 'Hesekiel'
