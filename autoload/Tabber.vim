@@ -45,7 +45,7 @@ fu! Tabber#TabPressed() " {
         let l:found_line_nr = search(l:jump_to, 'w')
 
         if l:found_line_nr != getpos('.')[1]
-           throw 'l:found_line_nr: ' . l:found_line_nr . ', but getpos returns ' . getpos('.')[1]
+           throw 'jump-to: l:found_line_nr: ' . l:found_line_nr . ', but getpos returns ' . getpos('.')[1]
         endif
 
 "       let l:cursor_pos    = getpos('.')[2]
@@ -98,8 +98,8 @@ endfu " }
 fu! Tabber#InsertUnindentedSkeleton(lines) " {
   call TQ84_log_indent(expand('<sfile>') . ' len(lines): ' . len(a:lines))
 
-  let l:save_foldenable = &foldenable
-  let &foldenable = 0
+" let l:save_foldenable = &foldenable
+" let &foldenable = 0
 
   let l:currLineNo   = line('.')
   let l:currLineText = getline(l:currLineNo)
@@ -121,7 +121,7 @@ fu! Tabber#InsertUnindentedSkeleton(lines) " {
     call setline(l:firstLine+l, a:lines[l])
   endfor
 
-  let &foldenable = l:save_foldenable
+" let &foldenable = l:save_foldenable
 
   call TQ84_log_dedent()
 
