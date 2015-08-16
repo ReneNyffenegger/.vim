@@ -5,14 +5,14 @@ line 4
 * line 5
   <h1>__H1H1__One -Two -Three </h1><!--{-->
     <div>__DIV_DIV__</div>
-   after H1     < 
+    after H1      <
   <!--}-->
 line 6
 line 7
 
   <h1>XXX</h1><!--{-->
     <div>YYYY</div>
-   ZZZZ 
+    ZZZZ
   <!--}-->
 
 line 8

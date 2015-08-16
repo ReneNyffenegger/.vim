@@ -56,7 +56,11 @@ fu! Tabber#TabPressed() " {
 
         normal x
 
-        startinsert
+        if col('.') + 1 == col('$')
+           startinsert!
+        else
+           startinsert
+        endif
 
         call remove(l:curr_instructions, 0)
         if len(l:curr_instructions) == 0 " {
