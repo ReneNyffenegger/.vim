@@ -2,7 +2,7 @@ call TQ84_log_indent(expand("<sfile>"))
 
 let b:in_tag = {}
 
-fu! Switch_Tag(tag) " {
+fu! <SID>Switch_Tag(tag) " {
   call TQ84_log_indent(expand("<sfile>"))
 
   if ! has_key(b:in_tag, a:tag)
@@ -20,9 +20,23 @@ fu! Switch_Tag(tag) " {
   call TQ84_log_dedent()
 
 endfu " }
+fu! <SID>RemoveComment() " {
 
-inoremap <buffer> <M-i> <ESC>:call Switch_Tag('i')<CR>
-inoremap <buffer> <M-b> <ESC>:call Switch_Tag('b')<CR>
+  call GUI#InsertModeInsertText(nr2char(10000))
+
+  call search('<!--', 'b')
+  normal 4x
+  call search('-->')
+  normal 3x
+  call search(nr2char(10000), 'b')
+  normal x
+
+endfu " }
+
+inoremap <buffer> <M-i> <ESC>:call <SID>Switch_Tag('i')<CR>
+inoremap <buffer> <M-b> <ESC>:call <SID>Switch_Tag('b')<CR>
+
+nnoremap <buffer> ,rmcom <ESC>:call <SID>RemoveComment()<CR>
 
 vnoremap <buffer> <M-b> :call tq84#EmbedVisualSelection('<b>', '</b>')<CR>
 vnoremap <buffer> <M-i> :call tq84#EmbedVisualSelection('<i>', '</i>')<CR>
