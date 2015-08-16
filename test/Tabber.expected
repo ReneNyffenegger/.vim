@@ -1,7 +1,18 @@
 line 1
 line 2
-  <h1>Foo. press tab again  a Bar. type 12 then 3 b EggsWhyZee One. press tab again  c Two. press tab again  d Three. press tab again  e Baz. press tab again  f </h1>  <!--{-->
-    <div> g<</div>
-  <!--}-->
 line 3
+line 4
+* line 5
+  <h1>__H1H1__One -Two -Three </h1><!--{-->
+    <div>__DIV_DIV__</div>
+   after H1     < 
+  <!--}-->
+line 6
+line 7
 
+  <h1>XXX</h1><!--{-->
+    <div>YYYY</div>
+   ZZZZ 
+  <!--}-->
+
+line 8
