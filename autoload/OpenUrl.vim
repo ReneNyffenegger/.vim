@@ -28,15 +28,13 @@ fu! OpenUrl#Go(url) " {
 
 endfu " }
 
-fu! OpenUrl#BlueLetterWithInput() " {
+fu! OpenUrl#BlueLetter(vers) " {
   call TQ84_log_indent(expand("<sfile>"))
-  let l:buch_kapitel_vers = input("Buch Kapitel Vers: ")
 
-  let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\(\w\+\) \(\w\+\) \(\w\+\)')
 
-  let l:buch    = buch_kapitel_vers_[1]
-  let l:kapitel = buch_kapitel_vers_[2]
-  let l:vers    = buch_kapitel_vers_[3]
+  let l:buch    = a:vers['buch']
+" let l:kapitel = buch_kapitel_vers_[2]
+" let l:vers    = buch_kapitel_vers_[3]
 
   if     l:buch == '1mo'   | let l:buch = 'gen'
   elseif l:buch == '2mo'   | let l:buch = 'ex'
@@ -68,7 +66,18 @@ fu! OpenUrl#BlueLetterWithInput() " {
   elseif l:buch == 'hl'    | let l:buch = 'song'
   endif
 
-  call OpenUrl#Go("http://www.blueletterbible.org/Bible.cfm?b=" . l:buch . "&c=" . l:kapitel . "&v=" . l:vers . "&t=KJV#" . l:vers)
+  call OpenUrl#Go("http://www.blueletterbible.org/Bible.cfm?b=" . l:buch . "&c=" . a:vers['kapitel'] . "&v=" . a:vers['vers'] . "&t=KJV#" . a:vers['vers'])
+  call TQ84_log_dedent()
+endfu " }
+
+fu! OpenUrl#BlueLetterWithInput() " {
+  call TQ84_log_indent(expand("<sfile>"))
+  let l:vers = Bibel#EingabeBuchKapitelVers()
+
+" let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\(\w\+\) \(\w\+\) \(\w\+\)')
+
+  call OpenUrl#BlueLetter(l:vers)
+
   call TQ84_log_dedent()
 endfu " }
 
