@@ -12,7 +12,15 @@ and the [accepted answer](http://vi.stackexchange.com/a/4030/985).
 
 ## submodules
 
+Initializing submodules (probably necessary only once)
+
+    git submodule init
+
+Updating submodules
+
+    git submodule update
+
 The following submodules were added:
 
-   git submodule add https://github.com/godlygeek/tabular bundle/tabular
+    git submodule add https://github.com/godlygeek/tabular bundle/tabular
     
