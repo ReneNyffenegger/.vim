@@ -78,4 +78,27 @@ fu! Bibel#BuchnameAusAbkuerzung(abkuerzung) " {
 
 endfu " }
 
+fu! Bibel#Vers(vers) " {
+  call TQ84_log_indent(expand('<sfile>'))
+  
+  if ! exists('s:eigene_uebersetzung')
+     let s:eigene_uebersetzung = readfile($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
+  endif
+
+  for i in s:eigene_uebersetzung
+
+    if i =~# '^' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
+
+"      let l:text = substitute(i, '\v.{-}\|(.{-})\|.*', '\1', '')
+       let l:text = substitute(i, '\v.*\|(.*)\|.*', '\1', '')
+       call TQ84_log_dedent()
+       return l:text
+    endif
+
+  endfor
+
+  call TQ84_log_dedent()
+  return 'Not found'
+endfu " }
+
 call TQ84_log_dedent()
