@@ -55,6 +55,10 @@ call TQ84_log_dedent() " }
 
 " }
 
+" { Pathogen
+execute pathogen#infect()
+" }
+
 " { Gui Options
 
 "   Don't source $VIMRUNTIME/menu.vim (I don't want menus)
