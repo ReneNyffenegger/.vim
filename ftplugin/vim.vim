@@ -50,5 +50,5 @@ fu! <SID>TabberLog() " {
 
 endfu " }
 
-nnoremap ,fu  :call <SID>TabberInsertFunction()<CR>
-inoremap ,log =<SID>TabberLog()<CR>
+nnoremap <buffer> ,fu  :call <SID>TabberInsertFunction()<CR>
+inoremap <buffer> ,log =<SID>TabberLog()<CR>
