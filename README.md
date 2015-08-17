@@ -9,3 +9,10 @@ So, on a Unix system, the files need to be cloned with `git clone <remote url> ~
 
 See Stackoverflow question [Keeping personal vimrc and syntax files etc in source control?](http://vi.stackexchange.com/questions/4027/keeping-personal-vimrc-and-syntax-files-etc-in-source-control)
 and the [accepted answer](http://vi.stackexchange.com/a/4030/985).
+
+## submodules
+
+The following submodules were added:
+
+   git submodule add https://github.com/godlygeek/tabular bundle/tabular
+    
