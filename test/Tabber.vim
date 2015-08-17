@@ -13,11 +13,14 @@ fu! <SID>InsertFooBarBaz() " {
      \ ['ins-const', 'Baz ']
      \ ])
 
+   normal i
    call Tabber#TabPressed()
 
 endfu " }
 
 fu! <SID>InsertOneTwoThree() " {
+
+ call TQ84_log_indent(expand('<sfile>') . ' .: ' . virtcol('.') . ', $: ' . virtcol('$')) 
 
    call Tabber#Add([
      \ ['ins-const', 'One '  ],
@@ -26,6 +29,10 @@ fu! <SID>InsertOneTwoThree() " {
      \ ])
 
    call Tabber#TabPressed()
+
+   call TQ84_log_dedent()
+
+   return ''
 
 endfu " }
 
@@ -75,7 +82,8 @@ new
   
 
 if mapcheck('123') == ""
-  inoremap  123 <ESC>:call <SID>InsertOneTwoThree()<CR>
+" inoremap  123 <ESC>:call <SID>InsertOneTwoThree()<CR>
+  inoremap  123 =<SID>InsertOneTwoThree()<CR>
 endif
 
 if mapcheck('fbb') == ""
@@ -146,6 +154,13 @@ else
 "  Add an unindented skeleton, test whether a jump
 "  mark at the end is treated correctly:
    let s:typed = s:typed . "iius2ENTER-1\tENTER-2"
+
+"  Go to last line
+   let s:typed = s:typed . "$G"
+
+"  Append lines with initial spacing
+   let s:typed = s:typed . "o     Space intentionally left blank\n"
+   let s:typed = s:typed . "123,\t,\t,\t<"
 
    execute "normal " . s:typed
 

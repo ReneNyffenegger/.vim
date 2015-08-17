@@ -8,11 +8,12 @@ fu! Tabber#TabPressed() " {
   call TQ84_log_indent(expand('<sfile>'))
 
   call TQ84_log('len(s:instruction_stack) = ' . len(s:instruction_stack))
+  call TQ84_log('virtcol(.) = ' . virtcol('.') . ' / virtcol($): ' . virtcol('$'))
 
   if len(s:instruction_stack) == 0
      iunmap <TAB>
      call GUI#InsertModeInsertText(nr2char(9))
-     inoremap  <TAB> <ESC>:call Tabber#TabPressed()<CR>
+     inoremap  <TAB> =Tabber#TabPressed()<CR>
   else
 
      let l:curr_instructions = s:instruction_stack[-1]
@@ -29,13 +30,16 @@ fu! Tabber#TabPressed() " {
 
      if     l:curr_instruction_type == 'ins-const' " {
 
-        call TQ84_log('An insert instruction, text = ' . l:curr_instruction[1] )
-        call GUI#InsertModeInsertText(l:curr_instruction[1])
+        let l:constantText = l:curr_instruction[1]
+
+        call TQ84_log('An insert instruction, text: >' . l:constantText . '<')
 
         call remove(l:curr_instructions, 0)
         if len(l:curr_instructions) == 0 " {
            call remove(s:instruction_stack, -1)
         endif " }
+
+        call GUI#InsertModeInsertText(l:curr_instruction[1])
 
      " }
      elseif l:curr_instruction_type == 'jump-to' " {
@@ -47,13 +51,6 @@ fu! Tabber#TabPressed() " {
         if l:found_line_nr != getpos('.')[1]
            throw 'jump-to: l:found_line_nr: ' . l:found_line_nr . ', but getpos returns ' . getpos('.')[1]
         endif
-
-"       let l:cursor_pos    = getpos('.')[2]
-"       call TQ84_log('found_line_nr: ' . l:found_line_nr . ', cursor now at ' . getpos('.')[1] . '/' . getpos('.')[2])
-
-"       let l:lineText = getline(l:found_line_nr)
-"       call setline(l:found_line_nr, l:lineText[0 : l:cursor_pos-1] . l:lineText[l:cursor_pos :])
-
 
         if virtcol('.') + 1 == virtcol('$')
            call TQ84_log('last character, startinsert!')
@@ -80,6 +77,8 @@ fu! Tabber#TabPressed() " {
   endif
 
   call TQ84_log_dedent()
+
+  return ''
 
 endfu " }
 
