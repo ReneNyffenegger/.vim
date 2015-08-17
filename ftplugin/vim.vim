@@ -32,4 +32,23 @@ fu! <SID>TabberInsertFunction() " {
   call TQ84_log_dedent()
 endfu " }
 
-nnoremap ,fu :call <SID>TabberInsertFunction()<CR>
+fu! <SID>TabberLog() " {
+
+  call TQ84_log_indent(expand('<sfile>'))
+
+  call Tabber#Add([
+     \ ['ins-const', 'call TQ84_log('],
+     \ ['ins-const', ')' . nr2char(13)],
+     \ ])
+
+  normal i
+  call Tabber#TabPressed()
+
+  call TQ84_log_dedent()
+
+  return ''
+
+endfu " }
+
+nnoremap ,fu  :call <SID>TabberInsertFunction()<CR>
+inoremap ,log =<SID>TabberLog()<CR>
