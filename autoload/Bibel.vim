@@ -29,7 +29,7 @@ let s:Buecher = {
 \   'hes'   : {'Name': 'Hesekiel'         },
 \   'dan'   : {'Name': 'Daniel'           },
 \   'hos'   : {'Name': 'Hosea'            },
-\   'jo'    : {'Name': 'Joel'             },
+\   'joe'   : {'Name': 'Joel'             },
 \   'am'    : {'Name': 'Amos'             },
 \   'ob'    : {'Name': 'Obadja'           },
 \   'jon'   : {'Name': 'Jona'             },
@@ -72,7 +72,6 @@ let s:Buecher = {
 fu! Bibel#EingabeBuchKapitelVers() " {
   call TQ84_log_indent(expand('<sfile>'))
 
-
   let l:found = 0
 
   while ! l:found
@@ -113,6 +112,9 @@ endfu " }
 
 fu! Bibel#Vers(vers) " {
   call TQ84_log_indent(expand('<sfile>'))
+
+  echo 'Use Bibel#VersText instead of Bibel#Vers'
+  call TQ84_log('Use VersText instead of Bibel#Vers')
   
   if ! exists('s:eigene_uebersetzung')
      let s:eigene_uebersetzung = readfile($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
@@ -122,7 +124,6 @@ fu! Bibel#Vers(vers) " {
 
     if i =~# '^' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
 
-"      let l:text = substitute(i, '\v.{-}\|(.{-})\|.*', '\1', '')
        let l:text = substitute(i, '\v.*\|(.*)\|.*', '\1', '')
        call TQ84_log_dedent()
        return l:text
@@ -132,6 +133,65 @@ fu! Bibel#Vers(vers) " {
 
   call TQ84_log_dedent()
   return 'Not found'
+endfu " }
+
+fu! Bibel#VersText(vers) " {
+  call TQ84_log_indent(expand('<sfile>'))
+  
+  if ! exists('s:eigene_uebersetzung')
+     let s:eigene_uebersetzung = readfile($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
+  endif
+
+  for i in s:eigene_uebersetzung
+
+    if i =~# '^' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
+
+       let l:text = substitute(i, '\v.*\|(.*)\|.*', '\1', '')
+       call TQ84_log_dedent()
+       return l:text
+    endif
+
+  endfor
+
+  call TQ84_log_dedent()
+  return 'Not found'
+endfu " }
+
+fu! Bibel#VersID(vers) " {
+  call TQ84_log_indent(expand('<sfile>'))
+  
+
+" Ersten Buchstaben des Buches gross machen
+"   1mo  -> 1Mo
+"   roem -> Roem
+"   gal  -> Gal
+  let l:ret = substitute(a:vers['buch'], '\v([a-z])', '\U\1', '')
+
+" Allfällige führende Ziffer mit Punkt und Space
+" erweitern
+"
+"   1Mo   -> 1. Mo
+"   Roem  -> Roem
+"   Gal   -> Gal
+
+  let l:ret = substitute(l:ret, '\v(\d)', '\1. ', '')
+
+"  oe nach ö konvertierten ausser für «joe»
+"    Roem -> Röm
+"    Joe  -> Joe
+
+  if l:ret != 'Joe'
+     let l:ret = substitute(l:ret, 'oe', 'ö', '')
+  endif
+
+" Kapitel und Vers anhängen
+
+  let l:ret = l:ret . ' ' . a:vers['kapitel'] . ':' . a:vers['vers']
+
+  call TQ84_log('l:ret = ' . l:ret)
+
+  call TQ84_log_dedent()
+  return l:ret
 endfu " }
 
 call TQ84_log_dedent()
