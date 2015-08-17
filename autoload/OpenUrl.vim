@@ -1,4 +1,4 @@
-" 
+"
 "  TODO:
 "  https://github.com/tyru/open-browser.vim/blob/master/plugin/openbrowser.vim
 "
@@ -31,13 +31,13 @@ endfu " }
 fu! OpenUrl#BlueLetterWithInput() " {
   call TQ84_log_indent(expand("<sfile>"))
   let l:buch_kapitel_vers = input("Buch Kapitel Vers: ")
-  
+
   let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\(\w\+\) \(\w\+\) \(\w\+\)')
-  
+
   let l:buch    = buch_kapitel_vers_[1]
   let l:kapitel = buch_kapitel_vers_[2]
   let l:vers    = buch_kapitel_vers_[3]
-  
+
   if     l:buch == '1mo'   | let l:buch = 'gen'
   elseif l:buch == '2mo'   | let l:buch = 'ex'
   elseif l:buch == '3mo'   | let l:buch = 'lev'
@@ -67,21 +67,15 @@ fu! OpenUrl#BlueLetterWithInput() " {
   elseif l:buch == 'rt'    | let l:buch = 'ru'
   elseif l:buch == 'hl'    | let l:buch = 'song'
   endif
-  
+
   call OpenUrl#Go("http://www.blueletterbible.org/Bible.cfm?b=" . l:buch . "&c=" . l:kapitel . "&v=" . l:vers . "&t=KJV#" . l:vers)
   call TQ84_log_dedent()
 endfu " }
 
-fu! OpenUrl#KommentarMitEingabe() " {
-  call TQ84_log_indent(expand("<sfile>") . "-BlueLetterWithInput")
+fu! OpenUrl#Kommentar(vers) " {
+  call TQ84_log_indent(expand('<sfile>'))
 
-  let l:buch_kapitel_vers = input("Buch Kapitel Vers: ")
-  
-  let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\(\w\+\) \(\w\+\) \(\w\+\)')
-  
-  let l:buch    = buch_kapitel_vers_[1]
-  let l:kapitel = buch_kapitel_vers_[2]
-  let l:vers    = buch_kapitel_vers_[3]
+  let l:buch = a:vers['buch']
 
   if l:buch == 'ri' || l:buch == 'rt'
     let l:buch_ = 'ri_rt.html'
@@ -105,9 +99,20 @@ fu! OpenUrl#KommentarMitEingabe() " {
     let l:buch_ = l:buch . '.html'
   endif
 
-" let l:dummy = RN_OpenBlueLetter(l:book, l:bk_ch_v_[2], l:bk_ch_v_[3])
   call TQ84_log("l:buch = " . l:buch . " / l:buch_ = " . l:buch_)
-  call OpenUrl#Go("file://c:\\schlachter2000\\" . l:buch_ . '#I' . l:buch . '-' . l:kapitel . '-' . l:vers)
+  let l:url = 'file://c:\schlachter2000\' . l:buch_ . '#I' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
+  call TQ84_log('l:url = ' . l:url)
+  call OpenUrl#Go(l:url)
+
+  call TQ84_log_dedent()
+endfu " }
+
+fu! OpenUrl#KommentarMitEingabe() " {
+  call TQ84_log_indent(expand("<sfile>"))
+
+  let l:vers = Bibel#EingabeBuchKapitelVers()
+
+  call OpenUrl#Kommentar(l:vers)
 
   call TQ84_log_dedent()
 endfu " }
@@ -115,56 +120,56 @@ endfu " }
 fu! OpenUrl#StrongsWithInput() " {
   call TQ84_log_indent(expand("<sfile>"))
   let l:strongs_nr = input("Strongs Number, prefix with G or H: ")
-  
+
   call OpenUrl#Go("http://www.blueletterbible.org/lang/lexicon/lexicon.cfm?Strongs=" . l:strongs_nr . "&t=KJV")
   call TQ84_log_dedent()
 endfu " }
 
 fu! OpenUrl#BibelOnlineLuther1545MitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
-  
+
   call OpenUrl#BibelOnline('luther_1545_letzte_hand', Bibel#EingabeBuchKapitelVers())
-  
+
   call TQ84_log_dedent()
 
 endfu " }
 fu! OpenUrl#BibelOnlineLuther1912MitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
-  
+
   call OpenUrl#BibelOnline('luther_1912', Bibel#EingabeBuchKapitelVers())
-  
+
   call TQ84_log_dedent()
 
 endfu " }
 fu! OpenUrl#BibelOnlineInterlinearMitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
-  
+
   call OpenUrl#BibelOnline('interlinear', Bibel#EingabeBuchKapitelVers())
-  
+
   call TQ84_log_dedent()
 
 endfu " }
 fu! OpenUrl#BibelOnlineNeueEvangelistischeMitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
-  
+
   call OpenUrl#BibelOnline('neue_evangelistische', Bibel#EingabeBuchKapitelVers())
-  
+
   call TQ84_log_dedent()
 
 endfu " }
 fu! OpenUrl#BibelOnlineSchlachter51MitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
-  
+
   call OpenUrl#BibelOnline('schlachter_1951', Bibel#EingabeBuchKapitelVers())
-  
+
   call TQ84_log_dedent()
 
 endfu " }
 fu! OpenUrl#BibelOnlineElberfelder1905MitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
-  
+
   call OpenUrl#BibelOnline('elberfelder_1905', Bibel#EingabeBuchKapitelVers())
-  
+
   call TQ84_log_dedent()
 
 endfu " }
@@ -188,11 +193,11 @@ endfu " }
 
 fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
-  
+
   let l:vers = Bibel#EingabeBuchKapitelVers()
 
   call TQ84_log('buch ' . l:vers['buch'] . ', kapitel: ' . l:vers['kapitel'])
-  
+
   if     l:vers['buch'] == '1mo'    | let l:buch_nr = '01'
   elseif l:vers['buch'] == '2mo'    | let l:buch_nr = '02'
   elseif l:vers['buch'] == '3mo'    | let l:buch_nr = '03'
@@ -220,7 +225,7 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   call TQ84_log('buch_nr ' . l:buch_nr)
 
   call OpenUrl#Go("https://www.die-bibel.de/online-bibeln/menge-bibel/bibeltext/bibel/text/lesen/stelle/" . l:buch_nr . '/' . l:vers['kapitel'] . '0001/' . l:vers['kapitel'] . '9999/')
-  
+
   call TQ84_log_dedent()
 
 endfu " }
