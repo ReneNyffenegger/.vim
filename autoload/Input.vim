@@ -4,14 +4,9 @@ fu! Input#BuchKapitelVers() " {
 
   call TQ84_log_indent(expand("<sfile>"))
 
-  let l:buch_kapitel_vers = input("Buch Kapitel Vers: ")
-  
-  let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\(\w\+\) \(\w\+\) \(\w\+\)')
+  call TQ84_log('deprecated, use Bibel#EingabeBuchKapitelVers')
 
-  let l:ret = {
-     \ 'buch'   : buch_kapitel_vers_[1],
-     \ 'kapitel': buch_kapitel_vers_[2],
-     \ 'vers'   : buch_kapitel_vers_[3]}
+  let l:ret = Bibel#EingabeBuchKapitelVers()
 
   call TQ84_log_dedent()
 

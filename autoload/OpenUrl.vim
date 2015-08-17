@@ -123,7 +123,7 @@ endfu " }
 fu! OpenUrl#BibelOnlineLuther1545MitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
   
-  call OpenUrl#BibelOnline('luther_1545_letzte_hand', Input#BuchKapitelVers())
+  call OpenUrl#BibelOnline('luther_1545_letzte_hand', Bibel#EingabeBuchKapitelVers())
   
   call TQ84_log_dedent()
 
@@ -131,7 +131,7 @@ endfu " }
 fu! OpenUrl#BibelOnlineLuther1912MitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
   
-  call OpenUrl#BibelOnline('luther_1912', Input#BuchKapitelVers())
+  call OpenUrl#BibelOnline('luther_1912', Bibel#EingabeBuchKapitelVers())
   
   call TQ84_log_dedent()
 
@@ -139,7 +139,7 @@ endfu " }
 fu! OpenUrl#BibelOnlineInterlinearMitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
   
-  call OpenUrl#BibelOnline('interlinear', Input#BuchKapitelVers())
+  call OpenUrl#BibelOnline('interlinear', Bibel#EingabeBuchKapitelVers())
   
   call TQ84_log_dedent()
 
@@ -147,7 +147,7 @@ endfu " }
 fu! OpenUrl#BibelOnlineNeueEvangelistischeMitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
   
-  call OpenUrl#BibelOnline('neue_evangelistische', Input#BuchKapitelVers())
+  call OpenUrl#BibelOnline('neue_evangelistische', Bibel#EingabeBuchKapitelVers())
   
   call TQ84_log_dedent()
 
@@ -155,7 +155,7 @@ endfu " }
 fu! OpenUrl#BibelOnlineSchlachter51MitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
   
-  call OpenUrl#BibelOnline('schlachter_1951', Input#BuchKapitelVers())
+  call OpenUrl#BibelOnline('schlachter_1951', Bibel#EingabeBuchKapitelVers())
   
   call TQ84_log_dedent()
 
@@ -163,7 +163,7 @@ endfu " }
 fu! OpenUrl#BibelOnlineElberfelder1905MitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
   
-  call OpenUrl#BibelOnline('elberfelder_1905', Input#BuchKapitelVers())
+  call OpenUrl#BibelOnline('elberfelder_1905', Bibel#EingabeBuchKapitelVers())
   
   call TQ84_log_dedent()
 
@@ -189,7 +189,7 @@ endfu " }
 fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
   
-  let l:vers = Input#BuchKapitelVers()
+  let l:vers = Bibel#EingabeBuchKapitelVers()
 
   call TQ84_log('buch ' . l:vers['buch'] . ', kapitel: ' . l:vers['kapitel'])
   
@@ -212,7 +212,7 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   elseif l:vers['buch'] == '2thes'  | let l:buch_nr = '63'
   elseif l:vers['buch'] == '1tim'   | let l:buch_nr = '64'
   elseif l:vers['buch'] == '2tim'   | let l:buch_nr = '65'
-  elseif l:vers['buch'] == 'tit''   | let l:buch_nr = '66'
+  elseif l:vers['buch'] == 'tit'    | let l:buch_nr = '66'
   elseif l:vers['buch'] == 'phim'   | let l:buch_nr = '67'
   elseif l:vers['buch'] == 'hebr'   | let l:buch_nr = '68'
   endif
