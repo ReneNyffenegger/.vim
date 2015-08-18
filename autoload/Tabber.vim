@@ -10,11 +10,13 @@ fu! Tabber#TabPressed() " {
   call TQ84_log('len(s:instruction_stack) = ' . len(s:instruction_stack))
   call TQ84_log('virtcol(.) = ' . virtcol('.') . ' / virtcol($): ' . virtcol('$'))
 
-  if len(s:instruction_stack) == 0
+  if len(s:instruction_stack) == 0 " {
+     call TQ84_log('insert verbatim TAB since instruction_stack is empty')
      iunmap <TAB>
      call GUI#InsertModeInsertText(nr2char(9))
      inoremap  <TAB> =Tabber#TabPressed()<CR>
-  else
+      " }
+  else " {
 
      let l:curr_instructions = s:instruction_stack[-1]
      call TQ84_log('len(l:curr_instructions) = ' . len(l:curr_instructions))
@@ -52,12 +54,16 @@ fu! Tabber#TabPressed() " {
            throw 'jump-to: l:found_line_nr: ' . l:found_line_nr . ', but getpos returns ' . getpos('.')[1]
         endif
 
+        call TQ84_log("I have jumped")
+
+        call GUI#LogLineAndPos()
+
         if virtcol('.') + 1 == virtcol('$')
-           call TQ84_log('last character, startinsert!')
+           call TQ84_log('After jump: ' . virtcol('.') . ' fell on last character [' . virtcol('$') . '], so startinsert!')
            normal x
            startinsert!
         else
-           call TQ84_log(virtcol('.') . ' not last character [' . virtcol('$') . '], startinsert')
+           call TQ84_log('After jump: ' . virtcol('.') . ' did not fall on last character [' . virtcol('$') . '], so startinsert')
            normal x
            startinsert
         endif
@@ -74,7 +80,7 @@ fu! Tabber#TabPressed() " {
 
      endif " }
 
-  endif
+  endif " }
 
   call TQ84_log_dedent()
 

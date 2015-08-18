@@ -78,6 +78,26 @@ fu! <SID>InsertUnindentedSkeleton_2() " {
 
 endfu " }
 
+fu! <SID>InsertAnotherUnInSkel() " {
+
+  let l:jumpTo_1 = Tabber#MakeJumpToMark()
+  let l:jumpTo_2 = Tabber#MakeJumpToMark()
+
+  call Tabber#InsertUnindentedSkeleton(
+  \ ['  EnEnEnTop ['    . l:jumpTo_1 . ']', 
+  \  '  EnEnEnBottom [' . l:jumpTo_2 . ']',
+  \ ])
+
+  call Tabber#Add([
+     \ ['jump-to', l:jumpTo_1 ],
+     \ ['jump-to', l:jumpTo_2 ],
+     \ ])
+
+  normal i
+  call Tabber#TabPressed()
+
+endfu " }
+
 new
   
 
@@ -95,6 +115,10 @@ endif
 
 if mapcheck('ius2') == ""
   inoremap  <buffer> ius2 <ESC>:call <SID>InsertUnindentedSkeleton_2()<CR>
+endif
+
+if mapcheck(',nnn') == ""
+  nnoremap  <buffer> ,nnn <ESC>:call <SID>InsertAnotherUnInSkel()<CR>
 endif
 
 if s:manually == 1
@@ -123,7 +147,7 @@ else
 "          One -Two -Three
    let s:typed = s:typed . "123-\t-\t"
          
-"  Move forard to the div:
+"  Move forward to the div:
    let s:typed = s:typed . "\t"
 
 "  and enter __DIV_DIV__
@@ -160,6 +184,19 @@ else
 "  Append lines with initial spacing
    let s:typed = s:typed . "o     Space intentionally left blank\n"
    let s:typed = s:typed . "123,\t,\t,\t<"
+   
+"  Try to execute a normal-mode-mapping
+"      ... go one line up, first
+   let s:typed = s:typed . "k"
+
+"      ... then execute mapping
+   let s:typed = s:typed . ",nnn"
+
+"      ... the write into first [...]
+   let s:typed = s:typed . "first\t"
+
+"      ... the write into second [...]
+   let s:typed = s:typed . "second\tthird"
 
    execute "normal " . s:typed
 
