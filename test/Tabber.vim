@@ -82,20 +82,19 @@ new
   
 
 if mapcheck('123') == ""
-" inoremap  123 <ESC>:call <SID>InsertOneTwoThree()<CR>
-  inoremap  123 =<SID>InsertOneTwoThree()<CR>
+  inoremap  <buffer> 123 =<SID>InsertOneTwoThree()<CR>
 endif
 
 if mapcheck('fbb') == ""
-  inoremap  fbb <ESC>:call <SID>InsertFooBarBaz()<CR>
+  inoremap  <buffer> fbb <ESC>:call <SID>InsertFooBarBaz()<CR>
 endif
 
 if mapcheck('h1') == ""
-  inoremap  h1  <ESC>:call <SID>InsertH1Section()<CR>
+  inoremap  <buffer> h1  <ESC>:call <SID>InsertH1Section()<CR>
 endif
 
 if mapcheck('ius2') == ""
-  inoremap  ius2 <ESC>:call <SID>InsertUnindentedSkeleton_2()<CR>
+  inoremap  <buffer> ius2 <ESC>:call <SID>InsertUnindentedSkeleton_2()<CR>
 endif
 
 if s:manually == 1
