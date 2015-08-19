@@ -26,15 +26,18 @@ endfu " }
 fu! tq84#EmbedVisualSelection(txt_before, txt_after) range " {
   call TQ84_log_indent(expand('<sfile>'))
 
-" Determining beginning ...
+" Determining beginning and end of visual selection
   let l:line_b    = line("'<")
   let l:line_e    = line("'>")
-
-" ... and end of visual selection
   let l:col_b     = col ("'<")
   let l:col_e     = col ("'>")
 
-  call TQ84_log('Lines: ' . l:line_b . "-" . l:line_e . ", columns " . l:col_b . ":" . l:col_e)
+" also get position of cursor
+  let l:line_c    = line(".")
+  let l:col_c     = col (".")
+
+  call TQ84_log('Selection:  ' . l:line_b . ":" . l:col_b . ' - ' . l:line_e . ':' . l:col_e)
+  call TQ84_log('Cursor: ' . l:line_c . ':' . l:col_c)
 
   let l:line = getline(l:line_e)
   let l:line = strpart(l:line, 0, l:col_e) . a:txt_after . strpart(l:line, l:col_e)
@@ -50,7 +53,7 @@ fu! tq84#EmbedVisualSelection(txt_before, txt_after) range " {
 
   call setline(l:line_b, l:line)
 
-  call setpos('.', [0, l:line_e, l:col_e + len(a:txt_before) + len(a:txt_after), 0])
+  call setpos('.', [0, l:line_b, l:col_b + len(a:txt_before) , 0])
 
   call TQ84_log_dedent()
 
