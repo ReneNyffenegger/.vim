@@ -156,7 +156,8 @@ if mapcheck(',nnn') == ""
 endif
 
 if mapcheck(',ie') == ""
-  inoremap  <buffer> ,ie =<SID>InsertIfElse()<CR>
+  inoremap  <buffer> ,ie  =<SID>InsertIfElse()<CR>
+  nnoremap  <buffer> ,ie i=<SID>InsertIfElse()<CR>
 endif
 
 if s:manually == 1
@@ -236,7 +237,7 @@ else
 "      ... the write into second [...]
    let s:typed = s:typed . "second\tthird"
 
-"  Try if else
+"  Try if else in insert mode
 
 "  Go to last line
    let s:typed = s:typed . '$G'
@@ -245,6 +246,18 @@ else
    let s:typed = s:typed . 'i'
 
    let s:typed = s:typed . ",ie2==2\t,ie3==3\tprint(2==2 and 3==3)\tprint(2==2 and 2!=3)\t// some comment\tprint (2!=2)\t// end if else"
+
+"  Try if else in normal mode
+
+"      ... go to «some comment»
+   let s:typed = s:typed . "?some comment\n"
+
+"      ... go to //
+   let s:typed = s:typed . "3h"
+
+"      ... normal mode: another if else
+   let s:typed = s:typed . ",ieG1\tG2\tG3\tG4"
+
 
    execute "normal " . s:typed
 

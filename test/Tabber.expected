@@ -30,6 +30,13 @@ line 8
          print(2==2 and 2!=3)
        }
        // some comment
+       if (G1) {
+         G2
+       }
+       else {
+         G3
+       }
+       G4
      }
      else {
        print (2!=2)
