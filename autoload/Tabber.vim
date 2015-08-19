@@ -116,7 +116,8 @@ fu! Tabber#InsertUnindentedSkeleton(lines) " {
   let l:currLineNo   = line('.')
   let l:currLineText = getline(l:currLineNo)
 
-  call TQ84_log('curr Line: ' . l:currLineText . ' (' . l:currLineNo . ')')
+" call TQ84_log('curr Line: ' . l:currLineText . ' (' . l:currLineNo . ')')
+  call GUI#LogLineAndPos()
 
   if l:currLineText !~# '^\s*$'
      call TQ84_log('insert extra line')
@@ -132,6 +133,29 @@ fu! Tabber#InsertUnindentedSkeleton(lines) " {
     call TQ84_log('setting line ' . (l:firstLine+l) . ' to ' . a:lines[l])
     call setline(l:firstLine+l, a:lines[l])
   endfor
+
+" let &foldenable = l:save_foldenable
+
+  call TQ84_log_dedent()
+
+endfu " }
+
+fu! Tabber#InsertIndentedSkeleton(lines) " {
+  call TQ84_log_indent(expand('<sfile>') . ' len(lines): ' . len(a:lines))
+
+" let l:save_foldenable = &foldenable
+" let &foldenable = 0
+
+  let l:currLineNo   = line('.')
+  let l:currCol      = virtcol('.')
+  let l:currLineText = getline(l:currLineNo)
+
+" call TQ84_log('curr Line: ' . l:currLineText . ' (' . l:currLineNo . ')')
+  call GUI#LogLineAndPos()
+
+  let l:lines = map(a:lines, '"' . repeat(' ', l:currCol-1) . '" . v:val')
+
+  call Tabber#InsertUnindentedSkeleton(l:lines)
 
 " let &foldenable = l:save_foldenable
 

@@ -98,6 +98,40 @@ fu! <SID>InsertAnotherUnInSkel() " {
 
 endfu " }
 
+fu! <SID>InsertIfElse() " {
+  call TQ84_log_indent(expand('<sfile>'))
+
+  let l:jumpTo_1 = Tabber#MakeJumpToMark()
+  let l:jumpTo_2 = Tabber#MakeJumpToMark()
+  let l:jumpTo_3 = Tabber#MakeJumpToMark()
+  let l:jumpTo_4 = Tabber#MakeJumpToMark()
+
+  call Tabber#InsertIndentedSkeleton([
+     \ 'if (' . l:jumpTo_1 . ') {',
+     \ '  ' . l:jumpTo_2          ,
+     \ '}'                        ,
+     \ 'else {'                   ,
+     \ '  ' . l:jumpTo_3          ,
+     \ '}'                        ,
+     \ l:jumpTo_4 ])
+
+
+  call Tabber#Add([
+     \ ['jump-to', l:jumpTo_1 ],
+     \ ['jump-to', l:jumpTo_2 ],
+     \ ['jump-to', l:jumpTo_3 ],
+     \ ['jump-to', l:jumpTo_4 ]
+     \ ])
+
+    
+  normal i
+  call Tabber#TabPressed()
+  
+  call TQ84_log_dedent()
+
+  return ''
+endfu " }
+
 new
   
 
@@ -119,6 +153,10 @@ endif
 
 if mapcheck(',nnn') == ""
   nnoremap  <buffer> ,nnn <ESC>:call <SID>InsertAnotherUnInSkel()<CR>
+endif
+
+if mapcheck(',ie') == ""
+  inoremap  <buffer> ,ie =<SID>InsertIfElse()<CR>
 endif
 
 if s:manually == 1
@@ -197,6 +235,16 @@ else
 
 "      ... the write into second [...]
    let s:typed = s:typed . "second\tthird"
+
+"  Try if else
+
+"  Go to last line
+   let s:typed = s:typed . '$G'
+
+"      ... go to insert mode
+   let s:typed = s:typed . 'i'
+
+   let s:typed = s:typed . ",ie2==2\t,ie3==3\tprint(2==2 and 3==3)\tprint(2==2 and 2!=3)\t// some comment\tprint (2!=2)\t// end if else"
 
    execute "normal " . s:typed
 
