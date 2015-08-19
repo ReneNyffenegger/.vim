@@ -19,6 +19,8 @@ fu! <SID>Switch_Tag(tag) " {
 
   call TQ84_log_dedent()
 
+  return ''
+
 endfu " }
 fu! <SID>RemoveComment() " {
 
@@ -33,8 +35,8 @@ fu! <SID>RemoveComment() " {
 
 endfu " }
 
-inoremap <buffer> <M-i> <ESC>:call <SID>Switch_Tag('i')<CR>
-inoremap <buffer> <M-b> <ESC>:call <SID>Switch_Tag('b')<CR>
+inoremap <buffer> <M-i> =<SID>Switch_Tag('i')<CR>
+inoremap <buffer> <M-b> =<SID>Switch_Tag('b')<CR>
 
 nnoremap <buffer> ,rmcom <ESC>:call <SID>RemoveComment()<CR>
 vnoremap <buffer> ,com  :call tq84#EmbedVisualSelection('<!-- ', ' -->')<CR>
