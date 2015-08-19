@@ -22,7 +22,10 @@ fu! Tabber#TabPressed() " {
      call TQ84_log('len(l:curr_instructions) = ' . len(l:curr_instructions))
 
      if len(l:curr_instructions) == 0 " {
-        throw "len of l:curr_instructions should never be 0!"
+        echo "len of l:curr_instructions should never be 0!"
+        call TQ84_log("len of l:curr_instructions should never be 0, returning")
+        call TQ84_log_dedent()
+        return ''
      endif " }
 
      let l:curr_instruction      = l:curr_instructions[0]
