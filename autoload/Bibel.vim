@@ -76,7 +76,7 @@ fu! Bibel#EingabeBuchKapitelVers() " {
 
   while ! l:found
     let l:buch_kapitel_vers  = input("Buch Kapitel Vers: ")
-    let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\v(\w+) (\w+) (\w+)')
+    let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\v(\w+) (\w+) (\S+)')
 
     if has_key(s:Buecher, l:buch_kapitel_vers_[1])
        let l:found = 1
@@ -88,6 +88,8 @@ fu! Bibel#EingabeBuchKapitelVers() " {
      \ 'buch'   : buch_kapitel_vers_[1],
      \ 'kapitel': buch_kapitel_vers_[2],
      \ 'vers'   : buch_kapitel_vers_[3]}
+
+  cal TQ84_log('ret = ' . string(l:ret))
   
   call TQ84_log_dedent()
 
@@ -137,18 +139,51 @@ endfu " }
 
 fu! Bibel#VersText(vers) " {
   call TQ84_log_indent(expand('<sfile>'))
+
+  let l:text = ''
   
   if ! exists('s:eigene_uebersetzung')
      let s:eigene_uebersetzung = readfile($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
   endif
 
+  let l:verse = matchlist(a:vers['vers'], '\v^(\d+)-(\d+)')
+
+  call TQ84_log('len(verse) = ' .len(l:verse))
+  if len(l:verse) > 1
+     let l:start_vers = l:verse[1]
+     let l:end_vers   = l:verse[2]
+  else
+     let l:start_vers = a:vers['vers']
+     let l:end_vers   = a:vers['vers']
+  endif   
+  call TQ84_log('start_vers: ' . l:start_vers . ', end_vers: ' . l:end_vers)
+
+  let l:additional_lines = 0
   for i in s:eigene_uebersetzung
 
-    if i =~# '^' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
+    if (i =~# '^' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . l:start_vers) || l:additional_lines
 
-       let l:text = substitute(i, '\v.*\|(.*)\|.*', '\1', '')
-       call TQ84_log_dedent()
-       return l:text
+       call TQ84_log('matched, additional_lines=' . l:additional_lines . ' / ' . i)
+
+       if len(l:text)
+          let l:text = l:text . ' '
+       endif
+
+       let l:text = l:text . substitute(i, '\v.*\|(.*)\|.*', '\1', '')
+
+       if l:additional_lines == 0
+          let l:additional_lines = l:end_vers - l:start_vers + 1
+          call TQ84_log('initializing additional_lines to: ' . l:additional_lines)
+       endif
+
+
+       let l:additional_lines = l:additional_lines - 1
+
+       if l:additional_lines <= 0
+          call TQ84_log_dedent()
+          return l:text
+       endif
+
     endif
 
   endfor
