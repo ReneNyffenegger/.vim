@@ -41,7 +41,7 @@ fu! <SID>TabberLog() " {
      \ ['ins-const', ')' . nr2char(13)],
      \ ])
 
-  normal i
+" normal i
   call Tabber#TabPressed()
 
   call TQ84_log_dedent()
@@ -50,5 +50,6 @@ fu! <SID>TabberLog() " {
 
 endfu " }
 
-nnoremap <buffer> ,fu  :call <SID>TabberInsertFunction()<CR>
+nnoremap <buffer> ,fu  =<SID>TabberInsertFunction()<CR>
+
 inoremap <buffer> ,log =<SID>TabberLog()<CR>
