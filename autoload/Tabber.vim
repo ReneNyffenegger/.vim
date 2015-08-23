@@ -116,26 +116,7 @@ fu! Tabber#InsertUnindentedSkeleton(lines) " {
 " let l:save_foldenable = &foldenable
 " let &foldenable = 0
 
-  let l:currLineNo   = line('.')
-  let l:currLineText = getline(l:currLineNo)
-
-" call TQ84_log('curr Line: ' . l:currLineText . ' (' . l:currLineNo . ')')
-  call GUI#LogLineAndPos()
-
-  if l:currLineText !~# '^\s*$'
-     call TQ84_log('insert extra line')
-     normal 0o
-  endif
-
-  let l:firstLine = line('.')
-  call TQ84_log('l:firstLine = ' . l:firstLine)
-
-  execute "normal " . (len(a:lines)-1) . 'o' . nr2char(27)
-
-  for l in range(0, len(a:lines)-1)
-    call TQ84_log('setting line ' . (l:firstLine+l) . ' to ' . a:lines[l])
-    call setline(l:firstLine+l, a:lines[l])
-  endfor
+  call GUI#InsertLines(a:lines)
 
 " let &foldenable = l:save_foldenable
 
