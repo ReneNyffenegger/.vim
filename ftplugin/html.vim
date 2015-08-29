@@ -46,5 +46,6 @@ vnoremap <buffer> <M-i> :call tq84#EmbedVisualSelection('<i>', '</i>')<CR>
 
 " Visually select between last > and following <
 nnoremap <buffer> ,vi<  v?>lo/<h
+nnoremap <buffer> ,ci<  v?>lo/<hc
 
 call TQ84_log_dedent()
