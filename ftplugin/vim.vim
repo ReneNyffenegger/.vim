@@ -31,6 +31,36 @@ fu! <SID>TabberInsertFunction() " {
 
   call TQ84_log_dedent()
 endfu " }
+fu! <SID>TabberInsertFor() " {
+
+  call TQ84_log_indent(expand('<sfile>'))
+
+  let l:jumpTo_1 = Tabber#MakeJumpToMark()
+  let l:jumpTo_2 = Tabber#MakeJumpToMark()
+  let l:jumpTo_3 = Tabber#MakeJumpToMark()
+
+   call Tabber#InsertIndentedSkeleton(
+   \ ['for ' . l:jumpTo_1 . ' in ' . l:jumpTo_2,
+   \  '  ' . l:jumpTo_3,
+   \  'endfor' ,
+   \ ])
+
+
+   call Tabber#Add([
+      \ ['jump-to', l:jumpTo_1 ],
+      \ ['jump-to', l:jumpTo_2 ],
+      \ ['jump-to', l:jumpTo_3 ]
+      \ ])
+
+   normal i
+
+   call Tabber#TabPressed()
+
+"  silent! zo
+
+   return ""
+  call TQ84_log_dedent()
+endfu " }
 
 fu! <SID>TabberLog() " {
 
@@ -50,6 +80,7 @@ fu! <SID>TabberLog() " {
 
 endfu " }
 
-nnoremap <buffer> ,fu  =<SID>TabberInsertFunction()<CR>
+nnoremap <buffer> ,fu  :call <SID>TabberInsertFunction()<CR>
+inoremap <buffer> ,for =<SID>TabberInsertFor()<CR>
 
 inoremap <buffer> ,log =<SID>TabberLog()<CR>
