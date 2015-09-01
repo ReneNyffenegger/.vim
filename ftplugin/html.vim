@@ -43,5 +43,6 @@ vnoremap <buffer> ,com  :call tq84#EmbedVisualSelection('<!-- ', ' -->')<CR>
 
 vnoremap <buffer> <M-b> :call tq84#EmbedVisualSelection('<b>', '</b>')<CR>
 vnoremap <buffer> <M-i> :call tq84#EmbedVisualSelection('<i>', '</i>')<CR>
+vnoremap <buffer> ,em   :call tq84#EmbedVisualSelection('<em>', '</em>')<CR>
 
 call TQ84_log_dedent()
