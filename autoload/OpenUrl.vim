@@ -215,7 +215,7 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   elseif l:vers['buch'] == 'jos'    | let l:buch_nr = '06'
   elseif l:vers['buch'] == 'hi'     | let l:buch_nr = '18'
   elseif l:vers['buch'] == 'ps'     | let l:buch_nr = '19'
-  elseif l:vers['buch'] == '1kor'   | let l:buch_nr = '56'
+  elseif l:vers['buch'] == 'roem'   | let l:buch_nr = '55'
   elseif l:vers['buch'] == '1kor'   | let l:buch_nr = '56'
   elseif l:vers['buch'] == '2kor'   | let l:buch_nr = '57'
   elseif l:vers['buch'] == 'gal'    | let l:buch_nr = '58'
