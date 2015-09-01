@@ -23,13 +23,15 @@ fu! <SID>TabberInsertFunction() " {
       \ ['jump-to', l:jumpTo_3 ]
       \ ])
 
-   normal i
+ " normal i
 
    call Tabber#TabPressed()
 
    silent! zo
 
-  call TQ84_log_dedent()
+   call TQ84_log_dedent()
+
+   return ''
 endfu " }
 
 fu! <SID>TabberLog() " {
@@ -50,6 +52,7 @@ fu! <SID>TabberLog() " {
 
 endfu " }
 
-nnoremap <buffer> ,fu  =<SID>TabberInsertFunction()<CR>
+nnoremap <buffer> ,fu i=<SID>TabberInsertFunction()<CR>
+inoremap <buffer> ,fu  =<SID>TabberInsertFunction()<CR>
 
 inoremap <buffer> ,log =<SID>TabberLog()<CR>
