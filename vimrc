@@ -151,6 +151,9 @@ endif " }
  
   " It's been said that mapleader should be set before vundle starts
   " loading the plugins.
+  "
+  " See also
+  " https://github.com/ReneNyffenegger/about-vim/blob/master/vimscript/variables/g_mapleader.vim
 
     let g:mapleader=","
 
