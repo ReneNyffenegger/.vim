@@ -79,8 +79,40 @@ fu! <SID>TabberLog() " {
   return ''
 
 endfu " }
+fu! <SID>TabberLogIndent() " {
+
+  call TQ84_log_indent(expand('<sfile>'))
+
+  call Tabber#Add([
+     \ ['ins-const', 'call TQ84_log_indent('],
+     \ ['ins-const', ')' . nr2char(13)],
+     \ ])
+
+  call Tabber#TabPressed()
+
+  call TQ84_log_dedent()
+  return ''
+
+endfu " }
+fu! <SID>TabberLogDedent() " {
+
+  call TQ84_log_indent(expand('<sfile>'))
+
+  call Tabber#Add([
+     \ ['ins-const', 'call TQ84_log_dedent('],
+     \ ['ins-const', ')' . nr2char(13)],
+     \ ])
+
+  call Tabber#TabPressed()
+
+  call TQ84_log_dedent()
+  return ''
+
+endfu " }
 
 nnoremap <buffer> ,fu  :call <SID>TabberInsertFunction()<CR>
 inoremap <buffer> ,for =<SID>TabberInsertFor()<CR>
 
 inoremap <buffer> ,log =<SID>TabberLog()<CR>
+inoremap <buffer> ,lgi =<SID>TabberLogIndent()<CR>
+inoremap <buffer> ,lgd =<SID>TabberLogDedent()<CR>
