@@ -90,8 +90,18 @@ set wildignore+=*.dll
 
 " { Backup files
 
-set nobackup
-set writebackup
+if exists('g:TQ84_CRYPT') && g:TQ84_CRYPT
+  call TQ84_log('TQ84_CRYPT is enabled')
+  set nobackup
+  set nowritebackup
+" no swapfile possibly already set with «-n»
+  set noswapfile
+else
+  call TQ84_log('TQ84_CRYPT not enabled')
+
+  set nobackup
+  set writebackup
+endif
 
 "  set backupdir=c:\temp\vim
 
@@ -151,6 +161,9 @@ endif " }
  
   " It's been said that mapleader should be set before vundle starts
   " loading the plugins.
+  "
+  " See also
+  " https://github.com/ReneNyffenegger/about-vim/blob/master/vimscript/variables/g_mapleader.vim
 
     let g:mapleader=","
 
