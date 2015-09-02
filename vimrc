@@ -251,7 +251,8 @@ cnoremap <C-N> <Down>
 " }
 
 " { Additional digraphs
-:digraph .. 8226
+:digraph oo 8226 " Bullet point
+:digraph .. 8230 " … (&hellip;)
 " }
 
 so       $git_work_dir\vim\vimfiles\vimrc
