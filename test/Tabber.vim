@@ -20,7 +20,7 @@ endfu " }
 
 fu! <SID>InsertOneTwoThree() " {
 
- call TQ84_log_indent(expand('<sfile>') . ' .: ' . virtcol('.') . ', $: ' . virtcol('$')) 
+ call TQ84_log_indent(expand('<sfile>') . ' .: ' . virtcol('.') . ', $: ' . virtcol('$'))
 
    call Tabber#Add([
      \ ['ins-const', 'One '  ],
@@ -84,7 +84,7 @@ fu! <SID>InsertAnotherUnInSkel() " {
   let l:jumpTo_2 = Tabber#MakeJumpToMark()
 
   call Tabber#InsertUnindentedSkeleton(
-  \ ['  EnEnEnTop ['    . l:jumpTo_1 . ']', 
+  \ ['  EnEnEnTop ['    . l:jumpTo_1 . ']',
   \  '  EnEnEnBottom [' . l:jumpTo_2 . ']',
   \ ])
 
@@ -123,17 +123,34 @@ fu! <SID>InsertIfElse() " {
      \ ['jump-to', l:jumpTo_4 ]
      \ ])
 
-    
+
   normal i
   call Tabber#TabPressed()
-  
+
+  call TQ84_log_dedent()
+
+  return ''
+endfu " }
+
+fu! <SID>InsertWhile() " {
+  call TQ84_log_indent(expand('<sfile>'))
+
+  call Tabber#InsertIndentedSkeleton([
+        \  'while (!1!) {',
+        \  '  !2!',
+        \  '}',
+        \  '!3!'
+        \ ])
+
+  call Tabber#TabPressed()
+
   call TQ84_log_dedent()
 
   return ''
 endfu " }
 
 new
-  
+
 
 if mapcheck('123') == ""
   inoremap  <buffer> 123 =<SID>InsertOneTwoThree()<CR>
@@ -160,13 +177,18 @@ if mapcheck(',ie') == ""
   nnoremap  <buffer> ,ie i=<SID>InsertIfElse()<CR>
 endif
 
+if mapcheck(',iw') == ""
+  inoremap  <buffer> ,iw  =<SID>InsertWhile()<CR>
+  nnoremap  <buffer> ,iw i=<SID>InsertWhile()<CR>
+endif
+
 if s:manually == 1
    echo "Go to insertmode and enter fbb or 123 or h1 or so."
 else
 
    let s:typed = ''
 
-  
+
 "  Insert eight lines
    let s:typed = s:typed . "iline 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8"
 
@@ -175,26 +197,26 @@ else
 
 "  insert a h1"
    let s:typed = s:typed . "h1"
-   
+
 "  The text between h1 and /h1 is ...
 "     ... __H1H1__
    let s:typed = s:typed . "__H1H1__"
-   
-"      ... followed by the expansion of 123 
+
+"      ... followed by the expansion of 123
 "          Note, after the tabulators, there is also a hyphen, so that
 "          the resulting string is
 "          One -Two -Three
    let s:typed = s:typed . "123-\t-\t"
-         
+
 "  Move forward to the div:
    let s:typed = s:typed . "\t"
 
 "  and enter __DIV_DIV__
    let s:typed = s:typed . "__DIV_DIV__"
-         
+
 "  Move forward, after the <div>
    let s:typed = s:typed . "\t"
-   
+
 "  and write
    let s:typed = s:typed . "after H1\t\t\t<"
 
@@ -223,7 +245,7 @@ else
 "  Append lines with initial spacing
    let s:typed = s:typed . "o     Space intentionally left blank\n"
    let s:typed = s:typed . "123,\t,\t,\t<"
-   
+
 "  Try to execute a normal-mode-mapping
 "      ... go one line up, first
    let s:typed = s:typed . "k"
@@ -256,7 +278,7 @@ else
    let s:typed = s:typed . "3h"
 
 "      ... normal mode: another if else
-   let s:typed = s:typed . ",ieG1\tG2\tG3\tG4"
+   let s:typed = s:typed . ",ieG1\t,iwG2\tggg2ggg3\t\tG3\tG4"
 
 
    execute "normal " . s:typed

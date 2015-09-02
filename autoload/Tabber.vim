@@ -113,10 +113,47 @@ endfu " }
 fu! Tabber#InsertUnindentedSkeleton(lines) " {
   call TQ84_log_indent(expand('<sfile>') . ' len(lines): ' . len(a:lines))
 
+  let l:lines = []
+
 " let l:save_foldenable = &foldenable
 " let &foldenable = 0
 
-  call GUI#InsertLines(a:lines)
+  let l:jumpPositions = {}
+
+  call TQ84_log_indent('looping over lines')
+  for l:line in a:lines
+    let l:matched = matchlist(l:line, '\v!(\d+)!')
+
+    call TQ84_log('l:line = ' . l:line)
+
+    while len(l:matched)
+
+      call TQ84_log('len(l:matched) = ' . len(l:matched) . ', l:matched[1] = ' . l:matched[1] . ', l:line = ' . l:line)
+
+"     let l:jumpMark = nr2char(10000) " Tabber#MakeJumpMark()
+      let l:jumpMark = Tabber#MakeJumpToMark()
+      let l:jumpPositions[l:matched[1]] = l:jumpMark
+      let l:line = substitute(l:line, '\v!\d+!', l:jumpMark, '')
+      call TQ84_log('after substitute: l:line = ' . l:line)
+
+      let l:matched = matchlist(l:line, '\v!(\d+)!')
+
+    endwhile
+
+    let l:lines += [l:line]
+  endfor
+  call TQ84_log_dedent()
+
+  call GUI#InsertLines(l:lines)
+
+  let l:instructions = []
+  for l:j in sort(map(keys(l:jumpPositions), 'v:val + 0'))
+    let l:instructions += [ ['jump-to', l:jumpPositions[l:j] ] ]
+  endfor
+
+  if len(l:instructions)
+     call Tabber#Add(l:instructions)
+  endif
 
 " let &foldenable = l:save_foldenable
 
