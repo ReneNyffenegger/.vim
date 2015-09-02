@@ -94,7 +94,7 @@ if exists('g:TQ84_CRYPT') && g:TQ84_CRYPT
   call TQ84_log('TQ84_CRYPT is enabled')
   set nobackup
   set nowritebackup
-" no swapfile possible already set with «-n»
+" no swapfile possibly already set with «-n»
   set noswapfile
 else
   call TQ84_log('TQ84_CRYPT not enabled')
