@@ -108,7 +108,7 @@ endif
 "  set backupdir=c:\temp\vim
 
 "  }
-"
+
 " { Other settings
 
 " keep 999 lines of command line history
@@ -122,6 +122,11 @@ set visualbell t_vb=""
 
 set relativenumber
 
+" }
+
+" { Languages
+" Use english messages
+language message en
 " }
 
 " { OS Dependent
