@@ -75,7 +75,16 @@ fu! Bibel#EingabeBuchKapitelVers() " {
   let l:found = 0
 
   while ! l:found
-    let l:buch_kapitel_vers  = input("Buch Kapitel Vers: ")
+
+    try " Detect CTRL-C while inputtning Buch, Kapitel und Vers {
+      let l:buch_kapitel_vers  = input("Buch Kapitel Vers: ")
+    catch /^Vim:Interrupt$/
+      call TQ84_log('CTRL-C wurde betätigt')
+      call TQ84_log_dedent()
+      return {}
+    endtry " }
+
+    call TQ84_log('l:buch_kapitel_vers: ' . l:buch_kapitel_vers)
     let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\v(\w+) (\w+) (\S+)')
 
     if has_key(s:Buecher, l:buch_kapitel_vers_[1])
