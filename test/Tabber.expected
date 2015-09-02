@@ -31,7 +31,11 @@ line 8
        }
        // some comment
        if (G1) {
-         G2
+         while (G2) {
+           ggg2
+           ggg3
+         }
+         
        }
        else {
          G3
