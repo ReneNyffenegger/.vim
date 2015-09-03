@@ -7,7 +7,7 @@ call TQ84_log_indent(expand("<sfile>"))
 
 fu! OpenUrl#Go(url) " {
 
-  call TQ84_log_indent(expand("<sfile>") . "-OpenUrl#Go: " . a:url)
+  call TQ84_log_indent(expand("<sfile>") . " " . a:url)
   let use_mozilla = 1
 
   let l:url = substitute(a:url, '#', '\\#', 'g')
