@@ -224,6 +224,7 @@ endif " }
    nnoremap <leader>opstr   :call OpenUrl#StrongsWithInput()<CR>
    nnoremap <leader>op4     :call misc#OpenScriptureForAll()<CR>
    nnoremap <leader>oprc    :e $MYVIMRC<CR>
+   nnoremap <leader>opurl   :call OpenUrl#Go(expand('<cWORD>'))<CR>
 
    " Open a file of which only a part of the file name is known:
    nnoremap <leader>ope8   :e *
