@@ -34,6 +34,23 @@ fu! <SID>RemoveComment() " {
   normal x
 
 endfu " }
+fu! <SID>LinkFromClipbaord() " {
+  call TQ84_log_indent(expand('<sfile>'))
+
+  if getreg('*') =~? '\v^https?://'  " {
+  
+     execute 'normal a<a href="' . getreg('*') . '">' . getreg('*') . '</a> '
+     startinsert
+
+     call TQ84_log('Link ' . getreg('*') . ' was inserted')
+
+     call TQ84_log_dedent()
+     return
+
+  endif " }
+
+  call TQ84_log_dedent()
+endfu " }
 
 inoremap <buffer> <M-i> =<SID>Switch_Tag('i')<CR>
 inoremap <buffer> <M-b> =<SID>Switch_Tag('b')<CR>
@@ -48,5 +65,8 @@ vnoremap <buffer> ,em   :call tq84#EmbedVisualSelection('<em>', '</em>')<CR>
 " Visually select between last > and following <
 nnoremap <buffer> ,vi<  v?>lo/<h
 nnoremap <buffer> ,ci<  v?>lo/<hc
+
+" Create a <a href link with the content of the clipboard
+inoremap <buffer> ,a <ESC>:call <SID>LinkFromClipbaord()<CR>
 
 call TQ84_log_dedent()
