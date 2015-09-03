@@ -258,9 +258,12 @@ nnoremap <S-F5> :set foldmethod=marker foldmarker={,}<CR>
 "  Toggle cursor position cross hair:
 nnoremap <M-F5> :set cursorline! cursorcolumn!<CR>
 " }
-
+" F6: {
 nnoremap   <F6> :only<CR>
 
+" Switch from virtual edit back and forth
+nnoremap <S-F6> :if &virtualedit == 'all' \| set virtualedit= \| else \| set virtualedit=all \| endif
+" }
   " }
   " { Misc
   "   Map from ^ (6) to $ (4)
