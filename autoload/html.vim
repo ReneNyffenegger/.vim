@@ -1,5 +1,6 @@
 call TQ84_log_indent(expand('<sfile>'))
 
+" { s:entities
 let s:entities = [
 \   ['auml'  , 'ä' ],
 \   ['ouml'  , 'ö' ],
@@ -14,6 +15,7 @@ let s:entities = [
 \   ['laquo' , "'" ], 
 \   ['ndash' , '-' ],
 \ ]
+" }
 
 fu! html#decode(html) " {
   call TQ84_log_indent(expand('<sfile>'))
