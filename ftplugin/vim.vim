@@ -117,4 +117,4 @@ inoremap <buffer> ,fu  =<SID>TabberInsertFunction()<CR>
 inoremap <buffer> ,for =<SID>TabberInsertFor()<CR>
 inoremap <buffer> ,log =<SID>TabberLog()<CR>
 inoremap <buffer> ,lgi =<SID>TabberLogIndent()<CR>
-inoremap <buffer> ,lgd =<SID>TabberLogDedent()<CR>
+inoremap <buffer> ,lgd TQ84_log_dedent()
