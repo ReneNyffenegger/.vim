@@ -214,12 +214,12 @@ endif " }
   " { <leader>op Open
    nnoremap <leader>op      <Nop>
    nnoremap <leader>opbl    :call OpenUrl#BlueLetterWithInput()<CR>
-   nnoremap <leader>oplu15  :call OpenUrl#BibelOnlineLuther1545MitEingabe()<CR>
-   nnoremap <leader>oplu12  :call OpenUrl#BibelOnlineLuther1912MitEingabe()<CR>
-   nnoremap <leader>opintl  :call OpenUrl#BibelOnlineInterlinearMitEingabe()<CR>
-   nnoremap <leader>opneu   :call OpenUrl#BibelOnlineNeueEvangelistischeMitEingabe()<CR>
-   nnoremap <leader>opsch51 :call OpenUrl#BibelOnlineSchlachter51MitEingabe()<CR>
-   nnoremap <leader>opelb05 :call OpenUrl#BibelOnlineElberfelder1905MitEingabe()<CR>
+   nnoremap <leader>oplu15  :call OpenUrl#BibelOnlineMitEingabe('luther_1545_letzte_hand')<CR>
+   nnoremap <leader>oplu12  :call OpenUrl#BibelOnlineMitEingabe('luther_1912')<CR>
+   nnoremap <leader>opintl  :call OpenUrl#BibelOnlineMitEingabe('interlinear')<CR>
+   nnoremap <leader>opneu   :call OpenUrl#BibelOnlineMitEingabe('neue_evangelistische')<CR>
+   nnoremap <leader>opsch51 :call OpenUrl#BibelOnlineMitEingabe('schlachter_1951')<CR>
+   nnoremap <leader>opelb05 :call OpenUrl#BibelOnlineMitEingabe('elberfelder_1905')<CR>
    nnoremap <leader>opmenge :call OpenUrl#MengeUebersetzungMitEingabe()<CR>
    nnoremap <leader>opkom   :call OpenUrl#KommentarMitEingabe()<CR>
    nnoremap <leader>opstr   :call OpenUrl#StrongsWithInput()<CR>
