@@ -212,6 +212,7 @@ endif " }
    nnoremap <leader>ftr    :call Font#Reset()<CR>
   " }
   " { <leader>op Open
+   nnoremap <leader>op      <Nop>
    nnoremap <leader>opbl    :call OpenUrl#BlueLetterWithInput()<CR>
    nnoremap <leader>oplu15  :call OpenUrl#BibelOnlineLuther1545MitEingabe()<CR>
    nnoremap <leader>oplu12  :call OpenUrl#BibelOnlineLuther1912MitEingabe()<CR>
