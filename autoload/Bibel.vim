@@ -146,14 +146,28 @@ fu! Bibel#Vers(vers) " {
   return 'Not found'
 endfu " }
 
-fu! Bibel#VersText(vers) " {
+fu! Bibel#VersText(vers, uebersetzung) " {
   call TQ84_log_indent(expand('<sfile>'))
 
   let l:text = ''
   
-  if ! exists('s:eigene_uebersetzung')
-     let s:eigene_uebersetzung = readfile($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
-  endif
+  if     a:uebersetzung ==# 'eue' " { Eigene Übersetzung
+     if ! exists('s:eigene_uebersetzung')
+        let s:eigene_uebersetzung = readfile($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
+     endif
+
+     let l:uebersetzung = s:eigene_uebersetzung
+  " }
+  elseif a:uebersetzung ==# 'elb1905' " { Elberfelder 1905
+     if ! exists('s:elberfelder_x')
+        let s:elberfelder_1905 = readfile($git_work_dir . '/biblisches/uebersetzungen_bibel/elberfelder/elberfelder-1905.sql') " TODO: Rename to .txt
+     endif
+
+     let l:uebersetzung = s:elberfelder_1905
+  " }
+  else " {
+     throw "Unbekannte Uebersetzung ' . a:uebersetzungen_bibel"
+  endif " }
 
   let l:verse = matchlist(a:vers['vers'], '\v^(\d+)-(\d+)')
 
@@ -168,7 +182,7 @@ fu! Bibel#VersText(vers) " {
   call TQ84_log('start_vers: ' . l:start_vers . ', end_vers: ' . l:end_vers)
 
   let l:additional_lines = 0
-  for i in s:eigene_uebersetzung
+  for i in l:uebersetzung " s:eigene_uebersetzung
 
     if (i =~# '^' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . l:start_vers) || l:additional_lines
 
