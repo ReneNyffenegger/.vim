@@ -74,7 +74,11 @@ fu! OpenUrl#BlueLetterWithInput() " {
   call TQ84_log_indent(expand("<sfile>"))
   let l:vers = Bibel#EingabeBuchKapitelVers()
 
-" let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\(\w\+\) \(\w\+\) \(\w\+\)')
+  if keys(l:vers) == []
+    call TQ84_log('Kein Vers eingegeben')
+    call TQ84_log_dedent()
+    return ''
+  endif
 
   call OpenUrl#BlueLetter(l:vers)
 
@@ -120,6 +124,11 @@ fu! OpenUrl#KommentarMitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
 
   let l:vers = Bibel#EingabeBuchKapitelVers()
+  if keys(l:vers) == []
+    call TQ84_log('Kein Vers eingegeben')
+    call TQ84_log_dedent()
+    return ''
+  endif
 
   call OpenUrl#Kommentar(l:vers)
 
@@ -134,58 +143,23 @@ fu! OpenUrl#StrongsWithInput() " {
   call TQ84_log_dedent()
 endfu " }
 
-fu! OpenUrl#BibelOnlineLuther1545MitEingabe() " {
-  call TQ84_log_indent(expand("<sfile>"))
+fu! OpenUrl#BibelOnlineMitEingabe(uebersetzung) " {
+  call TQ84_log_indent(expand("<sfile>") . ' ' . a:uebersetzung)
 
-  call OpenUrl#BibelOnline('luther_1545_letzte_hand', Bibel#EingabeBuchKapitelVers())
-
-  call TQ84_log_dedent()
-
-endfu " }
-fu! OpenUrl#BibelOnlineLuther1912MitEingabe() " {
-  call TQ84_log_indent(expand("<sfile>"))
-
-  call OpenUrl#BibelOnline('luther_1912', Bibel#EingabeBuchKapitelVers())
+  let l:vers = Bibel#EingabeBuchKapitelVers()
+  if keys(l:vers) == []
+    call TQ84_log('Kein Vers eingegeben')
+    call TQ84_log_dedent()
+    return
+  endif
+  call OpenUrl#BibelOnline(a:uebersetzung, l:vers)
 
   call TQ84_log_dedent()
-
-endfu " }
-fu! OpenUrl#BibelOnlineInterlinearMitEingabe() " {
-  call TQ84_log_indent(expand("<sfile>"))
-
-  call OpenUrl#BibelOnline('interlinear', Bibel#EingabeBuchKapitelVers())
-
-  call TQ84_log_dedent()
-
-endfu " }
-fu! OpenUrl#BibelOnlineNeueEvangelistischeMitEingabe() " {
-  call TQ84_log_indent(expand("<sfile>"))
-
-  call OpenUrl#BibelOnline('neue_evangelistische', Bibel#EingabeBuchKapitelVers())
-
-  call TQ84_log_dedent()
-
-endfu " }
-fu! OpenUrl#BibelOnlineSchlachter51MitEingabe() " {
-  call TQ84_log_indent(expand("<sfile>"))
-
-  call OpenUrl#BibelOnline('schlachter_1951', Bibel#EingabeBuchKapitelVers())
-
-  call TQ84_log_dedent()
-
-endfu " }
-fu! OpenUrl#BibelOnlineElberfelder1905MitEingabe() " {
-  call TQ84_log_indent(expand("<sfile>"))
-
-  call OpenUrl#BibelOnline('elberfelder_1905', Bibel#EingabeBuchKapitelVers())
-
-  call TQ84_log_dedent()
-
 endfu " }
 
 fu! OpenUrl#BibelOnline(uebersetzung, vers) " {
 
-  call TQ84_log_indent(expand("<sfile>") . ' Buch: ' . a:vers['buch'] . ', Kapitel: ' . a:vers['kapitel'])
+  call TQ84_log_indent(expand("<sfile>") . ' Uebersetzung: ' . a:uebersetzung . ', Buch: ' . a:vers['buch'] . ', Kapitel: ' . a:vers['kapitel'])
 
   let l:buch = tolower(Bibel#BuchnameAusAbkuerzung(a:vers['buch']))
 
@@ -204,6 +178,11 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   call TQ84_log_indent(expand("<sfile>"))
 
   let l:vers = Bibel#EingabeBuchKapitelVers()
+  if keys(l:vers) == [] " {
+    call TQ84_log('Kein Vers eingegeben')
+    call TQ84_log_dedent()
+    return
+  endif " }
 
   call TQ84_log('buch ' . l:vers['buch'] . ', kapitel: ' . l:vers['kapitel'])
 
@@ -215,6 +194,7 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   elseif l:vers['buch'] == 'jos'    | let l:buch_nr = '06'
   elseif l:vers['buch'] == 'hi'     | let l:buch_nr = '18'
   elseif l:vers['buch'] == 'ps'     | let l:buch_nr = '19'
+  elseif l:vers['buch'] == 'apg'    | let l:buch_nr = '54'
   elseif l:vers['buch'] == 'roem'   | let l:buch_nr = '55'
   elseif l:vers['buch'] == '1kor'   | let l:buch_nr = '56'
   elseif l:vers['buch'] == '2kor'   | let l:buch_nr = '57'
