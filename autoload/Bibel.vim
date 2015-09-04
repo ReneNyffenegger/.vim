@@ -74,15 +74,20 @@ fu! Bibel#EingabeBuchKapitelVers() " {
 
   let l:found = 0
 
-  while ! l:found
+  while ! l:found " Iterieren, bis gültige Eingabe (oder nichts) eingegeben wurde {
 
-    try " Detect CTRL-C while inputtning Buch, Kapitel und Vers {
+    try " Catch CTRL-C {
       let l:buch_kapitel_vers  = input("Buch Kapitel Vers: ")
     catch /^Vim:Interrupt$/
-      call TQ84_log('CTRL-C wurde betätigt')
+      call TQ84_log('CTRL-C gedrückt')
+      let l:buch_kapitel_vers = ''
+    endtry " }
+
+    if l:buch_kapitel_vers == '' " { Leeren Hash zurückgeben, wenn nichts eingegeben
+      call TQ84_log('Nichts eingegeben')
       call TQ84_log_dedent()
       return {}
-    endtry " }
+    endif " }
 
     call TQ84_log('l:buch_kapitel_vers: ' . l:buch_kapitel_vers)
     let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\v(\w+) (\w+) (\S+)')
@@ -91,7 +96,7 @@ fu! Bibel#EingabeBuchKapitelVers() " {
        let l:found = 1
     endif
 
-  endwhile
+  endwhile " }
 
   let l:ret = {
      \ 'buch'   : buch_kapitel_vers_[1],
