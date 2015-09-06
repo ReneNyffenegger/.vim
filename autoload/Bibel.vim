@@ -156,19 +156,26 @@ fu! Bibel#VersText(vers, uebersetzung) " {
 
   let l:text = ''
   
-  if     a:uebersetzung ==# 'eue' " { Eigene Übersetzung
+  if     a:uebersetzung ==# 'eue' "      { Eigene Übersetzung
      if ! exists('s:eigene_uebersetzung')
         let s:eigene_uebersetzung = readfile($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
      endif
 
      let l:uebersetzung = s:eigene_uebersetzung
   " }
-  elseif a:uebersetzung ==# 'elb1905' " { Elberfelder 1905
-     if ! exists('s:elberfelder_x')
+  elseif a:uebersetzung ==# 'elb1905' "  { Elberfelder 1905
+     if ! exists('s:elberfelder_1905')
         let s:elberfelder_1905 = readfile($git_work_dir . '/biblisches/uebersetzungen_bibel/elberfelder/elberfelder-1905.sql') " TODO: Rename to .txt
      endif
 
      let l:uebersetzung = s:elberfelder_1905
+  " }
+  elseif a:uebersetzung ==# 'kjv' "      { King James Version
+     if ! exists('s:uebersetzung_kjv')
+        let s:uebersetzung_kjv = readfile('e:\Digitales-Backup\Biblisches\kommentare\kjv.txt')
+     endif
+
+     let l:uebersetzung = s:uebersetzung_kjv
   " }
   else " {
      throw "Unbekannte Uebersetzung ' . a:uebersetzungen_bibel"
