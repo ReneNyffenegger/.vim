@@ -178,25 +178,38 @@ fu! Bibel#VersText(vers, uebersetzung) " {
      let l:uebersetzung = s:uebersetzung_kjv
   " }
   else " {
-     throw "Unbekannte Uebersetzung ' . a:uebersetzungen_bibel"
+     throw 'Unbekannte Uebersetzung ' . a:uebersetzung
   endif " }
 
-  let l:verse = matchlist(a:vers['vers'], '\v^(\d+)-(\d+)')
+  if     type(a:vers) == 1 " String
+    call TQ84_log('Typ ist String')
+    let l:buch_kapitel_vers = matchlist(a:vers, '\v([^-]+)-([^-]+)-([^-]+)')
+    let l:vers = {
+       \ 'buch'   : buch_kapitel_vers[1],
+       \ 'kapitel': buch_kapitel_vers[2],
+       \ 'vers'   : buch_kapitel_vers[3]}
+
+  elseif type(a:vers) == 4 " Hash
+    call TQ84_log('Typ ist Hash')
+    let l:vers = a:vers
+  endif
+
+  let l:verse = matchlist(l:vers['vers'], '\v^(\d+)-(\d+)')
 
   call TQ84_log('len(verse) = ' .len(l:verse))
   if len(l:verse) > 1
      let l:start_vers = l:verse[1]
      let l:end_vers   = l:verse[2]
   else
-     let l:start_vers = a:vers['vers']
-     let l:end_vers   = a:vers['vers']
+     let l:start_vers = l:vers['vers']
+     let l:end_vers   = l:vers['vers']
   endif   
   call TQ84_log('start_vers: ' . l:start_vers . ', end_vers: ' . l:end_vers)
 
   let l:additional_lines = 0
-  for i in l:uebersetzung " s:eigene_uebersetzung
+  for i in l:uebersetzung " {
 
-    if (i =~# '^' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . l:start_vers) || l:additional_lines
+    if (i =~# '^' . l:vers['buch'] . '-' . l:vers['kapitel'] . '-' . l:start_vers) || l:additional_lines " {
 
        call TQ84_log('matched, additional_lines=' . l:additional_lines . ' / ' . i)
 
@@ -219,12 +232,41 @@ fu! Bibel#VersText(vers, uebersetzung) " {
           return l:text
        endif
 
-    endif
+    endif " }
 
-  endfor
+  endfor " }
 
   call TQ84_log_dedent()
   return 'Not found'
+endfu " }
+
+fu! Bibel#VersTexte(verse, uebersetzungen) " {
+
+    "
+    "  Aufruf
+    "     call Bibel#VersTexte('2mo-4-9 jes-8-12', 'eue elb1905 kjv')
+    "
+    "  Erstellt ein neues Window (new) und schreibt die Verse
+    "  in dieses Window.
+  
+    call TQ84_log_indent(expand('<sfile>'))
+    
+    new
+
+    for l:vers in split(a:verse)
+      call TQ84_log('l:vers = ' . l:vers)
+      call append('$', l:vers)
+      for l:uebersetzung in split(a:uebersetzungen)
+        call TQ84_log('l:uebersetzung = ' . l:uebersetzung)
+        call append('$', '  ' . Bibel#VersText(l:vers, l:uebersetzung))
+      endfor
+
+      call append('$','')
+
+    endfor
+
+    call TQ84_log_dedent()
+
 endfu " }
 
 fu! Bibel#VersID(vers) " {
