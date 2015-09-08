@@ -1,5 +1,7 @@
 call TQ84_log_indent(expand("<sfile>"))
 
+" unlet s:uebersetzung_kjv
+
 let s:Buecher = {
 \   '1mo'   : {'Name': '1. Mose'          }, 
 \   '2mo'   : {'Name': '2. Mose'          }, 
@@ -151,6 +153,37 @@ fu! Bibel#Vers(vers) " {
   return 'Not found'
 endfu " }
 
+fu! Bibel#UebersetzungEinlesen(pfad) " {
+  call TQ84_log_indent(expand('<sfile>') . ' a:pfad = ' . a:pfad)
+
+  let l:file = readfile(a:pfad)
+
+  let l:ret = {}
+
+  for l:line in l:file " {
+
+    let l:m = matchlist(l:line, '\v^([^-]+)-([^-]+)-([^|]+)\|([^|]+)\|')
+
+    if l:line =~# '^#'
+       continue
+    endif
+
+    if ! has_key(l:ret, l:m[1])
+       let l:ret[l:m[1]] = {}
+    endif
+
+    if ! has_key(l:ret[l:m[1]], l:m[2])
+       let l:ret[l:m[1]][l:m[2]] = {}
+    endif
+
+    let l:ret[l:m[1]][l:m[2]][l:m[3]] = l:m[4]
+
+  endfor " }
+
+  call TQ84_log_dedent()
+  return l:ret
+endfu " }
+
 fu! Bibel#VersText(vers, uebersetzung) " {
   call TQ84_log_indent(expand('<sfile>'))
 
@@ -158,21 +191,21 @@ fu! Bibel#VersText(vers, uebersetzung) " {
   
   if     a:uebersetzung ==# 'eue' "      { Eigene Übersetzung
      if ! exists('s:eigene_uebersetzung')
-        let s:eigene_uebersetzung = readfile($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
+        let s:eigene_uebersetzung = Bibel#UebersetzungEinlesen($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
      endif
 
      let l:uebersetzung = s:eigene_uebersetzung
   " }
   elseif a:uebersetzung ==# 'elb1905' "  { Elberfelder 1905
      if ! exists('s:elberfelder_1905')
-        let s:elberfelder_1905 = readfile($git_work_dir . '/biblisches/uebersetzungen_bibel/elberfelder/elberfelder-1905.sql') " TODO: Rename to .txt
+        let s:elberfelder_1905 = Bibel#UebersetzungEinlesen($git_work_dir . '/biblisches/uebersetzungen_bibel/elberfelder/elberfelder-1905.sql') " TODO: Rename to .txt
      endif
 
      let l:uebersetzung = s:elberfelder_1905
   " }
   elseif a:uebersetzung ==# 'kjv' "      { King James Version
      if ! exists('s:uebersetzung_kjv')
-        let s:uebersetzung_kjv = readfile('e:\Digitales-Backup\Biblisches\kommentare\kjv.txt')
+        let s:uebersetzung_kjv = Bibel#UebersetzungEinlesen('e:\Digitales-Backup\Biblisches\kommentare\kjv.txt')
      endif
 
      let l:uebersetzung = s:uebersetzung_kjv
@@ -181,18 +214,21 @@ fu! Bibel#VersText(vers, uebersetzung) " {
      throw 'Unbekannte Uebersetzung ' . a:uebersetzung
   endif " }
 
-  if     type(a:vers) == 1 " String
+  if     type(a:vers) == 1 " { String
     call TQ84_log('Typ ist String')
-    let l:buch_kapitel_vers = matchlist(a:vers, '\v([^-]+)-([^-]+)-([^-]+)')
+    let l:buch_kapitel_vers = matchlist(a:vers, '\v([^-]+)-([^-]+)-(\S+)')
     let l:vers = {
-       \ 'buch'   : buch_kapitel_vers[1],
-       \ 'kapitel': buch_kapitel_vers[2],
-       \ 'vers'   : buch_kapitel_vers[3]}
+       \ 'buch'   : l:buch_kapitel_vers[1],
+       \ 'kapitel': l:buch_kapitel_vers[2],
+       \ 'vers'   : l:buch_kapitel_vers[3]}
 
-  elseif type(a:vers) == 4 " Hash
+    call TQ84_log('l:vers = ' .string(l:vers))
+
+  " }
+  elseif type(a:vers) == 4 " { Hash
     call TQ84_log('Typ ist Hash')
     let l:vers = a:vers
-  endif
+  endif " }
 
   let l:verse = matchlist(l:vers['vers'], '\v^(\d+)-(\d+)')
 
@@ -207,37 +243,21 @@ fu! Bibel#VersText(vers, uebersetzung) " {
   call TQ84_log('start_vers: ' . l:start_vers . ', end_vers: ' . l:end_vers)
 
   let l:additional_lines = 0
-  for i in l:uebersetzung " {
 
-    if (i =~# '^' . l:vers['buch'] . '-' . l:vers['kapitel'] . '-' . l:start_vers) || l:additional_lines " {
+  let l:text = ''
+  for l:vers_ in range(l:start_vers, l:end_vers) " { Über Verse iterieren
 
-       call TQ84_log('matched, additional_lines=' . l:additional_lines . ' / ' . i)
-
-       if len(l:text)
-          let l:text = l:text . ' '
-       endif
-
-       let l:text = l:text . substitute(i, '\v.*\|(.*)\|.*', '\1', '')
-
-       if l:additional_lines == 0
-          let l:additional_lines = l:end_vers - l:start_vers + 1
-          call TQ84_log('initializing additional_lines to: ' . l:additional_lines)
-       endif
-
-
-       let l:additional_lines = l:additional_lines - 1
-
-       if l:additional_lines <= 0
-          call TQ84_log_dedent()
-          return l:text
-       endif
-
-    endif " }
+    if len(l:text)
+       let l:text = l:text . ' '
+    endif
+ 
+    let l:text = l:text . l:uebersetzung[l:vers['buch']][l:vers['kapitel']][l:vers_]
 
   endfor " }
 
   call TQ84_log_dedent()
-  return 'Not found'
+  return l:text
+
 endfu " }
 
 fu! Bibel#VersTexte(verse, uebersetzungen) " {
