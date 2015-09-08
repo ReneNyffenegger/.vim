@@ -7,7 +7,7 @@ set rtp+=$git_work_dir\vim\vimfiles
 set rtp+=$git_work_dir\vim\vimfiles\after
 
 " Log functions {
-" Create the log functions before the're used the 
+" Create the log functions before the're used the
 " first time. See TQ84_log_indent below.
 :runtime lib\tq84_log.vim
 call TQ84_log_init()
@@ -30,7 +30,7 @@ set bs=2            "   allow backspacing over everything in insert mode
 
 " Filetype related {
 call TQ84_log_indent('filetype on') " {
-filetype on 
+filetype on
 " -----------
 " This command loads (on Windows)
 "   $VIMRUNTIME/filetype.vim
@@ -165,7 +165,7 @@ endif " }
 " { Mappings
 
   " { Mapleader
- 
+
   " It's been said that mapleader should be set before vundle starts
   " loading the plugins.
   "
@@ -265,6 +265,13 @@ nnoremap   <F6> :only<CR>
 " Switch from virtual edit back and forth
 nnoremap <S-F6> :if &virtualedit == 'all' \| set virtualedit= \| else \| set virtualedit=all \| endif
 " }
+  " }
+  " { Gui
+ nnoremap <leader>h :call GUI#ToLeftMonitor()<CR>
+ nnoremap <leader>l :call GUI#ToRightMonitor()<CR>
+ nnoremap <leader>gj :call GUI#Minimize()<CR>
+ nnoremap <leader>gm :call GUI#Maximize()<CR>
+ nnoremap <leader>gn :call GUI#NormalSize()<CR>
   " }
   " { Misc
   "   Map from ^ (6) to $ (4)
