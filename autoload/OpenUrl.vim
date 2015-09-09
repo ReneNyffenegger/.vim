@@ -213,6 +213,14 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   elseif l:vers['buch'] == 'tit'    | let l:buch_nr = '66'
   elseif l:vers['buch'] == 'phim'   | let l:buch_nr = '67'
   elseif l:vers['buch'] == 'hebr'   | let l:buch_nr = '68'
+  elseif l:vers['buch'] == 'jak'    | let l:buch_nr = '69'
+  elseif l:vers['buch'] == '1petr'  | let l:buch_nr = '70'
+  elseif l:vers['buch'] == '2petr'  | let l:buch_nr = '71'
+  elseif l:vers['buch'] == '1joh'   | let l:buch_nr = '72'
+  elseif l:vers['buch'] == '2joh'   | let l:buch_nr = '73'
+  elseif l:vers['buch'] == '3joh'   | let l:buch_nr = '74'
+  elseif l:vers['buch'] == 'jud'    | let l:buch_nr = '75'
+  elseif l:vers['buch'] == 'offb'   | let l:buch_nr = '76'
   endif
 
   call TQ84_log('buch_nr ' . l:buch_nr)
