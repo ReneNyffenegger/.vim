@@ -130,7 +130,6 @@ fu! Tabber#InsertUnindentedSkeleton(lines) " {
 
       call TQ84_log('len(l:matched) = ' . len(l:matched) . ', l:matched[1] = ' . l:matched[1] . ', l:line = ' . l:line)
 
-"     let l:jumpMark = nr2char(10000) " Tabber#MakeJumpMark()
       let l:jumpMark = Tabber#MakeJumpToMark()
       let l:jumpPositions[l:matched[1]] = l:jumpMark
       let l:line = substitute(l:line, '\v!\d+!', l:jumpMark, '')
