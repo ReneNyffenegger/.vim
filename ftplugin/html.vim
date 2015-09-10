@@ -51,6 +51,16 @@ fu! <SID>LinkFromClipbaord() " {
 
   call TQ84_log_dedent()
 endfu " }
+fu! <SID>GotoID() " {
+  call TQ84_log_indent(expand('<sfile>'))
+
+  let l:id = expand('<cword>')
+  call TQ84_log('l:id = ' . l:id)
+
+  call search('id=["'']' . l:id . '["'']')
+
+  call TQ84_log_dedent()
+endfu " }
 
 inoremap <buffer> <M-i> =<SID>Switch_Tag('i')<CR>
 inoremap <buffer> <M-b> =<SID>Switch_Tag('b')<CR>
@@ -65,6 +75,9 @@ vnoremap <buffer> ,em   :call tq84#EmbedVisualSelection('<em>', '</em>')<CR>
 " Visually select between last > and following <
 nnoremap <buffer> ,vi<  v?>lo/<h
 nnoremap <buffer> ,ci<  v?>lo/<hc
+
+nnoremap <buffer> <leader>gtid  :call <SID>GotoID()<CR>
+
 
 " Create a <a href link with the content of the clipboard
 inoremap <buffer> ,a <ESC>:call <SID>LinkFromClipbaord()<CR>
