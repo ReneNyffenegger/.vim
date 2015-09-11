@@ -1,7 +1,5 @@
 call TQ84_log_indent(expand("<sfile>"))
 
-" unlet s:uebersetzung_kjv
-
 let s:Buecher = {
 \   '1mo'   : {'Name': '1. Mose'          }, 
 \   '2mo'   : {'Name': '2. Mose'          }, 
@@ -70,6 +68,16 @@ let s:Buecher = {
 \   'jud'   : {'Name': 'Judas'            },
 \   'offb'  : {'Name': 'Offenbarung'      },
 \ }
+
+fu! Bibel#ResetBuchCache(uebersetzung) " {
+  call TQ84_log_indent(expand('<sfile>'))
+
+  if exists('s:uebersetzung_' . a:uebersetzung)
+     unlet s:uebersetzung_{a:uebersetzung}
+  endif
+
+  call TQ84_log_dedent()
+endfu " }
 
 fu! Bibel#EingabeBuchKapitelVers() " {
   call TQ84_log_indent(expand('<sfile>'))
@@ -199,18 +207,18 @@ fu! Bibel#VersText(vers, uebersetzung) " {
   let l:text = ''
   
   if     a:uebersetzung ==# 'eue' "      { Eigene Übersetzung
-     if ! exists('s:eigene_uebersetzung')
-        let s:eigene_uebersetzung = Bibel#UebersetzungEinlesen($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
+     if ! exists('s:uebersetzung_eue')
+        let s:uebersetzung_eue = Bibel#UebersetzungEinlesen($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
      endif
 
-     let l:uebersetzung = s:eigene_uebersetzung
+     let l:uebersetzung = s:uebersetzung_eue
   " }
   elseif a:uebersetzung ==# 'elb1905' "  { Elberfelder 1905
-     if ! exists('s:elberfelder_1905')
-        let s:elberfelder_1905 = Bibel#UebersetzungEinlesen($git_work_dir . '/biblisches/uebersetzungen_bibel/elberfelder/elberfelder-1905.sql') " TODO: Rename to .txt
+     if ! exists('s:uebersetzung_elb1905j')
+        let s:uebersetzung_elb1905 = Bibel#UebersetzungEinlesen($git_work_dir . '/biblisches/uebersetzungen_bibel/elberfelder/elberfelder-1905.sql') " TODO: Rename to .txt
      endif
 
-     let l:uebersetzung = s:elberfelder_1905
+     let l:uebersetzung = s:uebersetzung_elb1905
   " }
   elseif a:uebersetzung ==# 'kjv' "      { King James Version
      if ! exists('s:uebersetzung_kjv')
