@@ -160,7 +160,11 @@ fu! Bibel#UebersetzungEinlesen(pfad) " {
 
   let l:ret = {}
 
+  let l:line_no = 0
+  try
   for l:line in l:file " {
+
+    let l:line_no = l:line_no + 1
 
     let l:m = matchlist(l:line, '\v^([^-]+)-([^-]+)-([^|]+)\|([^|]+)\|')
 
@@ -179,6 +183,11 @@ fu! Bibel#UebersetzungEinlesen(pfad) " {
     let l:ret[l:m[1]][l:m[2]][l:m[3]] = l:m[4]
 
   endfor " }
+  catch /.*/
+    let l:fehler = 'Fehler in ' . a:pfad . ', Zeile: ' . l:line_no . ' (' . v:exception . ')'
+    call TQ84_log(l:fehler)
+    echo 'Bibel#UebersetzungEinlesen: ' . l:fehler
+  endtry
 
   call TQ84_log_dedent()
   return l:ret
@@ -243,6 +252,13 @@ fu! Bibel#VersText(vers, uebersetzung) " {
   call TQ84_log('start_vers: ' . l:start_vers . ', end_vers: ' . l:end_vers)
 
   let l:additional_lines = 0
+
+  if ! has_key(l:uebersetzung[l:vers['buch']][l:vers['kapitel']], l:end_vers)
+
+     call TQ84_log_dedent()
+     return 'Vers ' . l:end_vers . ' nicht vorhanden'
+
+  endif
 
   let l:text = ''
   for l:vers_ in range(l:start_vers, l:end_vers) " { Über Verse iterieren
