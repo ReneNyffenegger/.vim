@@ -4,18 +4,25 @@ fu! tq84#SystemInDir(dir, cmd) " {
 
   call TQ84_log_indent(expand("<sfile>"))
 
-  call TQ84_log('a:dir = ' . a:dir)
-  call TQ84_log('a:cmd = ' . a:cmd)
+  try
 
-
-  let l:cwd = getcwd()
-  call TQ84_log('l:cwd = ' . l:cwd)
-
-  execute "cd " . a:dir
-
-  let l:response = system (a:cmd)
+    call TQ84_log('a:dir = ' . a:dir)
+    call TQ84_log('a:cmd = ' . a:cmd)
+  
+  
+    let l:cwd = getcwd()
+    call TQ84_log('l:cwd = ' . l:cwd)
+  
+    execute "cd " . a:dir
+  
+    let l:response = system (a:cmd)
 
   execute "cd " .  l:cwd
+
+  catch /.*/
+    call TQ84_log('exception caught: ' . v:exception)
+    let l:response = v:exception
+  endtry
 
   call TQ84_log_dedent()
 
