@@ -16,6 +16,7 @@ fu! tq84#SystemInDir(dir, cmd) " {
     execute "cd " . a:dir
   
     let l:response = system (a:cmd)
+    call TQ84_log('l:response = ' . l:response)
 
   execute "cd " .  l:cwd
 
