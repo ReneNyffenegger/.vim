@@ -307,11 +307,15 @@ cnoremap <C-N> <Down>
 " }
 call TQ84_log_dedent()
 " }
+" { Abbreviations
+iabbr aeg Ägypten
+" }
 
 " { Additional digraphs
 :digraph oo 8226 " Bullet point
 :digraph .. 8230 " … (&hellip;)
 " }
+
 
 so       $git_work_dir\vim\vimfiles\vimrc
 call TQ84_log_dedent()
