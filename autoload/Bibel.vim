@@ -161,10 +161,14 @@ fu! Bibel#Vers(vers) " {
   return 'Not found'
 endfu " }
 
-fu! Bibel#UebersetzungEinlesen(pfad) " {
-  call TQ84_log_indent(expand('<sfile>') . ' a:pfad = ' . a:pfad)
+fu! Bibel#UebersetzungEinlesen(uebersetzung) " {
+  call TQ84_log_indent(expand('<sfile>') . ' a:uebersetzung = ' . a:uebersetzung)
 
-  let l:file = readfile(a:pfad)
+  let l:pfad = Bibel#PfadTextDatei(a:uebersetzung)
+  call TQ84_log('l:pfad = ' . l:pfad)
+
+
+  let l:file = readfile(l:pfad)
 
   let l:ret = {}
 
@@ -192,7 +196,7 @@ fu! Bibel#UebersetzungEinlesen(pfad) " {
 
   endfor " }
   catch /.*/
-    let l:fehler = 'Fehler in ' . a:pfad . ', Zeile: ' . l:line_no . ' (' . v:exception . ')'
+    let l:fehler = 'Fehler in ' . l:pfad . ', Zeile: ' . l:line_no . ' (' . v:exception . ')'
     call TQ84_log(l:fehler)
     echo 'Bibel#UebersetzungEinlesen: ' . l:fehler
   endtry
@@ -208,21 +212,21 @@ fu! Bibel#VersText(vers, uebersetzung) " {
   
   if     a:uebersetzung ==# 'eue' "      { Eigene Übersetzung
      if ! exists('s:uebersetzung_eue')
-        let s:uebersetzung_eue = Bibel#UebersetzungEinlesen($git_work_dir . '/biblisches/kommentare/eigene_uebersetzung.txt')
+        let s:uebersetzung_eue = Bibel#UebersetzungEinlesen(a:uebersetzung)
      endif
 
      let l:uebersetzung = s:uebersetzung_eue
   " }
   elseif a:uebersetzung ==# 'elb1905' "  { Elberfelder 1905
      if ! exists('s:uebersetzung_elb1905j')
-        let s:uebersetzung_elb1905 = Bibel#UebersetzungEinlesen($git_work_dir . '/biblisches/uebersetzungen_bibel/elberfelder/elberfelder-1905.sql') " TODO: Rename to .txt
+        let s:uebersetzung_elb1905 = Bibel#UebersetzungEinlesen(a:uebersetzung) " TODO: Rename to .txt
      endif
 
      let l:uebersetzung = s:uebersetzung_elb1905
   " }
   elseif a:uebersetzung ==# 'kjv' "      { King James Version
      if ! exists('s:uebersetzung_kjv')
-        let s:uebersetzung_kjv = Bibel#UebersetzungEinlesen('e:\Digitales-Backup\Biblisches\kommentare\kjv.txt')
+        let s:uebersetzung_kjv = Bibel#UebersetzungEinlesen(a:uebersetzung)
      endif
 
      let l:uebersetzung = s:uebersetzung_kjv
@@ -348,6 +352,30 @@ fu! Bibel#VersID(vers) " {
 
   call TQ84_log_dedent()
   return l:ret
+endfu " }
+
+fu! Bibel#PfadTextDatei(uebersetzung) " {
+
+  call TQ84_log_indent(expand('<sfile>') . ' ' . a:uebersetzung)
+
+  if     a:uebersetzung ==# 'eue'
+         let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/tq84.bibel'
+  elseif a:uebersetzung ==# 'kjv'
+         let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/kjv.bibel'
+  elseif a:uebersetzung ==# 'elb1905'
+         let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/elb1905.bibel'
+  elseif a:uebersetzung ==# 'sch2k'
+         let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/sch2k.bibel'
+  else
+         call TQ84_log('Unbekannte Übersetzung ' . a:uebersetzung)
+         call TQ84_log_dedent()
+         throw 'Unbekannte Übersetzung ' . a:uebersetzung
+  endif
+
+  call TQ84_log('Returning ' . l:ret)
+  call TQ84_log_dedent()
+  return l:ret
+
 endfu " }
 
 call TQ84_log_dedent()
