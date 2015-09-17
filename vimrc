@@ -239,6 +239,8 @@ call TQ84_log_indent("Mappings")
    nnoremap <leader>opurl   :call OpenUrl#Go(expand('<cWORD>'))<CR>
    nnoremap <leader>opeue   :call GUI#OpenFile(Bibel#PfadTextDatei('eue'))<CR>
    nnoremap <leader>opkjv   :call GUI#OpenFile(Bibel#PfadTextDatei('kjv'))<CR>
+   nnoremap <leader>opelb05 :call GUI#OpenFile(Bibel#PfadTextDatei('elb1905'))<CR>
+   nnoremap <leader>opsch2k :call GUI#OpenFile(Bibel#PfadTextDatei('sch2k'))<CR>
 
    " Open a file of which only a part of the file name is known:
    nnoremap <leader>ope8   :e *
