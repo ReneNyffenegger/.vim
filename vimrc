@@ -111,6 +111,17 @@ endif
 
 " { Other settings
 
+" { Editing
+set sw=2
+set ts=2
+
+set expandtab            " use spaces instead of tabulators
+set smarttab
+
+set guicursor=a:blinkon0 " no blinking cursor  (a = all modes)
+
+" }
+
 " keep 999 lines of command line history
 set history=999
 
@@ -163,7 +174,7 @@ endif " }
 " }
 
 " { Mappings
-
+call TQ84_log_indent("Mappings")
   " { Mapleader
 
   " It's been said that mapleader should be set before vundle starts
@@ -267,19 +278,34 @@ nnoremap <S-F6> :if &virtualedit == 'all' \| set virtualedit= \| else \| set vir
 " }
   " }
   " { Gui
- nnoremap <leader>h :call GUI#ToLeftMonitor()<CR>
- nnoremap <leader>l :call GUI#ToRightMonitor()<CR>
- nnoremap <leader>gj :call GUI#Minimize()<CR>
- nnoremap <leader>gm :call GUI#Maximize()<CR>
- nnoremap <leader>gn :call GUI#NormalSize()<CR>
+nnoremap <leader>h :call GUI#ToLeftMonitor()<CR>
+nnoremap <leader>l :call GUI#ToRightMonitor()<CR>
+nnoremap <leader>gj :call GUI#Minimize()<CR>
+nnoremap <leader>gm :call GUI#Maximize()<CR>
+nnoremap <leader>gn :call GUI#NormalSize()<CR>
   " }
   " { Misc
   "   Map from ^ (6) to $ (4)
-      nnoremap ,v64 ^v$h
+nnoremap ,v64 ^v$h
+   "  Go to normal mode more easily. {
+inoremap jj <Esc>
+inoremap jw <Esc>:w<CR>
+   " }
+" No more «Entering Ex mode. Type "visual" to go to Normal mode.» {
+" map Q <Nop> would do that, but we can just hijack this command
+" for something more useful:
+map Q gq
+" }
+  " }
+  " { Insert mode
+  " help ins-special-special
+inoremap <C-b> <S-Left>
   " }
   " { Command line mode
 cnoremap <C-P> <Up>
 cnoremap <C-N> <Down>
+" }
+call TQ84_log_dedent()
 " }
 
 " { Additional digraphs
