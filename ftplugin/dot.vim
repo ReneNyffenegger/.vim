@@ -26,7 +26,9 @@ fu! <SID>ConvertDotFile(dotfile_with_path, format, show) " {
    " The following line contains an «echo 1» in order to circumvent
    " an E371 error, see also
    "   http://vi.stackexchange.com/questions/4746/how-do-i-combine-system-and-start-in-a-windows-environment
-     call tq84#SystemInDir(l:dir, 'echo 1 & start ' . l:outfile)
+   " call tq84#SystemInDir(l:dir, 'echo 1 & start ' . l:outfile)
+   " Solution given in SE is to use «start /b»
+     call tq84#SystemInDir(l:dir, 'start /b ' . l:outfile)
   endif
 
   call TQ84_log_dedent()
