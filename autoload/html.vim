@@ -44,5 +44,14 @@ fu! html#encode(text) " {
   call TQ84_log_dedent()
   return l:html
 endfu " }
+fu! html#decodeInFile() " {
+  call TQ84_log_indent(expand('<sfile>'))
+
+  for l:e in s:entities
+    call ReplaceInFile('\&' . '\C&' . l:e[0] . ';', l:e[1])
+  endfor
+
+  call TQ84_log_dedent()
+endfu!
 
 call TQ84_log_dedent()
