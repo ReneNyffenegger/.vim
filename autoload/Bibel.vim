@@ -366,6 +366,8 @@ fu! Bibel#PfadTextDatei(uebersetzung) " {
          let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/elb1905.bibel'
   elseif a:uebersetzung ==# 'sch2k'
          let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/sch2k.bibel'
+  elseif a:uebersetzung ==# 'ylt'
+         let l:ret = $git_work_dir . 'c:/github/Bibeluebersetzungen/ylt.bibel'
   else
          call TQ84_log('Unbekannte Übersetzung ' . a:uebersetzung)
          call TQ84_log_dedent()
