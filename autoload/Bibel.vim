@@ -69,11 +69,13 @@ let s:Buecher = {
 \   'offb'  : {'Name': 'Offenbarung'      },
 \ }
 
+let s:uebersetzung = {}
+
 fu! Bibel#ResetBuchCache(uebersetzung) " {
   call TQ84_log_indent(expand('<sfile>'))
 
-  if exists('s:uebersetzung_' . a:uebersetzung)
-     unlet s:uebersetzung_{a:uebersetzung}
+  if has_key(s:uebersetzung, a:uebersetzung)
+     call remove(s:uebersetzung, a:uebersetzung)
   endif
 
   call TQ84_log_dedent()
@@ -209,31 +211,12 @@ fu! Bibel#VersText(vers, uebersetzung) " {
   call TQ84_log_indent(expand('<sfile>'))
 
   let l:text = ''
-  
-  if     a:uebersetzung ==# 'eue' "      { Eigene Übersetzung
-     if ! exists('s:uebersetzung_eue')
-        let s:uebersetzung_eue = Bibel#UebersetzungEinlesen(a:uebersetzung)
-     endif
 
-     let l:uebersetzung = s:uebersetzung_eue
-  " }
-  elseif a:uebersetzung ==# 'elb1905' "  { Elberfelder 1905
-     if ! exists('s:uebersetzung_elb1905j')
-        let s:uebersetzung_elb1905 = Bibel#UebersetzungEinlesen(a:uebersetzung) " TODO: Rename to .txt
-     endif
+  if ! has_key(s:uebersetzung, a:uebersetzung)
+     let s:uebersetzung[a:uebersetzung] = Bibel#UebersetzungEinlesen(a:uebersetzung)
+  endif
 
-     let l:uebersetzung = s:uebersetzung_elb1905
-  " }
-  elseif a:uebersetzung ==# 'kjv' "      { King James Version
-     if ! exists('s:uebersetzung_kjv')
-        let s:uebersetzung_kjv = Bibel#UebersetzungEinlesen(a:uebersetzung)
-     endif
-
-     let l:uebersetzung = s:uebersetzung_kjv
-  " }
-  else " {
-     throw 'Unbekannte Uebersetzung ' . a:uebersetzung
-  endif " }
+  let l:uebersetzung = s:uebersetzung[a:uebersetzung]
 
   if     type(a:vers) == 1 " { String
     call TQ84_log('Typ ist String')
@@ -367,7 +350,7 @@ fu! Bibel#PfadTextDatei(uebersetzung) " {
   elseif a:uebersetzung ==# 'sch2k'
          let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/sch2k.bibel'
   elseif a:uebersetzung ==# 'ylt'
-         let l:ret = $git_work_dir . 'c:/github/Bibeluebersetzungen/ylt.bibel'
+         let l:ret = 'c:/github/Bibeluebersetzungen/ylt.bibel'
   else
          call TQ84_log('Unbekannte Übersetzung ' . a:uebersetzung)
          call TQ84_log_dedent()
