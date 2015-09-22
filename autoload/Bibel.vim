@@ -70,6 +70,7 @@ let s:Buecher = {
 \ }
 
 let s:uebersetzung = {}
+let s:github_uebersetzungen_pfad = 'c:/github/BibelUebersetzungen'
 
 fu! Bibel#ResetBuchCache(uebersetzung) " {
   call TQ84_log_indent(expand('<sfile>'))
@@ -344,13 +345,13 @@ fu! Bibel#PfadTextDatei(uebersetzung) " {
   if     a:uebersetzung ==# 'eue'
          let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/tq84.bibel'
   elseif a:uebersetzung ==# 'kjv'
-         let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/kjv.bibel'
+         let l:ret = s:github_uebersetzungen_pfad . '/kjv.bibel'
   elseif a:uebersetzung ==# 'elb1905'
-         let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/elb1905.bibel'
+         let l:ret = s:github_uebersetzungen_pfad . '/elb1905.bibel'
   elseif a:uebersetzung ==# 'sch2k'
          let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/sch2k.bibel'
   elseif a:uebersetzung ==# 'ylt'
-         let l:ret = 'c:/github/Bibeluebersetzungen/ylt.bibel'
+         let l:ret = s:github_uebersetzungen_pfad . '/ylt.bibel'
   else
          call TQ84_log('Unbekannte Übersetzung ' . a:uebersetzung)
          call TQ84_log_dedent()
