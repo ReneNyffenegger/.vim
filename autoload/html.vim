@@ -44,10 +44,17 @@ fu! html#encode(text) " {
   call TQ84_log_dedent()
   return l:html
 endfu " }
-fu! html#decodeInFile() " {
+fu! html#decodeInFile(nbsp) " {
+  "
+  "  The parameter nbsp determines, if &nbsp; should be
+  "  translated into spaces (' ') or left as they are.
+  "
   call TQ84_log_indent(expand('<sfile>'))
 
   for l:e in s:entities
+    if l:e[0] == 'nbsp' && a:nbsp
+       next
+    endif
     call ReplaceInFile('\&' . '\C&' . l:e[0] . ';', l:e[1])
   endfor
 
