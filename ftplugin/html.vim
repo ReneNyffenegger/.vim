@@ -78,6 +78,8 @@ nnoremap <buffer> ,ci<  v?>lo/<hc
 
 nnoremap <buffer> <leader>gtid  :call <SID>GotoID()<CR>
 
+nnoremap <buffer> <leader><Space> c &nbsp;<ESC>
+
 
 " Create a <a href link with the content of the clipboard
 inoremap <buffer> ,a <ESC>:call <SID>LinkFromClipbaord()<CR>
