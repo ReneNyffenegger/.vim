@@ -67,4 +67,27 @@ fu! tq84#EmbedVisualSelection(txt_before, txt_after) range " {
 
 endfu " }
 
+fu! tq84#toggle_highlight_word_under_cursor() " {
+
+  call TQ84_log_indent(expand("<sfile>"))
+
+  if ! exists('s:highlight_word_under_cursor') || s:highlight_word_under_cursor == 0 " {
+     call TQ84_log('s:highlight_word_under_cursor does not exist')
+
+     let @/=expand('<cword>')
+
+     let s:highlight_word_under_cursor = matchadd('Search', @/)
+
+  else
+
+     call matchdelete(s:highlight_word_under_cursor) 
+     let s:highlight_word_under_cursor=0
+
+  endif " }
+
+
+  call TQ84_log_dedent()
+
+endfu " }
+
 call TQ84_log_dedent()
