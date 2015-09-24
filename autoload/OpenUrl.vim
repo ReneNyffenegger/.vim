@@ -166,6 +166,7 @@ fu! OpenUrl#BibelOnline(uebersetzung, vers) " {
   let l:buch = substitute(l:buch, '\v(\d)\. ', '\1_', '')
   let l:buch = substitute(l:buch, 'ä'        , 'ae' , '')
   let l:buch = substitute(l:buch, 'ö'        , 'oe' , '')
+  let l:buch = substitute(l:buch, 'thessaloniker', 'thessalonicher', '')
 
   call TQ84_log('l:buch = ' . l:buch)
 
