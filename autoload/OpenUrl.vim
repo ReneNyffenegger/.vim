@@ -186,7 +186,7 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
 
   call TQ84_log('buch ' . l:vers['buch'] . ', kapitel: ' . l:vers['kapitel'])
 
-  if     l:vers['buch'] == '1mo'    | let l:buch_nr = '01'
+  if     l:vers['buch'] == '1mo'    | let l:buch_nr = '01' " {
   elseif l:vers['buch'] == '2mo'    | let l:buch_nr = '02'
   elseif l:vers['buch'] == '3mo'    | let l:buch_nr = '03'
   elseif l:vers['buch'] == '4mo'    | let l:buch_nr = '04'
@@ -241,7 +241,7 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
   elseif l:vers['buch'] == '3joh'   | let l:buch_nr = '74'
   elseif l:vers['buch'] == 'jud'    | let l:buch_nr = '75'
   elseif l:vers['buch'] == 'offb'   | let l:buch_nr = '76'
-  endif
+  endif " }
 
   call TQ84_log('buch_nr ' . l:buch_nr)
 
@@ -249,6 +249,61 @@ fu! OpenUrl#MengeUebersetzungMitEingabe() " {
 
   call TQ84_log_dedent()
 
+endfu " }
+
+fu! OpenUrl#NeueEVUebMitEingabe() " {
+  call TQ84_log_indent(expand("<sfile>"))
+
+  let l:vers = Bibel#EingabeBuchKapitelVers()
+  if keys(l:vers) == [] " {
+    call TQ84_log('Kein Vers eingegeben')
+    call TQ84_log_dedent()
+    return
+  endif " }
+
+  let l:buch = l:vers['buch']
+
+  if     l:buch ==# 'rt' " {
+     let l:buch = 'rut'
+  elseif l:buch ==# 'esr'
+     let l:buch = 'esra'
+  elseif l:buch ==# 'hi'
+     let l:buch = 'hiob'
+  elseif l:buch ==# 'joe'
+     let l:buch = 'joel'
+  elseif l:buch ==# 'am'
+     let l:buch = 'amos'
+  elseif l:buch ==# 'ob'
+     let l:buch = 'obadja'
+  elseif l:buch ==# 'jon'
+     let l:buch = 'jona'
+  elseif l:buch ==# 'zeph'
+     let l:buch = 'zef'
+  elseif l:buch ==# 'joh'
+     let l:buch = 'jo'
+  elseif l:buch ==# 'roem'
+     let l:buch = 'roe'
+  elseif l:buch ==# 'phim'
+     let l:buch = 'phm'
+  elseif l:buch ==# '1petr'
+     let l:buch = '1pt'
+  elseif l:buch ==# '2petr'
+     let l:buch = '2pt'
+  elseif l:buch ==# '1joh'
+     let l:buch = '1jo'
+  elseif l:buch ==# '2joh'
+     let l:buch = '2jo'
+  elseif l:buch ==# '3joh'
+     let l:buch = '3jo'
+  elseif l:buch ==# 'offb'
+     let l:buch = 'off'
+  endif " }
+
+  call TQ84_log('l:buch = ' . l:buch)
+
+  call OpenUrl#Go('http://www.alt.kh-vanheiden.de/NeUe/Bibeltexte/' . l:buch . '.html#' . l:vers['kapitel'])
+
+  call TQ84_log_dedent()
 endfu " }
 
 call TQ84_log_dedent()

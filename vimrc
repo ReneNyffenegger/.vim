@@ -228,7 +228,11 @@ call TQ84_log_indent("Mappings")
    nnoremap <leader>oplu15  :call OpenUrl#BibelOnlineMitEingabe('luther_1545_letzte_hand')<CR>
    nnoremap <leader>oplu12  :call OpenUrl#BibelOnlineMitEingabe('luther_1912')<CR>
    nnoremap <leader>opintl  :call OpenUrl#BibelOnlineMitEingabe('interlinear')<CR>
-   nnoremap <leader>opneu   :call OpenUrl#BibelOnlineMitEingabe('neue_evangelistische')<CR>
+"  Neue Evangelistische Übersetzung {
+"  24.9.2015: Tagesaktueller Link verwenden:
+"  nnoremap <leader>opneu   :call OpenUrl#BibelOnlineMitEingabe('neue_evangelistische')<CR>
+   nnoremap <leader>opneu   :call OpenUrl#NeueEVUebMitEingabe()<CR>
+"  }
    nnoremap <leader>opsch51 :call OpenUrl#BibelOnlineMitEingabe('schlachter_1951')<CR>
    nnoremap <leader>opelb05 :call OpenUrl#BibelOnlineMitEingabe('elberfelder_1905')<CR>
    nnoremap <leader>opmenge :call OpenUrl#MengeUebersetzungMitEingabe()<CR>
