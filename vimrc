@@ -304,6 +304,7 @@ inoremap jw <Esc>:w<CR>
 " for something more useful:
 map Q gq
 " }
+nnoremap <leader>dv :call Bibel#ZeigeVerseMitEingabe('eue')<CR>
   " }
   " { Insert mode
   " help ins-special-special
