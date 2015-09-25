@@ -364,4 +364,20 @@ fu! Bibel#PfadTextDatei(uebersetzung) " {
 
 endfu " }
 
+fu! Bibel#ZeigeVerseMitEingabe(uebersetzung) " {
+  call TQ84_log_indent(expand('<sfile>'))
+  let l:vers = Bibel#EingabeBuchKapitelVers()
+
+
+  if l:vers == {}
+     call TQ84_log_dedent()
+     return
+   endif
+
+   echo "\n"
+   echo Bibel#VersText(l:vers, a:uebersetzung)
+
+  call TQ84_log_dedent()
+endfu " }
+
 call TQ84_log_dedent()
