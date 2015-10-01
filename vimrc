@@ -253,7 +253,7 @@ call TQ84_log_indent("Mappings")
 
 " Toggle Case Insesitiveness
 
-nnoremap   <F2> :set ic!<CR>
+nnoremap   <F2> :setlocal ic!<CR>
 nnoremap <S-F2> :set hlsearch!<CR>
 
 " F3: Complete Filename / path / filename only to clipboard {
@@ -304,8 +304,9 @@ inoremap jw <Esc>:w<CR>
 " for something more useful:
 map Q gq
 " }
-nnoremap <leader>dv   :call Bibel#ZeigeVerseMitEingabe('eue')<CR>
-nnoremap <leader>cpbv :let @*=Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
+nnoremap <leader>dv    :call Bibel#ZeigeVerseMitEingabe('eue')<CR>
+nnoremap <leader>cpbv  :let @*=Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
+nnoremap <leader>burvw :call Buffer#ReverseWordUnderCursor()<CR>
   " }
   " { Insert mode
   " help ins-special-special
