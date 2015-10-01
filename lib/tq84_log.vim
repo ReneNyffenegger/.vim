@@ -168,7 +168,7 @@ fu! TQ84_log_flush() " {
 endfu " }
 fu! TQ84_log_open_log() " {
     call TQ84_log_flush()
-    execute 'e ' . g:tq84_log_file_name
+    execute 'e! ' . g:tq84_log_file_name
 endfu " }
 
 nnoremap      ,oplog     :call TQ84_log_open_log()<CR>
