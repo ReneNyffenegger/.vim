@@ -307,6 +307,7 @@ map Q gq
 nnoremap <leader>dv    :call Bibel#ZeigeVerseMitEingabe('eue')<CR>
 nnoremap <leader>cpbv  :let @*=Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
 nnoremap <leader>burvw :call Buffer#ReverseWordUnderCursor()<CR>
+inoremap <leader>inbv  =Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
   " }
   " { Insert mode
   " help ins-special-special
