@@ -262,8 +262,16 @@ fu! Bibel#VersText(vers, uebersetzung) " {
     if len(l:text)
        let l:text = l:text . ' '
     endif
+
+    if has_key(l:uebersetzung[l:vers['buch']][l:vers['kapitel']], l:vers_)
  
-    let l:text = l:text . l:uebersetzung[l:vers['buch']][l:vers['kapitel']][l:vers_]
+       let l:text = l:text . l:uebersetzung[l:vers['buch']][l:vers['kapitel']][l:vers_]
+
+    else
+
+       let l:text = l:text . ' *** Vers ' . l:vers_ . " gibt's nicht ***"
+
+    endif
 
   endfor " }
 
