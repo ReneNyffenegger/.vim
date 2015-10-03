@@ -318,4 +318,87 @@ fu! OpenUrl#NeueEVUebMitEingabe() " {
   call TQ84_log_dedent()
 endfu " }
 
+fu! OpenUrl#NT_W_Einert_MitEingabe() " { Neues Testament von w. Einert
+  call TQ84_log_indent(expand("<sfile>"))
+
+  let l:vers = Bibel#EingabeBuchKapitelVers()
+  if keys(l:vers) == [] " {
+    call TQ84_log('Kein Vers eingegeben')
+    call TQ84_log_dedent()
+    return
+  endif " }
+
+  let l:buch = l:vers['buch']
+  let l:kap  = l:vers['kapitel']
+
+  if     l:buch ==# 'mt' " {
+     let l:buch = 'M'
+  elseif l:buch ==# 'mk'
+     let l:buch = 'MK'
+  elseif l:buch ==# 'lk'
+     let l:buch = 'L'
+  elseif l:buch ==# 'joh'
+     let l:buch = 'J'
+  elseif l:buch ==# 'apg'
+     let l:buch = 'A'
+  elseif l:buch ==# 'roem'
+     let l:buch = 'R'
+  elseif l:buch ==# '1kor'
+     let l:buch = '1K'
+  elseif l:buch ==# '2kor'
+     let l:buch = '2K'
+  elseif l:buch ==# 'gal'
+     let l:buch = 'G'
+  elseif l:buch ==# 'eph'
+     let l:buch = 'E'
+  elseif l:buch ==# 'phil'
+     let l:buch = 'P'
+  elseif l:buch ==# 'kol'
+     let l:buch = 'K'
+  elseif l:buch ==# '1thes'
+     let l:buch = '1TH'
+  elseif l:buch ==# '2thes'
+     let l:buch = '2TH'
+  elseif l:buch ==# '1tim'
+     let l:buch = '1TM'
+  elseif l:buch ==# '2tim'
+     let l:buch = '2TM'
+  elseif l:buch ==# 'tit'
+     let l:buch = 'T'
+  elseif l:buch ==# 'phim'
+     let l:buch = 'PM'
+     let l:kapitel = ''
+  elseif l:buch ==# 'joh'
+     let l:buch = 'J'
+  elseif l:buch ==# 'hebr'
+     let l:buch = 'H'
+  elseif l:buch ==# 'jak'
+     let l:buch = 'JK'
+  elseif l:buch ==# '1petr'
+     let l:buch = '1P'
+  elseif l:buch ==# '2petr'
+     let l:buch = '2P'
+  elseif l:buch ==# '1joh'
+     let l:buch = '1J'
+  elseif l:buch ==# '1joh'
+     let l:buch = '1J'
+  elseif l:buch ==# '2joh'
+     let l:buch = '2J'
+  elseif l:buch ==# '3joh'
+     let l:buch = '3J'
+  elseif l:buch ==# 'jud'
+     let l:buch = 'JD'
+  elseif l:buch ==# 'offb'
+     let l:buch = 'EH'
+  endif " }
+
+  call TQ84_log('l:buch = ' . l:buch)
+
+  call OpenUrl#Go('http://www.bibelthemen.eu/we_nt/' . l:buch . l:kapitel . '.htm')
+
+  call TQ84_log_dedent()
+endfu " }
+
+
+
 call TQ84_log_dedent()
