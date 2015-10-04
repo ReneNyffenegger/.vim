@@ -235,6 +235,7 @@ call TQ84_log_indent("Mappings")
 "  }
    nnoremap <leader>opsch51 :call OpenUrl#BibelOnlineMitEingabe('schlachter_1951')<CR>
    nnoremap <leader>opelb05 :call OpenUrl#BibelOnlineMitEingabe('elberfelder_1905')<CR>
+   nnoremap <leader>opntwe  :call OpenUrl#NT_W_Einert_MitEingabe()<CR>
    nnoremap <leader>opmenge :call OpenUrl#MengeUebersetzungMitEingabe()<CR>
    nnoremap <leader>opkom   :call OpenUrl#KommentarMitEingabe()<CR>
    nnoremap <leader>opstr   :call OpenUrl#StrongsWithInput()<CR>
