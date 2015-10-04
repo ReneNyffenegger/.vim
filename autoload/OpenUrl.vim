@@ -90,6 +90,15 @@ fu! OpenUrl#Kommentar(vers) " {
 
   let l:buch = a:vers['buch']
 
+  let l:seperate_chapters = 1
+
+  if l:seperate_chapters " {
+
+    let l:buch_ = l:buch . '_' . a:vers['kapitel'] . '.html'
+
+  " }
+  else " {
+
   if l:buch == 'ri' || l:buch == 'rt'
     let l:buch_ = 'ri_rt.html'
   elseif l:buch == 'esr' || l:buch == 'neh' || l:buch == 'est'
@@ -111,6 +120,8 @@ fu! OpenUrl#Kommentar(vers) " {
   else
     let l:buch_ = l:buch . '.html'
   endif
+
+  endif " }
 
   call TQ84_log("l:buch = " . l:buch . " / l:buch_ = " . l:buch_)
   let l:url = 'file://c:\schlachter2000\' . l:buch_ . '#I' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
