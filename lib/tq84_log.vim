@@ -154,6 +154,9 @@ fu! TQ84_log_clear() " {
    else " {
 
       let g:tq84_log_memory_lines = []
+    " 2015-10-09: emptying s:tq84_log_array, too:
+      let l:tq84_log_array = []
+
       call TQ84_log_flush()
 
    endif " }
