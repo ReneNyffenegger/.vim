@@ -405,7 +405,10 @@ fu! OpenUrl#NT_W_Einert_MitEingabe() " { Neues Testament von w. Einert
 
   call TQ84_log('l:buch = ' . l:buch)
 
-  call OpenUrl#Go('http://www.bibelthemen.eu/we_nt/' . l:buch . l:kapitel . '.htm')
+  let l:url = 'http://www.bibelthemen.eu/we_nt/' . l:buch . l:kap . '.htm'
+  call TQ84_log('url = ' . l:url)
+
+  call OpenUrl#Go(l:url)
 
   call TQ84_log_dedent()
 endfu " }
