@@ -28,6 +28,20 @@ fu! OpenUrl#Go(url) " {
 
 endfu " }
 
+fu! OpenUrl#GoogleSearch(txt) " {
+
+  call TQ84_log_indent(expand("<sfile>") . " " . a:txt)
+
+  let l:q = substitute(a:txt, '\v\s+', '+', 'g')
+
+  call TQ84_log('l:q = ' + l:q)
+
+  call OpenUrl#Go('www.google.com/search?q=' . l:q)
+
+  call TQ84_log_dedent()
+
+endfu " }
+
 fu! OpenUrl#BlueLetter(vers) " {
   call TQ84_log_indent(expand("<sfile>"))
 
