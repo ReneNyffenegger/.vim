@@ -96,5 +96,6 @@ nnoremap <buffer> ,v<bar>     0f<bar>lvf<bar>h
 nnoremap <buffer> ,celb      :call <SID>CopyElberfelder()<CR>
 
 nnoremap <buffer> / /\ze.*<bar><left><left><left><left><left><left>
+nnoremap <buffer> k/ /#.*
 
 call TQ84_log_dedent()
