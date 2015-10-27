@@ -84,7 +84,6 @@ fu! tq84#CopyFile(src_file, dest_file) " {
   endif
 
   let l:cmd = 'copy ' . a:src_file . ' ' . a:dest_file
-  " l:dest_dir . '\' . l:file
   call TQ84_log('cmd = ' . l:cmd)
 
   let l:dummy = system(l:cmd)
