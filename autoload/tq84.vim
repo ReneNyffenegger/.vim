@@ -67,6 +67,32 @@ fu! tq84#EmbedVisualSelection(txt_before, txt_after) range " {
 
 endfu " }
 
+fu! tq84#CopyFile(src_file, dest_file) " {
+
+  call TQ84_log_indent(expand('<sfile>') . ' src_file=' . a:src_file . ', dest_file=' . a:dest_file)
+
+  let l:file     = fnamemodify(a:src_file , ':t')
+  let l:dest_dir = fnamemodify(a:dest_file, ':h')
+
+  call TQ84_log('file=' . l:file . ', dest_dir=' . l:dest_dir)
+
+  if ! isdirectory(l:dest_dir)
+
+    call TQ84_log('dest_dir does not exist, creating it')
+    call mkdir(l:dest_dir, 'p')
+
+  endif
+
+  let l:cmd = 'copy ' . a:src_file . ' ' . a:dest_file
+  " l:dest_dir . '\' . l:file
+  call TQ84_log('cmd = ' . l:cmd)
+
+  let l:dummy = system(l:cmd)
+
+  call TQ84_log_dedent()
+
+endfu " }
+
 fu! tq84#toggle_highlight_word_under_cursor() " {
 
   call TQ84_log_indent(expand("<sfile>"))
@@ -89,5 +115,6 @@ fu! tq84#toggle_highlight_word_under_cursor() " {
   call TQ84_log_dedent()
 
 endfu " }
+
 
 call TQ84_log_dedent()
