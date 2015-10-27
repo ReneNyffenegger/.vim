@@ -97,7 +97,7 @@ fu! tq84#CopyToUniformServer(src_file, dest_dir) " {
   call TQ84_log_indent(expand('<sfile>') . ' src_file=' . a:src_file . ', dest_dir=' . a:dest_dir)
 
   let l:fileName = fnamemodify(a:src_file, ':t')
-  call tq84#CopyFile(a:src_file, 'c:\tools\UniServerZ\www\' . a:dest_dir . '\' . l:fileName)
+  call tq84#CopyFile(a:src_file, $UNI_SERVER_Z_ROOT . '\www\' . a:dest_dir . '\' . l:fileName)
 
   call TQ84_log_dedent()
 
