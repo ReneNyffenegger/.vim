@@ -84,4 +84,6 @@ nnoremap <buffer> <leader><Space> c &nbsp;<ESC>
 " Create a <a href link with the content of the clipboard
 inoremap <buffer> ,a <ESC>:call <SID>LinkFromClipbaord()<CR>
 
+nnoremap <buffer> ! :call OpenUrl#Go(expand('%'))<CR>
+
 call TQ84_log_dedent()
