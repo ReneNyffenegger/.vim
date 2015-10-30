@@ -103,6 +103,30 @@ fu! tq84#CopyToUniformServer(src_file, dest_dir) " {
 
 endfu " }
 
+fu! tq84#SwitchBodyAndSpec() " {
+  call TQ84_log_indent(expand('<sfile>'))
+
+  let l:extension         =  expand("%:e"  )
+  let l:without_extension =  expand("%:p:r")
+
+  call TQ84_log('extension: '   . l:extension)
+  call TQ84_log('without ext: ' . l:without_extension)
+
+  if l:extension ==? 'pks' " {
+     execute 'e ' . l:without_extension . '.pkb'
+     call TQ84_log_dedent()
+     return
+  endif " }
+
+  if l:extension ==? 'pkb' " {
+     execute 'e ' . l:without_extension . '.pks'
+     call TQ84_log_dedent()
+     return
+  endif " }
+
+  call TQ84_log_dedent()
+endfu " }
+
 fu! tq84#toggle_highlight_word_under_cursor() " {
 
   call TQ84_log_indent(expand("<sfile>"))
@@ -125,6 +149,7 @@ fu! tq84#toggle_highlight_word_under_cursor() " {
   call TQ84_log_dedent()
 
 endfu " }
+
 
 
 call TQ84_log_dedent()

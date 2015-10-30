@@ -306,6 +306,7 @@ inoremap jw <Esc>:w<CR>
 " for something more useful:
 map Q gq
 " }
+nnoremap <leader>sw    :call tq84#SwitchBodyAndSpec()<CR>
 nnoremap <leader>dv    :call Bibel#ZeigeVerseMitEingabe('eue')<CR>
 nnoremap <leader>cpbv  :let @*=Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
 nnoremap <leader>burvw :call Buffer#ReverseWordUnderCursor()<CR>
