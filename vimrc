@@ -83,6 +83,26 @@ set guioptions-=r
 
 " }
 
+" { Colors / Syntax highlightening
+"         ----------------------------------
+"   «syntax on» seems to want to read $VIMRUNTIME/syntax/syntax.vim
+"
+"   The syntax commands are implemented by sourcing a file:
+"      :syntax enable  $VIMRUNTIME/syntax/syntax.vim
+"      :syntax on      $VIMRUNTIME/syntax/syntax.vim
+"      :syntax manual  $VIMRUNTIME/syntax/manual.vim
+"      :syntax off     $VIMRUNTIME/syntax/nosyntax.vim
+
+call TQ84_log_indent('syntax enable')
+syntax enable  " Not exactly equivalent to «syntax on». see :help syntax (under 1. Quick start)
+call TQ84_log_dedent()
+
+call TQ84_log_indent('colorscheme rene')
+" colorscheme rene
+call TQ84_log_dedent()
+
+" }
+
 " { Files to ignore (when using :e or insert mode )
 set wildignore+=*.o
 set wildignore+=*.obj
