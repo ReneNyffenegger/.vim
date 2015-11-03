@@ -129,6 +129,22 @@ endif
 
 "  }
 
+" { Status line
+
+set statusline=\ 
+set statusline+=%f           " relative filename
+set statusline+=\ %y         " filetype
+set statusline+=\ ic:%{&ic}  " show ignore case flag
+set statusline+=\ %=         " Jump to right portion of status line
+set statusline+=\ %c         " column
+set statusline+=\ %l         " line
+set statusline+=/%L          " total number of lines
+set statusline+=\            " final space
+
+"   Always show status line
+set laststatus=2
+" }
+
 " { Other settings
 
 " { Editing
@@ -342,6 +358,7 @@ cnoremap <C-N> <Down>
 " }
 call TQ84_log_dedent()
 " }
+
 " { Abbreviations
 iabbr aeg Ägypten
 " }
