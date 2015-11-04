@@ -135,6 +135,7 @@ set statusline=\
 set statusline+=%f           " relative filename
 set statusline+=\ %y         " filetype
 set statusline+=\ ic:%{&ic}  " show ignore case flag
+set statusline+=\ %m         " file modification flag
 set statusline+=\ %=         " Jump to right portion of status line
 set statusline+=\ %c         " column
 set statusline+=\ %l         " line
