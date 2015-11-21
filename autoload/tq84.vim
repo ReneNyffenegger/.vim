@@ -124,6 +124,19 @@ fu! tq84#SwitchBodyAndSpec() " {
      return
   endif " }
 
+  let l:file_name = expand("%:t")
+  let l:directory = expand("%:h")
+  if l:file_name ==? 'spec.plsql' " {
+     execute 'e ' . l:directory . '/' . 'body.plsql'
+     call TQ84_log_dedent()
+     return
+  endif " }
+  if l:file_name ==? 'body.plsql' " {
+     execute 'e ' . l:directory . '/' . 'spec.plsql'
+     call TQ84_log_dedent()
+     return
+  endif " }
+
   call TQ84_log_dedent()
 endfu " }
 
