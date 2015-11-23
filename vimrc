@@ -369,6 +369,15 @@ iabbr aeg Ägypten
 :digraph .. 8230 " … (&hellip;)
 " }
 
+" { special hosts / local vimrc
 
-so       $git_work_dir\vim\vimfiles\vimrc
+if hostname() == 'OKFMGMT022'
+  so X:\commands\okfmgmt022.vim
+else
+  so $git_work_dir\vim\vimfiles\vimrc
+endif
+
+" }
+
+
 call TQ84_log_dedent()
