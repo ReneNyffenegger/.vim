@@ -18,11 +18,12 @@ fu! <SID>StatusLine()
   let l:MonthText=getline(l:lineMonth)
   let l:YearText =getline(l:lineYear )
 
-  let l:DayText  =substitute(l:DayText  , '\v(\d\d).*'    , '\1', '')
+  let l:DayNr    =substitute(l:DayText  , '\v(\d\d).*'    , '\1', '')
+  let l:DayName  =substitute(l:DayText  , '\v\d\d (..).*' , '\1', '')
   let l:MonthText=substitute(l:MonthText, '\v(\d\d).*'    , '\1', '')
   let l:YearText =substitute(l:YearText , '\v(\d\d\d\d).*', '\1', '')
 
-  let l:date = l:YearText . '-' . l:MonthText . '-' . l:DayText
+  let l:date = l:YearText . '-' . l:MonthText . '-' . l:DayNr . ' (' . l:DayName . ')'
 
 " call TQ84_log('l:DayText=' . l:DayText) 
 
