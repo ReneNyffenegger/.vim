@@ -43,6 +43,62 @@ fu! s:SID() " {
   return s:SID
 endfu " }
 
+fu! AgendaGoToToday() " {
+
+  let l:j = strftime('%Y')
+  let l:m = strftime('%m')
+  let l:t = strftime('%d')
+
+" echo l:j . ' ' . l:m . ' ' . l:t
+
+  call AgendaGoToDate(l:j, l:m, l:t)
+
+endfu " }
+
+fu! AgendaGoToDate(j, m, t) " {
+
+  call TQ84_log_indent(expand('<sfile>') . ' j=' . a:j . ', m=' . a:m . ', t=' . a:t)
+
+  if type(a:m) == 0 " integer
+     let l:m = printf('%02d', a:m)
+  else
+     let l:m = a:m
+  endif
+
+  if type(a:t) == 0 " integer
+     let l:t = printf('%02d', a:t)
+  else
+     let l:t = a:t
+  endif
+
+  if ! search('^' . a:j . ' ' . nr2char('{'))
+     call TQ84_log('Year ' . l:j . ' not found')
+     call TQ84_log_dedent()
+     return
+  endif
+
+  if ! search('^' . l:m . ' ' . nr2char(123))
+     call TQ84_log('Month ' . l:m . ' not found')
+     call TQ84_log_dedent()
+     return
+  endif
+
+  if ! search('\v^' . l:t . ' (Mo|Di|Mi|Do|Fr|Sa|So)>.*\' . nr2char(123))
+     call TQ84_log('Tag ' . l:t . ' nicht gefunden')
+     call TQ84_log_dedent()
+     return
+  endif
+
+  normal zo
+  normal zo
+  normal zo
+
+  call TQ84_log_dedent()
+
+endfu " }
+
 execute "setl statusline=%!<SNR>" . s:SID() . '_StatusLine()'
 
 call TQ84_log_dedent()
+
+call AgendaGoToToday()
