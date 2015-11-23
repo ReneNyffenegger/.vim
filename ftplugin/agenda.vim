@@ -1,5 +1,8 @@
 call TQ84_log_indent(expand('<sfile>'))
 
+set foldmarker={,}
+set foldmethod=marker
+
 fu! <SID>StatusLine()
 " call TQ84_log_indent(expand('<sfile>'))
 
