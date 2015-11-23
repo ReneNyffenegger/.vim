@@ -55,24 +55,28 @@ fu! AgendaGoToToday() " {
 
 endfu " }
 
-fu! AgendaGoToDate(j, m, t) " {
+fu! AgendaGoToDate(y, m, t) " {
 
-  call TQ84_log_indent(expand('<sfile>') . ' j=' . a:j . ', m=' . a:m . ', t=' . a:t)
+  call TQ84_log_indent(expand('<sfile>') . ' y=' . a:y . ', m=' . a:m . ', t=' . a:t)
 
-  if type(a:m) == 0 " integer
+  call TQ84_log('len(a:m): ' . len(a:m))
+  if len(a:m) == 1
      let l:m = printf('%02d', a:m)
+     call TQ84_log('a:m converted to ' . l:m)
   else
      let l:m = a:m
   endif
 
-  if type(a:t) == 0 " integer
+  call TQ84_log('len(a:t): ' . len(a:t))
+  if len(a:t) == 1
      let l:t = printf('%02d', a:t)
+     call TQ84_log('a:t converted to ' . l:t)
   else
      let l:t = a:t
   endif
 
-  if ! search('^' . a:j . ' ' . nr2char('{'))
-     call TQ84_log('Year ' . l:j . ' not found')
+  if ! search('^' . a:y . ' ' . nr2char(123))
+     call TQ84_log('Year ' . l:y . ' not found')
      call TQ84_log_dedent()
      return
   endif
@@ -84,7 +88,7 @@ fu! AgendaGoToDate(j, m, t) " {
   endif
 
   if ! search('\v^' . l:t . ' (Mo|Di|Mi|Do|Fr|Sa|So)>.*\' . nr2char(123))
-     call TQ84_log('Tag ' . l:t . ' nicht gefunden')
+     call TQ84_log('Day ' . l:t . ' not found')
      call TQ84_log_dedent()
      return
   endif
@@ -97,8 +101,28 @@ fu! AgendaGoToDate(j, m, t) " {
 
 endfu " }
 
+fu! AgendaGoToDateWithInput() " {
+  call TQ84_log_indent(expand('<sfile>'))
+
+  let l:dateInput = input('Date: ')
+
+  let l:year  = substitute(l:dateInput, '\v(\d\d\d\d).*'        , '\1','')
+  let l:month = substitute(l:dateInput, '\v\d\d\d\d (\d+).*'   , '\1','')
+  let l:day   = substitute(l:dateInput, '\v\d\d\d\d \d+ (\d+)', '\1','')
+
+  call TQ84_log('l:dateInput: ' . l:dateInput . ', l:year=' . l:year . ', l:month=' . l:month . ', l:day=' . l:day)
+
+  normal zC
+
+  call AgendaGoToDate(l:year, l:month, l:day)
+
+  call TQ84_log_dedent()
+endfu " }
+
 execute "setl statusline=%!<SNR>" . s:SID() . '_StatusLine()'
 
-call TQ84_log_dedent()
+nnoremap ,gtdt <ESC>:call AgendaGoToDateWithInput()<CR>
 
 call AgendaGoToToday()
+
+call TQ84_log_dedent()
