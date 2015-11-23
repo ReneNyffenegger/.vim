@@ -4,14 +4,14 @@ set foldmarker={,}
 set foldmethod=marker
 set foldtext=getline(v:foldstart)
 
-fu! <SID>StatusLine()
+fu! <SID>StatusLine() " {
 " call TQ84_log_indent(expand('<sfile>'))
 
   let l:pos_cursor=getpos('.')
   
   let l:lineDay  =search('\v^ *\d\d (Mo|Di|Mi|Do|Fr|Sa|So)>', 'b')
-  let l:lineMonth=search('\v^ *\d\d \{'                     , 'b')
-  let l:lineYear =search('\v^ *\d\d\d\d \{'                 , 'b')
+  let l:lineMonth=search('\v^ *\d\d \' . nr2char(123)       , 'b') " 123 is opening curly braces
+  let l:lineYear =search('\v^ *\d\d\d\d \' . nr2char(123)   , 'b')
 
 " call TQ84_log('l:lineDay =' . l:lineDay) 
 
@@ -33,15 +33,15 @@ fu! <SID>StatusLine()
 " call TQ84_log_dedent()
   return l:date
 
-endfu
+endfu " }
 
-fu! s:SID()
+fu! s:SID() " {
   call TQ84_log_indent(expand('<sfile>'))
   let s:SID=matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze_SID$')
   call TQ84_log('s:SID=' . s:SID)
   call TQ84_log_dedent()
   return s:SID
-endfu
+endfu " }
 
 execute "setl statusline=%!<SNR>" . s:SID() . '_StatusLine()'
 
