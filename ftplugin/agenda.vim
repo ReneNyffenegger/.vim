@@ -2,6 +2,7 @@ call TQ84_log_indent(expand('<sfile>'))
 
 set foldmarker={,}
 set foldmethod=marker
+set foldtext=getline(v:foldstart)
 
 fu! <SID>StatusLine()
 " call TQ84_log_indent(expand('<sfile>'))
