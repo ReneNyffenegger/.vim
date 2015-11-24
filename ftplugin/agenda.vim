@@ -4,6 +4,19 @@ set foldmarker={,}
 set foldmethod=marker
 set foldtext=getline(v:foldstart)
 
+fu! <SID>Today() " {
+  call TQ84_log_indent(expand('<sfile>'))
+
+  let l:y = strftime('%Y')
+  let l:m = strftime('%m')
+  let l:d = strftime('%d')
+
+  call TQ84_log('y=' . l:y . ', m=' . l:m . ', d=' . l:d)
+
+  call TQ84_log_dedent()
+  return {'y': l:y, 'm': l:m, 'd': l:d}
+endfu " }
+
 fu! <SID>StatusLine() " {
 " call TQ84_log_indent(expand('<sfile>'))
 
@@ -45,38 +58,32 @@ endfu " }
 
 fu! AgendaGoToToday() " {
 
-  let l:j = strftime('%Y')
-  let l:m = strftime('%m')
-  let l:t = strftime('%d')
-
-" echo l:j . ' ' . l:m . ' ' . l:t
-
-  call AgendaGoToDate(l:j, l:m, l:t)
+  call AgendaGoToDate(<SID>Today())
 
 endfu " }
 
-fu! AgendaGoToDate(y, m, t) " {
+fu! AgendaGoToDate(date) " {
 
-  call TQ84_log_indent(expand('<sfile>') . ' y=' . a:y . ', m=' . a:m . ', t=' . a:t)
+  call TQ84_log_indent(expand('<sfile>') . ' y=' . a:date['y'] . ', m=' . a:date['m'] . ', d=' . a:date['d'])
 
-  call TQ84_log('len(a:m): ' . len(a:m))
-  if len(a:m) == 1
-     let l:m = printf('%02d', a:m)
-     call TQ84_log('a:m converted to ' . l:m)
+  call TQ84_log('len(date[m]): ' . len(a:date['m']))
+  if len(a:date['m']) == 1
+     let l:m = printf('%02d', a:date['m'])
+     call TQ84_log('a:date[m] converted to ' . l:m)
   else
-     let l:m = a:m
+     let l:m = a:date['m']
   endif
 
-  call TQ84_log('len(a:t): ' . len(a:t))
-  if len(a:t) == 1
-     let l:t = printf('%02d', a:t)
-     call TQ84_log('a:t converted to ' . l:t)
+  call TQ84_log('len(a[d]): ' . len(a:date['d']))
+  if len(a:date['d']) == 1
+     let l:d = printf('%02d', a:date['d'])
+     call TQ84_log('a:date[d] converted to ' . l:d)
   else
-     let l:t = a:t
+     let l:d = a:date['d']
   endif
 
-  if ! search('^' . a:y . ' ' . nr2char(123))
-     call TQ84_log('Year ' . l:y . ' not found')
+  if ! search('^' . a:date['y'] . ' ' . nr2char(123))
+     call TQ84_log('Year ' . l:date['y'] . ' not found')
      call TQ84_log_dedent()
      return
   endif
@@ -87,8 +94,8 @@ fu! AgendaGoToDate(y, m, t) " {
      return
   endif
 
-  if ! search('\v^' . l:t . ' (Mo|Di|Mi|Do|Fr|Sa|So)>.*\' . nr2char(123))
-     call TQ84_log('Day ' . l:t . ' not found')
+  if ! search('\v^' . l:d . ' (Mo|Di|Mi|Do|Fr|Sa|So)>.*\' . nr2char(123))
+     call TQ84_log('Day ' . l:d . ' not found')
      call TQ84_log_dedent()
      return
   endif
@@ -114,7 +121,7 @@ fu! AgendaGoToDateWithInput() " {
 
   normal zC
 
-  call AgendaGoToDate(l:year, l:month, l:day)
+  call AgendaGoToDate({'y': l:year, 'm': l:month, 'd': l:day})
 
   call TQ84_log_dedent()
 endfu " }
