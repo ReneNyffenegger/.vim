@@ -174,8 +174,8 @@ fu! TQ84_log_open_log() " {
     execute 'e! ' . g:tq84_log_file_name
 endfu " }
 
-nnoremap      ,oplog     :call TQ84_log_open_log()<CR>
-nnoremap      ,rmlog     :call TQ84_log_clear()<CR>
+nnoremap      ,opvil     :call TQ84_log_open_log()<CR>
+nnoremap      ,rmvil     :call TQ84_log_clear()<CR>
 
 " }
 else " {
