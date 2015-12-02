@@ -2,8 +2,10 @@
 
 ## Windows vs Unix
 
-Since Vim 7.4, all configuration files, even the [vimrc](https://github.com/ReneNyffenegger/.vim/blob/master/vimrc) file go to the directory `%userprofile%\vimfiles` on Windows and
-`$HOME/.vim` on Unix.
+Since Vim 7.4, all configuration files, even the
+[vimrc](https://github.com/ReneNyffenegger/.vim/blob/master/vimrc) file go to
+the directory <del>`%userprofile%\vimfiles`</del> `%HOMEDRIVE%\vimfiles`
+on Windows and `$HOME/.vim` on Unix.
 
 So, on a Unix system, the files need to be cloned with `git clone <remote url> ~/.vim`, on a Windows system, they need to be cloned with `git clone <remote url> $HOME/vimfiles`.
 
