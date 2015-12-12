@@ -126,10 +126,29 @@ fu! AgendaGoToDateWithInput() " {
   call TQ84_log_dedent()
 endfu " }
 
+fu! AgendaGoToNextWeekday(weekday) " {
+  call TQ84_log_indent(expand('<sfile>'))
+
+  call AgendaGoToToday()
+
+  call search('^\d\d ' . a:weekday . '\>')
+  normal zo
+
+  call TQ84_log_dedent()
+endfu " }
+
 execute "setl statusline=%!<SNR>" . s:SID() . '_StatusLine()'
 
 nnoremap <buffer> ,gtd <ESC>:call AgendaGoToDateWithInput()<CR>
 nnoremap <buffer> ,gtt <ESC>:call AgendaGoToToday()<CR>
+
+nnoremap <buffer> ,gtnmo <ESC>:call AgendaGoToNextWeekday('Mo')<CR>
+nnoremap <buffer> ,gtndi <ESC>:call AgendaGoToNextWeekday('Di')<CR>
+nnoremap <buffer> ,gtnmi <ESC>:call AgendaGoToNextWeekday('Mi')<CR>
+nnoremap <buffer> ,gtndo <ESC>:call AgendaGoToNextWeekday('Do')<CR>
+nnoremap <buffer> ,gtnfr <ESC>:call AgendaGoToNextWeekday('Fr')<CR>
+nnoremap <buffer> ,gtnsa <ESC>:call AgendaGoToNextWeekday('Sa')<CR>
+nnoremap <buffer> ,gtnso <ESC>:call AgendaGoToNextWeekday('So')<CR>
 
 call AgendaGoToToday()
 
