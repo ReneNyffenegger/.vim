@@ -128,8 +128,8 @@ endfu " }
 
 execute "setl statusline=%!<SNR>" . s:SID() . '_StatusLine()'
 
-nnoremap ,gtd <ESC>:call AgendaGoToDateWithInput()<CR>
-nnoremap ,gtt <ESC>:call AgendaGoToToday()<CR>
+nnoremap <buffer> ,gtd <ESC>:call AgendaGoToDateWithInput()<CR>
+nnoremap <buffer> ,gtt <ESC>:call AgendaGoToToday()<CR>
 
 call AgendaGoToToday()
 
