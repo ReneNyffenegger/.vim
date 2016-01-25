@@ -17,7 +17,17 @@ fu! <SID>ConvertDotFile(dotfile_with_path, format, show) " {
 
   let l:dot_exe = 'c:\tools\graphviz-2.38\release\bin\dot.exe'
 
-  call tq84#SystemInDir(l:dir, l:dot_exe . ' -Gcharset=utf8 -T' . a:format . ' -o' . l:outfile . ' ' . l:dotfile)
+  let l:dot_response = tq84#SystemInDir(l:dir, l:dot_exe . ' -Gcharset=utf8 -T' . a:format . ' -o' . l:outfile . ' ' . l:dotfile)
+
+  if l:dot_response =~# 'Error:'
+
+     call TQ84_log('returning, because of error message: ' . l:dot_response)
+     echo l:dot_response
+     call TQ84_log_dedent()
+     return
+
+
+  endif
 
   if a:show
      call TQ84_log('a:show is true')
