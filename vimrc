@@ -118,6 +118,14 @@ if exists('g:TQ84_CRYPT') && g:TQ84_CRYPT
   set nowritebackup
 " no swapfile possibly already set with «-n»
   set noswapfile
+
+" 2016-01-26: http://vi.stackexchange.com/questions/6177/
+  set history=0
+  set nomodeline " why ?
+  set noshelltemp
+  set noundofile
+  set secure
+  set viminfo=""
 else
   call TQ84_log('TQ84_CRYPT not enabled')
 
