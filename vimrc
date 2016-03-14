@@ -3,13 +3,13 @@ set encoding=utf8       " {
 "   the Meta key (Alt) work, at least on windows, that is.
 "   }
 
-set rtp+=$git_work_dir\vim\vimfiles
-set rtp+=$git_work_dir\vim\vimfiles\after
+set rtp+=$git_work_dir/vim/vimfiles
+set rtp+=$git_work_dir/vim/vimfiles/after
 
 " Log functions {
 " Create the log functions before the're used the
 " first time. See TQ84_log_indent below.
-:runtime lib\tq84_log.vim
+:runtime lib/tq84_log.vim
 call TQ84_log_init()
 " }
 
@@ -58,10 +58,14 @@ call TQ84_log_dedent() " }
 " }
 
 " { Pathogen
+call TQ84_log_indent('pathogen#infect')
 execute pathogen#infect()
+call TQ84_log_dedent()
 " }
 
 " { Gui Options
+
+call TQ84_log('GUI Options')
 
 "   Don't source $VIMRUNTIME/menu.vim (I don't want menus)
 "   (must be stated before sourcing :syntax on (sy on))
@@ -93,6 +97,8 @@ set guioptions-=r
 "      :syntax manual  $VIMRUNTIME/syntax/manual.vim
 "      :syntax off     $VIMRUNTIME/syntax/nosyntax.vim
 
+call TQ84_log('Colors / Syntax highlightening')
+
 call TQ84_log_indent('syntax enable')
 syntax enable  " Not exactly equivalent to «syntax on». see :help syntax (under 1. Quick start)
 call TQ84_log_dedent()
@@ -101,13 +107,6 @@ call TQ84_log_indent('colorscheme rene')
 " colorscheme rene
 call TQ84_log_dedent()
 
-" }
-
-" { Files to ignore (when using :e or insert mode )
-set wildignore+=*.o
-set wildignore+=*.obj
-set wildignore+=*.exe
-set wildignore+=*.dll
 " }
 
 " { Backup files
@@ -194,6 +193,12 @@ if     has('unix') " {
 " Full screen
   set columns=999 lines=999
 
+" { Files to ignore (when using :e or insert mode )
+
+set wildignore+=*.o
+
+" }
+
 " }
 elseif has('win32') || has('win64') " {
   call TQ84_log('has win32 || win64')
@@ -208,6 +213,14 @@ elseif has('win32') || has('win64') " {
   " For example, search in all *.txt files for foo.*bar:
   " :grep "foo.*bar" *.txt
   set grepprg=findstr\ /n\ /s\ /i\ /r\ /c:$*
+
+" { Files to ignore (when using :e or insert mode )
+
+set wildignore+=*.obj
+set wildignore+=*.exe
+set wildignore+=*.dll
+
+" }
 
 " }
 else " {
@@ -329,7 +342,7 @@ nnoremap <M-F5> :set cursorline! cursorcolumn!<CR>
 nnoremap   <F6> :only<CR>
 
 " Switch from virtual edit back and forth
-nnoremap <S-F6> :if &virtualedit == 'all' \| set virtualedit= \| else \| set virtualedit=all \| endif
+nnoremap <S-F6> :if &virtualedit == 'all' \| set virtualedit= \| else \| set virtualedit=all \| endif
 " }
   " }
   " { Gui
@@ -382,7 +395,9 @@ iabbr aeg Ägypten
 if hostname() == 'OKFMGMT022'
   so X:\commands\okfmgmt022.vim
 else
-  so $git_work_dir\vim\vimfiles\vimrc
+  call TQ84_log_indent('$git_work_dir/vim/vimfiles/vimrc')
+  so $git_work_dir/vim/vimfiles/vimrc
+  call TQ84_log_dedent()
 endif
 
 " }
