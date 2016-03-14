@@ -181,7 +181,7 @@ set relativenumber
 
 " { Languages
 " Use english messages
-language message en
+language message en_US.UTF-8
 " }
 
 " { OS Dependent
