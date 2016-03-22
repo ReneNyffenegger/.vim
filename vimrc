@@ -394,6 +394,8 @@ iabbr aeg Ägypten
 
 if hostname() == 'OKFMGMT022'
   so X:\commands\okfmgmt022.vim
+elseif hostname() == 'NCHA25509404'
+  " do nothing
 else
   call TQ84_log_indent('$git_work_dir/vim/vimfiles/vimrc')
   so $git_work_dir/vim/vimfiles/vimrc
