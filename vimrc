@@ -405,7 +405,7 @@ endif
 " }
 
 " Autocommands for special files {
-autocmd! BufReadPre $git_work_dir/biblisches/kommentare/alle_kapitel.html :so ${github_root}Biblisches/vim/Kommentare.vim
+autocmd! BufReadPre $git_work_dir/biblisches/kommentare/alle_kapitel.html :so $github_root/Biblisches/vim/Kommentare.vim
 
 " }
 
