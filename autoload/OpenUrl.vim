@@ -63,7 +63,7 @@ fu! OpenUrl#BlueLetter(vers) " {
   let l:buch    = a:vers['buch']
 
   if     l:buch == '1mo'   | let l:buch = 'gen'
-  elseif l:buch == '2mo'   | let l:buch = 'ex'
+  elseif l:buch == '2mo'   | let l:buch = 'exo'
   elseif l:buch == '3mo'   | let l:buch = 'lev'
   elseif l:buch == '4mo'   | let l:buch = 'num'
   elseif l:buch == '5mo'   | let l:buch = 'deu'
@@ -92,7 +92,8 @@ fu! OpenUrl#BlueLetter(vers) " {
   elseif l:buch == 'hl'    | let l:buch = 'song'
   endif
 
-  call OpenUrl#Go("http://www.blueletterbible.org/Bible.cfm?b=" . l:buch . "&c=" . a:vers['kapitel'] . "&v=" . a:vers['vers'] . "&t=KJV#" . a:vers['vers'])
+" call OpenUrl#Go("http://www.blueletterbible.org/Bible.cfm?b=" . l:buch . "&c=" . a:vers['kapitel'] . "&v=" . a:vers['vers'] . "&t=KJV#" . a:vers['vers'])
+  call OpenUrl#Go("http://www.blueletterbible.org/kjv/" . l:buch . '/'. a:vers['kapitel'] . '/' . a:vers['vers'])
 
   call TQ84_log_dedent()
 endfu " }
