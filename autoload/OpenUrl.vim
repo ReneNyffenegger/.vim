@@ -17,10 +17,12 @@ fu! OpenUrl#Go(url) " {
   call TQ84_log("url = " . l:url)
 
   if use_mozilla == 1
-"   let d = system("\"c:\\Program Files\\Mozilla Firefox\\firefox.exe\" -url " . a:url )
-    execute "silent !start cmd /c start firefox -url " . l:url
+    if has('unix')
+      execute "silent !firefox -url " . l:url . ' &'
+    else
+      execute "silent !start cmd /c start firefox -url " . l:url
+    endif
   else
-"   let d = system("start chrome.exe " . a:url)
     execute "silent !start cmd /c start chrome  " . l:url
   endif
 
@@ -138,7 +140,13 @@ fu! OpenUrl#Kommentar(vers) " {
   endif " }
 
   call TQ84_log("l:buch = " . l:buch . " / l:buch_ = " . l:buch_)
-  let l:url = 'file://c:\schlachter2000\' . l:buch_ . '#I' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
+
+  if has('unix')
+    let l:url = '~/schlachter2000/' . l:buch_ . '#I' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
+  else
+    let l:url = 'file://c:\schlachter2000\' . l:buch_ . '#I' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
+  endif
+
   call TQ84_log('l:url = ' . l:url)
   call OpenUrl#Go(l:url)
 
