@@ -170,7 +170,6 @@ fu! Bibel#UebersetzungEinlesen(uebersetzung) " {
   let l:pfad = Bibel#PfadTextDatei(a:uebersetzung)
   call TQ84_log('l:pfad = ' . l:pfad)
 
-
   let l:file = readfile(l:pfad)
 
   let l:ret = {}
