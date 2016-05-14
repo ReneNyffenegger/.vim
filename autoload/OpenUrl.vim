@@ -11,24 +11,32 @@ fu! OpenUrl#Go(url) " {
   let use_mozilla = 1
 
 
-  let l:url = substitute(a:url, '#', '\\#', 'g')
+  let l:url = a:url
+
   if !has('unix')
+     let l:url = substitute(l:url, '#', '\\#', 'g')
      let l:url = substitute(l:url, '&', '^&' , 'g')
   else
+     let l:url = substitute(l:url, '#', '\\\#'  , 'g')
      let l:url = substitute(l:url, '&', '\\&' , 'g')
+"    let l:url = substitute(l:url, '~', '\\~' , 'g')
   endif
 
   call TQ84_log("url = " . l:url)
 
+  
   if use_mozilla == 1
     if has('unix')
-      execute "silent !firefox -url " . l:url . ' &'
+      let l:exec_stmt = "firefox -url '" . l:url . "' &"
     else
-      execute "silent !start cmd /c start firefox -url " . l:url
+      let l:exec_stmt = "start cmd /c start firefox -url " . l:url
     endif
   else
-    execute "silent !start cmd /c start chrome  " . l:url
+    let l:exec_stmt = "start cmd /c start chrome  " . l:url
   endif
+
+  call TQ84_log("exec_stmt = " . l:exec_stmt)
+  execute "silent !" . l:exec_stmt
 
   call TQ84_log_dedent()
 
@@ -145,7 +153,7 @@ fu! OpenUrl#Kommentar(vers) " {
   call TQ84_log("l:buch = " . l:buch . " / l:buch_ = " . l:buch_)
 
   if has('unix')
-    let l:url = '~/schlachter2000/' . l:buch_ . '#I' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
+    let l:url = 'file://' . expand('~') . '/schlachter2000/' . l:buch_ . '#I' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
   else
     let l:url = 'file://c:\schlachter2000\' . l:buch_ . '#I' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
   endif
