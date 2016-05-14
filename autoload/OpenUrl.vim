@@ -10,9 +10,13 @@ fu! OpenUrl#Go(url) " {
   call TQ84_log_indent(expand("<sfile>") . " " . a:url)
   let use_mozilla = 1
 
-  let l:url = substitute(a:url, '#', '\\#', 'g')
-  let l:url = substitute(l:url, '&', '^&' , 'g')
 
+  let l:url = substitute(a:url, '#', '\\#', 'g')
+  if !has('unix')
+     let l:url = substitute(l:url, '&', '^&' , 'g')
+  else
+     let l:url = substitute(l:url, '&', '\\&' , 'g')
+  endif
 
   call TQ84_log("url = " . l:url)
 
@@ -49,8 +53,6 @@ fu! OpenUrl#BlueLetter(vers) " {
 
 
   let l:buch    = a:vers['buch']
-" let l:kapitel = buch_kapitel_vers_[2]
-" let l:vers    = buch_kapitel_vers_[3]
 
   if     l:buch == '1mo'   | let l:buch = 'gen'
   elseif l:buch == '2mo'   | let l:buch = 'ex'
@@ -83,6 +85,7 @@ fu! OpenUrl#BlueLetter(vers) " {
   endif
 
   call OpenUrl#Go("http://www.blueletterbible.org/Bible.cfm?b=" . l:buch . "&c=" . a:vers['kapitel'] . "&v=" . a:vers['vers'] . "&t=KJV#" . a:vers['vers'])
+
   call TQ84_log_dedent()
 endfu " }
 
