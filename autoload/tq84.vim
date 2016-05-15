@@ -4,16 +4,20 @@ fu! tq84#SystemInDir(dir, cmd) " {
 
   call TQ84_log_indent(expand("<sfile>"))
 
+  let l:dir = a:dir
+  if ! has('unix')
+    let l:dir = substitute(l:dir, '/', '\', 'g')
+  endif
+
   try
 
-    call TQ84_log('a:dir = ' . a:dir)
+    call TQ84_log('l:dir = ' . l:dir)
     call TQ84_log('a:cmd = ' . a:cmd)
-  
   
     let l:cwd = getcwd()
     call TQ84_log('l:cwd = ' . l:cwd)
   
-    execute "cd " . a:dir
+    execute "cd " . l:dir
   
     let l:response = system (a:cmd)
     call TQ84_log('l:response = ' . l:response)
