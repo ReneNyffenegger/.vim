@@ -352,6 +352,10 @@ nnoremap <leader>gj :call GUI#Minimize()<CR>
 nnoremap <leader>gm :call GUI#Maximize()<CR>
 nnoremap <leader>gn :call GUI#NormalSize()<CR>
   " }
+  " { cd
+map ,cdnot :cd $github_root/notes/notes
+map ,cdhyd :cd $github_root/Hydroplattentheorie
+  " }
   " { Misc
   "   Map from ^ (6) to $ (4)
 nnoremap ,v64 ^v$h
