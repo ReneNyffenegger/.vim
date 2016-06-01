@@ -76,7 +76,7 @@ fu! OpenUrl#BlueLetter(vers) " {
   elseif l:buch == 'esr'   | let l:buch = 'ezr'
   elseif l:buch == 'hi'    | let l:buch = 'job'
   elseif l:buch == 'ps'    | let l:buch = 'psa'
-  elseif l:buch == 'pred'  | let l:buch = 'eccl'
+  elseif l:buch == 'pred'  | let l:buch = 'ecc'
   elseif l:buch == 'hl'    | let l:buch = 'sng'
   elseif l:buch == 'kla'   | let l:buch = 'lam'
   elseif l:buch == 'hes'   | let l:buch = 'eze'
