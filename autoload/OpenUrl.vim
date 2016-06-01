@@ -68,7 +68,7 @@ fu! OpenUrl#BlueLetter(vers) " {
   elseif l:buch == '4mo'   | let l:buch = 'num'
   elseif l:buch == '5mo'   | let l:buch = 'deu'
   elseif l:buch == 'ri'    | let l:buch = 'jdg'
-  elseif l:buch == 'rt'    | let l:buch = 'ru'
+  elseif l:buch == 'rt'    | let l:buch = 'rth'
   elseif l:buch == '1sam'  | let l:buch = '1sa'
   elseif l:buch == '2sam'  | let l:buch = '2sa'
   elseif l:buch == '1koe'  | let l:buch = '1ki'
