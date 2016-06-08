@@ -73,6 +73,8 @@ fu! OpenUrl#BlueLetter(vers) " {
   elseif l:buch == '2sam'  | let l:buch = '2sa'
   elseif l:buch == '1koe'  | let l:buch = '1ki'
   elseif l:buch == '2koe'  | let l:buch = '2ki'
+  elseif l:buch == '1chr'  | let l:buch = '1ch'
+  elseif l:buch == '2chr'  | let l:buch = '2ch'
   elseif l:buch == 'esr'   | let l:buch = 'ezr'
   elseif l:buch == 'hi'    | let l:buch = 'job'
   elseif l:buch == 'ps'    | let l:buch = 'psa'
