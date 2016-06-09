@@ -298,6 +298,7 @@ call TQ84_log_indent("Mappings")
    nnoremap <leader>opmenge :call OpenUrl#MengeUebersetzungMitEingabe()<CR>
    nnoremap <leader>opkom   :call OpenUrl#KommentarMitEingabe()<CR>
    nnoremap <leader>opstr   :call OpenUrl#StrongsWithInput()<CR>
+   nnoremap <leader>opdict  :call OpenUrl#dict_leo_org(input("Search Term: "))<CR>
    nnoremap <leader>op4     :call misc#OpenScriptureForAll()<CR>
    nnoremap <leader>oprc    :e $MYVIMRC<CR>
    nnoremap <leader>opurl   :call OpenUrl#Go(expand('<cWORD>'))<CR>

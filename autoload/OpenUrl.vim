@@ -457,6 +457,18 @@ fu! OpenUrl#NT_W_Einert_MitEingabe() " { Neues Testament von w. Einert
   call TQ84_log_dedent()
 endfu " }
 
+fu! OpenUrl#dict_leo_org(searchTerm) " {
+  call TQ84_log_indent(expand("<sfile>"))
+
+  call TQ84_log('l:searchTerm = ' . a:searchTerm)
+
+  let l:url = 'http://dict.leo.org/ende/index_de.html#/search=' . a:searchTerm
+  call TQ84_log('url = ' . l:url)
+
+  call OpenUrl#Go(l:url)
+
+  call TQ84_log_dedent()
+endfu " }
 
 
 call TQ84_log_dedent()
