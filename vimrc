@@ -411,7 +411,7 @@ endif
 
 " Autocommands for special files {
 autocmd! BufReadPre $git_work_dir/biblisches/kommentare/alle_kapitel.html :so $github_root/Biblisches/vim/Kommentare.vim
-
+autocmd! BufReadPost **/about/Unicode/Codepoints/selection.txt setl colorcolumn=7,10,14,22,25
 " }
 
 
