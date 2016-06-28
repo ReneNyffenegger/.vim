@@ -94,12 +94,19 @@ fu! OpenUrl#BlueLetter(vers) " {
   elseif l:buch == '1petr' | let l:buch = '1pe'
   elseif l:buch == '2petr' | let l:buch = '2pe'
   elseif l:buch == 'kol'   | let l:buch = 'col'
-  elseif l:buch == 'phim'  | let l:buch = 'phm'
+  elseif l:buch == 'phil'  | let l:buch = 'phl'
+  elseif l:buch == 'phil'  | let l:buch = 'phl'
+  elseif l:buch == '1thes' | let l:buch = '1th'
+  elseif l:buch == '2thes' | let l:buch = '2th'
+  elseif l:buch == '1tim'  | let l:buch = '1ti'
+  elseif l:buch == '2tim'  | let l:buch = '2ti'
   elseif l:buch == 'jak'   | let l:buch = 'jam'
   elseif l:buch == 'jes'   | let l:buch = 'isa'
   elseif l:buch == 'sach'  | let l:buch = 'zec'
   elseif l:buch == 'mt'    | let l:buch = 'mat'
+  elseif l:buch == 'mk'    | let l:buch = 'mar'
   elseif l:buch == 'lk'    | let l:buch = 'luk'
+  elseif l:buch == 'joh'   | let l:buch = 'jhn'
   elseif l:buch == 'offb'  | let l:buch = 'rev'
   endif
 
@@ -195,7 +202,7 @@ fu! OpenUrl#StrongsWithInput() " {
   call TQ84_log_indent(expand("<sfile>"))
   let l:strongs_nr = input("Strongs Number, prefix with G or H: ")
 
-  call OpenUrl#Go("http://www.blueletterbible.org/lang/lexicon/lexicon.cfm?Strongs=" . l:strongs_nr . "&t=KJV")
+  call OpenUrl#Go("http://www.blueletterbible.org/lang/lexicon/lexicon.cfm?Strongs=" . l:strongs_nr)
   call TQ84_log_dedent()
 endfu " }
 
