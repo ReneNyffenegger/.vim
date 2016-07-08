@@ -7,7 +7,7 @@ set rtp+=$git_work_dir/vim/vimfiles
 set rtp+=$git_work_dir/vim/vimfiles/after
 
 " Log functions {
-" Create the log functions before the're used the
+" Create the log functions before they're used the
 " first time. See TQ84_log_indent below.
 :runtime lib/tq84_log.vim
 call TQ84_log_init()
