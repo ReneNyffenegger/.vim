@@ -363,6 +363,7 @@ nnoremap ,v64 ^v$h
    "  Go to normal mode more easily. {
 inoremap jj <Esc>
 inoremap jw <Esc>:w<CR>
+nnoremap <leader>755 :silent! !chmod 755 %<CR>
    " }
 " No more «Entering Ex mode. Type "visual" to go to Normal mode.» {
 " map Q <Nop> would do that, but we can just hijack this command
