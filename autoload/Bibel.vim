@@ -70,7 +70,7 @@ let s:Buecher = {
 \ }
 
 let s:uebersetzung = {}
-let s:github_uebersetzungen_pfad = 'c:/github/BibelUebersetzungen'
+let s:github_uebersetzungen_pfad = expand("$github_root") . '/BibelUebersetzungen'
 
 fu! Bibel#ResetBuchCache(uebersetzung) " {
   call TQ84_log_indent(expand('<sfile>'))
