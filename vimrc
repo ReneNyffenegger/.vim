@@ -363,7 +363,7 @@ nnoremap ,v64 ^v$h
    "  Go to normal mode more easily. {
 inoremap jj <Esc>
 inoremap jw <Esc>:w<CR>
-nnoremap <leader>755 :silent! !chmod 755 %<CR>
+nnoremap <leader>755 :let b:tq84_autoread=:silent! !chmod 755 %<CR>
    " }
 " No more «Entering Ex mode. Type "visual" to go to Normal mode.» {
 " map Q <Nop> would do that, but we can just hijack this command
@@ -375,6 +375,8 @@ nnoremap <leader>dv    :call Bibel#ZeigeVerseMitEingabe('eue')<CR>
 nnoremap <leader>cpbv  :let @*=Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
 nnoremap <leader>burvw :call Buffer#ReverseWordUnderCursor()<CR>
 inoremap <leader>inbv  =Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
+inoremap <leader>indt  =strftime("%Y-%m-%d")<CR>
+nnoremap <leader>indt  :execute "normal i" . strftime("%Y-%m-%d")<CR>
   " }
   " { Insert mode
   " help ins-special-special
