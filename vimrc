@@ -363,7 +363,10 @@ nnoremap ,v64 ^v$h
    "  Go to normal mode more easily. {
 inoremap jj <Esc>
 inoremap jw <Esc>:w<CR>
-nnoremap <leader>755 :let b:tq84_autoread=:silent! !chmod 755 %<CR>
+" Convoluted sequence of commands to chmod 755 current file.
+" Without first writing it and reading it after chmod'ing the file,
+" a W16 would be thrown.
+nnoremap <leader>755 :w \| execute 'silent! !chmod 755 %' \| e! <CR>
    " }
 " No more «Entering Ex mode. Type "visual" to go to Normal mode.» {
 " map Q <Nop> would do that, but we can just hijack this command
