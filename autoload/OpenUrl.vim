@@ -171,11 +171,7 @@ fu! OpenUrl#Kommentar(vers) " {
 
   call TQ84_log("l:buch = " . l:buch . " / l:buch_ = " . l:buch_)
 
-  if has('unix')
-    let l:url = 'file://' . expand('~') . '/schlachter2000/' . l:buch_ . '#I' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
-  else
-    let l:url = 'file://c:\schlachter2000\' . l:buch_ . '#I' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
-  endif
+  let l:url = 'file://' . $rn_root . 'local/Biblisches/Kommentare/'. l:buch_ . '#I' . a:vers['buch'] . '-' . a:vers['kapitel'] . '-' . a:vers['vers']
 
   call TQ84_log('l:url = ' . l:url)
   call OpenUrl#Go(l:url)
