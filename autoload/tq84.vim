@@ -35,6 +35,26 @@ fu! tq84#SystemInDir(dir, cmd) " {
 
 endfu " }
 
+fu! tq84#OpenDocument(doc) " {
+  call TQ84_log_indent(expand("<sfile>") . ' ' . a:doc)
+
+  if has('unix')
+    let l:doc = substitute(a:doc, '\', '/', 'g')
+
+    let l:cmd = 'xdg-open ' . l:doc
+
+  else
+    let l:cmd = substitute(a:doc, '/', '\', 'g')
+
+
+    execute ('silent !start ' . l:doc)
+  endif
+
+  call system(l:cmd)
+
+  call TQ84_log_dedent()
+endfu " }
+
 fu! tq84#EmbedVisualSelection(txt_before, txt_after) range " {
   call TQ84_log_indent(expand('<sfile>'))
 
