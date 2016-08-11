@@ -44,11 +44,12 @@ fu! tq84#OpenDocument(doc) " {
     let l:cmd = 'xdg-open ' . l:doc
 
   else
-    let l:cmd = substitute(a:doc, '/', '\', 'g')
+    let l:doc = substitute(a:doc, '/', '\', 'g')
 
-
-    execute ('silent !start ' . l:doc)
+    let l:cmd = l:doc
   endif
+
+  call TQ84_log('l:cmd = ' . l:cmd)
 
   call system(l:cmd)
 
