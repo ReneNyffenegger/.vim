@@ -105,8 +105,12 @@ fu! Bibel#EingabeBuchKapitelVers() " {
     call TQ84_log('l:buch_kapitel_vers: ' . l:buch_kapitel_vers)
     let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\v(\w+) (\w+) (\S+)')
 
-    if has_key(s:Buecher, l:buch_kapitel_vers_[1])
-       let l:found = 1
+    call TQ84_log('len(l:buch_kapitel_vers_): ' . len(l:buch_kapitel_vers_))
+
+    if len(l:buch_kapitel_vers_) == 10 " Matchlist seems to return 10 items if it matched...
+       if has_key(s:Buecher, l:buch_kapitel_vers_[1])
+          let l:found = 1
+       endif
     endif
 
   endwhile " }
