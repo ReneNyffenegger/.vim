@@ -116,7 +116,7 @@ fu! Bibel#EingabeBuchKapitelVers() " {
      \ 'kapitel': buch_kapitel_vers_[2],
      \ 'vers'   : buch_kapitel_vers_[3]}
 
-  cal TQ84_log('ret = ' . string(l:ret))
+  call TQ84_log('ret = ' . string(l:ret))
   
   call TQ84_log_dedent()
 
