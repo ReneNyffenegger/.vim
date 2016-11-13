@@ -51,7 +51,10 @@ fu! tq84#OpenDocument(doc) " {
 
   call TQ84_log('l:cmd = ' . l:cmd)
 
-  call system(l:cmd)
+  let l:cmd_out = system(l:cmd)
+  if v:shell_error != 0
+     echo l:cmd_out
+  endif
 
   call TQ84_log_dedent()
 endfu " }
