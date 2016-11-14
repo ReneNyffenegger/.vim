@@ -13,7 +13,7 @@ set rtp+=$git_work_dir/vim/vimfiles/after
 call TQ84_log_init()
 " }
 
-call TQ84_log_indent(expand("<sfile>"))
+call TQ84_log_indent(expand("<sfile>") . ', line ' . expand("<slnum>") . ": After calling TQ84_log_init()")
 
 set nocompatible        " {
 "   This options sets/modifies other options!
@@ -29,7 +29,7 @@ set linebreak       "   Only used when a text is «wrapped» (set wrap): prevent
 set bs=2            "   allow backspacing over everything in insert mode
 
 " Filetype related {
-call TQ84_log_indent('filetype on') " {
+call TQ84_log_indent('line ' . expand('<slnum>') . ': filetype on') " {
 filetype on
 " -----------
 " This command loads (on Windows)
@@ -40,13 +40,13 @@ filetype on
 "   au BufNewFile,BufRead *.java,*.jav		setf java
 "
 call TQ84_log_dedent() " }
-call TQ84_log_indent('plugin on') " {
+call TQ84_log_indent('line ' . expand('<slnum>') . ': plugin on') " {
 filetype plugin on
 " ------------------
 " This command also tries to load $VIMRUNTIME/filetype.vim
 "
 call TQ84_log_dedent() " }
-call TQ84_log_indent('indent on') " {
+call TQ84_log_indent('line ' . expand('<slnum>') . ': indent on') " {
 "    TODO 2015-07-31. Comment next line if alle_kapitel.html takes too long to edit
 filetype indent on
 "
@@ -65,7 +65,7 @@ call TQ84_log_dedent()
 
 " { Gui Options
 
-call TQ84_log('GUI Options')
+call TQ84_log('line ' . expand('<slnum>') . ': GUI Options')
 
 "   Don't source $VIMRUNTIME/menu.vim (I don't want menus)
 "   (must be stated before sourcing :syntax on (sy on))
@@ -97,13 +97,13 @@ set guioptions-=r
 "      :syntax manual  $VIMRUNTIME/syntax/manual.vim
 "      :syntax off     $VIMRUNTIME/syntax/nosyntax.vim
 
-call TQ84_log('Colors / Syntax highlightening')
+call TQ84_log('line ' . expand('<slnum>') . ': Colors / Syntax highlightening')
 
 call TQ84_log_indent('syntax enable')
 syntax enable  " Not exactly equivalent to «syntax on». see :help syntax (under 1. Quick start)
 call TQ84_log_dedent()
 
-call TQ84_log_indent('colorscheme rene')
+call TQ84_log_indent('line ' . expand('<slnum>') . ': colorscheme rene')
 " colorscheme rene
 call TQ84_log_dedent()
 
@@ -112,7 +112,7 @@ call TQ84_log_dedent()
 " { Backup files
 
 if exists('g:TQ84_CRYPT') && g:TQ84_CRYPT
-  call TQ84_log('TQ84_CRYPT is enabled')
+  call TQ84_log('line ' . expand('<slnum>') . ': TQ84_CRYPT is enabled')
   set nobackup
   set nowritebackup
 " no swapfile possibly already set with «-n»
@@ -126,7 +126,7 @@ if exists('g:TQ84_CRYPT') && g:TQ84_CRYPT
   set secure
   set viminfo=""
 else
-  call TQ84_log('TQ84_CRYPT not enabled')
+  call TQ84_log('line ' . expand('<slnum>') . ': TQ84_CRYPT not enabled')
 
   set nobackup
   set writebackup
@@ -187,7 +187,7 @@ language message en_US.UTF-8
 " { OS Dependent
 if     has('unix') " {
 
-  call TQ84_log('has unix')
+  call TQ84_log('line ' . expand('<slnum>') . ': has unix')
   set guifont=Monospace\ 9
 
 " Full screen
@@ -201,7 +201,7 @@ set wildignore+=*.o
 
 " }
 elseif has('win32') || has('win64') " {
-  call TQ84_log('has win32 || win64')
+  call TQ84_log('line ' . expand('<slnum>') . ': has win32 || win64')
 
 " Only working on windows: opens gvim using the entire screen.
   autocmd GUIEnter * simalt ~x
@@ -232,7 +232,7 @@ endif " }
 " }
 
 " { Mappings
-call TQ84_log_indent("Mappings")
+call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
   " { Mapleader
 
   " It's been said that mapleader should be set before vundle starts
@@ -408,7 +408,7 @@ if hostname() == 'OKFMGMT022'
 elseif hostname() == 'NCHA25509404'
   " do nothing
 else
-  call TQ84_log_indent('$git_work_dir/vim/vimfiles/vimrc')
+  call TQ84_log_indent('line ' . expand('<slnum>') . ': $git_work_dir/vim/vimfiles/vimrc')
   so $git_work_dir/vim/vimfiles/vimrc
   call TQ84_log_dedent()
 endif
