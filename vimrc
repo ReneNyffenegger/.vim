@@ -347,8 +347,8 @@ nnoremap <S-F6> :if &virtualedit == 'all' \| set virtualedit= \| else \| set vir
 " }
   " }
   " { Gui
-nnoremap <leader>h :call GUI#ToLeftMonitor()<CR>
-nnoremap <leader>l :call GUI#ToRightMonitor()<CR>
+nnoremap <leader>h :call GUI#ChangeMonitor(   0, 0)<CR>
+nnoremap <leader>l :call GUI#ChangeMonitor(2000, 0)<CR>
 nnoremap <leader>gj :call GUI#Minimize()<CR>
 nnoremap <leader>gm :call GUI#Maximize()<CR>
 nnoremap <leader>gn :call GUI#NormalSize()<CR>
