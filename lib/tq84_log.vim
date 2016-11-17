@@ -8,7 +8,7 @@ if "use_log" == "use_log" " {
   elseif isdirectory($HOME) && filewritable($HOME)
          let g:tq84_log_file_name   = $HOME . "/vim_log_" . strftime('%Y-%m-%d_%H-%M-%S')
   else
-       let g:tq84_log_file_name   =          "/vim_log_" . strftime('%Y-%m-%d_%H-%M-%S')
+         let g:tq84_log_file_name   =         "/vim_log_" . strftime('%Y-%m-%d_%H-%M-%S')
   endif
 
 " let g:tq84_log_file_mode   ='file'
