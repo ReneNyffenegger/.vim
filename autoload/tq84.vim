@@ -193,5 +193,21 @@ fu! tq84#toggle_highlight_word_under_cursor() " {
 endfu " }
 
 
+fu! tq84#ScriptSID(sfile) " {
+"
+"  to be called like so
+"    let l:sid tq84#ScriptSID(expand('<sfile'>)
+"
+  call TQ84_log_indent(expand("<sfile>"))
+
+  call TQ84_log('sfile=' . a:sfile)
+  let l:sid = matchstr(a:sfile, '<SNR>\zs\d\+\ze_.*')
+  call TQ84_log('sid=' . l:sid)
+
+  call TQ84_log_dedent()
+  return l:sid
+endfu " }
+
+
 
 call TQ84_log_dedent()
