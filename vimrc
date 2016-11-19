@@ -13,16 +13,25 @@ set rtp+=$git_work_dir/vim/vimfiles/after
 call TQ84_log_init()
 " }
 
+
 call TQ84_log_indent(expand("<sfile>") . ', line ' . expand("<slnum>") . ": After calling TQ84_log_init()")
 
-set nocompatible        " {
-"   This options sets/modifies other options!
+call TQ84_log('option autoindent: ' . &autoindent)
+
+" { set nocompatible
+call TQ84_log('compatible before unsetting it: ' . &compatible)
+set nocompatible
+"   This is a special kind of option, because when it's set or
+"   reset, other options are changes as a side effect.
+"  (See for example http://stackoverflow.com/questions/23012391)
+"
 "   Note, the option is set anyway when a (g)vimrc file is found
-"   }
+call TQ84_log('compatible after unsetting it:  ' . &compatible)
+" }
 
 " { Bare minimum settings
 
-set hidden
+" set hidden
 set lazyredraw      "   Don't update display while executing macros.
 set nowrap
 set linebreak       "   Only used when a text is «wrapped» (set wrap): prevents words from being broken in the middle.
@@ -65,7 +74,7 @@ call TQ84_log_dedent()
 
 " { Gui Options
 
-call TQ84_log('line ' . expand('<slnum>') . ': GUI Options')
+call TQ84_log('line ' . expand('<slnum>') . ': guioptions = ' . &guioptions)
 
 "   Don't source $VIMRUNTIME/menu.vim (I don't want menus)
 "   (must be stated before sourcing :syntax on (sy on))
@@ -84,6 +93,8 @@ set guioptions+=c
 
 "   No right scrollbar
 set guioptions-=r
+
+call TQ84_log('line ' . expand('<slnum>') . ': guioptions = ' . &guioptions)
 
 " }
 
@@ -149,8 +160,11 @@ set statusline+=\ %l         " line
 set statusline+=/%L          " total number of lines
 set statusline+=\            " final space
 
+call TQ84_log('statusline=' . &statusline)
+
 "   Always show status line
 set laststatus=2
+
 " }
 
 " { Other settings
