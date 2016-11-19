@@ -31,7 +31,7 @@ call TQ84_log('compatible after unsetting it:  ' . &compatible)
 
 " { Bare minimum settings
 
-" set hidden
+set hidden
 set lazyredraw      "   Don't update display while executing macros.
 set nowrap
 set linebreak       "   Only used when a text is «wrapped» (set wrap): prevents words from being broken in the middle.
