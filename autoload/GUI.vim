@@ -27,7 +27,7 @@ fu! GUI#ChangeMonitor(x, y) " {
     let l:winpos_cmd = 'winpos ' . a:x . ' ' . a:y
     call TQ84_log('winpos_cmd: ' . l:winpos_cmd)
 
-     execute l:winpos_cmd
+    execute l:winpos_cmd
 
     sleep 10m
     call GUI#Maximize()
