@@ -46,10 +46,13 @@ fu! Buffer#InsertLines(lines, ...) " {
 
     execute "normal " . (len(a:lines)-1) . 'o' . nr2char(27)
 
-    for l in range(0, len(a:lines)-1)
+    for l in range(0, len(a:lines)-1) " {
+    "
+    "   2016-11-20: TODO Using »call append(...)« is probably easier
+    "
         call TQ84_log('setting line ' . (l:firstLineNo+l) . ' to ' . a:lines[l])
         call setline(l:firstLineNo+l, l:indentText . a:lines[l])
-    endfor
+    endfor " }
     
     call TQ84_log_dedent()
 endfu " }
