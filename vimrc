@@ -15,17 +15,38 @@ call TQ84_log_init()
 
 call TQ84_log_indent(expand("<sfile>") . ', line ' . expand("<slnum>") . ": After calling TQ84_log_init()")
 
-call TQ84_log('option autoindent: ' . &autoindent)
+call TQ84_log_indent('Option Values') " {
+  
+  let s:options = [
+  \ 'autoindent'    ,
+  \ 'compatible'    ,
+  \ 'grepprg'       ,
+  \ 'guifont'       ,
+  \ 'relativenumber',
+  \ 'wildchar'      ,
+  \ 'wildignore'    ,
+  \ 'visualbell'    ,
+  \ 'wrap'          ]
+  
+  for s:option in s:options
+      call TQ84_log(printf('%-18s: %s', s:option, eval('&' . s:option)))
+  endfor
+
+call TQ84_log_dedent() " }
 
 " { set nocompatible
-call TQ84_log('compatible before unsetting it: ' . &compatible)
-set nocompatible
+"
+"   2016-11-20 Since compatible is set anyway if a vimrc file is found,
+"   it does not need to be explicitely be set.
+"
 "   This is a special kind of option, because when it's set or
 "   reset, other options are changes as a side effect.
 "  (See for example http://stackoverflow.com/questions/23012391)
 "
 "   Note, the option is set anyway when a (g)vimrc file is found
-call TQ84_log('compatible after unsetting it:  ' . &compatible)
+"
+" set nocompatible
+" call TQ84_log('compatible after unsetting it:  ' . &compatible)
 " }
 
 " { Bare minimum settings
@@ -182,7 +203,8 @@ set guicursor=a:blinkon0 " no blinking cursor  (a = all modes)
 " keep 999 lines of command line history
 set history=999
 
-set wildchar=9
+" 2016-11-20 wildchar=9 seems to be the default with nocompatible
+" set wildchar=9
 "set wildmode=list,longest
 
 " No fancy visual bell
@@ -208,7 +230,7 @@ if     has('unix') " {
 
 " { Files to ignore (when using :e or insert mode )
 
-set wildignore+=*.o
+  set wildignore+=*.o
 
 " }
 
@@ -229,9 +251,9 @@ elseif has('win32') || has('win64') " {
 
 " { Files to ignore (when using :e or insert mode )
 
-set wildignore+=*.obj
-set wildignore+=*.exe
-set wildignore+=*.dll
+  set wildignore+=*.obj
+  set wildignore+=*.exe
+  set wildignore+=*.dll
 
 " }
 
