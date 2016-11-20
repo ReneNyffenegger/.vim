@@ -3,10 +3,10 @@ if "use_log" == "use_log" " {
 " let s:log_indent = 0
   let s:tq84_log_array = []
 
-  if   isdirectory('/tmp') && filewritable('/tmp')
-         let g:tq84_log_file_name   = "/tmp". "/vim_log_" . strftime('%Y-%m-%d_%H-%M-%S')
-  elseif isdirectory($TEMP) && filewritable($TEMP)
+  if     isdirectory($TEMP) && filewritable($TEMP)
          let g:tq84_log_file_name   = $TEMP . "/vim_log_" . strftime('%Y-%m-%d_%H-%M-%S')
+  elseif isdirectory('/tmp') && filewritable('/tmp')
+         let g:tq84_log_file_name   = "/tmp". "/vim_log_" . strftime('%Y-%m-%d_%H-%M-%S')
   elseif isdirectory($HOME) && filewritable($HOME)
          let g:tq84_log_file_name   = $HOME . "/vim_log_" . strftime('%Y-%m-%d_%H-%M-%S')
   else
