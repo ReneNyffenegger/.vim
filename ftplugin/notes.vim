@@ -3,6 +3,10 @@ call TQ84_log_indent(expand('<sfile>'))
 try
 
 " Use forward slashes
+"
+" TODO This is a global option. It should be
+" reset when going to another buffer.
+"
 call TQ84_log('set shellslash, was ' . &shellslash)
 setl shellslash
 
