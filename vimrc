@@ -13,7 +13,6 @@ set rtp+=$git_work_dir/vim/vimfiles/after
 call TQ84_log_init()
 " }
 
-
 call TQ84_log_indent(expand("<sfile>") . ', line ' . expand("<slnum>") . ": After calling TQ84_log_init()")
 
 call TQ84_log('option autoindent: ' . &autoindent)
@@ -37,7 +36,35 @@ set nowrap
 set linebreak       "   Only used when a text is «wrapped» (set wrap): prevents words from being broken in the middle.
 set bs=2            "   allow backspacing over everything in insert mode
 
-" Filetype related {
+" }
+
+" { Gui Options
+
+call TQ84_log('line ' . expand('<slnum>') . ': guioptions = ' . &guioptions)
+
+"   Don't source $VIMRUNTIME/menu.vim (I don't want menus)
+"   (must be stated before sourcing :syntax on (sy on))
+"   TODO: Is this necessary given that «set guioptions-=m»
+"   doesn't display a menu at all?
+set guioptions+=M
+
+"   No Menubar anyway
+set guioptions-=m
+
+"   No toolbar either
+set guioptions-=T
+
+"   Console dialogs instead of gui dialogs for simple options
+set guioptions+=c
+
+"   No right scrollbar
+set guioptions-=r
+
+call TQ84_log('line ' . expand('<slnum>') . ': guioptions = ' . &guioptions)
+
+" }
+
+" { Filetype related
 call TQ84_log_indent('line ' . expand('<slnum>') . ': filetype on') " {
 filetype on
 " -----------
@@ -64,38 +91,10 @@ filetype indent on
 call TQ84_log_dedent() " }
 "  }
 
-" }
-
 " { Pathogen
 call TQ84_log_indent('pathogen#infect')
 execute pathogen#infect()
 call TQ84_log_dedent()
-" }
-
-" { Gui Options
-
-call TQ84_log('line ' . expand('<slnum>') . ': guioptions = ' . &guioptions)
-
-"   Don't source $VIMRUNTIME/menu.vim (I don't want menus)
-"   (must be stated before sourcing :syntax on (sy on))
-"   TODO: Is this necessary given that «set guioptions-=m»
-"   doesn't display a menu at all?
-set guioptions-=M
-
-"   No Menubar anyway
-set guioptions-=m
-
-"   No toolbar either
-set guioptions-=T
-
-"   Console dialogs instead of gui dialogs for simple options
-set guioptions+=c
-
-"   No right scrollbar
-set guioptions-=r
-
-call TQ84_log('line ' . expand('<slnum>') . ': guioptions = ' . &guioptions)
-
 " }
 
 " { Colors / Syntax highlightening
@@ -429,7 +428,7 @@ endif
 
 " }
 
-" Autocommands for special files {
+" { Autocommands for special files
 autocmd! BufReadPre $git_work_dir/biblisches/kommentare/alle_kapitel.html :so $github_root/Biblisches/vim/Kommentare.vim
 autocmd! BufReadPost **/about/Unicode/Codepoints/selection.txt setl colorcolumn=7,10,14,22,25
 " }
