@@ -3,8 +3,6 @@ set encoding=utf8       " {
 "   the Meta key (Alt) work, at least on windows, that is.
 "   }
 
-set rtp+=$git_work_dir/vim/vimfiles
-set rtp+=$git_work_dir/vim/vimfiles/after
 
 " Log functions {
 " Create the log functions before they're used the
@@ -14,6 +12,15 @@ call TQ84_log_init()
 " }
 
 call TQ84_log_indent(expand("<sfile>") . ', line ' . expand("<slnum>") . ": After calling TQ84_log_init()")
+
+if exists('$git_work_dir')
+   call TQ84_log('$git_work_dir exists, adding to &rtp')
+   set rtp+=$git_work_dir/vim/vimfiles
+   set rtp+=$git_work_dir/vim/vimfiles/after
+else
+   call TQ84_log('$git_work_dir does not exists, not adding to &rtp')
+endif
+
 
 call TQ84_log_indent('Option Values') " {
   
@@ -31,6 +38,12 @@ call TQ84_log_indent('Option Values') " {
   for s:option in s:options
       call TQ84_log(printf('%-18s: %s', s:option, eval('&' . s:option)))
   endfor
+
+  call TQ84_log_indent('runtimepath') " {
+       for s:rtp in split(&rtp, ',')
+           call TQ84_log(s:rtp)
+       endfor
+  call TQ84_log_dedent() " }
 
 call TQ84_log_dedent() " }
 
@@ -113,9 +126,14 @@ call TQ84_log_dedent() " }
 "  }
 
 " { Pathogen
-call TQ84_log_indent('pathogen#infect')
-execute pathogen#infect()
-call TQ84_log_dedent()
+runtime autoload/pathogon.vim
+if exists('*pathogen#infect')
+   call TQ84_log_indent('pathogen#infect')
+   execute pathogen#infect()
+   call TQ84_log_dedent()
+else
+   call TQ84_log('pathogen#infect not found')
+endif
 " }
 
 " { Colors / Syntax highlightening
@@ -438,14 +456,17 @@ iabbr aeg Ägypten
 
 " { special hosts / local vimrc
 
-if hostname() == 'OKFMGMT022'
-  so X:\commands\okfmgmt022.vim
-elseif hostname() == 'NCHA25509404'
-  " do nothing
-else
+" if hostname() == 'OKFMGMT022'
+"   so X:\commands\okfmgmt022.vim
+" elseif hostname() == 'NCHA25509404'
+"   " do nothing
+" else
+if exists('$git_work_dir')
   call TQ84_log_indent('line ' . expand('<slnum>') . ': $git_work_dir/vim/vimfiles/vimrc')
   so $git_work_dir/vim/vimfiles/vimrc
   call TQ84_log_dedent()
+else
+  call TQ84_log('$git_work_dir does not exist')
 endif
 
 " }
