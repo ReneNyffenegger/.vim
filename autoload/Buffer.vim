@@ -57,4 +57,53 @@ fu! Buffer#InsertLines(lines, ...) " {
     call TQ84_log_dedent()
 endfu " }
 
+fu! Buffer#OpenFile(filename) " {
+  call TQ84_log_indent(expand('<sfile>'))
+
+  let l:curr_name = substitute(expand('%:p'), '\', '/', 'g')
+  let l:file_name = substitute(a:filename   , '\', '/', 'g')
+
+  call TQ84_log('l:curr_name = ' . l:curr_name)
+  call TQ84_log('l:file_name = ' . l:file_name)
+
+
+  if l:curr_name  ==? l:file_name
+     call TQ84_log('Current buffer is already file looked for')
+     call TQ84_log_dedent()
+     return 0
+  endif
+
+  let l:winNr = bufwinnr(a:filename)
+
+  call TQ84_log('Window nr for requested file: ' . l:winNr)
+
+  if l:winNr != -1
+     exe l:winNr . 'wincmd w'
+     call TQ84_log_dedent()
+
+   " Return 0 to indicate that window was not split
+     return 0
+  endif
+
+  let l:curWin = winbufnr(0)
+  call TQ84_log('current window: ' . l:curWin)
+
+  let l:curBufName = bufname(l:curWin)
+  call TQ84_log('current buffer name ' . l:curBufName)
+
+  let l:new_split = 0
+  if l:curBufName != ""
+      call TQ84_log('opening new window')
+
+      split
+      let l:new_split = 1
+  end
+
+  call TQ84_log('e ' . a:filename)
+  execute "e " . a:filename
+
+  call TQ84_log_dedent()
+  return l:new_split
+endfu " }
+
 call TQ84_log_dedent()
