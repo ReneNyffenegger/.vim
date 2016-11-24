@@ -7,11 +7,15 @@ set encoding=utf8       " {
 " Log functions {
 " Create the log functions before they're used the
 " first time. See TQ84_log_indent below.
-:runtime lib/tq84_log.vim
+runtime lib/tq84_log.vim
 call TQ84_log_init()
 " }
 
 call TQ84_log_indent(expand("<sfile>") . ', line ' . expand("<slnum>") . ": After calling TQ84_log_init()")
+
+
+call tq84#option#log()
+let s:options_start = tq84#option#values()
 
 if exists('$git_work_dir')
    call TQ84_log('$git_work_dir exists, adding to &rtp')
@@ -21,32 +25,6 @@ else
    call TQ84_log('$git_work_dir does not exists, not adding to &rtp')
 endif
 
-
-call TQ84_log_indent('Option Values') " {
-  
-  let s:options = [
-  \ 'autoindent'    ,
-  \ 'commentstring' ,
-  \ 'compatible'    ,
-  \ 'grepprg'       ,
-  \ 'guifont'       ,
-  \ 'relativenumber',
-  \ 'wildchar'      ,
-  \ 'wildignore'    ,
-  \ 'visualbell'    ,
-  \ 'wrap'          ]
-  
-  for s:option in s:options
-      call TQ84_log(printf('%-18s: %s', s:option, eval('&' . s:option)))
-  endfor
-
-  call TQ84_log_indent('runtimepath') " {
-       for s:rtp in split(&rtp, ',')
-           call TQ84_log(s:rtp)
-       endfor
-  call TQ84_log_dedent() " }
-
-call TQ84_log_dedent() " }
 
 " { set nocompatible
 "
@@ -216,6 +194,8 @@ set expandtab            " use spaces instead of tabulators
 set smarttab
 
 set guicursor=a:blinkon0 " no blinking cursor  (a = all modes)
+
+set foldmarker=\ {,\ }
 
 " }
 
@@ -477,5 +457,6 @@ autocmd! BufReadPre $git_work_dir/biblisches/kommentare/alle_kapitel.html :so $g
 autocmd! BufReadPost **/about/Unicode/Codepoints/selection.txt setl colorcolumn=7,10,14,22,25
 " }
 
+call tq84#option#diff(s:options_start, tq84#option#values())
 
 call TQ84_log_dedent()
