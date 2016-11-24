@@ -59,4 +59,27 @@ fu tq84#option#diff(values_1, values_2) " {
    
 endfu " }
 
+fu tq84#option#rmDupRTP() " {
+   call TQ84_log_indent(expand('<sfile>'))
+
+ " Remove same directories in runtime path
+   call TQ84_log('rtp=' . &rtp)
+
+   let l:rtp=split(&rtp, ',')
+
+   call TQ84_log('before map, l:rtp=' . string(l:rtp))
+   call map(l:rtp, 'expand(v:val, "p")')
+
+ " Change C:\ to c:\
+   call map(l:rtp, 'substitute(v:val, "^\\(.\\):", "\\L\\1\\e:", "")')
+
+   call TQ84_log('after map, l:rtp=' . string(l:rtp))
+
+   let &rtp=join(tq84#list#rmDup(l:rtp), ',')
+
+   call TQ84_log('rtp=' . &rtp)
+
+   call TQ84_log_dedent()
+endfu " }
+
 call TQ84_log_dedent()
