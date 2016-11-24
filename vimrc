@@ -25,6 +25,7 @@ else
    call TQ84_log('$git_work_dir does not exists, not adding to &rtp')
 endif
 
+call tq84#option#rmDupRTP()
 
 " { set nocompatible
 "
