@@ -26,6 +26,7 @@ call TQ84_log_indent('Option Values') " {
   
   let s:options = [
   \ 'autoindent'    ,
+  \ 'commentstring' ,
   \ 'compatible'    ,
   \ 'grepprg'       ,
   \ 'guifont'       ,
