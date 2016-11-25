@@ -10,6 +10,8 @@ fu <SID>TabPressed() " {
 
    if     l:wordLeftOfCursor == 'if' " {
 
+          call TQ84_log('if found')
+
           let l:mark1 = tq84#tabber2#nextJumpToMark()
           let l:mark2 = tq84#tabber2#nextJumpToMark()
 
@@ -23,6 +25,8 @@ fu <SID>TabPressed() " {
           call <SID>InsertLines(l:lines, col('.')-1 - len(l:wordLeftOfCursor)) 
 
           call TQ84_log_dedent()
+
+        " Return a space which will be inserted immediatly after the if:
           return ' '
    endif " }
 
@@ -38,6 +42,7 @@ fu <SID>TabPressed() " {
 
    endif " }
 
+   call TQ84_log('No word found, instructions empty, returning tab')
 
    call TQ84_log_dedent()
 
@@ -50,9 +55,10 @@ call tq84#tabber2#init(function('<SID>TabPressed'))
 fu <SID>WordLeftOfCursor() " {
    call TQ84_log_indent(expand('<sfile>'))
 
-   let l:line=getline('.')
+   call <SID>LogLineAndPos()
 
-   let l:col = col('.')
+   let l:line= getline('.')
+   let l:col = col    ('.')
 
    let l:word = matchstr  (l:line,    '\<\w\+\%' . l:col . 'c')
 
