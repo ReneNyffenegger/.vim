@@ -213,6 +213,8 @@ set visualbell t_vb=""
 
 set relativenumber
 
+set suffixes=.bak,~,.o,.info,.swp,.obj
+
 " }
 
 " { Languages
