@@ -4,6 +4,7 @@ let s:options = [
 \ 'autoindent'    ,
 \ 'commentstring' ,
 \ 'compatible'    ,
+\ 'formatoptions' ,
 \ 'grepprg'       ,
 \ 'guifont'       ,
 \ 'relativenumber',
