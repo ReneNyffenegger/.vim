@@ -171,6 +171,7 @@ set statusline=\
 set statusline+=%f           " relative filename
 set statusline+=\ %y         " filetype
 set statusline+=\ ic:%{&ic}  " show ignore case flag
+set statusline+=\ ff:%{&ff}  " file format
 set statusline+=\ %m         " file modification flag
 set statusline+=\ %=         " Jump to right portion of status line
 set statusline+=\ %c         " column
@@ -453,9 +454,12 @@ endif
 
 " }
 
-" { Autocommands for special files
-autocmd! BufReadPre $git_work_dir/biblisches/kommentare/alle_kapitel.html :so $github_root/Biblisches/vim/Kommentare.vim
-autocmd! BufReadPost **/about/Unicode/Codepoints/selection.txt setl colorcolumn=7,10,14,22,25
+" { Autocommands
+  autocmd BufNewFile * set ff=unix
+  " { Autocommands for special files
+    autocmd! BufReadPre $git_work_dir/biblisches/kommentare/alle_kapitel.html :so $github_root/Biblisches/vim/Kommentare.vim
+    autocmd! BufReadPost **/about/Unicode/Codepoints/selection.txt setl colorcolumn=7,10,14,22,25
+  " }
 " }
 
 call tq84#option#diff(s:options_start, tq84#option#values())
