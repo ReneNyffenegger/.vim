@@ -426,6 +426,7 @@ inoremap <C-b> <S-Left>
   " { Command line mode
 cnoremap <C-P> <Up>
 cnoremap <C-N> <Down>
+cnoremap  e tq84#cmdline#cutPathTail()<CR>
 " }
 call TQ84_log_dedent()
 " }
