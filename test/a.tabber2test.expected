@@ -1,0 +1,8 @@
+   if 1=2 " {
+      foo
+      if x=y " {
+         echo 'x is equal to y'
+      endif " }
+    ar
+   endif " }
+   fini

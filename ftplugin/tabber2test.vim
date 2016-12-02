@@ -2,7 +2,7 @@ call TQ84_log_indent(expand('<sfile>'))
 
 let b:instructions = []
 
-fu <SID>TabPressed() " {
+fu! <SID>TabPressed() " {
    call TQ84_log_indent(expand('<sfile>'))
 
    let l:wordLeftOfCursor = <SID>WordLeftOfCursor()
@@ -20,7 +20,7 @@ fu <SID>TabPressed() " {
 
           call <SID>InsertRightOfCursor(' " {')
 
-          let l:lines = ['   ' . l:mark1 . ' foo', 'endif " }', l:mark2]
+          let l:lines = ['   ' . l:mark1, 'endif " }', l:mark2]
 
           call <SID>InsertLines(l:lines, col('.')-1 - len(l:wordLeftOfCursor)) 
 
@@ -50,9 +50,10 @@ fu <SID>TabPressed() " {
 endfu " }
 
 call tq84#tabber2#init(function('<SID>TabPressed'))
+set ai
 
 
-fu <SID>WordLeftOfCursor() " {
+fu! <SID>WordLeftOfCursor() " {
    call TQ84_log_indent(expand('<sfile>'))
 
    call <SID>LogLineAndPos()
@@ -68,7 +69,7 @@ fu <SID>WordLeftOfCursor() " {
    return l:word
 endfu " }
 
-fu <SID>InsertRightOfCursor(text) " {
+fu! <SID>InsertRightOfCursor(text) " {
    call TQ84_log_indent(expand('<sfile>') . ', text=' . a:text . '<')
 
    let l:last_column = virtcol('.')  == virtcol('$')
@@ -91,7 +92,7 @@ fu <SID>InsertRightOfCursor(text) " {
    call TQ84_log_dedent()
 endfu " }
 
-fu <SID>InsertLines(lines, indent) " {
+fu! <SID>InsertLines(lines, indent) " {
    call TQ84_log_indent(expand('<sfile>'))
    let l:lines = map(a:lines, 'printf("%' . a:indent . 's%s", "", v:val)')
 
