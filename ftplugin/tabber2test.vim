@@ -2,58 +2,9 @@ call TQ84_log_indent(expand('<sfile>'))
 
 set ai
 
-" let b:instructions = []
-" 
-" fu! <SID>TabPressed() " {
-"    call TQ84_log_indent(expand('<sfile>'))
-" 
-"    let l:wordLeftOfCursor = <SID>WordLeftOfCursor()
-"    call TQ84_log('wordLeftOfCursor=' . l:wordLeftOfCursor . '<')
-" 
-"    if     l:wordLeftOfCursor == 'if' " {
-" 
-"           call TQ84_log('if found')
-" 
-"           let l:mark1 = tq84#tabber2#nextJumpToMark()
-"           let l:mark2 = tq84#tabber2#nextJumpToMark()
-" 
-"           call add(b:instructions, function('tq84#tabber2#jumpToMarkAndEatIt', [l:mark2]))
-"           call add(b:instructions, function('tq84#tabber2#jumpToMarkAndEatIt', [l:mark1]))
-" 
-"           call <SID>InsertRightOfCursor(' " {')
-" 
-"           let l:lines = ['   ' . l:mark1, 'endif " }', l:mark2]
-" 
-"           call <SID>InsertLines(l:lines, col('.')-1 - len(l:wordLeftOfCursor)) 
-" 
-"           call TQ84_log_dedent()
-" 
-"         " Return a space which will be inserted immediatly after the if:
-"           return ' '
-"    endif " }
-" 
-"    if len(b:instructions) " {
-" 
-"       call TQ84_log('len(b:instructions) = ' . len(b:instructions))
-"       let l:Instruction = remove(b:instructions, -1)
-"       call TQ84_log('calling ' . string(l:Instruction))
-"       let l:ret = l:Instruction()
-"       call TQ84_log('l:ret = ' . l:ret . '<')
-"       call TQ84_log_dedent()
-"       return l:ret
-" 
-"    endif " }
-" 
-"    call TQ84_log('No word found, instructions empty, returning tab')
-" 
-"    call TQ84_log_dedent()
-" 
-"    return nr2char(9)
-" endfu " }
 
 
-" call tq84#tabber2#init(function('<SID>TabPressed'))
-  call tq84#tabber2#init()
+call tq84#tabber2#init()
 
 call tq84#tabber2#addExpansionRuleFunc(function('tq84#tabber2#expansionRuleWord', ['if',
   \ [ ' " {',
