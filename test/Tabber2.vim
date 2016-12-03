@@ -1,5 +1,13 @@
+call TQ84_log_indent('test/Tabber2.vim')
+
 let s:fileExpected = expand('<sfile>:h') . '/a.tabber2test.expected'
-let s:fileGotten   = $TEMP . '/a.tabber2test'
+if isdirectory($TEMP) && filewritable($TEMP)
+   let s:fileGotten   = $TEMP . '/a.tabber2test'
+else
+   let s:fileGotten   ='/tmp/a.tabber2test'
+endif
+
+call TQ84_log(printf('files: expected=%s gotten=%s', s:fileExpected, s:fileGotten))
 
 exe 'silent! bw! ' . s:fileGotten
 
@@ -28,3 +36,5 @@ if tq84#os#filesDiffer(s:fileGotten, s:fileExpected)
 else
    echomsg 'OK'
 end
+
+call TQ84_log_dedent()
