@@ -2,12 +2,14 @@ call TQ84_log_indent(expand('<sfile>'))
 
 fu! tq84#SystemInDir(dir, cmd) " {
 
-  call TQ84_log_indent(expand("<sfile>"))
+  call TQ84_log_indent('tq84#SystemInDir')
 
-  let l:dir = a:dir
-  if ! has('unix')
-    let l:dir = substitute(l:dir, '/', '\', 'g')
-  endif
+" 2016-12-03: use tq84#os#correctPathSlashes()
+"
+" if ! has('unix')
+"   let l:dir = substitute(l:dir, '/', '\', 'g')
+" endif
+  let l:dir = tq84#os#correctPathSlashes(a:dir)
 
   try
 

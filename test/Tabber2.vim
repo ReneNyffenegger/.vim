@@ -1,9 +1,10 @@
-" let s:bufnr=bufnr('c:\temp\a.tabber2test')
-" if s:bufnr != -1
-silent! bw!       c:\temp\a.tabber2test
-if filereadable ('c:\temp\a.tabber2test')
-   call  delete ('c:\temp\a.tabber2test')
-   let g:FF = expand('<sfile>:p')
+let s:fileExpected = expand('<sfile>:h') . '/a.tabber2test.expected'
+let s:fileGotten   = $TEMP . '/a.tabber2test'
+
+exe 'silent! bw! ' . s:fileGotten
+
+if filereadable (s:fileGotten)
+   call  delete (s:fileGotten)
 endif
  
 fu! Type(txt)
@@ -11,18 +12,19 @@ fu! Type(txt)
 endfu
   
 new
-e c:\temp\a.tabber2test
+exe 'e ' . s:fileGotten
+
+" Do the actual typing...
  
 call Type("   if\t1=2\tfoo\nif\tx=y\techo 'x is equal to y'\tbar\tfini")
 
 silent w
 
+" Typing finished
 
-let s:fc = 'fc c:\temp\a.tabber2test ' . expand('<sfile>:h') . '\a.tabber2test.expected'
-let s:diffOut = system(s:fc)
-
-if match(s:diffOut, 'FC: Keine Unterschiede gefunden') == -1
-   echoerr s:diffOut
+" Compare expected and created (gotten) file:
+if tq84#os#filesDiffer(s:fileGotten, s:fileExpected)
+   echoerr 'NOT OK!!!!!'
 else
    echomsg 'OK'
-endif
+end
