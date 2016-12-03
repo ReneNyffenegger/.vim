@@ -3,6 +3,6 @@
       if x=y " {
          echo 'x is equal to y'
       endif " }
-    ar
+      bar
    endif " }
    fini

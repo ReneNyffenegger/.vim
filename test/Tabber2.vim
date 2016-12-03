@@ -2,7 +2,6 @@
 " if s:bufnr != -1
 silent! bw!       c:\temp\a.tabber2test
 if filereadable ('c:\temp\a.tabber2test')
-   echo "deleting c:\temp\a.tabber2test"
    call  delete ('c:\temp\a.tabber2test')
    let g:FF = expand('<sfile>:p')
 endif
@@ -14,7 +13,7 @@ endfu
 new
 e c:\temp\a.tabber2test
  
-call Type("   if\t1=2\tfoo\nif\tx=y\techo 'x is equal to y'\t\bar\tfini")
+call Type("   if\t1=2\tfoo\nif\tx=y\techo 'x is equal to y'\tbar\tfini")
 
 silent w
 
