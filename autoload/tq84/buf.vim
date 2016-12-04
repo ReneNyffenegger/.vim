@@ -1,6 +1,6 @@
 call TQ84_log_indent(expand('<sfile>'))
 
-fu tq84#buf#logLineAndPos() " {
+fu! tq84#buf#logLineAndPos() " {
   call TQ84_log_indent(expand('<sfile>'))
   
   let l:line_intro = 'line (' . line('.') . ') >'
@@ -25,7 +25,7 @@ fu tq84#buf#logLineAndPos() " {
   call TQ84_log_dedent()
 endfu " }
 
-fu tq84#buf#wordLeftOfCursor() " {
+fu! tq84#buf#wordLeftOfCursor() " {
    call TQ84_log_indent(expand('<sfile>'))
 
    call tq84#buf#logLineAndPos()
@@ -70,6 +70,27 @@ fu! tq84#buf#insertLines(lines, indent) " {
 
     call append(line('.'), l:lines)
     call TQ84_log_dedent()
+endfu " }
+
+fu! tq84#buf#buffers() " {
+    let l:ret=[]
+    call TQ84_log_indent(expand('<sfile>'))
+
+    for l:bufNr in range(1, bufnr('$'))
+
+        if bufexists(l:bufNr)
+           let l:bufName = bufname(l:bufNr)
+           call TQ84_log('Adding ' . l:bufName . ' (' . l:bufNr . ')')
+           call add(l:ret, l:bufName)
+        else
+           call TQ84_log('buffer ' . l:bufNr . ' does not exist')
+        endif
+
+    endfor
+
+    call TQ84_log_dedent()
+
+    return l:ret
 endfu " }
 
 
