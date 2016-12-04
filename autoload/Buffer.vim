@@ -24,7 +24,7 @@ fu! Buffer#InsertLines(lines, ...) " {
     " }
     else " {
 
-       let l:opts = {}
+       let l:opts ={}
 
     endif " }
 
