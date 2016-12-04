@@ -28,4 +28,21 @@ fu! tq84#notes#buffers() " {
    return l:ret
 endfu " }
 
+fu! tq84#notes#omnifunc(findstart, base) " {
+    call TQ84_log_indent('tq84#notes#omnifunc, findstart=' . a:findstart . ', base=' . a:base)
+
+    if a:findstart == 1 " { First invocation
+       let l:pos = col('.')
+       call TQ84_log('Returning ' . l:pos . ' because findstart == 1')
+       call TQ84_log_dedent()
+       return l:pos
+    endif " }
+
+
+    call TQ84_log_dedent()
+
+    return tq84#notes#buffers()
+
+endfu " }
+
 call TQ84_log_dedent()

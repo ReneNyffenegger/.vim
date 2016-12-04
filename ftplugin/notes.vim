@@ -24,4 +24,7 @@ catch
 
 endtry
 
+
+setl omnifunc=tq84#notes#omnifunc
+
 call TQ84_log_dedent()
