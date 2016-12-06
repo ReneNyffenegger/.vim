@@ -381,7 +381,7 @@ nnoremap <M-F5> :set cursorline! cursorcolumn!<CR>
 nnoremap   <F6> :only<CR>
 
 " Switch from virtual edit back and forth
-nnoremap <S-F6> :if &virtualedit == 'all' \| set virtualedit= \| else \| set virtualedit=all \| endif
+nnoremap <S-F6> :if &virtualedit == 'all' \| set virtualedit= \| else \| set virtualedit=all \| endif<CR>
 " }
   " }
   " { Gui
