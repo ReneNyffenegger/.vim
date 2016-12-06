@@ -14,7 +14,7 @@ let s:options = [
 \ 'visualbell'    ,
 \ 'wrap'          ]
 
-fu tq84#option#log() " {
+fu! tq84#option#log() " {
    call TQ84_log_indent(expand('<sfile>'))
 
    for s:option in s:options
@@ -33,14 +33,14 @@ fu tq84#option#log() " {
    call TQ84_log_dedent()
 endfu " }
 
-fu tq84#option#values() " {
+fu! tq84#option#values() " {
    call TQ84_log(expand('<sfile>'))
 
    return map(copy(s:options), 'eval("&" . v:val)')
 
 endfu " }
 
-fu tq84#option#diff(values_1, values_2) " {
+fu! tq84#option#diff(values_1, values_2) " {
 
    call TQ84_log_indent(expand('<sfile>'))
 
@@ -60,7 +60,7 @@ fu tq84#option#diff(values_1, values_2) " {
    
 endfu " }
 
-fu tq84#option#rmDupRTP() " {
+fu! tq84#option#rmDupRTP() " {
    call TQ84_log_indent(expand('<sfile>'))
 
  " Remove same directories in runtime path
@@ -79,6 +79,30 @@ fu tq84#option#rmDupRTP() " {
    let &rtp=join(tq84#list#rmDup(l:rtp), ',')
 
    call TQ84_log('rtp=' . &rtp)
+
+   call TQ84_log_dedent()
+endfu " }
+
+fu! tq84#option#toggleColorcolumn(col) " {
+   call TQ84_log_indent('tq84#option#toggleColorcolumn')
+
+   let l:cc=&cc
+
+   call TQ84_log('l:cc=' . l:cc)
+
+   if l:cc == ''
+      call TQ84_log('cc is empty, adding column')
+      let &cc = a:col
+
+   elseif match(l:cc, '\<' . a:col . '\>') > -1
+      call TQ84_log('cc contains column, removing it')
+      execute 'setl cc-=' . a:col
+
+   else
+      call TQ84_log('cc does not contain column, adding it')
+      execute 'setl cc+=' . a:col
+   endif
+
 
    call TQ84_log_dedent()
 endfu " }
