@@ -17,6 +17,7 @@ set includeexpr=substitute(v:fname,'^→','','')
 call TQ84_log('set ff=unix, was ' . &ff)
 set ff=unix
 
+nnoremap <buffer> gf :call tq84#notes#gotoFileUnderCursor()<CR>
 
 catch
 
