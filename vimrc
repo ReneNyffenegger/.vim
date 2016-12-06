@@ -350,11 +350,11 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
   " }
   " { Function keys
 
-" Toggle Case Insesitiveness
-
+" F2: { Ignoring case,  highlighting
 nnoremap   <F2> :setlocal ic!<CR>
 nnoremap <S-F2> :set hlsearch!<CR>
-
+nnoremap <M-F2> :call tq84#option#toggleColorcolumn(col('.'))<CR>
+" }
 " F3: Complete Filename / path / filename only to clipboard {
 nnoremap   <F3> :let @+=expand("%:p")<CR>
 nnoremap <S-F3> :let @+=expand("%:p:h")<CR>
