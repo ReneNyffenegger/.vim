@@ -18,3 +18,11 @@ else
       throw 'wrong correction of path slashes'
    endif
 endif
+
+if tq84#string#fromEnd('1234567890', 1) != '0' " {
+   throw 'last character of 1234567890 is 0'
+endif " }
+
+if tq84#string#fromEnd('1234567890', 4) != '7890' " {
+throw 'last 4 characters of 1234567890 are 7890'
+endif " }
