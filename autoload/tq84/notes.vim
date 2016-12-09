@@ -66,7 +66,11 @@ fu! tq84#notes#gotoFileUnderCursor() " {
 
     if isdirectory(l:filename_abs) " {
 
-       if l:filename_abs, len(l:filename_abs) - 1, 1) != '/' && l:filename_abs, len(l:filename_abs) - 1, 1) != '\'
+       let l:last_char = tq84#string#fromEnd(l:filename_abs, 1)
+
+       call TQ84_log('isdirectory, l:last_char = ' . l:last_char)
+
+       if l:last_char != '/' && l:last_char != '\'
           let l:filename_abs .= '/'
        endif
 
