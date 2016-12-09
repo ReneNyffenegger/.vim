@@ -338,13 +338,17 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>opstr   :call OpenUrl#StrongsWithInput()<CR>
    nnoremap <leader>opdict  :call OpenUrl#dict_leo_org(input("Search Term: "))<CR>
    nnoremap <leader>op4     :call misc#OpenScriptureForAll()<CR>
-   nnoremap <leader>oprc    :e $MYVIMRC<CR>
    nnoremap <leader>opurl   :call OpenUrl#Go(expand('<cWORD>'))<CR>
    nnoremap <leader>opeue   :call Buffer#OpenFile(Bibel#PfadTextDatei('eue'))<CR>
    nnoremap <leader>opkjv   :call Buffer#OpenFile(Bibel#PfadTextDatei('kjv'))<CR>
    nnoremap <leader>opelb05 :call Buffer#OpenFile(Bibel#PfadTextDatei('elb1905'))<CR>
    nnoremap <leader>opsch2k :call Buffer#OpenFile(Bibel#PfadTextDatei('sch2k'))<CR>
 
+"  Open VIM related files {
+   nnoremap <leader>oprc    :e $MYVIMRC<CR>
+   nnoremap <leader>opviro  :exe 'e ' . fnamemodify($MYVIMRC, ':h')<CR>
+   nnoremap <leader>opvitq  :exe 'e ' . fnamemodify($MYVIMRC, ':h') . '/autoload/tq84'<CR>
+"  }
    " Open a file of which only a part of the file name is known:
    nnoremap <leader>ope8   :e *
   " }
