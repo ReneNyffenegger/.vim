@@ -45,7 +45,7 @@ fu! tq84#notes#omnifunc(findstart, base) " {
 
 endfu " }
 
-fu! tq84#notes#gotoFileUnderCursor() " {
+fu! tq84#notes#gotoFileUnderCursor(openInNewWindow) " {
     call TQ84_log_indent('tq84#notes#gotoFileUnderCursor')
 
     let l:line = getline('.')
@@ -80,7 +80,11 @@ fu! tq84#notes#gotoFileUnderCursor() " {
 
     call TQ84_log('e ' . l:filename_abs)
 
-    execute 'e ' . l:filename_abs
+    if a:openInNewWindow
+       call tq84#buf#openFile(l:filename_abs) 
+    else
+      execute 'e ' . l:filename_abs
+    end
 
     call TQ84_log_dedent()
 endfu " }
