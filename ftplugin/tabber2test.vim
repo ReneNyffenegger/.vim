@@ -10,6 +10,6 @@ call tq84#tabber2#addExpansionRuleFunc(function('tq84#tabber2#expansionRuleWord'
   \   'endif " }',
   \   '!3!']]))
 
-" call tq84#tabber2#addExpansionRuleFunc(function('tq84#tabber2#expansionRuleWord', ['out', 'dbms_output.put_line', ["('!1!');!2!"]]))
+call tq84#tabber2#addExpansionRuleFunc(function('tq84#tabber2#expansionRuleWord', ['out', ["dbms_output.put_line('!1!');!2!"]]))
 
 call TQ84_log_dedent()
