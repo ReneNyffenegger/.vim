@@ -1,6 +1,6 @@
 call TQ84_log_indent(expand('<sfile>'))
 
-fu tq84#tabber2#init() " {
+fu! tq84#tabber2#init() " {
    call TQ84_log_indent(expand('<sfile>'))
 
    if exists('b:tabber2') " {
@@ -9,7 +9,7 @@ fu tq84#tabber2#init() " {
       return
    endif " }
 
-   let b:tabber2 = {}
+   let b:tabber2 ={}
 
  " Unfortunately, all syntax that is set up as part of the
  "»filetype detect mechanism« is later cleaned up when (before)
@@ -36,7 +36,7 @@ fu tq84#tabber2#init() " {
    call TQ84_log_dedent()
 endfu " }
 
-fu tq84#tabber2#addExpansionRuleFunc(expansionRuleFunc) " {
+fu! tq84#tabber2#addExpansionRuleFunc(expansionRuleFunc) " {
    call TQ84_log_indent('tq84#tabber2#addExpansionRule')
 
    call add(b:tabber2.expansionRuleFuncs, a:expansionRuleFunc)
@@ -44,10 +44,10 @@ fu tq84#tabber2#addExpansionRuleFunc(expansionRuleFunc) " {
    call TQ84_log_dedent()
 endfu " }
 
-
 fu! tq84#tabber2#expansionRuleWord(word, lines) " {
 
-   call TQ84_log_indent(printf('expansionRuleWord, testing if word=%s', a:word))
+"  call TQ84_log_indent(printf('tq84#tabber2#expansionRuleWord, testing if word=%s, wordReplace=%s', a:word, a:wordReplace))
+   call TQ84_log_indent(printf('tq84#tabber2#expansionRuleWord, testing if word=%s'                , a:word))
 
  " TODO: A buffer variable could be used here...
    let l:wordLeftOfCursor = tq84#buf#wordLeftOfCursor()
@@ -62,7 +62,8 @@ fu! tq84#tabber2#expansionRuleWord(word, lines) " {
 
           let l:jumpNo = 1
 
-          while 1
+          call TQ84_log_indent('Replacing jump markers')
+          while 1 " {
        
             let l:jumpPattern = '!' . l:jumpNo . '!'
 
@@ -70,24 +71,44 @@ fu! tq84#tabber2#expansionRuleWord(word, lines) " {
        
             let l:matchedLine = match(a:lines, l:jumpPattern)
        
-            if  l:matchedLine > -1
+            if  l:matchedLine > -1 " {
 
                 call TQ84_log('jumpPattern found')
                 let l:jumpMark = tq84#tabber2#nextJumpToMark()
+
+                if l:jumpNo == 1
+                   let l:firstJumpMark = l:jumpMark
+                else
+                   call add(l:instructions, function('tq84#tabber2#jumpToMarkAndEatIt', [l:jumpMark]))
+                endif
         
                 let l:lines[l:matchedLine] = substitute(l:lines[l:matchedLine], l:jumpPattern, l:jumpMark, '')
-                call add(l:instructions, function('tq84#tabber2#jumpToMarkAndEatIt', [l:jumpMark]))
 
                 let l:jumpNo = l:jumpNo + 1
        
                 continue
-            endif
+            endif " }
        
            
             call TQ84_log(printf('No match found for l:jumpNo=%d, exiting loop', l:jumpNo))
             break
        
-          endwhile
+          endwhile " }
+          call TQ84_log_dedent()
+
+          call TQ84_log_indent('Replace triggering word')
+          call tq84#buf#logLineAndPos()
+          let l:line = getline('.')
+          let l:col  = col    ('.')
+"         let l:line = strpart(l:line, 0, l:col - len(a:word) -1 ) . a:wordReplace . strpart(l:line, l:col)
+          let l:line = strpart(l:line, 0, l:col - len(a:word) -1 ) . strpart(l:line, l:col)
+          let l:col = l:col - len(a:word) -1 
+          call setline('.', l:line)
+          call TQ84_log('l:line=' . l:line)
+          call TQ84_log('l:col='  . l:col)
+"         call setpos('.', [0, line('.'), l:col - len(a:word)+len(a:wordReplace), 0])
+"         call setpos('.', [0, line('.'), l:col - len(a:word)                   , 0])
+          call TQ84_log_dedent()
 
           call TQ84_log(printf('adding %d instructions to b:instructions', len(l:instructions)))
           call extend(b:instructions, reverse(l:instructions))
@@ -95,7 +116,11 @@ fu! tq84#tabber2#expansionRuleWord(word, lines) " {
 
           call tq84#buf#insertRightOfCursor(l:lines[0])
 
-          call tq84#buf#insertLines(l:lines[1:], col('.')-1 - len(a:word))
+"         call tq84#buf#insertLines(l:lines[1:], col('.')-1 - len(a:word))
+          call tq84#buf#insertLines(l:lines[1:], l:col)
+
+          call TQ84_log('jump to first jump mark')
+          call tq84#tabber2#jumpToMarkAndEatIt(l:firstJumpMark)
 
           call TQ84_log_dedent()
           return 1
@@ -108,10 +133,11 @@ fu! tq84#tabber2#expansionRuleWord(word, lines) " {
 
 endfu " }
 
-fu tq84#tabber2#nextJumpToMark() " {
+fu! tq84#tabber2#nextJumpToMark() " {
    call TQ84_log_indent('tq84#tabber2#nextJumpToMark')
 
    if b:tabber2.syntax_todo
+      call TQ84_log('b:tabber2.syntax_todo -> tq84#tabber2#setupSyntax()')
       call tq84#tabber2#setupSyntax()
    endif
 
@@ -122,8 +148,8 @@ fu tq84#tabber2#nextJumpToMark() " {
    return nr2char(b:tabber2['currJumpToMark'])
 endfu " }
 
-fu tq84#tabber2#jumpToMarkAndEatIt(jumpMark) " {
-   call TQ84_log_indent(expand('<sfile>') . ', jumpMark=' . char2nr(a:jumpMark))
+fu! tq84#tabber2#jumpToMarkAndEatIt(jumpMark) " {
+   call TQ84_log_indent('tq84#tabber2#jumpToMarkAndEatIt, jumpMark=' . char2nr(a:jumpMark))
 
    if search(a:jumpMark) == 0 " {
       call TQ84_log('warning, jumpMark ' . char2nr(a:jumpMark) . ' not found')
@@ -132,9 +158,9 @@ fu tq84#tabber2#jumpToMarkAndEatIt(jumpMark) " {
    endif  " }
 
    let l:virtcolBeforeEating=virtcol('.')
-   call TQ84_log(printf('going to eat character. mode()=%s, virtcol(".")=%d, virtcol("$")=%d', mode(), l:virtcolBeforeEating, virtcol('$')))
+"  call TQ84_log(printf('going to eat character. mode()=%s, virtcol(".")=%d, virtcol("$")=%d', mode(), l:virtcolBeforeEating, virtcol('$')))
    normal x
-   call TQ84_log(printf('going to eat character. mode()=%s, virtcol(".")=%d, virtcol("$")=%d', mode(), virtcol('.'), virtcol('$')))
+"  call TQ84_log(printf('going to eat character. mode()=%s, virtcol(".")=%d, virtcol("$")=%d', mode(), virtcol('.'), virtcol('$')))
 
    if l:virtcolBeforeEating == virtcol('.') + 1
       startinsert!
@@ -147,7 +173,7 @@ fu tq84#tabber2#jumpToMarkAndEatIt(jumpMark) " {
 
 endfu " }
 
-fu tq84#tabber2#tab() " {
+fu! tq84#tabber2#tab() " {
    call TQ84_log_indent(expand('<sfile>'))
 
    call TQ84_log('return nr2char(9)')
@@ -156,7 +182,7 @@ fu tq84#tabber2#tab() " {
    return nr2char(9)
 endfu " }
 
-fu tq84#tabber2#tabPressed() " {
+fu! tq84#tabber2#tabPressed() " {
    call TQ84_log_indent('tq84#tabber2#tabPressed')
 
    for l:Func in b:tabber2.expansionRuleFuncs " {
@@ -165,8 +191,9 @@ fu tq84#tabber2#tabPressed() " {
        if l:Func()
 
           call TQ84_log('l:Func returned true')
+
           call TQ84_log_dedent()
-          return ' '
+          return ''
 
        endif
 
@@ -194,7 +221,7 @@ fu tq84#tabber2#tabPressed() " {
 
  endfu " }
 
-fu tq84#tabber2#setupSyntax() " {
+fu! tq84#tabber2#setupSyntax() " {
    call TQ84_log_indent('tq84#tabber2#setupSyntax')
 
    let l:cmd = 'syntax match JumpMark /[' . nr2char(b:tabber2.currJumpToMark) . '-' . nr2char(b:tabber2.currJumpToMark+1000) . ']/ conceal'

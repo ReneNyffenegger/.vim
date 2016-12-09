@@ -15,8 +15,8 @@ if filereadable (s:fileGotten)
    call  delete (s:fileGotten)
 endif
  
-fu! Type(txt)
-  execute 'normal i' . a:txt
+fu! Type(i_or_a, txt)
+  execute 'normal ' a:i_or_a . a:txt
 endfu
   
 new
@@ -24,7 +24,8 @@ exe 'e ' . s:fileGotten
 
 " Do the actual typing...
  
-call Type("   if\t1=2\tfoo\nif\tx=y\techo 'x is equal to y'\tbar\tfini")
+call Type('i', "   if\t1=2\tfoo\nif\tx=y\techo 'x is equal to y'\tbar\tfini")
+" call Type('a',  nr2char(10) . "new line: out\t")
 
 silent w
 

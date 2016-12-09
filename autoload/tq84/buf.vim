@@ -1,7 +1,7 @@
 call TQ84_log_indent(expand('<sfile>'))
 
 fu! tq84#buf#logLineAndPos() " {
-  call TQ84_log_indent(expand('<sfile>'))
+  call TQ84_log_indent('tq84#buf#logLineAndPos')
   
   let l:line_intro = 'line (' . line('.') . ') >'
 
@@ -26,7 +26,7 @@ fu! tq84#buf#logLineAndPos() " {
 endfu " }
 
 fu! tq84#buf#wordLeftOfCursor() " {
-   call TQ84_log_indent(expand('<sfile>'))
+   call TQ84_log_indent('tq84#buf#wordLeftOfCursor')
 
    call tq84#buf#logLineAndPos()
 
@@ -42,7 +42,7 @@ fu! tq84#buf#wordLeftOfCursor() " {
 endfu " }
 
 fu! tq84#buf#insertRightOfCursor(text) " {
-   call TQ84_log_indent(expand('<sfile>') . ', text=' . a:text . '<')
+   call TQ84_log_indent('tq84#buf#insertRightOfCursor, text=' . a:text . '<')
 
    let l:last_column = virtcol('.')  == virtcol('$')
    call tq84#buf#logLineAndPos()
@@ -65,7 +65,7 @@ fu! tq84#buf#insertRightOfCursor(text) " {
 endfu " }
 
 fu! tq84#buf#insertLines(lines, indent) " {
-    call TQ84_log_indent(expand('<sfile>'))
+    call TQ84_log_indent('tq84#buf#insertLines')
     let l:lines = map(a:lines, 'printf("%' . a:indent . 's%s", "", v:val)')
 
     call append(line('.'), l:lines)
