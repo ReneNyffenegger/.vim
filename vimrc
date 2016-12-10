@@ -320,6 +320,7 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
   " { <leader>op Open
    nnoremap <leader>op      <Nop>
    nnoremap <leader>opgo    :call OpenUrl#GoogleSearch(input('? '))<CR>
+   nnoremap <leader>opfile  :call tq84#OpenDocument(expand('<cWORD>'))<CR>
    nnoremap <leader>opbl    :call OpenUrl#BlueLetterWithInput()<CR>
    nnoremap <leader>oplu15  :call OpenUrl#BibelOnlineMitEingabe('luther_1545_letzte_hand')<CR>
    nnoremap <leader>oplu12  :call OpenUrl#BibelOnlineMitEingabe('luther_1912')<CR>
