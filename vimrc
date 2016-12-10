@@ -294,14 +294,13 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
     inoremap <M-"> Ä
     inoremap <M-:> Ö
     inoremap <M-{> Ü
-    " }
+
     cnoremap <M-'> ä
     cnoremap <M-;> ö
     cnoremap <M-[> ü
     cnoremap <M-"> Ä
     cnoremap <M-:> Ö
     cnoremap <M-{> Ü
-    " }
   " }
   " { Special characters
 
