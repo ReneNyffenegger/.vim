@@ -349,6 +349,9 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>opviro  :exe 'e ' . fnamemodify($MYVIMRC, ':h')<CR>
    nnoremap <leader>opvitq  :exe 'e ' . fnamemodify($MYVIMRC, ':h') . '/autoload/tq84'<CR>
 "  }
+"  Open Perl related files {
+   nnoremap <leader>opplmo   :exe 'e '.$github_root.'/PerlModules/'<CR>
+"  }
    " Open a file of which only a part of the file name is known:
    nnoremap <leader>ope8   :e *
   " }
