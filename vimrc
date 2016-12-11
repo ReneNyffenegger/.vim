@@ -477,4 +477,10 @@ endif
 
 call tq84#option#diff(s:options_start, tq84#option#values())
 
+if has('fname_case')
+   call TQ84_log('has fname_case')
+else
+   call TQ84_log('does not have fname_case')
+endif
+
 call TQ84_log_dedent()
