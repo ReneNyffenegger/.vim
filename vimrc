@@ -189,8 +189,10 @@ set laststatus=2
 " { Other settings
 
 " { Editing
-set sw=2
-set ts=2
+
+set shiftwidth=2
+set tabstop=2
+set autoindent
 
 set expandtab            " use spaces instead of tabulators
 set smarttab
