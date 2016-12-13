@@ -6,6 +6,12 @@ call TQ84_log_indent('Setting up tabber 2')
 
 call tq84#tabber2#init()
 
+call tq84#tabber2#addExpansionRuleFunc(function('tq84#tabber2#expansionRuleWord', ['logi'  , ['call TQ84_log_indent(!1!)!2!' ] ]))
+call tq84#tabber2#addExpansionRuleFunc(function('tq84#tabber2#expansionRuleWord', ['log'   , ['call TQ84_log(!1!)!2!'        ] ]))
+call tq84#tabber2#addExpansionRuleFunc(function('tq84#tabber2#expansionRuleWord', ['logd'  , ['call TQ84_log_dedent()!1!'    ] ]))
+
+call tq84#tabber2#addExpansionRuleFunc(function('tq84#tabber2#expansionRuleWord', ['expfil', ["expand('<sfile>')!1!"         ] ]))
+
 call TQ84_log_dedent()
 
 
