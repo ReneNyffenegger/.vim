@@ -341,10 +341,10 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>opdict  :call OpenUrl#dict_leo_org(input("Search Term: "))<CR>
    nnoremap <leader>op4     :call misc#OpenScriptureForAll()<CR>
    nnoremap <leader>opurl   :call OpenUrl#Go(expand('<cWORD>'))<CR>
-   nnoremap <leader>opeue   :call Buffer#OpenFile(Bibel#PfadTextDatei('eue'))<CR>
-   nnoremap <leader>opkjv   :call Buffer#OpenFile(Bibel#PfadTextDatei('kjv'))<CR>
-   nnoremap <leader>opelb05 :call Buffer#OpenFile(Bibel#PfadTextDatei('elb1905'))<CR>
-   nnoremap <leader>opsch2k :call Buffer#OpenFile(Bibel#PfadTextDatei('sch2k'))<CR>
+   nnoremap <leader>opeue   :call tq84#buf#openFile(Bibel#PfadTextDatei('eue'))<CR>
+   nnoremap <leader>opkjv   :call tq84#buf#openFile(Bibel#PfadTextDatei('kjv'))<CR>
+   nnoremap <leader>opelb05 :call tq84#buf#openFile(Bibel#PfadTextDatei('elb1905'))<CR>
+   nnoremap <leader>opsch2k :call tq84#buf#openFile(Bibel#PfadTextDatei('sch2k'))<CR>
 
 "  Open VIM related files {
    nnoremap <leader>oprc    :e $MYVIMRC<CR>
