@@ -1,16 +1,22 @@
 call TQ84_log_indent(expand('<sfile>'))
 
+" { Mappings
+
 nnoremap <buffer> <F3>      :let @+ = '@"'.expand('%:p').'"'.nr2char(10)<CR>:w<CR>
 inoremap <buffer> <F3> <ESC>:let @+ = '@"'.expand('%:p').'"'.nr2char(10)<CR>:w<CR>
+
+nnoremap <buffer> <C-F4>    :call tq84#ft#sql#yankCurStmtAndGoToNext()<CR>
+
+" Add clipboard's content below current cursor position with leading --
+" nnoremap <buffer> <F7> :call append('.', extend(map(extend([''], split(@+, "\n")), "'-- ' . v:val"), ['']))<CR>
+  nnoremap <buffer> <F7> :call append('.',        map(extend([''], split(@+, "\n")), "'-- ' . v:val")       )<CR>
+
+" }
 
 set foldmarker=\ {,\ }
 set foldmethod=marker
 set foldtext=getline(v:foldstart)
 set commentstring=\ --%s
-
-" Add clipboard's content below current cursor position with leading --
-" nnoremap <buffer> <F7> :call append('.', extend(map(extend([''], split(@+, "\n")), "'-- ' . v:val"), ['']))<CR>
-  nnoremap <buffer> <F7> :call append('.',        map(extend([''], split(@+, "\n")), "'-- ' . v:val")       )<CR>
 
 call tq84#tabber2#init()
 call tq84#tabber2#addExpansionRuleFunc(function('tq84#tabber2#expansionRuleWord', ['out', ["dbms_output.put_line('!1!');!2!"]]))
