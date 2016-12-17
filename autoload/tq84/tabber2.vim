@@ -96,16 +96,16 @@ fu! tq84#tabber2#expansionRuleWord(word, lines) " {
           endwhile " }
           call TQ84_log_dedent()
 
-          call TQ84_log_indent('Replace triggering word')
+          call TQ84_log_indent('Replace triggering word [' . a:word . ']')
           call tq84#buf#logLineAndPos()
           let l:line = getline('.')
           let l:col  = col    ('.')
 "         let l:line = strpart(l:line, 0, l:col - len(a:word) -1 ) . a:wordReplace . strpart(l:line, l:col)
-          let l:line = strpart(l:line, 0, l:col - len(a:word) -1 ) . strpart(l:line, l:col)
+          let l:line = strpart(l:line, 0, l:col - len(a:word) -1 ) . l:lines[0] . strpart(l:line, l:col-1)
           let l:col = l:col - len(a:word) -1 
           call setline('.', l:line)
-          call TQ84_log('l:line=' . l:line)
-          call TQ84_log('l:col='  . l:col)
+          call TQ84_log('l:line=' . l:line . ', l:col=' . l:col)
+"         call TQ84_log('l:col='  . l:col)
 "         call setpos('.', [0, line('.'), l:col - len(a:word)+len(a:wordReplace), 0])
 "         call setpos('.', [0, line('.'), l:col - len(a:word)                   , 0])
           call TQ84_log_dedent()
@@ -114,7 +114,7 @@ fu! tq84#tabber2#expansionRuleWord(word, lines) " {
           call extend(b:instructions, reverse(l:instructions))
           call TQ84_log(printf('len(b:instructions)=%d', len(b:instructions)))
 
-          call tq84#buf#insertRightOfCursor(l:lines[0])
+"         call tq84#buf#insertRightOfCursor(l:lines[0])
 
 "         call tq84#buf#insertLines(l:lines[1:], col('.')-1 - len(a:word))
           call tq84#buf#insertLines(l:lines[1:], l:col)

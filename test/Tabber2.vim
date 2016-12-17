@@ -27,6 +27,7 @@ exe 'e ' . s:fileGotten
 call Type('i', "   if\t1=2\tfoo\nif\tx=y\techo 'x is equal to y'\tbar\tfini")
 call Type('a',  nr2char(10) . "new line: out\thello word\t" . nr2char(10))
 call Type('i', "if\tfoo=bar\tout\tfoo=bar\t\t")
+call Type('i', "out\texp\t\t")
 
 silent w
 

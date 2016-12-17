@@ -171,6 +171,7 @@ set statusline=\
 set statusline+=%f           " relative filename
 set statusline+=\ %y         " filetype
 set statusline+=\ ic:%{&ic}  " show ignore case flag
+set statusline+=\ ve:%{&ve}  " virtual edit
 set statusline+=\ ff:%{&ff}  " file format
 set statusline+=\ %m         " file modification flag
 set statusline+=\ %=         " Jump to right portion of status line

@@ -6,3 +6,8 @@
       bar
    endif " }
    fini
+   new line: dbms_output.put_line('hello word');
+if foo=bar " {
+   dbms_output.put_line('foo=bar');
+endif " }
+dbms_output.put_line('an expanded string');
