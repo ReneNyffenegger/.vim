@@ -141,5 +141,20 @@ fu! tq84#buf#openFile(filename) " {
     return l:new_split
 endfu " }
 
+fu! tq84#buf#openScratch() " {
+    call TQ84_log_indent('tq84#buf#openScratch')
+
+    let l:split = tq84#buf#openFile('scratch-buf')
+
+    if l:split == 0 " {
+       call TQ84_log('l:split=0, setting buftype etc')
+       setl buftype=nofile
+       setl bufhidden=hide
+       setl noswapfile
+       setl buflisted
+    endif " }
+
+    call TQ84_log_dedent()
+endfu " }
 
 call TQ84_log_dedent()
