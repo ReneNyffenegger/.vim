@@ -23,10 +23,8 @@ fu! tq84#tabber2#init() " {
    let b:tabber2.syntax_todo = 1
 
    let b:tabber2.currJumpToMark = 9999
-"  let b:tabber2.tabFunc        = a:tabFunc
 
    inoremap <buffer> <TAB>         =tq84#tabber2#tabPressed()<CR>
- " inoremap <buffer> <TAB> <ESC>:call tq84#tabber2#tabPressed()<CR>
 
  " The list of funcrefs to be checked after a Tab was pressed:
    let b:tabber2.expansionRuleFuncs = []
@@ -45,9 +43,7 @@ fu! tq84#tabber2#addExpansionRuleFunc(expansionRuleFunc) " {
 endfu " }
 
 fu! tq84#tabber2#expansionRuleWord(word, lines) " {
-
-"  call TQ84_log_indent(printf('tq84#tabber2#expansionRuleWord, testing if word=%s, wordReplace=%s', a:word, a:wordReplace))
-   call TQ84_log_indent(printf('tq84#tabber2#expansionRuleWord, testing if word=%s'                , a:word))
+   call TQ84_log_indent(printf('tq84#tabber2#expansionRuleWord, testing if word=%s', a:word))
 
  " TODO: A buffer variable could be used here...
    let l:wordLeftOfCursor = tq84#buf#wordLeftOfCursor()
@@ -100,23 +96,16 @@ fu! tq84#tabber2#expansionRuleWord(word, lines) " {
           call tq84#buf#logLineAndPos()
           let l:line = getline('.')
           let l:col  = col    ('.')
-"         let l:line = strpart(l:line, 0, l:col - len(a:word) -1 ) . a:wordReplace . strpart(l:line, l:col)
           let l:line = strpart(l:line, 0, l:col - len(a:word) -1 ) . l:lines[0] . strpart(l:line, l:col-1)
           let l:col = l:col - len(a:word) -1 
           call setline('.', l:line)
           call TQ84_log('l:line=' . l:line . ', l:col=' . l:col)
-"         call TQ84_log('l:col='  . l:col)
-"         call setpos('.', [0, line('.'), l:col - len(a:word)+len(a:wordReplace), 0])
-"         call setpos('.', [0, line('.'), l:col - len(a:word)                   , 0])
           call TQ84_log_dedent()
 
           call TQ84_log(printf('adding %d instructions to b:instructions', len(l:instructions)))
           call extend(b:instructions, reverse(l:instructions))
           call TQ84_log(printf('len(b:instructions)=%d', len(b:instructions)))
 
-"         call tq84#buf#insertRightOfCursor(l:lines[0])
-
-"         call tq84#buf#insertLines(l:lines[1:], col('.')-1 - len(a:word))
           call tq84#buf#insertLines(l:lines[1:], l:col)
 
           call TQ84_log('jump to first jump mark')
@@ -158,9 +147,7 @@ fu! tq84#tabber2#jumpToMarkAndEatIt(jumpMark) " {
    endif  " }
 
    let l:virtcolBeforeEating=virtcol('.')
-"  call TQ84_log(printf('going to eat character. mode()=%s, virtcol(".")=%d, virtcol("$")=%d', mode(), l:virtcolBeforeEating, virtcol('$')))
    normal x
-"  call TQ84_log(printf('going to eat character. mode()=%s, virtcol(".")=%d, virtcol("$")=%d', mode(), virtcol('.'), virtcol('$')))
 
    if l:virtcolBeforeEating == virtcol('.') + 1
       startinsert!
