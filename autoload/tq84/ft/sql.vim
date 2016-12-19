@@ -60,4 +60,26 @@ fu! tq84#ft#sql#yankCurStmtAndGoToNext() " {
     call TQ84_log_dedent()
 endfu " }
 
+fu! tq84#ft#sql#formatStmt() " {
+    call TQ84_log_indent('tq84#ft#sql#formatStmt')
+
+    let l:startLine = tq84#ft#sql#stmtStartLine()
+    let l:endLine   = tq84#ft#sql#stmtEndLine  ()
+
+    for l:line in range(l:startLine, l:endLine-1) " {
+
+        if getline(l:line + 1) =~ '\v^\s*,' " {
+        "  move a line's leading comma to end of previous line
+
+           call setline(l:line  , getline(l:line  ) . ',')
+           call setline(l:line+1, substitute(getline(l:line+1), '\v^(\s*),', '\1', ''))
+
+        endif " }
+
+    endfor " }
+
+    call TQ84_log_dedent()
+endfu " }
+
+
 call TQ84_log_dedent()
