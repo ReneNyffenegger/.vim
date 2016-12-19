@@ -94,6 +94,11 @@ fu! tq84#buf#buffers() " {
 endfu " }
 
 fu! tq84#buf#openFile(filename) " {
+"
+"   Returns
+"      0 if the buffer was already existing
+"      1 if the buffer was created
+"
     call TQ84_log_indent(expand('<sfile>'))
   
     let l:curr_name = substitute(expand('%:p'), '\', '/', 'g')
@@ -103,7 +108,7 @@ fu! tq84#buf#openFile(filename) " {
     call TQ84_log('l:file_name = ' . l:file_name)
   
     if l:curr_name  ==? l:file_name
-       call TQ84_log('Current buffer is already file looked for')
+       call TQ84_log('Current buffer is already file looked for, returning 0')
        call TQ84_log_dedent()
        return 0
     endif
@@ -114,9 +119,10 @@ fu! tq84#buf#openFile(filename) " {
   
     if l:winNr != -1
        exe l:winNr . 'wincmd w'
+
+       call TQ84_log('Window with requested buffer already visible, jumping to window and returning 0')
        call TQ84_log_dedent()
   
-     " Return 0 to indicate that window was not split
        return 0
     endif
   
@@ -126,28 +132,35 @@ fu! tq84#buf#openFile(filename) " {
     let l:curBufName = bufname(l:curWin)
     call TQ84_log('current buffer name ' . l:curBufName)
   
-    let l:new_split = 0
+"   let l:new_split = 0
     if l:curBufName != ""
-        call TQ84_log('opening new window')
+        call TQ84_log('opening new window, assigning 1 to l:new_split')
   
         split
-        let l:new_split = 1
+"       let l:new_split = 1
     end
+
+    if bufnr(a:filename) == -1
+       let l:newBuffer = 1
+    else
+       let l:newBuffer = 0
+    endif
   
     call TQ84_log('e ' . a:filename)
     execute "e " . a:filename
   
+    call TQ84_log('returning l:newBuffer=' . l:newBuffer)
     call TQ84_log_dedent()
-    return l:new_split
+    return l:newBuffer
 endfu " }
 
 fu! tq84#buf#openScratch() " {
     call TQ84_log_indent('tq84#buf#openScratch')
 
-    let l:split = tq84#buf#openFile('scratch-buf')
+    let l:newBuffer = tq84#buf#openFile('scratch-buf')
 
-    if l:split == 0 " {
-       call TQ84_log('l:split=0, setting buftype etc')
+    if l:newBuffer " {
+       call TQ84_log('l:newBuffer != 0, setting buftype etc')
        setl buftype=nofile
        setl bufhidden=hide
        setl noswapfile
