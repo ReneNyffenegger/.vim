@@ -346,6 +346,8 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>opkjv   :call tq84#buf#openFile(Bibel#PfadTextDatei('kjv'))<CR>
    nnoremap <leader>opelb05 :call tq84#buf#openFile(Bibel#PfadTextDatei('elb1905'))<CR>
    nnoremap <leader>opsch2k :call tq84#buf#openFile(Bibel#PfadTextDatei('sch2k'))<CR>
+   
+   nnoremap <leader>opbusc  :call tq84#buf#openScratch()<CR>
 
 "  Open VIM related files {
    nnoremap <leader>oprc    :e $MYVIMRC<CR>
