@@ -10,6 +10,8 @@ nnoremap <buffer> <C-F4>    :call tq84#ft#sql#yankCurStmtAndGoToNext()<CR>
 " Add clipboard's content below current cursor position with leading --
 " nnoremap <buffer> <F7> :call append('.', extend(map(extend([''], split(@+, "\n")), "'-- ' . v:val"), ['']))<CR>
   nnoremap <buffer> <F7> :call append('.',        map(extend([''], split(@+, "\n")), "'-- ' . v:val")       )<CR>
+  
+nnoremap ,stfm :call tq84#ft#sql#formatStmt()<CR>
 
 " }
 
