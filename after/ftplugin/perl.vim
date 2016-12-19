@@ -1,6 +1,6 @@
 call TQ84_log_indent(expand('<sfile>'))
 
-setl commentstring=\ \#%s
+setl commentstring=\ \#\ %s
 
 setl foldmethod=marker
 setl foldtext=getline(v:foldstart)
