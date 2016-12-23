@@ -63,6 +63,10 @@ fu! tq84#OpenDocument(doc) " {
 endfu " }
 
 fu! tq84#EmbedVisualSelection(txt_before, txt_after) range " {
+"
+" TODO: This function does not work right if the embedded selection
+"       contains a two byte character (Such as ß, ä etc)
+"
   call TQ84_log_indent(expand('<sfile>'))
 
 " Determining beginning and end of visual selection
@@ -194,7 +198,6 @@ fu! tq84#toggle_highlight_word_under_cursor() " {
 
 endfu " }
 
-
 fu! tq84#ScriptSID(sfile) " {
 "
 "  to be called like so
@@ -209,7 +212,5 @@ fu! tq84#ScriptSID(sfile) " {
   call TQ84_log_dedent()
   return l:sid
 endfu " }
-
-
 
 call TQ84_log_dedent()
