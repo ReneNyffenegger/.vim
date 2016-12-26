@@ -1,3 +1,7 @@
+"   2016-12-27: Adding nocompatible because starting
+"   vim with -u ~/.vim/vimrc seems to start vim
+"   in compatible mode... (See comment for 'set nocompatible' below)
+set nocompatible
 set encoding=utf8       " {
 "   At the very start, so that the various mappings involving
 "   the Meta key (Alt) work, at least on windows, that is.
@@ -18,9 +22,13 @@ call tq84#option#log()
 let s:options_start = tq84#option#values()
 
 if exists('$git_work_dir')
-   call TQ84_log('$git_work_dir exists, adding to &rtp')
-   set rtp+=$git_work_dir/vim/vimfiles
-   set rtp+=$git_work_dir/vim/vimfiles/after
+    if isdirectory($git_work_dir)
+       call TQ84_log('$git_work_dir exists, adding to &rtp')
+       set rtp+=$git_work_dir/vim/vimfiles
+       set rtp+=$git_work_dir/vim/vimfiles/after
+    else
+       call TQ84_log('$git_work_dir [' . $git_work_dir . '] is not a directory')
+    endif
 else
    call TQ84_log('$git_work_dir does not exists, not adding to &rtp')
 endif
@@ -231,8 +239,15 @@ if     has('unix') " {
   call TQ84_log('line ' . expand('<slnum>') . ': has unix')
   set guifont=Monospace\ 9
 
-" Full screen
-  set columns=999 lines=999
+  if has('gui_running')
+  "  2016-12-27: Go full screen only if running in gui.
+  "  See also http://stackoverflow.com/questions/4229658/why-some-people-use-if-hasgui-running-in-a-gvimrc
+     call TQ84_log('has gui_running')
+  "  Full screen
+     set columns=999 lines=999
+  else
+     call TQ84_log('does not have gui_running')
+  endif
 
 " { Files to ignore (when using :e or insert mode )
 
@@ -468,9 +483,13 @@ iabbr aeg Ägypten
 "   " do nothing
 " else
 if exists('$git_work_dir')
-  call TQ84_log_indent('line ' . expand('<slnum>') . ': $git_work_dir/vim/vimfiles/vimrc')
-  so $git_work_dir/vim/vimfiles/vimrc
-  call TQ84_log_dedent()
+  if isdirectory($git_work_dir)
+     call TQ84_log_indent('line ' . expand('<slnum>') . ': $git_work_dir/vim/vimfiles/vimrc')
+     so $git_work_dir/vim/vimfiles/vimrc
+     call TQ84_log_dedent()
+  else
+     call TQ84_log($git_work_dir . ' is not a directory')
+  endif
 else
   call TQ84_log('$git_work_dir does not exist')
 endif
