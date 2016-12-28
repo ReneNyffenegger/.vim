@@ -17,11 +17,10 @@ call TQ84_log_init()
 
 call TQ84_log_indent(expand("<sfile>") . ', line ' . expand("<slnum>") . ": After calling TQ84_log_init()")
 
-
 call tq84#option#log()
 let s:options_start = tq84#option#values()
 
-if exists('$git_work_dir')
+if exists('$git_work_dir') " {
     if isdirectory($git_work_dir)
        call TQ84_log('$git_work_dir exists, adding to &rtp')
        set rtp+=$git_work_dir/vim/vimfiles
@@ -29,9 +28,10 @@ if exists('$git_work_dir')
     else
        call TQ84_log('$git_work_dir [' . $git_work_dir . '] is not a directory')
     endif
-else
+" }
+else " {
    call TQ84_log('$git_work_dir does not exists, not adding to &rtp')
-endif
+endif " }
 
 call tq84#option#rmDupRTP()
 
