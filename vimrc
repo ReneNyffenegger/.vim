@@ -467,6 +467,14 @@ nnoremap <leader>burvw :call Buffer#ReverseWordUnderCursor()<CR>
 inoremap <leader>inbv  =Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
 inoremap <leader>indt  =strftime("%Y-%m-%d")<CR>
 nnoremap <leader>indt  :execute "normal i" . strftime("%Y-%m-%d")<CR>
+  " git {
+  " sa  http://vim.wikia.com/wiki/Version_Control_for_Vimfiles
+nnoremap <leader>rci  :call tq84#git#ci()<CR>
+nnoremap <leader>rst  :call tq84#git#st()<CR>
+nnoremap <leader>rup  :call tq84#git#up()<CR>
+nnoremap <leader>radd :call tq84#git#add()<CR>
+
+  " }
   " }
   " { Insert mode
   " help ins-special-special
