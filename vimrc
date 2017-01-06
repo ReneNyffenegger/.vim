@@ -351,6 +351,7 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
   " }
   " { <leader>op Open
    nnoremap <leader>op      <Nop>
+   nnoremap <leader>op.     :execute 'e ' . expand('%:p:h')<CR>
    nnoremap <leader>opgo    :call OpenUrl#GoogleSearch(input('? '))<CR>
    nnoremap <leader>opfile  :call tq84#OpenDocument(expand('<cWORD>'))<CR>
    nnoremap <leader>opbl    :call OpenUrl#BlueLetterWithInput()<CR>
