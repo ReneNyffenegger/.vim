@@ -7,12 +7,10 @@ let s:fileGotten = tq84#test#newFile('a.tabber2test')
 call TQ84_log(printf('files: expected=%s gotten=%s', s:fileExpected, s:fileGotten))
 
  
-fu! Type(i_or_a, txt)
-  execute 'normal ' a:i_or_a . a:txt
-endfu
+" fu! Type(i_or_a, txt)
+"   execute 'normal ' a:i_or_a . a:txt
+" endfu
   
-new
-exe 'e ' . s:fileGotten
 
 " Do the actual typing...
  

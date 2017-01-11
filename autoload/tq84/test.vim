@@ -3,8 +3,9 @@ call TQ84_log_indent(expand('<sfile>'))
 fu! tq84#test#newFile(filenameWithoutPath) " {
 
 "
-" The function creates a 'temporary' file with the indicated
-" filename (a:filenameWithoutPath).
+" The function creates a 'temporary' buffer with the indicated
+" filename (a:filenameWithoutPath). When the function returns,
+" this new buffer is the current buffer.
 "
 " This function can be used instead of tempname() if the suffix
 " of the file is important for setting the filetype.
@@ -29,6 +30,8 @@ fu! tq84#test#newFile(filenameWithoutPath) " {
      call  delete (l:fileWithPath)
   endif
 
+  new
+  exe 'e ' . l:fileWithPath
 
   call TQ84_log('returning ' . l:fileWithPath)
   call TQ84_log_dedent()
