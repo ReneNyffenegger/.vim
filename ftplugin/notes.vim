@@ -28,5 +28,6 @@ endtry
 
 
 setl omnifunc=tq84#notes#omnifunc
+set  path=,,**
 
 call TQ84_log_dedent()
