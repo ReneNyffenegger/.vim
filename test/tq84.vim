@@ -26,3 +26,12 @@ endif " }
 if tq84#string#fromEnd('1234567890', 4) != '7890' " {
 throw 'last 4 characters of 1234567890 are 7890'
 endif " }
+
+let s:txtFile = tq84#test#newFile('foo.txt')
+call tq84#test#type('hello world' . nr2char(10))
+call tq84#test#type('I am the great pretender' . nr2char(10))
+exe 'normal k/pret/e' . nr2char(10)
+if tq84#buf#wordLeftOfCursor() != 'pre'
+   throw 'tq84#buf#wordLeftOfCursor returned ' . tq84#buf#wordLeftOfCursor() . ' instead of "pre"'
+endif
+exe 'silent! bw! ' . s:txtFile
