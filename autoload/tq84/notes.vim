@@ -49,10 +49,10 @@ fu! tq84#notes#gotoFileUnderCursor(openInNewWindow) " {
     call TQ84_log_indent('tq84#notes#gotoFileUnderCursor')
 
     let l:line = getline('.')
-    let l:col  = col    ('.')
+    let l:col  = virtcol('.')
     call TQ84_log('l:line=' . l:line . ', col=' . l:col)
 
-    let l:filename_rel = matchstr(l:line, '\v→ *\zs[-_a-zA-Z/]*%' . (l:col-1) . 'v[-_a-zA-Z/]*\ze')
+    let l:filename_rel = matchstr(l:line, '\v→ *\zs[-_a-zA-Z/]*%' . l:col . 'v[-_a-zA-Z/]*\ze')
 
     if l:filename_rel == ''
        call TQ84_log('l:filename_rel is empty, returning')
