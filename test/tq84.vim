@@ -38,4 +38,7 @@ call tq84#buf#insertRightOfCursor('INSERTED')
 if getline('.') != 'I am the great preINSERTEDtender'
    throw getline('.') . ' instead of "I am the great preINSERTEDtender"'
 endif
+if tq84#buf#lineRightOfCursor() != 'INSERTEDtender'
+   throw 'tq84#buf#lineRightOfCursor() returned ' . tq84#buf#lineRightOfCursor() . ' instead of INSERTEDtender'
+endif
 exe 'silent! bw! ' . s:txtFile
