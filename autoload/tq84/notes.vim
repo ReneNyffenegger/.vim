@@ -5,12 +5,7 @@ fu! tq84#notes#buffers() " {
 
    let l:ret = []
 
-   for l:bufName in tq84#buf#buffers() " {
-
-       if !len(l:bufName)
-          call TQ84_log('bufName is empty, skipping')
-          break
-       endif
+   for l:bufName in filter(tq84#buf#buffers(), 'len(v:val)') " {
        
        let l:bufNameFull = fnamemodify(l:bufName, ':p')
 
