@@ -34,4 +34,8 @@ exe 'normal k/pret/e' . nr2char(10)
 if tq84#buf#wordLeftOfCursor() != 'pre'
    throw 'tq84#buf#wordLeftOfCursor returned ' . tq84#buf#wordLeftOfCursor() . ' instead of "pre"'
 endif
+call tq84#buf#insertRightOfCursor('INSERTED')
+if getline('.') != 'I am the great preINSERTEDtender'
+   throw getline('.') . ' instead of "I am the great preINSERTEDtender"'
+endif
 exe 'silent! bw! ' . s:txtFile
