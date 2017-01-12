@@ -354,7 +354,8 @@ fu! Bibel#PfadTextDatei(uebersetzung) " {
   call TQ84_log_indent(expand('<sfile>') . ' ' . a:uebersetzung)
 
   if     a:uebersetzung ==# 'eue'
-         let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/tq84.bibel'
+"        let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/tq84.bibel'
+         let l:ret = s:github_uebersetzungen_pfad . '/tq84.bibel'
   elseif a:uebersetzung ==# 'kjv'
          let l:ret = s:github_uebersetzungen_pfad . '/kjv.bibel'
   elseif a:uebersetzung ==# 'elb1905'
