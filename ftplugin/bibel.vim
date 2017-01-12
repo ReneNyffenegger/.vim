@@ -87,6 +87,7 @@ fu! <SID>CopyElberfelder() " {
   call TQ84_log_dedent()
 endfu " }
 
+set wrap
 
 nnoremap <buffer> <leader>yv :let @*=<SID>VersTextDerAktuellenZeile()<CR>
 nnoremap <buffer> ,gtk       :call <SID>GeheZuKommentar()<CR>
