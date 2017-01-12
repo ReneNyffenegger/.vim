@@ -373,6 +373,7 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>op4     :call misc#OpenScriptureForAll()<CR>
    nnoremap <leader>opurl   :call OpenUrl#Go(expand('<cWORD>'))<CR>
    nnoremap <leader>opeue   :call tq84#buf#openFile(Bibel#PfadTextDatei('eue'))<CR>
+   nnoremap <leader>opjantz :call tq84#buf#openFile(Bibel#PfadTextDatei('jantz'))<CR>
    nnoremap <leader>opkjv   :call tq84#buf#openFile(Bibel#PfadTextDatei('kjv'))<CR>
    nnoremap <leader>opelb05 :call tq84#buf#openFile(Bibel#PfadTextDatei('elb1905'))<CR>
    nnoremap <leader>opsch2k :call tq84#buf#openFile(Bibel#PfadTextDatei('sch2k'))<CR>
