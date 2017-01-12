@@ -364,6 +364,8 @@ fu! Bibel#PfadTextDatei(uebersetzung) " {
          let l:ret = $git_work_dir . '/biblisches/kommentare/uebersetzungen/sch2k.bibel'
   elseif a:uebersetzung ==# 'ylt'
          let l:ret = s:github_uebersetzungen_pfad . '/ylt.bibel'
+  elseif a:uebersetzung ==# 'jantz'
+         let l:ret = $digitales_backup . 'Biblisches/Uebersetzungen/Jantzen_Das_Neue_Testament_In_Deutscher_Fassung_2011.txt'
   else
          call TQ84_log('Unbekannte Übersetzung ' . a:uebersetzung)
          call TQ84_log_dedent()
