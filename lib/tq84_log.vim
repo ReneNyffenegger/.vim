@@ -182,6 +182,7 @@ endfu " }
 fu! TQ84_log_open_log() " {
     call TQ84_log_flush()
     execute 'e! ' . g:tq84_log_file_name
+    normal $G
 endfu " }
 
 nnoremap      ,opvil     :call TQ84_log_open_log()<CR>
