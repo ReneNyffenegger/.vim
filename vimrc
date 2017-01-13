@@ -522,7 +522,9 @@ endif
 " { Autocommands
   autocmd BufNewFile * set ff=unix
   " { Autocommands for special files
-    autocmd! BufReadPre $git_work_dir/biblisches/kommentare/alle_kapitel.html :so $github_root/Biblisches/vim/Kommentare.vim
+  " 2017-01-13
+  " autocmd! BufReadPre $git_work_dir/biblisches/kommentare/alle_kapitel.html :so $github_root/Biblisches/vim/Kommentare.vim
+    autocmd! BufReadPost $github_root/Bibelkommentare/Text so $github_root/Bibelkommentare/mappings.vim
     autocmd! BufReadPost **/about/Unicode/Codepoints/selection.txt setl colorcolumn=7,10,14,22,25
   " }
 " }
