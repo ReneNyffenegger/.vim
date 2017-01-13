@@ -358,11 +358,8 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>oplu15  :call OpenUrl#BibelOnlineMitEingabe('luther_1545_letzte_hand')<CR>
    nnoremap <leader>oplu12  :call OpenUrl#BibelOnlineMitEingabe('luther_1912')<CR>
    nnoremap <leader>opintl  :call OpenUrl#BibelOnlineMitEingabe('interlinear')<CR>
-"  Neue Evangelistische Übersetzung {
-"  24.9.2015: Tagesaktueller Link verwenden:
-"  nnoremap <leader>opneu   :call OpenUrl#BibelOnlineMitEingabe('neue_evangelistische')<CR>
+"  Neue Evangelistische Übersetzung:
    nnoremap <leader>opneu   :call OpenUrl#NeueEVUebMitEingabe()<CR>
-"  }
    nnoremap <leader>opsch51 :call OpenUrl#BibelOnlineMitEingabe('schlachter_1951')<CR>
    nnoremap <leader>opelb05 :call OpenUrl#BibelOnlineMitEingabe('elberfelder_1905')<CR>
    nnoremap <leader>opntwe  :call OpenUrl#NT_W_Einert_MitEingabe()<CR>
@@ -377,6 +374,7 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>opkjv   :call tq84#buf#openFile(Bibel#PfadTextDatei('kjv'))<CR>
    nnoremap <leader>opelb05 :call tq84#buf#openFile(Bibel#PfadTextDatei('elb1905'))<CR>
    nnoremap <leader>opsch2k :call tq84#buf#openFile(Bibel#PfadTextDatei('sch2k'))<CR>
+   nnoremap <leader>opalk   :execute 'e ' . $github_root . 'Bibelkommentare/Text'<CR>
    
    nnoremap <leader>opbusc  :call tq84#buf#openScratch()<CR>
 
