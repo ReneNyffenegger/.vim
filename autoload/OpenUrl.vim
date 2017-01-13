@@ -373,7 +373,9 @@ fu! OpenUrl#NeueEVUebMitEingabe() " {
 
   call TQ84_log('l:buch = ' . l:buch)
 
-  call OpenUrl#Go('http://www.alt.kh-vanheiden.de/NeUe/Bibeltexte/' . l:buch . '.html#' . l:vers['kapitel'])
+" 2017-01-13
+" call OpenUrl#Go('http://www.alt.kh-vanheiden.de/NeUe/Bibeltexte/' . l:buch . '.html#' . l:vers['kapitel'])
+  call OpenUrl#Go('https://neue.derbibelvertrauen.de/' . l:buch . '.html#' . l:vers['kapitel'])
 
   call TQ84_log_dedent()
 endfu " }
