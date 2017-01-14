@@ -1,5 +1,6 @@
 call TQ84_log_indent(expand('<sfile>'))
 
+
 fu! tq84#bibelkommentare#searchVerse(bkv) " {
   call TQ84_log_indent('bibelkommentare#searchVerse')
 
@@ -39,8 +40,29 @@ fu! tq84#bibelkommentare#searchVerse(bkv) " {
 
   endif " }
  
-  normal zM
+  let l:verseEndLine   = search('^#'   . nr2char(125), 'n')
+
+  call TQ84_log('l:verseEndLine = ' . l:verseEndLine)
+
   normal zv
+  exe l:lineNo . ',' . l:verseEndLine . ' foldopen!'
+  exe 'normal z' . nr2char(10)
+
+
+  call TQ84_log_dedent()
+endfu " }
+
+fu! tq84#bibelkommentare#insertText() " {
+  call TQ84_log_indent('bibelkommentare#insertText')
+
+  let l:line = getline('.')
+  call TQ84_log('l:line=' . l:line)
+
+  if l:line =~ '^#' " { Cursor is on start of a line
+     call append(line('.'), [' ' . nr2char(123), '  ', ' ' . nr2char(125)])
+     call cursor(line('.') + 2, 3)
+     startinsert!
+  endif " }
 
   call TQ84_log_dedent()
 endfu " }
