@@ -27,8 +27,9 @@ fu! tq84#bibelkommentare#searchVerse(bkv) " {
     
      while l:lineNo == 0 && l:vers > 0
 
-       let l:pattern = l:pattern_ch . '-' . l:vers . ' ' . nr2char(125)
+       let l:pattern = l:pattern_ch . '-' . l:vers . ' ' . nr2char(123)
        let l:lineNo = search(l:pattern)
+       call TQ84_log('searched for ' . l:pattern . ', l:lineNo=' . l:lineNo)
        let l:vers = l:vers - 1
 
      endwhile
