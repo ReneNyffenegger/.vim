@@ -47,7 +47,7 @@ fu! tq84#notes#gotoFileUnderCursor(openInNewWindow) " {
     let l:col  = virtcol('.')
     call TQ84_log('l:line=' . l:line . ', col=' . l:col)
 
-    let l:filename_rel = matchstr(l:line, '\v→ *\zs[-_a-zA-Z/]*%' . l:col . 'v[-_a-zA-Z/]*\ze')
+    let l:filename_rel = matchstr(l:line, '\v→ *\zs[-_a-zA-Zäöü/]*%' . l:col . 'v[-_a-zA-Zäöü/]*\ze')
 
     if l:filename_rel == ''
        call TQ84_log('l:filename_rel is empty, returning')
