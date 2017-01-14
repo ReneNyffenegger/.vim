@@ -47,13 +47,23 @@ fu! tq84#notes#gotoFileUnderCursor(openInNewWindow) " {
     let l:col  = virtcol('.')
     call TQ84_log('l:line=' . l:line . ', col=' . l:col)
 
-    let l:filename_rel = matchstr(l:line, '\v→ *\zs[-_a-zA-Zäöü/]*%' . l:col . 'v[-_a-zA-Zäöü/]*\ze')
+    let l:matches = matchlist(l:line, '\v(→?) *([-_a-zA-Zäöü0-9/]*%' . l:col . 'v[-_a-zA-Zäöü0-9/]*)')
+
+    let l:filename_rel = l:matches[2]
 
     if l:filename_rel == ''
        call TQ84_log('l:filename_rel is empty, returning')
        call TQ84_log_dedent()
        return
     endif
+
+    if l:matches[1] != '→'
+       call TQ84_log('not a → file, opening ' . l:filename_rel)
+       call tq84#buf#openFile(l:filename_rel)
+       call TQ84_log_dedent()
+       return
+    endif
+       
 
     call TQ84_log('filename_rel=' . l:filename_rel)
     let l:filename_abs = $github_root . 'notes/notes/' . l:filename_rel
