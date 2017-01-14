@@ -69,7 +69,9 @@ fu! tq84#bibelkommentare#insertText() " {
   let l:line = getline('.')
   call TQ84_log('l:line=' . l:line)
 
-  if l:line =~ '^#' " { Cursor is on start of a line
+  if l:line =~ '^#' " { Cursor is on start of a verse
+     call tq84#bibelkommentare#insertText_()
+  elseif l:line =~ '^ ' . nr2char(125) " Cursor on end of a text item
      call tq84#bibelkommentare#insertText_()
   else
      call search(' ' . nr2char(125))
