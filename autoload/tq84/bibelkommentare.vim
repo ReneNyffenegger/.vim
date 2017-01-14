@@ -52,6 +52,16 @@ fu! tq84#bibelkommentare#searchVerse(bkv) " {
   call TQ84_log_dedent()
 endfu " }
 
+fu! tq84#bibelkommentare#insertText_() " {
+  call TQ84_log_indent('bibelkommentare#insertText_')
+
+  call append(line('.'), [' ' . nr2char(123), '  ', ' ' . nr2char(125)])
+  call cursor(line('.') + 2, 3)
+  startinsert!
+
+  call TQ84_log_dedent()
+endfu " }
+
 fu! tq84#bibelkommentare#insertText() " {
   call TQ84_log_indent('bibelkommentare#insertText')
 
@@ -59,9 +69,10 @@ fu! tq84#bibelkommentare#insertText() " {
   call TQ84_log('l:line=' . l:line)
 
   if l:line =~ '^#' " { Cursor is on start of a line
-     call append(line('.'), [' ' . nr2char(123), '  ', ' ' . nr2char(125)])
-     call cursor(line('.') + 2, 3)
-     startinsert!
+     call tq84#bibelkommentare#insertText_()
+  else
+     call search(' ' . nr2char(125))
+     call tq84#bibelkommentare#insertText_()
   endif " }
 
   call TQ84_log_dedent()
