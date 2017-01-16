@@ -99,6 +99,8 @@ fu! Bibel#EingabeBuchKapitelVers() " {
     if l:buch_kapitel_vers == '' " { Leeren Hash zurückgeben, wenn nichts eingegeben
       call TQ84_log('Nichts eingegeben')
       call TQ84_log_dedent()
+    " 2017-01-16 returning empty Dictionary instead of nothing, so that
+    "            returned value can be compared  with == {}
       return {}
     endif " }
 

@@ -2,7 +2,13 @@ call TQ84_log_indent(expand('<sfile>'))
 
 
 fu! tq84#bibelkommentare#searchVerse(bkv) " {
-  call TQ84_log_indent('bibelkommentare#searchVerse')
+  call TQ84_log_indent('bibelkommentare#searchVerse, type(a:bkv) = ' . type(a:bkv))
+
+  if a:bkv == {}
+     call TQ84_log('a:bkv == {}, returning')
+     call TQ84_log_dedent()
+     return
+  endif
 
   let l:pattern_ch = '^#' . a:bkv['buch'] . '-' . a:bkv['kapitel'] . '-'
 
