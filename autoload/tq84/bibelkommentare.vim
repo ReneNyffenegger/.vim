@@ -4,9 +4,9 @@ call TQ84_log_indent(expand('<sfile>'))
 fu! tq84#bibelkommentare#searchVerse(bkv) " {
   call TQ84_log_indent('bibelkommentare#searchVerse')
 
-  let l:pattern_ch = '^#' . a:bkv['buch'] . '-' . a:bkv['kapitel']
+  let l:pattern_ch = '^#' . a:bkv['buch'] . '-' . a:bkv['kapitel'] . '-'
 
-  let l:pattern =  l:pattern_ch . '-' . a:bkv['vers'] . ' ' . nr2char(123)
+  let l:pattern =  l:pattern_ch . a:bkv['vers'] . ' ' . nr2char(123)
   call TQ84_log('searching for ' . l:pattern)
   let l:lineNo = search(l:pattern, 'w')
 
@@ -21,20 +21,30 @@ fu! tq84#bibelkommentare#searchVerse(bkv) " {
         call TQ84_log('Chapter does not exist')
         call TQ84_log_dedent()
         return
+     else
+      " Go to beginning of Chapter
+        let l:lineNo_ch = search('^@.* ' . nr2char(123), 'b')
+        call TQ84_log('Chapter exits, l:lineNo_ch=' . l:lineNo_ch)
      endif " }
 
      let l:vers = a:bkv['vers'] - 1
     
      while l:lineNo == 0 && l:vers > 0
 
-       let l:pattern = l:pattern_ch . '-' . l:vers . ' ' . nr2char(123)
+       let l:pattern = l:pattern_ch  . l:vers . ' ' . nr2char(123)
        let l:lineNo = search(l:pattern)
        call TQ84_log('searched for ' . l:pattern . ', l:lineNo=' . l:lineNo)
        let l:vers = l:vers - 1
 
      endwhile
 
-     call search('#}') " go to end of verse
+     if l:vers == 0
+        call TQ84_log('l:vers == 0 -> Requested verse is first in chapter, going to begin of chapter at line ' . l:lineNo_ch)
+
+        exe 'normal ' . l:lineNo_ch . 'G'
+     else
+        call search('#}') " go to end of verse
+     endif
 
      call append(line('.'), ['#' . a:bkv['buch'] . '-' . a:bkv['kapitel'] . '-' . a:bkv['vers'] . ' ' . nr2char(123), '#}'])
      execute 'normal ' . (line('.') + 1) . 'G'
