@@ -44,7 +44,7 @@ fu! tq84#bibelkommentare#searchVerse(bkv) " {
 
      endwhile
 
-     if l:vers == 0
+     if l:vers == 0 && l:lineNo == 0
         call TQ84_log('l:vers == 0 -> Requested verse is first in chapter, going to begin of chapter at line ' . l:lineNo_ch)
 
         exe 'normal ' . l:lineNo_ch . 'G'
