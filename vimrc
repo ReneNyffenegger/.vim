@@ -521,6 +521,8 @@ endif
 
 " { Autocommands
   autocmd BufNewFile * set ff=unix
+
+  autocmd BufNewFile *.pl :call tq84#ft#perl#BufNewFile()
   " { Autocommands for special files
   " 2017-01-13
   " autocmd! BufReadPre $git_work_dir/biblisches/kommentare/alle_kapitel.html :so $github_root/Biblisches/vim/Kommentare.vim
