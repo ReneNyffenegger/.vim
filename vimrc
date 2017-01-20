@@ -445,6 +445,10 @@ nnoremap ,cdhyd :cd $github_root/Hydroplattentheorie<CR>
 " cd to directory of current buffer
 nnoremap ,cd.   :execute 'cd ' . expand('%:p:h')<CR>
   " }
+  " { shell
+nnoremap ,shkomm :echo (system('komm'))<CR>
+nnoremap ,shnots :echo (system('nots'))<CR>
+  " }
   " { Misc
   "   Map from ^ (6) to $ (4)
 nnoremap ,v64 ^v$h
