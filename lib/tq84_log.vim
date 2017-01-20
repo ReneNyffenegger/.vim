@@ -165,7 +165,8 @@ fu! TQ84_log_clear() " {
 
       let g:tq84_log_memory_lines = []
     " 2015-10-09: emptying s:tq84_log_array, too:
-      let l:tq84_log_array = []
+    " 2017-01-20: s:tq84_log_array instead of g:tq84_log_array !!!
+      let s:tq84_log_array = []
 
       call TQ84_log_flush()
 
