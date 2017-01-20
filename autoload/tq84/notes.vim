@@ -58,7 +58,7 @@ fu! tq84#notes#omnifunc(findstart, base) " {
           let s:omnifunc_add_arrow = 1
        endif
 
-       let l:pos = virtcol('.') - strlen(l:matchList[2]) -1
+       let l:pos = col('.') - strlen(l:matchList[2]) -1
 
        call TQ84_log('s:omnifunc_add_arrow = ' . s:omnifunc_add_arrow)
 
