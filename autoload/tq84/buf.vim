@@ -57,6 +57,22 @@ fu! tq84#buf#lineRightOfCursor() " {
    return l:line_
 endfu " }
 
+fu! tq84#buf#lineLeftOfCursor() " {
+   call TQ84_log_indent('tq84#buf#lineLeftOfCursor')
+
+   call tq84#buf#logLineAndPos()
+
+   let l:line= getline('.')
+   let l:col = col    ('.')
+
+   let l:line_ = strpart(l:line, 0, l:col-1)
+
+   call TQ84_log('returning line right of cursor=' . l:line_)
+
+   call TQ84_log_dedent()
+   return l:line_
+endfu " }
+
 fu! tq84#buf#insertRightOfCursor(text) " {
    call TQ84_log_indent('tq84#buf#insertRightOfCursor, text=' . a:text . '<')
 

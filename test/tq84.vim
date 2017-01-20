@@ -19,6 +19,8 @@ else
    endif
 endif
 
+" { tq84#string
+
 if tq84#string#fromEnd('1234567890', 1) != '0' " {
    throw 'last character of 1234567890 is 0'
 endif " }
@@ -26,6 +28,10 @@ endif " }
 if tq84#string#fromEnd('1234567890', 4) != '7890' " {
 throw 'last 4 characters of 1234567890 are 7890'
 endif " }
+
+" }
+
+" { tq84#buf
 
 let s:txtFile = tq84#test#newFile('foo.txt')
 call tq84#test#type('hello world' . nr2char(10))
@@ -41,4 +47,9 @@ endif
 if tq84#buf#lineRightOfCursor() != 'INSERTEDtender'
    throw 'tq84#buf#lineRightOfCursor() returned ' . tq84#buf#lineRightOfCursor() . ' instead of INSERTEDtender'
 endif
+if tq84#buf#lineLeftOfCursor() != 'I am the great pre'
+throw 'tq84#buf#lineLeftOfCursor() returned ' . tq84#buf#lineLeftOfCursor() . ' instead of I am the great pre'
+endif
 exe 'silent! bw! ' . s:txtFile
+
+" }
