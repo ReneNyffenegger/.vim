@@ -1,6 +1,6 @@
 call TQ84_log_indent(expand('<sfile>'))
 
-so $github_root/Biblisches/vim/Kommentare-Perl.vim
+" 2017-01-20 so $github_root/Biblisches/vim/Kommentare-Perl.vim
 
 fu! <SID>VersIDDerAktuellenZeile() " {
   call TQ84_log_indent(expand('<sfile>'))
