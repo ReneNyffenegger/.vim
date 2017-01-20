@@ -10,7 +10,6 @@ fu! tq84#os#filesDiffer(file1, file2) " {
        let l:cmd = printf('fc %s %s'  , l:file1, l:file2)
     else
        let l:cmd = printf('diff %s %s', l:file1, l:file2)
-       le
     endif
 
     call TQ84_log('l:cmd = ' . l:cmd)
