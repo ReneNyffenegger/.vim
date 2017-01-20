@@ -27,16 +27,65 @@ fu! tq84#notes#omnifunc(findstart, base) " {
     call TQ84_log_indent('tq84#notes#omnifunc, findstart=' . a:findstart . ', base=' . a:base)
 
     if a:findstart == 1 " { First invocation
-       let l:pos = col('.')
+
+       let l:leftOfCursor = tq84#buf#lineLeftOfCursor()
+
+       call TQ84_log('l:leftOfCursor: >' . l:leftOfCursor . '<')
+
+"      let l:matches = matchlist(l:leftOfCursor, '\v→ *(\S*)$')
+"      call TQ84_log('len(l:matches)' . len(l:matches))
+
+       let l:matchList = matchlist(l:leftOfCursor, '\v(→)? *(\S*)$')
+
+       if len(l:matchList) == 0 " {
+"         call TQ84_log("→ didnt't match" )
+"         let s:omnifunc_add_arrow = 1
+"         let l:pos = col('.') - 
+          call TQ84_log('Returning -3 because no → found')
+          call TQ84_log_dedent()
+          return -3
+       endif
+"      else
+"         let s:omnifunc_add_arrow = 0
+"         let l:pos = col('.')
+"      end " }
+
+       call TQ84_log('l:matchList[1, 2, 3, 4] = ' . l:matchList[1] . ' - ' . l:matchList[2] . ' - ' . l:matchList[3] . ' - ' . l:matchList[4])
+
+       if l:matchList[1] == '→'
+          let s:omnifunc_add_arrow = 0
+       else
+          let s:omnifunc_add_arrow = 1
+       endif
+
+       let l:pos = virtcol('.') - strlen(l:matchList[2]) -1
+
+       call TQ84_log('s:omnifunc_add_arrow = ' . s:omnifunc_add_arrow)
+
        call TQ84_log('Returning ' . l:pos . ' because findstart == 1')
        call TQ84_log_dedent()
        return l:pos
     endif " }
 
+    if a:base == '' " {
+       call TQ84_log('returning buffers because a:base is empty')
+       call TQ84_log_dedent()
+       if s:omnifunc_add_arrow
+          return map(tq84#notes#buffers(), "'→ ' . v:val")
+       else
+          return tq84#notes#buffers()
+       endif
+    endif " }
+
+    let l:globbedFiles = split(glob('**/' . a:base), nr2char(0))
+
 
     call TQ84_log_dedent()
-
-    return tq84#notes#buffers()
+    if s:omnifunc_add_arrow
+       return map(l:globbedFiles, "'→ ' . v:val")
+    else
+       return l:globbedFiles
+    endif
 
 endfu " }
 
