@@ -143,4 +143,21 @@ fu! tq84#notes#gotoFileUnderCursor(openInNewWindow) " {
     call TQ84_log_dedent()
 endfu " }
 
+fu! tq84#notes#tabPressed() " {
+  call TQ84_log_indent('tq84#notes#tabPressed')
+
+  call tq84#buf#logLineAndPos()
+
+  let l:found = tq84#buf#regexpAtCursor('§\+?V?\zs\w+-\d+-\d+')
+
+  call TQ84_log('l:found=' . l:found)
+
+  if l:found != '' " {
+     let l:matchlist = matchlist(l:found, '\v(\w+)-(\d+)-(\d+)')
+     call tq84#bibelkommentare#gotoVerseFromAnywhere(l:matchlist[1], l:matchlist[2], l:matchlist[3])
+  endif " }
+
+  call TQ84_log_dedent()
+endfu " }
+
 call TQ84_log_dedent()

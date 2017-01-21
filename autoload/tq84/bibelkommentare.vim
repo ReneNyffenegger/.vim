@@ -1,5 +1,13 @@
 call TQ84_log_indent(expand('<sfile>'))
 
+fu! tq84#bibelkommentare#gotoVerseFromAnywhere(bk, ch, v) " {
+  call TQ84_log_indent('tq84#bibelkommentare#gotoVerseFromAnywhere')
+  call tq84#buf#openFile($github_root . 'Bibelkommentare/Text')
+
+  call tq84#bibelkommentare#searchVerse({'buch': a:bk, 'kapitel': a:ch, 'vers': a:v})
+  call TQ84_log_dedent()
+endf " }
+
 fu! tq84#bibelkommentare#searchVerse(bkv) " {
   call TQ84_log_indent('bibelkommentare#searchVerse, type(a:bkv) = ' . type(a:bkv))
 
