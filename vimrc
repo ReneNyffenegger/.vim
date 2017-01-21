@@ -183,7 +183,8 @@ set statusline+=\ ve:%{&ve}  " virtual edit
 set statusline+=\ ff:%{&ff}  " file format
 set statusline+=\ %m         " file modification flag
 set statusline+=\ %=         " Jump to right portion of status line
-set statusline+=\ %c         " column
+set statusline+=\ c:%c       " column (Counts bytes, not characters)
+set statusline+=\ v:%v       " virtual column
 set statusline+=\ %l         " line
 set statusline+=/%L          " total number of lines
 set statusline+=\            " final space
