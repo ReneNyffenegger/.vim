@@ -41,6 +41,33 @@ fu! tq84#buf#wordLeftOfCursor() " {
    return l:word
 endfu " }
 
+fu! tq84#buf#regexpAtCursor(regexp) " { # Note that regexp should be very magic (as though \v was prepended)
+   call TQ84_log_indent('tq84#buf#regexpAtCursor, regexp = ' . a:regexp)
+
+   call tq84#buf#logLineAndPos()
+
+   let l:line = getline('.')
+   let l:pos  = virtcol('.')
+
+   let l:pos_1 = l:pos + 1
+   let l:pos_2 = l:pos
+   if l:pos_2 < 0
+      let l:pos_2 = 0
+   endif
+
+   let l:regexp = 
+   \ '\v'                .
+   \ '%<'  .  l:pos_1    . 'v' .
+   \          a:regexp   .     
+   \ '%>'  .  l:pos_2    . 'v'
+
+   let l:matched = matchstr(l:line, l:regexp)
+   call TQ84_log('l:matched=' . l:matched)
+
+   call TQ84_log_dedent()
+   return l:matched
+endfu " }
+
 fu! tq84#buf#lineRightOfCursor() " {
    call TQ84_log_indent('tq84#buf#lineLeftOfCursor')
 

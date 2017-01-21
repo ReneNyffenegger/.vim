@@ -50,6 +50,40 @@ endif
 if tq84#buf#lineLeftOfCursor() != 'I am the great pre'
 throw 'tq84#buf#lineLeftOfCursor() returned ' . tq84#buf#lineLeftOfCursor() . ' instead of I am the great pre'
 endif
+
+" { tq84#buf#regexpAtCursor
+
+normal o
+call tq84#test#type('foo → abc-22-def and → ghi-42-jkl or more')
+
+fu! GoToColumnAndTestRegexp(col, expected) " {
+  exe 'normal ' . a:col . '|'
+
+  let l:regexp = '→ *\zs\w+-\d+-\w+'
+" let l:regexp = '\w+-\d+-\w+'
+  if tq84#buf#regexpAtCursor(l:regexp) != a:expected
+     throw 'problem at ' . a:col . ': found ' . tq84#buf#regexpAtCursor(l:regexp)
+  endif
+endfu " }
+
+call GoToColumnAndTestRegexp( 1, '')
+call GoToColumnAndTestRegexp( 3, '')
+call GoToColumnAndTestRegexp( 4, '')
+call GoToColumnAndTestRegexp( 5, 'abc-22-def')
+call GoToColumnAndTestRegexp( 6, 'abc-22-def')
+call GoToColumnAndTestRegexp( 7, 'abc-22-def')
+call GoToColumnAndTestRegexp(14, 'abc-22-def')
+call GoToColumnAndTestRegexp(15, 'abc-22-def')
+call GoToColumnAndTestRegexp(16, 'abc-22-def')
+call GoToColumnAndTestRegexp(17, '')
+call GoToColumnAndTestRegexp(21, '')
+call GoToColumnAndTestRegexp(22, 'ghi-42-jkl')
+call GoToColumnAndTestRegexp(33, 'ghi-42-jkl')
+call GoToColumnAndTestRegexp(34, '')
+
+
+" }
+
 exe 'silent! bw! ' . s:txtFile
 
 " }
