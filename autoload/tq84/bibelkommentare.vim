@@ -1,11 +1,10 @@
 call TQ84_log_indent(expand('<sfile>'))
 
-
 fu! tq84#bibelkommentare#searchVerse(bkv) " {
   call TQ84_log_indent('bibelkommentare#searchVerse, type(a:bkv) = ' . type(a:bkv))
 
-  if a:bkv == {}
-     call TQ84_log('a:bkv == {}, returning')
+  if a:bkv =={}
+     call TQ84_log('a:bkv =={}, returning')
      call TQ84_log_dedent()
      return
   endif
