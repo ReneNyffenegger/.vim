@@ -376,6 +376,7 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>opelb05 :call tq84#buf#openFile(Bibel#PfadTextDatei('elb1905'))<CR>
    nnoremap <leader>opsch2k :call tq84#buf#openFile(Bibel#PfadTextDatei('sch2k'))<CR>
    nnoremap <leader>opalk   :execute 'e ' . $github_root . 'Bibelkommentare/Text'<CR>
+   execute 'nnoremap <leader>opkon   :e ' . $github_root . 'notes/notes/biblisches/Eigene-Uebersetzung/Konkordanz/'
    
    nnoremap <leader>opbusc  :call tq84#buf#openScratch()<CR>
 
