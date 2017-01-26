@@ -160,4 +160,15 @@ fu! tq84#notes#tabPressed() " {
   call TQ84_log_dedent()
 endfu " }
 
+fu! tq84#notes#bibleVerse() " {
+  call TQ84_log_indent('tq84#notes#bibleVerse')
+  let l:bcv  = Bibel#EingabeBuchKapitelVers()
+  let l:text = Bibel#VersText(l:bcv, 'eue')
+
+  let l:text .= ' §' . l:bcv['buch'] . '-' . l:bcv['kapitel'] . '-' . l:bcv['vers']
+
+  call TQ84_log_dedent()
+  return l:text
+endfu " }
+
 call TQ84_log_dedent()

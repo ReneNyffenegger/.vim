@@ -472,6 +472,7 @@ nnoremap <leader>dv    :call Bibel#ZeigeVerseMitEingabe('eue')<CR>
 nnoremap <leader>cpbv  :let @*=Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
 nnoremap <leader>burvw :call Buffer#ReverseWordUnderCursor()<CR>
 inoremap <leader>inbv  =Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
+inoremap <leader>inbp  =tq84#notes#bibleVerse()<CR>
 inoremap <leader>indt  =strftime("%Y-%m-%d")<CR>
 nnoremap <leader>indt  :execute "normal i" . strftime("%Y-%m-%d")<CR>
   " git {
