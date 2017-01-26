@@ -163,6 +163,13 @@ endfu " }
 fu! tq84#notes#bibleVerse() " {
   call TQ84_log_indent('tq84#notes#bibleVerse')
   let l:bcv  = Bibel#EingabeBuchKapitelVers()
+
+  if l:bcv == {}
+     call TQ84_log('Nichts eingegeben')
+     call TQ84_log_dedent()
+     return ''
+  endif
+
   let l:text = Bibel#VersText(l:bcv, 'eue')
 
   let l:text .= ' §' . l:bcv['buch'] . '-' . l:bcv['kapitel'] . '-' . l:bcv['vers']
