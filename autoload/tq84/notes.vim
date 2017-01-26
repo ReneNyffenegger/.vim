@@ -82,6 +82,8 @@ fu! tq84#notes#omnifunc(findstart, base) " {
 
     call TQ84_log_dedent()
     if s:omnifunc_add_arrow
+     " 2017-01-26 remove trailing /index:
+       map(l:globbedFiles, "v:val = substitute(v:val, '/index$', '', '')")
        return map(l:globbedFiles, "'→ ' . v:val")
     else
        return l:globbedFiles
@@ -164,7 +166,7 @@ fu! tq84#notes#bibleVerse() " {
   call TQ84_log_indent('tq84#notes#bibleVerse')
   let l:bcv  = Bibel#EingabeBuchKapitelVers()
 
-  if l:bcv == {}
+  if l:bcv =={}
      call TQ84_log('Nichts eingegeben')
      call TQ84_log_dedent()
      return ''
