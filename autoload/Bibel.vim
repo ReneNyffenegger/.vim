@@ -214,7 +214,7 @@ fu! Bibel#UebersetzungEinlesen(uebersetzung) " {
 endfu " }
 
 fu! Bibel#VersText(vers, uebersetzung) " {
-  call TQ84_log_indent(expand('<sfile>'))
+  call TQ84_log_indent('Bibel#VersText: ' . string(a:vers) . ' / ' . a:uebersetzung)
 
   let l:text = ''
 
@@ -232,11 +232,11 @@ fu! Bibel#VersText(vers, uebersetzung) " {
        \ 'kapitel': l:buch_kapitel_vers[2],
        \ 'vers'   : l:buch_kapitel_vers[3]}
 
-    call TQ84_log('l:vers = ' .string(l:vers))
+"   call TQ84_log('l:vers = ' .string(l:vers))
 
   " }
   elseif type(a:vers) == 4 " { Hash
-    call TQ84_log('Typ ist Hash')
+"   call TQ84_log('Typ ist Hash')
     let l:vers = a:vers
   endif " }
 
@@ -286,6 +286,8 @@ fu! Bibel#VersText(vers, uebersetzung) " {
 endfu " }
 
 fu! Bibel#VersTexte(verse, uebersetzungen) " {
+
+   throw "2017-01-26: is this function still being used?"
 
     "
     "  Aufruf

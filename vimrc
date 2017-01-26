@@ -353,9 +353,17 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
   " { <leader>op Open
    nnoremap <leader>op      <Nop>
    nnoremap <leader>op.     :execute 'e ' . expand('%:p:h')<CR>
-   nnoremap <leader>opgo    :call OpenUrl#GoogleSearch(input('? '))<CR>
+   nnoremap <leader>opbusc  :call tq84#buf#openScratch()<CR>
    nnoremap <leader>opfile  :call tq84#OpenDocument(expand('<cWORD>'))<CR>
-   nnoremap <leader>opbl    :call OpenUrl#BlueLetterWithInput()<CR>
+   nnoremap <leader>opkom   :call OpenUrl#KommentarMitEingabe()<CR>
+   nnoremap <leader>opalk   :execute 'e ' . $github_root . 'Bibelkommentare/Text'<CR>
+   execute 'nnoremap <leader>opkon   :e ' . $github_root . 'notes/notes/biblisches/Eigene-Uebersetzung/Konkordanz/'
+ " { Internet
+   nnoremap <leader>opdict  :call OpenUrl#dict_leo_org(input("Search Term: "))<CR>
+   nnoremap <leader>opurl   :call OpenUrl#Go(expand('<cWORD>'))<CR>
+   nnoremap <leader>opgo    :call OpenUrl#GoogleSearch(input('? '))<CR>
+ " }
+ " { Bible Translations 
    nnoremap <leader>oplu15  :call OpenUrl#BibelOnlineMitEingabe('luther_1545_letzte_hand')<CR>
    nnoremap <leader>oplu12  :call OpenUrl#BibelOnlineMitEingabe('luther_1912')<CR>
    nnoremap <leader>opintl  :call OpenUrl#BibelOnlineMitEingabe('interlinear')<CR>
@@ -365,20 +373,19 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>opelb05 :call OpenUrl#BibelOnlineMitEingabe('elberfelder_1905')<CR>
    nnoremap <leader>opntwe  :call OpenUrl#NT_W_Einert_MitEingabe()<CR>
    nnoremap <leader>opmenge :call OpenUrl#MengeUebersetzungMitEingabe()<CR>
-   nnoremap <leader>opkom   :call OpenUrl#KommentarMitEingabe()<CR>
-   nnoremap <leader>opstr   :call OpenUrl#StrongsWithInput()<CR>
-   nnoremap <leader>opdict  :call OpenUrl#dict_leo_org(input("Search Term: "))<CR>
    nnoremap <leader>op4     :call misc#OpenScriptureForAll()<CR>
-   nnoremap <leader>opurl   :call OpenUrl#Go(expand('<cWORD>'))<CR>
+   " { Locally available
    nnoremap <leader>opeue   :call tq84#buf#openFile(Bibel#PfadTextDatei('eue'))<CR>
    nnoremap <leader>opjantz :call tq84#buf#openFile(Bibel#PfadTextDatei('jantz'))<CR>
    nnoremap <leader>opkjv   :call tq84#buf#openFile(Bibel#PfadTextDatei('kjv'))<CR>
    nnoremap <leader>opelb05 :call tq84#buf#openFile(Bibel#PfadTextDatei('elb1905'))<CR>
    nnoremap <leader>opsch2k :call tq84#buf#openFile(Bibel#PfadTextDatei('sch2k'))<CR>
-   nnoremap <leader>opalk   :execute 'e ' . $github_root . 'Bibelkommentare/Text'<CR>
-   execute 'nnoremap <leader>opkon   :e ' . $github_root . 'notes/notes/biblisches/Eigene-Uebersetzung/Konkordanz/'
-   
-   nnoremap <leader>opbusc  :call tq84#buf#openScratch()<CR>
+   " }
+ " }
+ " { Blue letter bible related
+   nnoremap <leader>opstr   :call OpenUrl#StrongsWithInput()<CR>
+   nnoremap <leader>opbl    :call OpenUrl#BlueLetterWithInput()<CR>
+ " }
 
 "  Open VIM related files {
    nnoremap <leader>oprc    :e $MYVIMRC<CR>
@@ -468,13 +475,16 @@ nnoremap <leader>755 :w \| execute 'silent! !chmod 755 %' \| e! <CR>
 map Q gq
 " }
 nnoremap <leader>sw    :call tq84#SwitchBodyAndSpec()<CR>
+nnoremap <leader>burvw :call Buffer#ReverseWordUnderCursor()<CR>
+  " { helpers for bible study
 nnoremap <leader>dv    :call Bibel#ZeigeVerseMitEingabe('eue')<CR>
 nnoremap <leader>cpbv  :let @*=Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
-nnoremap <leader>burvw :call Buffer#ReverseWordUnderCursor()<CR>
 inoremap <leader>inbv  =Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
 inoremap <leader>inbp  =tq84#notes#bibleVerse()<CR>
 inoremap <leader>indt  =strftime("%Y-%m-%d")<CR>
 nnoremap <leader>indt  :execute "normal i" . strftime("%Y-%m-%d")<CR>
+nnoremap ,bl2tx        :call tq84#blueletterbible#copied2germanText()<CR>
+  " }
   " git {
   " sa  http://vim.wikia.com/wiki/Version_Control_for_Vimfiles
 nnoremap <leader>rci  :call tq84#git#ci()<CR>
