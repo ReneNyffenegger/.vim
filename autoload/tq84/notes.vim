@@ -68,22 +68,31 @@ fu! tq84#notes#omnifunc(findstart, base) " {
     endif " }
 
     if a:base == '' " {
+       "
+       let l:buffers = tq84#notes#buffers()
+
+     " 2017-01-26 remove trailing /index:
+       call TQ84_log('remove trailing /index')
+       call map(l:buffers, "substitute(v:val, '/index$', '', '')")
+"      let l:buffers = map(l:buffers, "v:val = substitute(v:val, 'o', 'XXX', 'g')")
+
        call TQ84_log('returning buffers because a:base is empty')
        call TQ84_log_dedent()
+
        if s:omnifunc_add_arrow
-          return map(tq84#notes#buffers(), "'→ ' . v:val")
+          return map(l:buffers, "'→ ' . v:val")
        else
-          return tq84#notes#buffers()
+          return l:buffers
        endif
     endif " }
 
     let l:globbedFiles = split(glob('**/' . a:base), nr2char(0))
+  " 2017-01-26 remove trailing /index:
+    call map(l:globbedFiles, "substitute(v:val, '/index$', '', '')")
 
 
     call TQ84_log_dedent()
     if s:omnifunc_add_arrow
-     " 2017-01-26 remove trailing /index:
-       map(l:globbedFiles, "v:val = substitute(v:val, '/index$', '', '')")
        return map(l:globbedFiles, "'→ ' . v:val")
     else
        return l:globbedFiles
