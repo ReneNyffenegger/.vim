@@ -1,7 +1,9 @@
 call TQ84_log_indent(expand('<sfile>'))
 
 let s:book_abbreviations={
-  \ 'neh': 'nehemiah'
+  \ '1chr': '2_chronicles',
+  \ '2chr': '2_chronicles',
+  \ 'neh' : 'nehemiah'
   \ }
 
 fu! tq84#websites#biblehub#openInterlinearVerse(verse) " {
