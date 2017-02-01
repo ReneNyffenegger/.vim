@@ -1,6 +1,16 @@
 call TQ84_log_indent(expand('<sfile>'))
 
 let s:book_abbreviations={
+  \ '1Sa' : '1sam',
+  \ '2Sa' : '2sam',
+  \ '1Ki' : '1koe',
+  \ '2Ki' : '2koe',
+  \ '1Ch' : '1chr',
+  \ '2Ch' : '2chr',
+  \ 'Ezr' : 'esr',
+  \ 'Jer' : 'jer',
+  \ 'Eze' : 'hes',
+  \ 'Neh' : 'neh',
   \ 'Mar' : 'mk'  ,
   \ 'Rom' : 'roem',
   \ '1Co' : '1kor',

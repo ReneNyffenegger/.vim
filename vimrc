@@ -483,7 +483,7 @@ inoremap <leader>inbv  =Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<C
 inoremap <leader>inbp  =tq84#notes#bibleVerse()<CR>
 inoremap <leader>indt  =strftime("%Y-%m-%d")<CR>
 nnoremap <leader>indt  :execute "normal i" . strftime("%Y-%m-%d")<CR>
-nnoremap ,bl2tx        :call tq84#blueletterbible#copied2germanText()<CR>
+vnoremap ,bl2tx        :call tq84#blueletterbible#copied2germanText()<CR>
   " }
   " git {
   " sa  http://vim.wikia.com/wiki/Version_Control_for_Vimfiles
