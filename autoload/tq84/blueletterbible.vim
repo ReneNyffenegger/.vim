@@ -1,6 +1,14 @@
 call TQ84_log_indent(expand('<sfile>'))
 
 let s:book_abbreviations={
+  \ 'Gen' : '1mo' ,
+  \ 'Exo' : '2mo' ,
+  \ 'Lev' : '3mo' ,
+  \ 'Num' : '4mo' ,
+  \ 'Deu' : '5mo' ,
+  \ 'Psa' : 'ps'  ,
+  \ 'Pro' : 'spr' ,
+  \ 'Eze' : 'hes' ,
   \ 'Mar' : 'mk'  ,
   \ 'Rom' : 'roem',
   \ '1Co' : '1kor',

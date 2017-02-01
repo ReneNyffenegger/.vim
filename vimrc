@@ -479,6 +479,7 @@ nnoremap <leader>burvw :call Buffer#ReverseWordUnderCursor()<CR>
   " { helpers for bible study
 nnoremap <leader>dv    :call Bibel#ZeigeVerseMitEingabe('eue')<CR>
 nnoremap <leader>cpbv  :let @*=Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
+inoremap <leader>inbh  =tq84#bibelkommentare#htmlVerseWithLink(Bibel#EingabeBuchKapitelVers())<CR>
 inoremap <leader>inbv  =Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
 inoremap <leader>inbp  =tq84#notes#bibleVerse()<CR>
 inoremap <leader>indt  =strftime("%Y-%m-%d")<CR>

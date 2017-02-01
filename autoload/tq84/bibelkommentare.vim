@@ -104,6 +104,41 @@ fu! tq84#bibelkommentare#insertText() " {
   call TQ84_log_dedent()
 endfu " }
 
+fu! tq84#bibelkommentare#htmlLinkToVerse(verse) " {
+  call TQ84_log_indent('tq84#bibelkommentare#htmlLinkToVerse: ' . string(a:verse))
+
+  if a:verse =={}
+     call TQ84_log('a:verse={}, returning')
+     call TQ84_log_dedent()
+     return
+  endif
+
+  return "<a href='/Biblisches/Kommentare/" . 
+    \ a:verse['buch'] . "_" . a:verse['kapitel'] . ".html#I" . 
+    \ a:verse['buch'] . "-" . a:verse['kapitel'] . "-" . a:verse['vers'] . 
+    \ "'>" . Bibel#VersID(a:verse) . "</a>"
+
+  call TQ84_log_dedent()
+endfu " }
+
+fu! tq84#bibelkommentare#htmlVerseWithLink(verse) " {
+  call TQ84_log_indent('tq84#bibelkommentare#htmlVerseWithLink: ' . string(a:verse))
+
+  if a:verse=={}
+     call TQ84_log('a:verse={}, returning')
+     call TQ84_log_dedent()
+     return ''
+  endif
+
+  let l:link = tq84#bibelkommentare#htmlLinkToVerse(a:verse)
+  let l:text = Bibel#VersText(a:verse, 'eue')
+
+  call TQ84_log_dedent()
+  return l:link . ' ' . l:text
+endfu " }
+
+
+
 fu! tq84#bibelkommentare#substitute_a_href() range " {
   call TQ84_log_indent('tq84#substitute_a_href')
 
@@ -122,5 +157,6 @@ fu! tq84#bibelkommentare#substitute_a_href() range " {
 
   call TQ84_log_dedent()
 endfu " }
+
 
 call TQ84_log_dedent()
