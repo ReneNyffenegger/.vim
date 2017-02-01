@@ -10,16 +10,18 @@ fu! <SID>Switch_Tag(tag) " {
   endif
 
   if b:in_tag[a:tag]
-     call GUI#InsertModeInsertText('</' . a:tag . '>')
+     let l:ret = '</' . a:tag . '>'
      let b:in_tag[a:tag] = 0
   else
-     call GUI#InsertModeInsertText('<'  . a:tag . '>')
+     let l:ret = '<'  . a:tag . '>'
      let b:in_tag[a:tag] = 1
   endif
 
+  call TQ84_log('l:ret=' . l:ret)
+
   call TQ84_log_dedent()
 
-  return ''
+  return l:ret
 
 endfu " }
 fu! <SID>RemoveComment() " {

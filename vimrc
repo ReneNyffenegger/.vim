@@ -374,6 +374,7 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>opntwe  :call OpenUrl#NT_W_Einert_MitEingabe()<CR>
    nnoremap <leader>opmenge :call OpenUrl#MengeUebersetzungMitEingabe()<CR>
    nnoremap <leader>op4     :call misc#OpenScriptureForAll()<CR>
+   nnoremap ,opinlh         :call tq84#websites#biblehub#openInterlinearVerse(Bibel#EingabeBuchKapitelVers())<CR>
    " { Locally available
    nnoremap <leader>opeue   :call tq84#buf#openFile(Bibel#PfadTextDatei('eue'))<CR>
    nnoremap <leader>opjantz :call tq84#buf#openFile(Bibel#PfadTextDatei('jantz'))<CR>
@@ -484,7 +485,7 @@ inoremap <leader>inbv  =Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<C
 inoremap <leader>inbp  =tq84#notes#bibleVerse()<CR>
 inoremap <leader>indt  =strftime("%Y-%m-%d")<CR>
 nnoremap <leader>indt  :execute "normal i" . strftime("%Y-%m-%d")<CR>
-nnoremap ,bl2tx        :call tq84#blueletterbible#copied2germanText()<CR>
+vnoremap ,bl2tx        :call tq84#blueletterbible#copied2germanText()<CR>
   " }
   " git {
   " sa  http://vim.wikia.com/wiki/Version_Control_for_Vimfiles
