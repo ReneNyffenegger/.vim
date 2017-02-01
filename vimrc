@@ -374,6 +374,7 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>opntwe  :call OpenUrl#NT_W_Einert_MitEingabe()<CR>
    nnoremap <leader>opmenge :call OpenUrl#MengeUebersetzungMitEingabe()<CR>
    nnoremap <leader>op4     :call misc#OpenScriptureForAll()<CR>
+   nnoremap ,opinlh         :call tq84#websites#biblehub#openInterlinearVerse(Bibel#EingabeBuchKapitelVers())<CR>
    " { Locally available
    nnoremap <leader>opeue   :call tq84#buf#openFile(Bibel#PfadTextDatei('eue'))<CR>
    nnoremap <leader>opjantz :call tq84#buf#openFile(Bibel#PfadTextDatei('jantz'))<CR>
