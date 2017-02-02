@@ -1,10 +1,19 @@
 call TQ84_log_indent(expand('<sfile>'))
 
-fu! tq84#bibelkommentare#gotoVerseFromAnywhere(bk, ch, v) " {
+fu! tq84#bibelkommentare#gotoVerseFromAnywhere(verse) " {
   call TQ84_log_indent('tq84#bibelkommentare#gotoVerseFromAnywhere')
   call tq84#buf#openFile($github_root . 'Bibelkommentare/Text')
 
-  call tq84#bibelkommentare#searchVerse({'buch': a:bk, 'kapitel': a:ch, 'vers': a:v})
+  call tq84#bibelkommentare#searchVerse(a:verse)
+  call TQ84_log_dedent()
+endf " }
+
+fu! tq84#bibelkommentare#gotoVerseFromContext() " {
+  call TQ84_log_indent('tq84#bibelkommentare#gotoVerseFromAnywhere')
+
+  let l:verse = tq84#buf#method#currentVerse()
+
+  call tq84#bibelkommentare#gotoVerseFromAnywhere(l:verse)
   call TQ84_log_dedent()
 endf " }
 
@@ -137,8 +146,6 @@ fu! tq84#bibelkommentare#htmlVerseWithLink(verse) " {
   return l:link . ' ' . l:text
 endfu " }
 
-
-
 fu! tq84#bibelkommentare#substitute_a_href() range " {
   call TQ84_log_indent('tq84#substitute_a_href')
 
@@ -157,6 +164,5 @@ fu! tq84#bibelkommentare#substitute_a_href() range " {
 
   call TQ84_log_dedent()
 endfu " }
-
 
 call TQ84_log_dedent()

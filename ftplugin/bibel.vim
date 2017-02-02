@@ -3,6 +3,7 @@ call TQ84_log_indent(expand('<sfile>'))
 " 2017-01-20 so $github_root/Biblisches/vim/Kommentare-Perl.vim
 
 fu! <SID>VersIDDerAktuellenZeile() " {
+  throw "2017-02-02 use tq84#ft#bibel#currentVerse"
   call TQ84_log_indent(expand('<sfile>'))
 
   let l:line = getline('.')
@@ -90,7 +91,7 @@ endfu " }
 set wrap
 
 nnoremap <buffer> <leader>yv :let @*=<SID>VersTextDerAktuellenZeile()<CR>
-nnoremap <buffer> ,gtk       :call <SID>GeheZuKommentar()<CR>
+" 2017-02-02 nnoremap <buffer> ,gtk       :call <SID>GeheZuKommentar()<CR>
 nnoremap <buffer> ,gta       :call <SID>GeheZuAlleKommentare()<CR>
 nnoremap <buffer> ,bl        :call <SID>OpenBlueLetter()<CR>
 nnoremap <buffer> ,v<bar>     0f<bar>lvf<bar>h
@@ -98,5 +99,8 @@ nnoremap <buffer> ,celb      :call <SID>CopyElberfelder()<CR>
 
 nnoremap <buffer> / /\ze.*<bar><left><left><left><left><left><left>
 nnoremap <buffer> ,k/ /#.*
+
+let b:tq84_methods={}
+let b:tq84_methods.currentVerse=function('tq84#ft#bibel#currentVerse')
 
 call TQ84_log_dedent()

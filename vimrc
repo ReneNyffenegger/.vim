@@ -363,6 +363,9 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>opurl   :call OpenUrl#Go(expand('<cWORD>'))<CR>
    nnoremap <leader>opgo    :call OpenUrl#GoogleSearch(input('? '))<CR>
  " }
+ " { gt
+   nnoremap ,gtbk           :call tq84#bibelkommentare#gotoVerseFromContext()<CR>
+ " }
  " { Bible Translations 
    nnoremap <leader>oplu15  :call OpenUrl#BibelOnlineMitEingabe('luther_1545_letzte_hand')<CR>
    nnoremap <leader>oplu12  :call OpenUrl#BibelOnlineMitEingabe('luther_1912')<CR>
