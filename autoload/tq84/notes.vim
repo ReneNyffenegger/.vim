@@ -206,7 +206,7 @@ fu! tq84#notes#tabPressed() " {
 
   if l:found != '' " {
      let l:matchlist = matchlist(l:found, '\v(\w+)-(\d+)-(\d+)')
-     call tq84#bibelkommentare#gotoVerseFromAnywhere({'buch': l:matchlist[1], 'kapitel': l:matchlist[2], 'vers': l:matchlist[3])
+     call tq84#bibelkommentare#gotoVerseFromAnywhere({'buch': l:matchlist[1], 'kapitel': l:matchlist[2], 'vers': l:matchlist[3]})
   endif " }
 
   call TQ84_log_dedent()
