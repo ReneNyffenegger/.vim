@@ -32,23 +32,13 @@ fu! tq84#notes#omnifunc(findstart, base) " {
 
        call TQ84_log('l:leftOfCursor: >' . l:leftOfCursor . '<')
 
-"      let l:matches = matchlist(l:leftOfCursor, '\v→ *(\S*)$')
-"      call TQ84_log('len(l:matches)' . len(l:matches))
-
        let l:matchList = matchlist(l:leftOfCursor, '\v(→)? *(\S*)$')
 
        if len(l:matchList) == 0 " {
-"         call TQ84_log("→ didnt't match" )
-"         let s:omnifunc_add_arrow = 1
-"         let l:pos = col('.') - 
           call TQ84_log('Returning -3 because no → found')
           call TQ84_log_dedent()
           return -3
-       endif
-"      else
-"         let s:omnifunc_add_arrow = 0
-"         let l:pos = col('.')
-"      end " }
+       endif " }
 
        call TQ84_log('l:matchList[1, 2, 3, 4] = ' . l:matchList[1] . ' - ' . l:matchList[2] . ' - ' . l:matchList[3] . ' - ' . l:matchList[4])
 
@@ -58,6 +48,14 @@ fu! tq84#notes#omnifunc(findstart, base) " {
           let s:omnifunc_add_arrow = 1
        endif
 
+       let s:omni_func_path_to_add_anchors = ''
+       if filereadable(l:matchList[2]) " {
+           let s:omni_func_path_to_add_anchors = l:matchList[2]
+           call TQ84_log('return col(".") because ' . l:matchList[2] . ' is a file')
+           call TQ84_log_dedent()
+           return col('.')
+       endif " }
+
        let l:pos = col('.') - strlen(l:matchList[2]) -1
 
        call TQ84_log('s:omnifunc_add_arrow = ' . s:omnifunc_add_arrow)
@@ -65,6 +63,23 @@ fu! tq84#notes#omnifunc(findstart, base) " {
        call TQ84_log('Returning ' . l:pos . ' because findstart == 1')
        call TQ84_log_dedent()
        return l:pos
+    endif " }
+
+    call TQ84_log('s:omni_func_path_to_add_anchors=' . s:omni_func_path_to_add_anchors)
+    if s:omni_func_path_to_add_anchors != '' " {
+
+       call TQ84_log('Adding anchors')
+       let l:existing_file = tq84#notes#addIndexToPathIfNecessary(s:omni_func_path_to_add_anchors)
+
+       let l:lines_existing_file = readfile(l:existing_file)
+
+       let l:anchors = filter(l:lines_existing_file, {i,v->match(v, '{.*#') != -1})
+       let l:anchors = map(l:anchors, {i,v->matchstr(v, '{.*\zs#.*\ze *$')})
+
+       call TQ84_log('returning anchors ' . string(l:anchors))
+       call TQ84_log_dedent()
+       return l:anchors
+
     endif " }
 
     if a:base == '' " {
@@ -86,6 +101,9 @@ fu! tq84#notes#omnifunc(findstart, base) " {
        endif
     endif " }
 
+  
+
+
     let l:globbedFiles = split(glob('**/' . a:base), nr2char(0))
   " 2017-01-26 remove trailing /index:
     call map(l:globbedFiles, "substitute(v:val, '/index$', '', '')")
@@ -98,6 +116,28 @@ fu! tq84#notes#omnifunc(findstart, base) " {
        return l:globbedFiles
     endif
 
+endfu " }
+
+fu! tq84#notes#addIndexToPathIfNecessary(path) " {
+  call TQ84_log_indent('tq84#notes#addIndexToPathIfNecessary, path=' . a:path)
+
+  if isdirectory(a:path) " {
+
+     let l:last_char = tq84#string#fromEnd(a:path, 1)
+
+     call TQ84_log('isdirectory, l:last_char = ' . l:last_char)
+
+     if l:last_char != '/' && l:last_char != '\'
+        let a:path .= '/'
+     endif
+
+     let a:path .= 'index'
+
+  endif " }
+
+  call TQ84_log('returning ' . a:path)
+  call TQ84_log_dedent()
+  return a:path
 endfu " }
 
 fu! tq84#notes#gotoFileUnderCursor(openInNewWindow) " {
@@ -129,19 +169,20 @@ fu! tq84#notes#gotoFileUnderCursor(openInNewWindow) " {
     let l:filename_abs = $github_root . 'notes/notes/' . l:filename_rel
     call TQ84_log('filename_abs=' . l:filename_abs)
 
-    if isdirectory(l:filename_abs) " {
+    let l:filename_abs = tq84#notes#addIndexToPathIfNecessary(l:filename_abs)
+"   if isdirectory(l:filename_abs) " {
 
-       let l:last_char = tq84#string#fromEnd(l:filename_abs, 1)
+"      let l:last_char = tq84#string#fromEnd(l:filename_abs, 1)
 
-       call TQ84_log('isdirectory, l:last_char = ' . l:last_char)
+"      call TQ84_log('isdirectory, l:last_char = ' . l:last_char)
 
-       if l:last_char != '/' && l:last_char != '\'
-          let l:filename_abs .= '/'
-       endif
+"      if l:last_char != '/' && l:last_char != '\'
+"         let l:filename_abs .= '/'
+"      endif
 
-       let l:filename_abs .= 'index'
+"      let l:filename_abs .= 'index'
 
-    endif " }
+"   endif " }
 
     call TQ84_log('e ' . l:filename_abs)
 
