@@ -121,23 +121,25 @@ endfu " }
 fu! tq84#notes#addIndexToPathIfNecessary(path) " {
   call TQ84_log_indent('tq84#notes#addIndexToPathIfNecessary, path=' . a:path)
 
-  if isdirectory(a:path) " {
+  let l:path = a:path
 
-     let l:last_char = tq84#string#fromEnd(a:path, 1)
+  if isdirectory(l:path) " {
+
+     let l:last_char = tq84#string#fromEnd(l:path, 1)
 
      call TQ84_log('isdirectory, l:last_char = ' . l:last_char)
 
      if l:last_char != '/' && l:last_char != '\'
-        let a:path .= '/'
+        let l:path .= '/'
      endif
 
-     let a:path .= 'index'
+     let l:path .= 'index'
 
   endif " }
 
-  call TQ84_log('returning ' . a:path)
+  call TQ84_log('returning ' . l:path)
   call TQ84_log_dedent()
-  return a:path
+  return l:path
 endfu " }
 
 fu! tq84#notes#gotoFileUnderCursor(openInNewWindow) " {
