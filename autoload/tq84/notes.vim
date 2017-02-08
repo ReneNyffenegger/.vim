@@ -24,7 +24,7 @@ fu! tq84#notes#buffers() " {
 endfu " }
 
 fu! tq84#notes#omnifunc(findstart, base) " {
-    call TQ84_log_indent('tq84#notes#omnifunc, findstart=' . a:findstart . ', base=' . a:base)
+    call TQ84_log_indent('tq84#notes#omnifunc, findstart=' . a:findstart . ', base=' . a:base . ', col(.)=' . col('.'))
 
     if a:findstart == 1 " { First invocation
 
@@ -40,7 +40,7 @@ fu! tq84#notes#omnifunc(findstart, base) " {
           return -3
        endif " }
 
-       call TQ84_log('l:matchList[1, 2, 3, 4] = ' . l:matchList[1] . ' - ' . l:matchList[2] . ' - ' . l:matchList[3] . ' - ' . l:matchList[4])
+       call TQ84_log('l:matchList[1, 2, 3, 4] = 1:' . l:matchList[1] . ' 2:' . l:matchList[2] . ' 3:' . l:matchList[3] . ' 4:' . l:matchList[4])
 
        if l:matchList[1] == '→'
           let s:omnifunc_add_arrow = 0
@@ -48,12 +48,17 @@ fu! tq84#notes#omnifunc(findstart, base) " {
           let s:omnifunc_add_arrow = 1
        endif
 
+       let l:potential_file = l:matchList[2]
+
        let s:omni_func_path_to_add_anchors = ''
-       if filereadable(l:matchList[2]) " {
+       if filereadable(l:potential_file) || filereadable(l:potential_file . '/index') " {
+           call TQ84_log('potential file ' . l:potential_file . ' is a file')
            let s:omni_func_path_to_add_anchors = l:matchList[2]
            call TQ84_log('return col(".") because ' . l:matchList[2] . ' is a file')
            call TQ84_log_dedent()
            return col('.')
+       else
+           call TQ84_log('potential file ' . l:potential_file . ' is not a file')
        endif " }
 
        let l:pos = col('.') - strlen(l:matchList[2]) -1
