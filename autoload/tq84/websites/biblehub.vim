@@ -1,9 +1,18 @@
 call TQ84_log_indent(expand('<sfile>'))
 
 let s:book_abbreviations={
-  \ '1chr': '2_chronicles',
+  \ '1mo' : 'genesis',
+  \ '2mo' : 'exodus',
+  \ '3mo' : 'leviticus',
+  \ '4mo' : 'numbers',
+  \ '5mo' : 'deuteronomy',
+  \ '1chr': '1_chronicles',
   \ '2chr': '2_chronicles',
-  \ 'neh' : 'nehemiah'
+  \ 'neh' : 'nehemiah',
+  \ 'mt'  : 'matthew',
+  \ 'mk'  : 'mark',
+  \ 'lk'  : 'lucas',
+  \ 'joh' : 'john',
   \ }
 
 fu! tq84#websites#biblehub#openInterlinearVerse(verse) " {
