@@ -13,6 +13,8 @@ let s:book_abbreviations={
   \ 'mk'  : 'mark',
   \ 'lk'  : 'lucas',
   \ 'joh' : 'john',
+  \ 'apg' : 'acts',
+  \ 'gal' : 'galatians',
   \ }
 
 fu! tq84#websites#biblehub#openInterlinearVerse(verse) " {
