@@ -519,6 +519,7 @@ iabbr aeg Ägypten
 " { Additional digraphs
 :digraph oo 8226 " Bullet point
 :digraph .. 8230 " … (&hellip;)
+:digraph -- 9776 " ☰
 " }
 
 " { special hosts / local vimrc
