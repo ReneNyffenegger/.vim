@@ -454,7 +454,7 @@ nnoremap <leader>gn :call GUI#NormalSize()<CR>
   " }
   " { cd
 nnoremap ,cdnot :cd $github_root/notes/notes<CR>
-nnoremap ,cdhyd :cd $github_root/Hydroplattentheorie<CR>
+nnoremap ,cdhyd :cd $github_root/Hydroplattentheorie/Präsentation<CR>
 " cd to directory of current buffer
 nnoremap ,cd.   :execute 'cd ' . expand('%:p:h')<CR>
   " }
