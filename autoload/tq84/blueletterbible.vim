@@ -18,21 +18,27 @@ let s:book_abbreviations={
   \ 'Pro' : 'spr'  ,
   \ 'Jer' : 'jer'  ,
   \ 'Eze' : 'hes'  ,
+  \ 'Mat' : 'mt'   ,
   \ 'Mar' : 'mk'   ,
+  \ 'Luk' : 'lk'   ,
+  \ 'Jhn' : 'joh'  ,
+  \ 'Act' : 'apg'  ,
   \ 'Rom' : 'roem' ,
   \ '1Co' : '1kor' ,
   \ '2Co' : '2kor' ,
   \ 'Gal' : 'gal'  ,
   \ 'Eph' : 'eph'  ,
   \ 'Col' : 'kol'  ,
+  \ '1Th' : '1thes',
+  \ '2Th' : '2thes',
   \ '1Ti' : '1tim' ,
   \ '2Ti' : '2tim' ,
+  \ 'Phm' : 'phim' ,
   \ 'Heb' : 'hebr' ,
   \ '1Pe' : '1petr',
   \ '2Pe' : '2petr',
   \ 'Rev' : 'offb'
   \ }
-
 
 
 fu! tq84#blueletterbible#copied2germanText() range " {
