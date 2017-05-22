@@ -21,7 +21,8 @@ fu! <SID>ConvertDotFile(dotfile_with_path, format, show) " {
     let l:dot_exe = 'dot'
   else
     call TQ84_log('does not have unix')
-    let l:dot_exe = 'c:\tools\graphviz-2.38\release\bin\dot.exe'
+  " 2017-04-08 let l:dot_exe = 'c:\tools\graphviz-2.38\release\bin\dot.exe'
+    let l:dot_exe = 'c:\tools\graphviz\bin\dot.exe'
   endif
 
 
