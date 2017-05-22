@@ -11,10 +11,13 @@ let s:book_abbreviations={
   \ 'neh' : 'nehemiah',
   \ 'mt'  : 'matthew',
   \ 'mk'  : 'mark',
-  \ 'lk'  : 'lucas',
+  \ 'lk'  : 'luke',
   \ 'joh' : 'john',
   \ 'apg' : 'acts',
   \ 'gal' : 'galatians',
+  \ '1joh': '1_john',
+  \ '2joh': '2_john',
+  \ '3joh': '3_john',
   \ }
 
 fu! tq84#websites#biblehub#openInterlinearVerse(verse) " {
@@ -31,6 +34,22 @@ fu! tq84#websites#biblehub#openInterlinearVerse(verse) " {
   call OpenUrl#Go('http://biblehub.com/interlinear/' . l:buch . '/' . a:verse['kapitel'] . '-' . a:verse['vers'] . '.htm')
 
   call TQ84_log_dedent()
-endfu
+endfu " }
+
+fu! tq84#websites#biblehub#openCommentaries(verse) " {
+  call TQ84_log_indent('tq84#biblehub#openCommentaries ' . string(a:verse))
+
+  if a:verse=={}
+     call TQ84_log('verse={}, returning')
+     call TQ84_log_dedent()
+     return
+  endif
+
+  let l:buch = s:book_abbreviations[a:verse['buch']]
+
+  call OpenUrl#Go('http://biblehub.com/commentaries/' . l:buch . '/' . a:verse['kapitel'] . '-' . a:verse['vers'] . '.htm')
+
+  call TQ84_log_dedent()
+endfu " }
 
 call TQ84_log_dedent()

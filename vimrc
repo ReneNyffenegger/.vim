@@ -370,6 +370,7 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>oplu15  :call OpenUrl#BibelOnlineMitEingabe('luther_1545_letzte_hand')<CR>
    nnoremap <leader>oplu12  :call OpenUrl#BibelOnlineMitEingabe('luther_1912')<CR>
    nnoremap <leader>opintl  :call OpenUrl#BibelOnlineMitEingabe('interlinear')<CR>
+
 "  Neue Evangelistische Übersetzung:
    nnoremap <leader>opneu   :call OpenUrl#NeueEVUebMitEingabe()<CR>
    nnoremap <leader>opsch51 :call OpenUrl#BibelOnlineMitEingabe('schlachter_1951')<CR>
@@ -378,6 +379,7 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    nnoremap <leader>opmenge :call OpenUrl#MengeUebersetzungMitEingabe()<CR>
    nnoremap <leader>op4     :call misc#OpenScriptureForAll()<CR>
    nnoremap ,opinlh         :call tq84#websites#biblehub#openInterlinearVerse(Bibel#EingabeBuchKapitelVers())<CR>
+   nnoremap ,opbhcom        :call tq84#websites#biblehub#openCommentaries(Bibel#EingabeBuchKapitelVers())<CR>
    " { Locally available
    nnoremap <leader>opeue   :call tq84#buf#openFile(Bibel#PfadTextDatei('eue'))<CR>
    nnoremap <leader>opjantz :call tq84#buf#openFile(Bibel#PfadTextDatei('jantz'))<CR>
