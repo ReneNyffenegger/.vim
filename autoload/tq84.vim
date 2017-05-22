@@ -27,7 +27,7 @@ fu! tq84#SystemInDir(dir, cmd) " {
   execute "cd " .  l:cwd
 
   catch /.*/
-    call TQ84_log('exception caught: ' . v:exception)
+    call TQ84_log('tq84#SystemInDir: exception caught: ' . v:exception)
     let l:response = v:exception
   endtry
 
