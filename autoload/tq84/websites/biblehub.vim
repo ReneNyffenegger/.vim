@@ -9,6 +9,8 @@ let s:book_abbreviations={
   \ '1chr': '1_chronicles',
   \ '2chr': '2_chronicles',
   \ 'neh' : 'nehemiah',
+  \ 'jes' : 'isaiah',
+  \ 'jer' : 'jeremiah',
   \ 'mt'  : 'matthew',
   \ 'mk'  : 'mark',
   \ 'lk'  : 'luke',
