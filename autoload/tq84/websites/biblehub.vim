@@ -17,6 +17,8 @@ let s:book_abbreviations={
   \ 'joh'  : 'john',
   \ 'apg'  : 'acts',
   \ 'gal'  : 'galatians',
+  \ '1thes': '1_thessalonians',
+  \ '2thes': '2_thessalonians',
   \ '1petr': '1_peter',
   \ '2petr': '2_peter',
   \ '1joh' : '1_john',
