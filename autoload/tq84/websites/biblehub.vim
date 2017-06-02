@@ -29,7 +29,7 @@ let s:book_abbreviations={
   \ }
 
 fu! tq84#websites#biblehub#openInterlinearVerse(verse) " {
-  call TQ84_log_indent('tq84#biblehub#openInterlinearVerse ' . string(a:verse))
+  call TQ84_log_indent('tq84#websites#biblehub#openInterlinearVerse ' . string(a:verse))
 
   if a:verse=={}
      call TQ84_log('verse={}, returning')
@@ -45,7 +45,7 @@ fu! tq84#websites#biblehub#openInterlinearVerse(verse) " {
 endfu " }
 
 fu! tq84#websites#biblehub#openCommentaries(verse) " {
-  call TQ84_log_indent('tq84#biblehub#openCommentaries ' . string(a:verse))
+  call TQ84_log_indent('tq84#websites#biblehub#openCommentaries ' . string(a:verse))
 
   if a:verse=={}
      call TQ84_log('verse={}, returning')

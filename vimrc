@@ -369,6 +369,7 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
  " { Bible Translations 
    nnoremap <leader>oplu15  :call OpenUrl#BibelOnlineMitEingabe('luther_1545_letzte_hand')<CR>
    nnoremap <leader>oplu12  :call OpenUrl#BibelOnlineMitEingabe('luther_1912')<CR>
+   nnoremap <leader>oplu17  :call tq84#websites#bibleserver#openLuther2017(Bibel#EingabeBuchKapitelVers())<CR>
    nnoremap <leader>opintl  :call OpenUrl#BibelOnlineMitEingabe('interlinear')<CR>
 
 "  Neue Evangelistische Übersetzung:

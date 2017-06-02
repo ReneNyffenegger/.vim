@@ -1,5 +1,7 @@
+" vim: foldmarker=_{,_}
 call TQ84_log_indent(expand("<sfile>"))
 
+"_{ s:Buecher
 let s:Buecher = {
 \   '1mo'   : {'Name': '1. Mose'          }, 
 \   '2mo'   : {'Name': '2. Mose'          }, 
@@ -68,11 +70,12 @@ let s:Buecher = {
 \   'jud'   : {'Name': 'Judas'            },
 \   'offb'  : {'Name': 'Offenbarung'      },
 \ }
+"_}
 
 let s:uebersetzung = {}
 let s:github_uebersetzungen_pfad = expand("$github_root") . '/Bibeluebersetzungen'
 
-fu! Bibel#ResetBuchCache(uebersetzung) " {
+fu! Bibel#ResetBuchCache(uebersetzung) "_{
   call TQ84_log_indent(expand('<sfile>'))
 
   if has_key(s:uebersetzung, a:uebersetzung)
@@ -80,42 +83,42 @@ fu! Bibel#ResetBuchCache(uebersetzung) " {
   endif
 
   call TQ84_log_dedent()
-endfu " }
+endfu "_}
 
-fu! Bibel#EingabeBuchKapitelVers() " {
+fu! Bibel#EingabeBuchKapitelVers() "_{
   call TQ84_log_indent(expand('<sfile>'))
 
   let l:found = 0
 
-  while ! l:found " Iterieren, bis gültige Eingabe (oder nichts) eingegeben wurde {
+  while ! l:found "_{ Iterieren, bis gültige Eingabe (oder nichts) eingegeben wurde
 
-    try " Catch CTRL-C {
+    try "_{ Catch CTRL-C
       let l:buch_kapitel_vers  = input("Buch Kapitel Vers: ")
     catch /^Vim:Interrupt$/
       call TQ84_log('CTRL-C gedrückt')
       let l:buch_kapitel_vers = ''
-    endtry " }
+    endtry "_}
 
-    if l:buch_kapitel_vers == '' " { Leeren Hash zurückgeben, wenn nichts eingegeben
+    if l:buch_kapitel_vers == '' "_{ Leeren Hash zurückgeben, wenn nichts eingegeben
       call TQ84_log('Nichts eingegeben')
       call TQ84_log_dedent()
     " 2017-01-16 returning empty Dictionary instead of nothing, so that
     "            returned value can be compared  with == {}
       return {}
-    endif " }
+    endif "_}
 
     call TQ84_log('l:buch_kapitel_vers: ' . l:buch_kapitel_vers)
     let l:buch_kapitel_vers_ = matchlist(l:buch_kapitel_vers, '\v(\w+) (\w+) (\S+)')
 
     call TQ84_log('len(l:buch_kapitel_vers_): ' . len(l:buch_kapitel_vers_))
 
-    if len(l:buch_kapitel_vers_) == 10 " Matchlist seems to return 10 items if it matched...
+    if len(l:buch_kapitel_vers_) == 10 " _{ Matchlist seems to return 10 items if it matched... 
        if has_key(s:Buecher, l:buch_kapitel_vers_[1])
           let l:found = 1
        endif
-    endif
+    endif "_}
 
-  endwhile " }
+  endwhile "_}
 
   let l:ret = {
      \ 'buch'   : buch_kapitel_vers_[1],
@@ -127,9 +130,9 @@ fu! Bibel#EingabeBuchKapitelVers() " {
   call TQ84_log_dedent()
 
   return l:ret
-endfu " }
+endfu "_}
 
-fu! Bibel#BuchnameAusAbkuerzung(abkuerzung) " {
+fu! Bibel#BuchnameAusAbkuerzung(abkuerzung) "_{
   call TQ84_log_indent(expand("<sfile>") . ' abkuerzung: ' . a:abkuerzung)
 
   if has_key(s:Buecher, a:abkuerzung)
@@ -143,9 +146,9 @@ fu! Bibel#BuchnameAusAbkuerzung(abkuerzung) " {
 
   return l:ret
 
-endfu " }
+endfu "_}
 
-fu! Bibel#Vers(vers) " {
+fu! Bibel#Vers(vers) "_{
   call TQ84_log_indent(expand('<sfile>'))
 
   echo 'Use Bibel#VersText instead of Bibel#Vers'
@@ -168,9 +171,9 @@ fu! Bibel#Vers(vers) " {
 
   call TQ84_log_dedent()
   return 'Not found'
-endfu " }
+endfu "_}
 
-fu! Bibel#UebersetzungEinlesen(uebersetzung) " {
+fu! Bibel#UebersetzungEinlesen(uebersetzung) "_{
   call TQ84_log_indent(expand('<sfile>') . ' a:uebersetzung = ' . a:uebersetzung)
 
   let l:pfad = Bibel#PfadTextDatei(a:uebersetzung)
@@ -182,7 +185,7 @@ fu! Bibel#UebersetzungEinlesen(uebersetzung) " {
 
   let l:line_no = 0
   try
-  for l:line in l:file " {
+  for l:line in l:file "_{
 
     let l:line_no = l:line_no + 1
 
@@ -202,7 +205,7 @@ fu! Bibel#UebersetzungEinlesen(uebersetzung) " {
 
     let l:ret[l:m[1]][l:m[2]][l:m[3]] = l:m[4]
 
-  endfor " }
+  endfor "_}
   catch /.*/
     let l:fehler = 'Fehler in ' . l:pfad . ', Zeile: ' . l:line_no . ' (' . v:exception . ')'
     call TQ84_log(l:fehler)
@@ -211,9 +214,9 @@ fu! Bibel#UebersetzungEinlesen(uebersetzung) " {
 
   call TQ84_log_dedent()
   return l:ret
-endfu " }
+endfu "_}
 
-fu! Bibel#VersText(vers, uebersetzung) " {
+fu! Bibel#VersText(vers, uebersetzung) "_{
   call TQ84_log_indent('Bibel#VersText: ' . string(a:vers) . ' / ' . a:uebersetzung)
 
   let l:text = ''
@@ -224,7 +227,7 @@ fu! Bibel#VersText(vers, uebersetzung) " {
 
   let l:uebersetzung = s:uebersetzung[a:uebersetzung]
 
-  if     type(a:vers) == 1 " { String
+  if     type(a:vers) == 1 "_{ String
     call TQ84_log('Typ ist String')
     let l:buch_kapitel_vers = matchlist(a:vers, '\v([^-]+)-([^-]+)-(\S+)')
     let l:vers = {
@@ -234,11 +237,11 @@ fu! Bibel#VersText(vers, uebersetzung) " {
 
 "   call TQ84_log('l:vers = ' .string(l:vers))
 
-  " }
-  elseif type(a:vers) == 4 " { Hash
+  "_}
+  elseif type(a:vers) == 4 "_{ Hash
 "   call TQ84_log('Typ ist Hash')
     let l:vers = a:vers
-  endif " }
+  endif "_}
 
   let l:verse = matchlist(l:vers['vers'], '\v^(\d+)-(\d+)')
 
@@ -262,7 +265,7 @@ fu! Bibel#VersText(vers, uebersetzung) " {
   endif
 
   let l:text = ''
-  for l:vers_ in range(l:start_vers, l:end_vers) " { Über Verse iterieren
+  for l:vers_ in range(l:start_vers, l:end_vers) "_{ Über Verse iterieren
 
     if len(l:text)
        let l:text = l:text . ' '
@@ -278,14 +281,14 @@ fu! Bibel#VersText(vers, uebersetzung) " {
 
     endif
 
-  endfor " }
+  endfor "_}
 
   call TQ84_log_dedent()
   return l:text
 
-endfu " }
+endfu "_}
 
-fu! Bibel#VersTexte(verse, uebersetzungen) " {
+fu! Bibel#VersTexte(verse, uebersetzungen) "_{
 
    throw "2017-01-26: is this function still being used?"
 
@@ -314,9 +317,9 @@ fu! Bibel#VersTexte(verse, uebersetzungen) " {
 
     call TQ84_log_dedent()
 
-endfu " }
+endfu "_}
 
-fu! Bibel#VersID(vers) " {
+fu! Bibel#VersID(vers) "_{
   call TQ84_log_indent(expand('<sfile>'))
   
 
@@ -351,9 +354,9 @@ fu! Bibel#VersID(vers) " {
 
   call TQ84_log_dedent()
   return l:ret
-endfu " }
+endfu "_}
 
-fu! Bibel#PfadTextDatei(uebersetzung) " {
+fu! Bibel#PfadTextDatei(uebersetzung) "_{
 
   call TQ84_log_indent(expand('<sfile>') . ' ' . a:uebersetzung)
 
@@ -380,9 +383,9 @@ fu! Bibel#PfadTextDatei(uebersetzung) " {
   call TQ84_log_dedent()
   return l:ret
 
-endfu " }
+endfu "_}
 
-fu! Bibel#ZeigeVerseMitEingabe(uebersetzung) " {
+fu! Bibel#ZeigeVerseMitEingabe(uebersetzung) "_{
   call TQ84_log_indent(expand('<sfile>'))
   let l:vers = Bibel#EingabeBuchKapitelVers()
 
@@ -396,6 +399,6 @@ fu! Bibel#ZeigeVerseMitEingabe(uebersetzung) " {
    echo Bibel#VersText(l:vers, a:uebersetzung)
 
   call TQ84_log_dedent()
-endfu " }
+endfu "_}
 
 call TQ84_log_dedent()
