@@ -1,5 +1,9 @@
 call TQ84_log_indent(expand('<sfile>'))
 
+setl commentstring=\ //%s
+setl foldmethod=marker
+setl foldmarker=_{,_}
+
 fu! <SID>ConvertDotFile(dotfile_with_path, format, show) " {
 
   call TQ84_log_indent(expand('<sfile>'))
@@ -60,7 +64,6 @@ fu! <SID>ConvertDotFile(dotfile_with_path, format, show) " {
   call TQ84_log_dedent()
 
 endfu " }
-
 
 nnoremap <buffer> ! :call <SID>ConvertDotFile(expand('%:p'), 'pdf', 1)<CR>
 
