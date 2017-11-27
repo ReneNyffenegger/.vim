@@ -566,4 +566,6 @@ else
    call TQ84_log('does not have fname_case')
 endif
 
+" runtime lib/switchLeftAltCtrl.vim
+
 call TQ84_log_dedent()
