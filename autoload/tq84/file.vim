@@ -1,6 +1,9 @@
 call TQ84_log_indent(expand('<sfile>'))
 
 fu! tq84#file#appendVisualSelection(filename) range " {
+ "
+ " https://stackoverflow.com/a/23090321
+ "
    call TQ84_log_indent('tq84#file#appendVisualSelection')
    execute "'<,'>w >> " . a:filename
    call TQ84_log_dedent()
