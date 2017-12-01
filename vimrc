@@ -353,7 +353,7 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
   " { <leader>op Open
    nnoremap <leader>op      <Nop>
    nnoremap <leader>op.     :execute 'e ' . expand('%:p:h')<CR>
-   nnoremap <leader>opbusc  :call tq84#buf#openScratch()<CR>
+   nnoremap <leader>opbusc  :call tq84#buf#openScratch('scratch-buf')<CR>
    nnoremap <leader>opfile  :call tq84#OpenDocument(expand('<cWORD>'))<CR>
    nnoremap <leader>opkom   :call OpenUrl#KommentarMitEingabe()<CR>
    nnoremap <leader>opalk   :execute 'e ' . $github_root . 'Bibelkommentare/Text'<CR>

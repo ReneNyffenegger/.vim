@@ -213,17 +213,17 @@ fu! tq84#buf#openFile(filename) " {
     return l:newBuffer
 endfu " }
 
-fu! tq84#buf#openScratch() " {
-    call TQ84_log_indent('tq84#buf#openScratch')
+fu! tq84#buf#openScratch(name) " {
+    call TQ84_log_indent('tq84#buf#openScratch, name = ' . a:name)
 
-    let l:newBuffer = tq84#buf#openFile('scratch-buf')
+    let l:newBuffer = tq84#buf#openFile(a:name)
 
     if l:newBuffer " {
        call TQ84_log('l:newBuffer != 0, setting buftype etc')
-       setl buftype=nofile
-       setl bufhidden=hide
+       setl buftype=nofile  " Don't related buffer with any phsyical file
+       setl bufhidden=hide  " Don't unload the buffer when buffer is no longer displayed in window
        setl noswapfile
-       setl buflisted
+       setl nobuflisted     " Don't show bufer in buffer list
     endif " }
 
     call TQ84_log_dedent()
