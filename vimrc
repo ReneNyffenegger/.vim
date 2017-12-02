@@ -114,7 +114,7 @@ call TQ84_log_dedent() " }
 "  }
 
 " { Pathogen
-runtime autoload/pathogon.vim
+runtime autoload/pathogen.vim
 if exists('*pathogen#infect')
    call TQ84_log_indent('pathogen#infect')
    execute pathogen#infect()
