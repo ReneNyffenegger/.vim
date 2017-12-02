@@ -28,5 +28,6 @@ Updating submodules
 
 The following submodules were added:
 
-    git submodule add https://github.com/godlygeek/tabular bundle/tabular
+    git submodule add https://github.com/godlygeek/tabular          bundle/tabular
+    git submodule add https://github.com/ReneNyffenegger/vim-conque bundle/vim-conque
     
