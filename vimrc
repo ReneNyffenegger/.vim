@@ -176,18 +176,19 @@ endif
 " { Status line
 
 set statusline=\ 
-set statusline+=%f           " relative filename
-set statusline+=\ %y         " filetype
-set statusline+=\ ic:%{&ic}  " show ignore case flag
-set statusline+=\ ve:%{&ve}  " virtual edit
-set statusline+=\ ff:%{&ff}  " file format
-set statusline+=\ %m         " file modification flag
-set statusline+=\ %=         " Jump to right portion of status line
-set statusline+=\ c:%c       " column (Counts bytes, not characters)
-set statusline+=\ v:%v       " virtual column
-set statusline+=\ %l         " line
-set statusline+=/%L          " total number of lines
-set statusline+=\            " final space
+set statusline+=%f              " relative filename
+set statusline+=\ %y            " filetype
+set statusline+=\ ic:%{&ic}     " show ignore case flag
+set statusline+=\ pt:%{&paste}  " show ignore case flag
+set statusline+=\ ve:%{&ve}     " virtual edit
+set statusline+=\ ff:%{&ff}     " file format
+set statusline+=\ %m            " file modification flag
+set statusline+=\ %=            " Jump to right portion of status line
+set statusline+=\ c:%c          " column (Counts bytes, not characters)
+set statusline+=\ v:%v          " virtual column
+set statusline+=\ %l            " line
+set statusline+=/%L             " total number of lines
+set statusline+=\               " final space
 
 call TQ84_log('statusline=' . &statusline)
 
@@ -446,6 +447,9 @@ nnoremap   <F6> :only<CR>
 
 " Switch from virtual edit back and forth
 nnoremap <S-F6> :if &virtualedit == 'all' \| set virtualedit= \| else \| set virtualedit=all \| endif<CR>
+" }
+" F12 {
+  set pastetoggle=<F12>
 " }
   " }
   " { Gui
