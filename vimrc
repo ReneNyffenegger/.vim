@@ -487,6 +487,8 @@ map Q gq
 " }
 nnoremap <leader>sw    :call tq84#SwitchBodyAndSpec()<CR>
 nnoremap <leader>burvw :call Buffer#ReverseWordUnderCursor()<CR>
+inoremap <leader>indt  =strftime("%Y-%m-%d")<CR>
+nnoremap <leader>indt  :execute "normal i" . strftime("%Y-%m-%d")<CR>
   " { helpers for bible study
 nnoremap <leader>dv    :call Bibel#ZeigeVerseMitEingabe('eue')<CR>
 nnoremap <leader>cpbv  :let @*=Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
@@ -494,8 +496,6 @@ inoremap <leader>inbh  =tq84#bibelkommentare#htmlVerseWithLink(Bibel#EingabeBuc
 inoremap <leader>inbv  =Bibel#VersText(Bibel#EingabeBuchKapitelVers(), 'eue')<CR>
 inoremap <leader>inbl  =tq84#bibelkommentare#htmlLinkToVerse(Bibel#EingabeBuchKapitelVers())<CR>
 inoremap <leader>inbp  =tq84#notes#bibleVerse()<CR>
-inoremap <leader>indt  =strftime("%Y-%m-%d")<CR>
-nnoremap <leader>indt  :execute "normal i" . strftime("%Y-%m-%d")<CR>
 vnoremap ,bl2tx        :call tq84#blueletterbible#copied2germanText()<CR>
   " }
   " git {
