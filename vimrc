@@ -555,10 +555,9 @@ endif
 
   autocmd BufNewFile *.pl :call tq84#ft#perl#BufNewFile()
   " { Autocommands for special files
-  " 2017-01-13
-  " autocmd! BufReadPre $git_work_dir/biblisches/kommentare/alle_kapitel.html :so $github_root/Biblisches/vim/Kommentare.vim
     autocmd! BufReadPost $github_root/Bibelkommentare/Text so $github_root/Bibelkommentare/mappings.vim
     autocmd! BufReadPost **/about/Unicode/Codepoints/selection.txt setl colorcolumn=7,10,14,22,25
+    autocmd! BufReadPost **/github/Geschichte-der-Wissenschaft/Ablauf.pl nnoremap <buffer> ! :execute "echo(tq84#SystemInDir(expand('%:p:h'), 'perl -I ~/github/lib/perl-GraphViz-Graph/lib Ablauf.pl && op Ablauf.pdf'))"<CR>
   " }
 " }
 
