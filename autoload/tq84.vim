@@ -48,7 +48,8 @@ fu! tq84#OpenDocument(doc) " {
   else
     let l:doc = substitute(a:doc, '/', '\', 'g')
 
-    let l:cmd = l:doc
+    " 2018-01-14 - let l:cmd = l:doc
+    let l:cmd = 'cmd /c start ' . l:doc
   endif
 
   call TQ84_log('l:cmd = ' . l:cmd)
