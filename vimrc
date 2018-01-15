@@ -524,7 +524,8 @@ iabbr aeg Ägypten
 " }
 
 " { Additional digraphs
-:digraph oo 8226 " Bullet point
+:digraph se  167 " § Section Sign (instead of SE)
+:digraph oo 8226 " • Bullet point
 :digraph .. 8230 " … (&hellip;)
 :digraph -- 9776 " ☰
 " }
