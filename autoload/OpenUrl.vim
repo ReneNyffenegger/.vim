@@ -60,59 +60,10 @@ fu! OpenUrl#BlueLetter(vers) " {
   call TQ84_log_indent(expand("<sfile>"))
 
 
-  let l:buch    = a:vers['buch']
+  let l:buch_gr = a:vers['buch']
+  let l:buch_en = tq84#blueletterbible#book_abbreviation_gr_to_en(l:buch_gr)
 
-  if     l:buch == '1mo'   | let l:buch = 'gen'
-  elseif l:buch == '2mo'   | let l:buch = 'exo'
-  elseif l:buch == '3mo'   | let l:buch = 'lev'
-  elseif l:buch == '4mo'   | let l:buch = 'num'
-  elseif l:buch == '5mo'   | let l:buch = 'deu'
-  elseif l:buch == 'ri'    | let l:buch = 'jdg'
-  elseif l:buch == 'rt'    | let l:buch = 'rth'
-  elseif l:buch == '1sam'  | let l:buch = '1sa'
-  elseif l:buch == '2sam'  | let l:buch = '2sa'
-  elseif l:buch == '1koe'  | let l:buch = '1ki'
-  elseif l:buch == '2koe'  | let l:buch = '2ki'
-  elseif l:buch == '1chr'  | let l:buch = '1ch'
-  elseif l:buch == '2chr'  | let l:buch = '2ch'
-  elseif l:buch == 'esr'   | let l:buch = 'ezr'
-  elseif l:buch == 'hi'    | let l:buch = 'job'
-  elseif l:buch == 'ps'    | let l:buch = 'psa'
-  elseif l:buch == 'pred'  | let l:buch = 'ecc'
-  elseif l:buch == 'hl'    | let l:buch = 'sng'
-  elseif l:buch == 'kla'   | let l:buch = 'lam'
-  elseif l:buch == 'hes'   | let l:buch = 'eze'
-  elseif l:buch == 'spr'   | let l:buch = 'pro'
-  elseif l:buch == 'am'    | let l:buch = 'amo'
-  elseif l:buch == 'ob'    | let l:buch = 'oba'
-  elseif l:buch == 'mi'    | let l:buch = 'mic'
-  elseif l:buch == 'zeph'  | let l:buch = 'zep'
-  elseif l:buch == 'roem'  | let l:buch = 'rom'
-  elseif l:buch == 'apg'   | let l:buch = 'acts'
-  elseif l:buch == '1kor'  | let l:buch = '1co'
-  elseif l:buch == '2kor'  | let l:buch = '2co'
-  elseif l:buch == '1petr' | let l:buch = '1pe'
-  elseif l:buch == '2petr' | let l:buch = '2pe'
-  elseif l:buch == 'kol'   | let l:buch = 'col'
-  elseif l:buch == 'phil'  | let l:buch = 'phl'
-  elseif l:buch == 'phil'  | let l:buch = 'phl'
-  elseif l:buch == '1thes' | let l:buch = '1th'
-  elseif l:buch == '2thes' | let l:buch = '2th'
-  elseif l:buch == '1tim'  | let l:buch = '1ti'
-  elseif l:buch == '2tim'  | let l:buch = '2ti'
-  elseif l:buch == 'jak'   | let l:buch = 'jam'
-  elseif l:buch == 'jes'   | let l:buch = 'isa'
-  elseif l:buch == 'sach'  | let l:buch = 'zec'
-  elseif l:buch == 'mt'    | let l:buch = 'mat'
-  elseif l:buch == 'mk'    | let l:buch = 'mar'
-  elseif l:buch == 'lk'    | let l:buch = 'luk'
-  elseif l:buch == 'joh'   | let l:buch = 'jhn'
-  elseif l:buch == 'hebr'  | let l:buch = 'heb'
-  elseif l:buch == 'offb'  | let l:buch = 'rev'
-  endif
-
-" call OpenUrl#Go("http://www.blueletterbible.org/Bible.cfm?b=" . l:buch . "&c=" . a:vers['kapitel'] . "&v=" . a:vers['vers'] . "&t=KJV#" . a:vers['vers'])
-  call OpenUrl#Go("http://www.blueletterbible.org/kjv/" . l:buch . '/'. a:vers['kapitel'] . '/' . a:vers['vers'])
+  call OpenUrl#Go("http://www.blueletterbible.org/kjv/" . l:buch_en . '/'. a:vers['kapitel'] . '/' . a:vers['vers'])
 
   call TQ84_log_dedent()
 endfu " }
