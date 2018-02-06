@@ -98,7 +98,7 @@ fu! TQ84_log_indent(S) " {
   let l:line = TQ84_log('time: ? ' . a:S . ' ' . nr2char(123))
   call add(s:tq84_log_array, {'reltime': reltime(), 'line': l:line})
 
-endfu! " }
+endfu " }
 fu! TQ84_log_getline(line) " {
 
 
@@ -146,7 +146,7 @@ fu! TQ84_log_dedent() " {
 
   call TQ84_log(nr2char(125))
 
-endfu! " }
+endfu " }
 fu! TQ84_log_clear() " {
 
    if g:tq84_log_file_mode == 'file' " {
