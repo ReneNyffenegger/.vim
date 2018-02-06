@@ -7,6 +7,7 @@ let s:book_abbreviations= {
   \ 'Lev' : '3mo'  ,
   \ 'Num' : '4mo'  ,
   \ 'Deu' : '5mo'  ,
+  \ 'Jos' : 'jos'  ,
   \ 'Jdg' : 'ri'   ,
   \ 'Rth' : 'rt'   ,
   \ '1Sa' : '1sam' ,
