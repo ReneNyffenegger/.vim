@@ -213,14 +213,20 @@ if has('gui_running') " {
 " }
 else " {
  " { Set Shape of cursor (http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes)
-   " Todo: why is the reaction time so slow?
-   
-   " Insert mode: I-Beam
-   let &t_SI = "\<Esc>[6 q"
-   " Replace mode: underline
-   let &t_SR = "\<Esc>[4 q"
-   " Normal mode: block
-   let &t_EI = "\<Esc>[2 q"
+ 
+ " Todo: why is the reaction time so slow?
+ "
+ " Todo: Do I still need them
+ "
+   " 2018-02-13: commented, see https://vi.stackexchange.com/questions/15192
+   "    
+   "  " Insert mode: I-Beam
+   "    let &t_SI = "\<Esc>[6 q"
+   "  " Replace mode: underline
+   "    let &t_SR = "\<Esc>[4 q"
+   "  " Normal mode: block
+   "    let &t_EI = "\<Esc>[2 q"
+
   " }
 endif " }
 
