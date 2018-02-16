@@ -565,6 +565,7 @@ endif
     autocmd! BufReadPost $github_root/Bibelkommentare/Text so $github_root/Bibelkommentare/mappings.vim
     autocmd! BufReadPost **/about/Unicode/Codepoints/selection.txt setl colorcolumn=7,10,14,22,25
     autocmd! BufReadPost **/github/Geschichte-der-Wissenschaft/Ablauf.pl nnoremap <buffer> ! :execute "echo(tq84#SystemInDir(expand('%:p:h'), 'perl -I ~/github/lib/perl-GraphViz-Graph/lib Ablauf.pl && op Ablauf.pdf'))"<CR>
+    autocmd! BufReadPost **/.config/openbox/rc.xml nnoremap <buffer> ! :silent !openbox --reconfigure<CR>
   " }
 " }
 
