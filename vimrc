@@ -245,6 +245,7 @@ set history=999
 set visualbell t_vb=""
 
 set relativenumber
+set number
 
 set suffixes=.bak,~,.o,.info,.swp,.obj
 
