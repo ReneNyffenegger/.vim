@@ -49,6 +49,8 @@ fu! tq84#OpenDocument(doc) " {
 "   let l:doc = substitute(a:doc, '/', '\', 'g')
 
     " 2018-01-14 - let l:cmd = l:doc
+    " 2018-03-12 - Should "start /b" used instead?
+    "              Compare http://vi.stackexchange.com/questions/4746/how-do-i-combine-system-and-start-in-a-windows-environment
     let l:cmd = 'cmd /c start ' . l:doc
   endif
 
