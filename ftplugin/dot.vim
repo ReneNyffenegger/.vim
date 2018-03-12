@@ -45,20 +45,20 @@ fu! <SID>ConvertDotFile(dotfile_with_path, format, show) " {
   if a:show
      call TQ84_log('a:show is true')
 
-     if has('unix')
+"    2018-03-12
+     call tq84#OpenDocument(l:dir . tq84#os#pathSeperator() . l:outfile)
 
-        call tq84#SystemInDir(l:dir, 'gnome-open ' . l:outfile . ' &')
-
-     else
-
-     "
-     " The following line contains an «echo 1» in order to circumvent
-     " an E371 error, see also
-     "   http://vi.stackexchange.com/questions/4746/how-do-i-combine-system-and-start-in-a-windows-environment
-     " call tq84#SystemInDir(l:dir, 'echo 1 & start ' . l:outfile)
-     " Solution given in SE is to use «start /b»
-       call tq84#SystemInDir(l:dir, 'start /b ' . l:outfile)
-     endif
+"    if has('unix')
+"       call tq84#SystemInDir(l:dir, 'gnome-open ' . l:outfile . ' &')
+"    else
+"    "
+"    " The following line contains an «echo 1» in order to circumvent
+"    " an E371 error, see also
+"    "   http://vi.stackexchange.com/questions/4746/how-do-i-combine-system-and-start-in-a-windows-environment
+"    " call tq84#SystemInDir(l:dir, 'echo 1 & start ' . l:outfile)
+"    " Solution given in SE is to use «start /b»
+"      call tq84#SystemInDir(l:dir, 'start /b ' . l:outfile)
+"    endif
   endif
 
   call TQ84_log_dedent()

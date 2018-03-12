@@ -48,4 +48,12 @@ fu! tq84#os#correctPathSlashes(path) " {
     return l:path
 endfu " }
 
+fu! tq84#os#pathSeperator() " {
+  if tq84#os#isWindows()
+     return '\'
+  endif
+
+  return '/'
+endfu " }
+
 call TQ84_log_dedent()

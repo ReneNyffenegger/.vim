@@ -40,13 +40,13 @@ endfu " }
 fu! tq84#OpenDocument(doc) " {
   call TQ84_log_indent(expand("<sfile>") . ' ' . a:doc)
 
+  let l:doc = tq84#os#correctPathSlashes(a:doc)
+
   if has('unix')
-    let l:doc = substitute(a:doc, '\', '/', 'g')
-
+"   let l:doc = substitute(a:doc, '\', '/', 'g')
     let l:cmd = 'xdg-open ' . l:doc
-
   else
-    let l:doc = substitute(a:doc, '/', '\', 'g')
+"   let l:doc = substitute(a:doc, '/', '\', 'g')
 
     " 2018-01-14 - let l:cmd = l:doc
     let l:cmd = 'cmd /c start ' . l:doc
