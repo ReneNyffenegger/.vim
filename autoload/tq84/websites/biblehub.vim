@@ -21,6 +21,7 @@ let s:book_abbreviations={
   \ 'lk'   : 'luke',
   \ 'joh'  : 'john',
   \ 'apg'  : 'acts',
+  \ 'roem' : 'romans',
   \ 'gal'  : 'galatians',
   \ '1thes': '1_thessalonians',
   \ '2thes': '2_thessalonians',
