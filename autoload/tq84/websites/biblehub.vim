@@ -11,6 +11,7 @@ let s:book_abbreviations={
   \ 'neh'  : 'nehemiah',
   \ 'jes'  : 'isaiah',
   \ 'jer'  : 'jeremiah',
+  \ 'hi'   : 'job',
   \ 'am'   : 'amos',
   \ 'hab'  : 'habakkuk',
   \ 'hag'  : 'haggai',
