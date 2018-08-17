@@ -448,6 +448,8 @@ nnoremap <S-F5> :set foldmethod=marker foldmarker={,}<CR>
 
 "  Toggle cursor position cross hair:
 nnoremap <M-F5> :set cursorline! cursorcolumn!<CR>
+
+nnoremap <C-F5> :call tq84#buf#set_ff_unix_rm_trailing_space()<CR>
 " }
 " F6: {
 nnoremap   <F6> :only<CR>

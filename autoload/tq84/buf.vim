@@ -229,4 +229,18 @@ fu! tq84#buf#openScratch(name) " {
     call TQ84_log_dedent()
 endfu " }
 
+fu! tq84#buf#set_ff_unix_rm_trailing_space() " {
+ "
+ "  2018-08-17: currently assigned shortcut key is: Ctrl-F5
+ "
+    call TQ84_log_indent('tq84#buf#set_ff_unix_rm_trailing_space')
+
+    set ff=unix
+    silent %s/\t/  /ge
+    silent %s/  *$//e
+    silent w
+
+    call TQ84_log_dedent()
+endfu
+
 call TQ84_log_dedent()
