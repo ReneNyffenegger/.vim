@@ -13,6 +13,7 @@ fu! tq84#vba#cleanSourceCode() " {
   %s/\<Dim\>/dim/ge
   %s/\<End\>/end/ge
   %s/\<Else\>/else/ge
+  %s/\<Erase\>/erase/ge
   %s/\<Exit\>/exit/ge
   %s/\<False\>/false/ge
   %s/\<For\>/for/ge
@@ -24,7 +25,9 @@ fu! tq84#vba#cleanSourceCode() " {
   %s/\<Long\>/long/ge
   %s/\<Next\>/next/ge
   %s/\<Private\>/private/ge
+  %s/\<ReDim\>/redim/ge
   %s/\<Set\>/set/ge
+  %s/\<String\>/string/ge
   %s/\<Sub\>/sub/ge
   %s/\<Then\>/then/ge
   %s/\<To\>/to/ge
