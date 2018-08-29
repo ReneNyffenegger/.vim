@@ -4,6 +4,7 @@ fu! tq84#vba#cleanSourceCode() " {
 
   %s/\<Alias\>/alias/ge
   %s/\<As\>/as/ge
+  %s/\<Boolean\>/boolean/ge
   %s/\<ByVal\>/byVal/ge
   %s/\<ByRef\>/byRef/ge
   %s/\<Call\>/call/ge
