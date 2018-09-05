@@ -5,6 +5,7 @@ fu! tq84#vba#cleanSourceCode() " {
   %s/\<Alias\>/alias/ge
   %s/\<As\>/as/ge
   %s/\<Boolean\>/boolean/ge
+  %s/\<Byte\>/byte/ge
   %s/\<ByVal\>/byVal/ge
   %s/\<ByRef\>/byRef/ge
   %s/\<Call\>/call/ge
@@ -22,8 +23,10 @@ fu! tq84#vba#cleanSourceCode() " {
   %s/\<If\>/if/ge
   %s/\<Integer\>/integer/ge
   %s/\<Len\>/len/ge
+  %s/\<LenB\>/lenB/ge
   %s/\<Lib\>/lib/ge
   %s/\<Long\>/long/ge
+  %s/\<LongPtr\>/longPtr/ge
   %s/\<Next\>/next/ge
   %s/\<Private\>/private/ge
   %s/\<ReDim\>/redim/ge
