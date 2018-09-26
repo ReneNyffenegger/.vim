@@ -28,7 +28,9 @@ fu! tq84#vba#cleanSourceCode() " {
   %s/\<Long\>/long/ge
   %s/\<LongPtr\>/longPtr/ge
   %s/\<Next\>/next/ge
+  %s/\<Option Explicit\>/option explicit/ge
   %s/\<Private\>/private/ge
+  %s/^Public\>/public/ge
   %s/\<ReDim\>/redim/ge
   %s/\<Set\>/set/ge
   %s/\<String\>/string/ge
