@@ -368,7 +368,13 @@ call TQ84_log_indent('line ' . expand('<slnum>') . ': Mappings')
    execute 'nnoremap <leader>opkon   :e ' . $github_root . 'notes/notes/biblisches/Eigene-Uebersetzung/Konkordanz/'
  " { Internet
    nnoremap <leader>opdict  :call OpenUrl#dict_leo_org(input("Search Term: "))<CR>
-   nnoremap <leader>opurl   :call OpenUrl#Go(expand('<cWORD>'))<CR>
+
+"  ---------------------------------------------------------------------
+"  2019-01-21: Apparently, `gx` provides the same functionality:
+"  nnoremap <leader>opurl   :call OpenUrl#Go(expand('<cWORD>'))<CR>
+   nnoremap <leader>opurl   :echoerr 'Use gx'<CR>
+"  ---------------------------------------------------------------------
+
    nnoremap <leader>opgo    :call OpenUrl#GoogleSearch(input('? '))<CR>
  " }
  " { gt
