@@ -1,4 +1,4 @@
-set foldmethod=marker
-set foldmarker=\ {,\ }
-set commentstring=\ '%s
-set ai
+setlocal foldmethod=marker
+setlocal foldmarker=\ {,\ }
+setlocal commentstring=\ '%s
+setlocal ai
