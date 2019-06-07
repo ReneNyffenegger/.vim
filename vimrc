@@ -105,8 +105,10 @@ filetype plugin on
 "
 call TQ84_log_dedent() " }
 call TQ84_log_indent('line ' . expand('<slnum>') . ': indent on') " {
-"    TODO 2015-07-31. Comment next line if alle_kapitel.html takes too long to edit
-filetype indent on
+"    2015-07-31. Comment next line if alle_kapitel.html takes too long to edit
+"    2019-06-07: Apparently »filetype indent on« switches to »indentexpr«
+"                indenting. So, comment it:
+"    filetype indent on
 "
 "    This command also tries to load $VIMRUNTIME/filetype.vim
 "
