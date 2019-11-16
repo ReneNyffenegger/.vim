@@ -160,7 +160,11 @@ if exists('g:TQ84_CRYPT') && g:TQ84_CRYPT
 " 2016-01-26: http://vi.stackexchange.com/questions/6177/
   set history=0
   set nomodeline " why ?
+
+" Note: somehow, when setting noshelltemp, system() on Windows
+"       starts to report errors in a Message Box.
   set noshelltemp
+
   set noundofile
   set secure
   set viminfo=""
@@ -557,8 +561,9 @@ iabbr aeg Ägypten
 "   " do nothing
 " else
 if exists('$git_work_dir')
+   call TQ84_log_indent('line ' . expand('<slnum>') . ': $git_work_dir exists, it is ' . $git_work_dir)
   if isdirectory($git_work_dir)
-     call TQ84_log_indent('line ' . expand('<slnum>') . ': $git_work_dir/vim/vimfiles/vimrc')
+     call TQ84_log_indent('line ' . expand('<slnum>') . ': going to source $git_work_dir/vim/vimfiles/vimrc')
      so $git_work_dir/vim/vimfiles/vimrc
      call TQ84_log_dedent()
   else
