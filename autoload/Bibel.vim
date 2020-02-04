@@ -222,6 +222,7 @@ fu! Bibel#VersText(vers, uebersetzung) "_{
   let l:text = ''
 
   if ! has_key(s:uebersetzung, a:uebersetzung)
+     call TQ84_log('Key is missing -> UebersetzungEinlesen')
      let s:uebersetzung[a:uebersetzung] = Bibel#UebersetzungEinlesen(a:uebersetzung)
   endif
 
