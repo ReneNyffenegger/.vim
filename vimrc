@@ -88,21 +88,27 @@ call TQ84_log('line ' . expand('<slnum>') . ': guioptions = ' . &guioptions)
 
 " { Filetype related
 call TQ84_log_indent('line ' . expand('<slnum>') . ': filetype on') " {
-filetype on
-" -----------
-" This command loads (on Windows)
-"   $VIMRUNTIME/filetype.vim
-" that defines autocommands for the BufNewFile and BufRead
-" event. For example, the file contains
+" The 'filetype on' command loads  $VIMRUNTIME/filetype.vim, which
+" defines autocommands for the BufNewFile and BufRead
+" events.
+" Typically, $VIMRUNTIME/filetype.vim contains autocommand
+" definitions such as:
 "
 "   au BufNewFile,BufRead *.java,*.jav		setf java
 "
+"  2020-10-10: commented out:
+"     filetype on
+"  because try to manually control which suffixes are related to what filetype.
+" (However, $VIMRUNTIME/filetype.vim is also executed by the command 'filetype plugin on`,
+"  below)
 call TQ84_log_dedent() " }
+
+" 2020-10-10: definition of filetypes
+au BufNewFile,BufRead *.pks,*pkb,*.tys,*.tyb,*.plsql setf plsql
+
 call TQ84_log_indent('line ' . expand('<slnum>') . ': plugin on') " {
+" filetype plug on also executes $VIMRUNTIME/filetype.vim …
 filetype plugin on
-" ------------------
-" This command also tries to load $VIMRUNTIME/filetype.vim
-"
 call TQ84_log_dedent() " }
 call TQ84_log_indent('line ' . expand('<slnum>') . ': indent on') " {
 "    2015-07-31. Comment next line if alle_kapitel.html takes too long to edit
