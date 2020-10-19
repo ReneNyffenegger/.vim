@@ -14,7 +14,7 @@ and the [accepted answer](http://vi.stackexchange.com/a/4030/985).
 
 ## pathogen
 
-Get [pathogen](https://github.com/tpope/vim-pathogen) with `get_pathogen.bat`.
+Get [pathogen](https://github.com/tpope/vim-pathogen) with `get_pathogen.bat`, `get-pathogen.ps` or `get_pathogen.sh`.
 
 ## submodules
 
