@@ -8,8 +8,6 @@ call TQ84_log_indent(expand("<sfile>"))
 fu! OpenUrl#Go(url) " {
 
   call TQ84_log_indent(expand("<sfile>") . " " . a:url)
-  let use_mozilla = 1
-
 
   let l:url = a:url
 
@@ -24,19 +22,51 @@ fu! OpenUrl#Go(url) " {
 
   call TQ84_log("url = " . l:url)
 
-  
-  if use_mozilla == 1
-    if has('unix')
-      let l:exec_stmt = "firefox -url '" . l:url . "' &"
-    else
-      let l:exec_stmt = "start cmd /c start firefox -url " . l:url
-    endif
-  else
-    let l:exec_stmt = "start cmd /c start chrome  " . l:url
-  endif
+  if has('unix') " {
+    let l:exec_stmt = "firefox -url '" . l:url . "' &"
+  " }
+  else " {
+
+    if !exists('g:webBrowserExe') " {
+
+       call TQ84_log('g:webBrowserExe does not exist, searching...')
+       for g:webBrowserExe in [
+          \ 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+       \ ]
+           call TQ84_log('Trying webbrowser ' . g:webBrowserExe)
+           if executable(g:webBrowserExe) " {
+              call TQ84_log(g:webBrowserExe . ' exists')
+              break
+           " }
+           else " {
+              call TQ84_log(g:webBrowserExe . ' does not exist')
+           endif " }
+
+       endfor
+    endif " }
+
+    if exists('g:webBrowserExe') " {
+
+       call TQ84_log('g:webBrowserExe exists, assigning l:exec_stmt')
+       let l:exec_stmt = '"' . g:webBrowserExe . '" -url ' . l:url
+
+    " }
+    else " {
+       call TQ84_log("No webbrowser found")
+       call TQ84_log_dedent()
+       return
+    endif " }
+
+"   let l:exec_stmt = "start cmd /c start firefox -url " . l:url
+  endif " }
+
+" else
+"   let l:exec_stmt = "start cmd /c start chrome  " . l:url
+" endif
 
   call TQ84_log("exec_stmt = " . l:exec_stmt)
-  execute "silent !" . l:exec_stmt
+" execute "silent !" . l:exec_stmt
+  execute "!start " . l:exec_stmt
 
   call TQ84_log_dedent()
 
