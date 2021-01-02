@@ -30,16 +30,19 @@ fu! OpenUrl#Go(url) " {
     if !exists('g:webBrowserExe') " {
 
        call TQ84_log('g:webBrowserExe does not exist, searching...')
-       for g:webBrowserExe in [
-          \ 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+       for l:webBrowserExe in [
+          \ 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe',
+          \ 'C:\Program Files\Google\Chrome\Application\chrome.exe'      ,
+          \ 'C:\Program Files\Mozilla Firefox\firefox.exe'
        \ ]
-           call TQ84_log('Trying webbrowser ' . g:webBrowserExe)
-           if executable(g:webBrowserExe) " {
-              call TQ84_log(g:webBrowserExe . ' exists')
+           call TQ84_log('Trying webbrowser ' . l:webBrowserExe)
+           if executable(l:webBrowserExe) " {
+              call TQ84_log(l:webBrowserExe . ' exists')
+              let g:webBrowserExe = l:webBrowserExe
               break
            " }
            else " {
-              call TQ84_log(g:webBrowserExe . ' does not exist')
+              call TQ84_log(l:webBrowserExe . ' does not exist')
            endif " }
 
        endfor
@@ -52,7 +55,8 @@ fu! OpenUrl#Go(url) " {
 
     " }
     else " {
-       call TQ84_log("No webbrowser found")
+       call TQ84_log('No webbrowser found, returning')
+       echo 'no webbrowser found'
        call TQ84_log_dedent()
        return
     endif " }
