@@ -2,12 +2,11 @@ call TQ84_log_indent(expand('<sfile>'))
 
 " { Mappings
 
-if 0 " SQL*Plus environment
-   nnoremap <buffer> <F3>      :let @+ = '@"'.expand('%:p').'"'.nr2char(10)<CR>:w<CR>
-   inoremap <buffer> <F3> <ESC>:let @+ = '@"'.expand('%:p').'"'.nr2char(10)<CR>:w<CR>
+if 1 " SQL*Plus environment
+   call tq84#ft#sqlplus#mappings()
 else
-   nnoremap <buffer> <F3>      :let @+ =      expand('%:p').'"'.nr2char(10)<CR>:w<CR>
-   inoremap <buffer> <F3> <ESC>:let @+ =      expand('%:p').'"'.nr2char(10)<CR>:w<CR>
+   nnoremap <buffer> <F3>      :let @+ =  '"'.expand('%:p').'"'.nr2char(10)<CR>:w<CR>
+   inoremap <buffer> <F3> <ESC>:let @+ =  '"'.expand('%:p').'"'.nr2char(10)<CR>:w<CR>
 endif
 
 nnoremap <buffer> <C-F4>    :call tq84#ft#sql#yankCurStmtAndGoToNext()<CR>
