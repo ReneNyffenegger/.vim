@@ -173,7 +173,9 @@ fu! tq84#notes#gotoFileUnderCursor(openInNewWindow) " {
        
 
     call TQ84_log('filename_rel=' . l:filename_rel)
-    let l:filename_abs = $github_root . 'notes/notes/' . l:filename_rel
+"   let l:filename_abs = $github_root . 'notes/notes/' . l:filename_rel
+    let l:filename_abs = $notes_dir . '/notes/' . l:filename_rel
+
     call TQ84_log('filename_abs=' . l:filename_abs)
 
     let l:filename_abs = tq84#notes#addIndexToPathIfNecessary(l:filename_abs)
