@@ -272,7 +272,7 @@ language message en_US.UTF-8
 if     has('unix') " {
 
   call TQ84_log('line ' . expand('<slnum>') . ': has unix')
-# 2023-10-19 Debian on WSL does not seem to have Monospace ubiquitously
+" 2023-10-19 Debian on WSL does not seem to have Monospace ubiquitously
   set guifont=Monospace\ 9
   set guifont=Liberation\ Mono\ 9
 
