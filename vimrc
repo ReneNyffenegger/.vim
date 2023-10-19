@@ -225,13 +225,13 @@ if has('gui_running') " {
 " }
 else " {
  " { Set Shape of cursor (http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes)
- 
+
  " Todo: why is the reaction time so slow?
  "
  " Todo: Do I still need them
  "
    " 2018-02-13: commented, see https://vi.stackexchange.com/questions/15192
-   "    
+   "
    "  " Insert mode: I-Beam
    "    let &t_SI = "\<Esc>[6 q"
    "  " Replace mode: underline
@@ -272,7 +272,9 @@ language message en_US.UTF-8
 if     has('unix') " {
 
   call TQ84_log('line ' . expand('<slnum>') . ': has unix')
+# 2023-10-19 Debian on WSL does not seem to have Monospace ubiquitously
   set guifont=Monospace\ 9
+  set guifont=Liberation\ Mono\ 9
 
   if has('gui_running')
   "  2016-12-27: Go full screen only if running in gui.
@@ -596,11 +598,11 @@ endif
 
 call tq84#option#diff(s:options_start, tq84#option#values())
 
-if has('fname_case')
+if has('fname_case') " {
    call TQ84_log('has fname_case')
 else
    call TQ84_log('does not have fname_case')
-endif
+endif " }
 
 " runtime lib/switchLeftAltCtrl.vim
 
